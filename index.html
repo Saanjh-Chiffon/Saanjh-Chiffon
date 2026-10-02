@@ -212,20 +212,9 @@ Discover delicate chiffon sarees designed to move with you —
     <h2>Chiffon, softly spoken.</h2>
     <p>Airy textures, graceful movement and colours inspired by Indian evenings.</p>
   </div>
-  <div class="products">
-    <article class="product">
-      <div class="product-image.D3EBB94B-6A74-4303-8B8D-E67C07073710_1200x"><span>Blush · Limited</span></div>
-      <div class="product-info"><h3>Gulabi Saanjh</h3><p>Blush pink chiffon · Pearl border</p><p class="price">₹8,900</p></div>
-    </article>
-    <article class="product">
-      <div class="product-img peach"><span>New arrival</span></div>
-      <div class="product-info"><h3>Peach Noor</h3><p>Soft peach chiffon · Delicate zari</p><p class="price">₹9,600</p></div>
-    </article>
-    <article class="product">
-      <div class="product-img lilac"><span>Editor's pick</span></div>
-      <div class="product-info"><h3>Lavender Raat</h3><p>Lavender chiffon · Hand-finished edge</p><p class="price">₹10,800</p></div>
-    </article>
-  </div>
+  <div class="products" id="products">
+    <p>Loading products...</p>
+</div>
 </section>
 
 <section class="story">
@@ -312,11 +301,38 @@ Discover delicate chiffon sarees designed to move with you —
     const db = getFirestore(app);
   const analytics = getAnalytics(app);
     async function loadProducts() {
-  const snapshot = await getDocs(collection(db, "PRODUCTS"));
+  const productsContainer = document.getElementById("products");
 
-  snapshot.forEach((doc) => {
-    console.log(doc.id, doc.data());
-  });
+  try {
+    const snapshot = await getDocs(collection(db, "PRODUCTS"));
+
+    productsContainer.innerHTML = "";
+
+    snapshot.forEach((doc) => {
+      const product = doc.data();
+
+      const article = document.createElement("article");
+      article.className = "product";
+
+      article.innerHTML = `
+        <div class="product-image">
+          <span>New arrival</span>
+        </div>
+
+        <div class="product-info">
+          <h3>${product.Name || "Saanjh Saree"}</h3>
+          <p>Beautiful chiffon saree</p>
+          <p class="price">₹${product.price || "Price unavailable"}</p>
+        </div>
+      `;
+
+      productsContainer.appendChild(article);
+    });
+
+  } catch (error) {
+    console.error("Error loading products:", error);
+    productsContainer.innerHTML = "<p>Products load nahi ho paaye.</p>";
+  }
 }
 
 loadProducts();
