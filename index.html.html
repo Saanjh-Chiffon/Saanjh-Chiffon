@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saanjh Chiffon — Grace in Every Fold</title>
+<meta name="description" content="Saanjh Chiffon — graceful, effortless chiffon sarees for modern Indian women.">
+<style>
+:root{
+  --ivory:#f5eee6;
+  --white:#fffdf9;
+  --rose:#ead7d0;
+  --blush:#f3e5df;
+  --peach:#e7c9b7;
+  --lilac:#ddd5df;
+  --sage:#dfe4d8;
+  --mauve:#9a6d60;
+  --berry:#60453d;
+  --gold:#b99a68;
+  --text:#3f332f;
+  --muted:#796d67;
+  --line:#dfd1c7;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--text);
+  background:radial-gradient(circle at 8% 8%,rgba(234,215,208,.45),transparent 28%),radial-gradient(circle at 92% 30%,rgba(223,213,224,.35),transparent 25%),var(--ivory);
+  font-family:Georgia,"Times New Roman",serif;
+}
+a{text-decoration:none;color:inherit}
+.container{width:min(1180px,88%);margin:auto}
+.topbar{
+  background:var(--berry);color:#fff8f5;text-align:center;
+  padding:9px;font:10px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase
+}
+nav{
+  position:sticky;top:0;z-index:20;background:rgba(255,253,249,.93);
+  backdrop-filter:blur(15px);border-bottom:1px solid var(--line)
+}
+.nav-inner{
+  min-height:78px;display:flex;align-items:center;justify-content:space-between
+}
+.logo{text-align:center;line-height:1}
+.logo-main{font-size:28px;letter-spacing:.12em;color:var(--berry)}
+.logo-sub{
+  display:block;margin-top:8px;font:9px Arial,sans-serif;letter-spacing:.35em;
+  color:var(--gold);text-transform:uppercase
+}
+.nav-links{display:flex;gap:28px;font:11px Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.nav-links a:hover{color:var(--mauve)}
+.nav-icons{font:12px Arial,sans-serif;color:var(--mauve)}
+.hero{
+  min-height:680px;display:grid;grid-template-columns:1fr 1fr;align-items:center;
+  gap:6%;padding:70px 0 80px;overflow:hidden
+}
+.hero-copy .eyebrow,.section-label{
+  font:10px Arial,sans-serif;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--mauve);font-weight:bold
+}
+.hero h1{
+  font-size:clamp(56px,7vw,94px);line-height:.88;font-weight:400;
+  color:var(--berry);margin:22px 0
+}
+.hero h1 em{color:#b77b8c}
+.hero p{max-width:520px;font-size:18px;line-height:1.8;color:var(--muted)}
+.btn{
+  display:inline-block;margin-top:25px;padding:16px 30px;
+  background:var(--berry);color:white;border:1px solid var(--gold);
+  font:11px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;
+  box-shadow:0 12px 28px rgba(120,72,93,.16);transition:.25s
+}
+.btn:hover{transform:translateY(-2px);background:#8b536a}
+.hero-visual{
+  min-height:570px;position:relative;border-radius:48% 48% 12px 12px;
+  background:
+    radial-gradient(circle at 30% 22%,#fff 0 7%,transparent 8%),
+    linear-gradient(145deg,#ead5c8,#c9a99a 46%,#876c60);
+  overflow:hidden;box-shadow:0 28px 60px rgba(120,72,93,.15);
+  border:1px solid rgba(199,160,100,.45)
+}
+.hero-visual:before{
+  content:"";position:absolute;width:65%;height:120%;left:18%;top:-10%;
+  border-radius:50% 45% 48% 52%;
+  background:linear-gradient(130deg,rgba(255,255,255,.85),rgba(244,225,216,.55),rgba(255,255,255,.12));
+  transform:rotate(15deg);box-shadow:25px 30px 60px rgba(87,63,53,.18)
+}
+.hero-visual:after{
+  content:"SAANJH CHIFFON";position:absolute;bottom:26px;left:28px;
+  font:10px Arial,sans-serif;letter-spacing:.28em;color:rgba(255,255,255,.9)
+}
+.marquee{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:15px 0;overflow:hidden;background:#5a433a;color:#f5e7d5
+}
+.marquee-inner{
+  white-space:nowrap;font:10px Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase
+}
+section{padding:100px 0}
+.section-head{text-align:center;margin-bottom:46px}
+.section-head h2{
+  font-size:48px;font-weight:400;color:var(--berry);margin:12px 0
+}
+.section-head p{max-width:570px;margin:auto;color:var(--muted);line-height:1.7}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.product{background:#fffdf9;border:1px solid var(--line);transition:.3s;box-shadow:0 10px 30px rgba(100,70,80,.05)}
+.product:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(100,70,80,.10)}
+.product-img{height:410px;position:relative;overflow:hidden}
+.product-img span{
+  position:absolute;left:18px;bottom:18px;color:white;
+  font:10px Arial,sans-serif;letter-spacing:.15em;text-transform:uppercase
+}
+.pink{background:linear-gradient(145deg,#b78379,#ead2cc 52%,#85625a)}
+.peach{background:linear-gradient(145deg,#b88b70,#f0dfd0 50%,#8f6b58)}
+.lilac{background:linear-gradient(145deg,#9d879e,#e5dce7 50%,#766174)}
+.product-info{padding:22px}
+.product-info h3{margin:0 0 7px;font-size:24px;font-weight:400;color:var(--berry)}
+.product-info p{margin:0;color:var(--muted);font:12px Arial,sans-serif}
+.product-info .price{margin-top:14px;color:var(--berry);font-weight:bold}
+.story{
+  background:linear-gradient(135deg,#5a443b,#75584c 50%,#4d3b35);
+}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:8%;align-items:center}
+.story-card{
+  min-height:430px;background:rgba(255,255,255,.10);border:1px solid rgba(199,160,100,.35);
+  padding:55px;display:flex;align-items:center;justify-content:center;text-align:center
+}
+.story-card .seal{
+  width:150px;height:150px;border:1px solid var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;color:var(--berry);
+  font:12px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase
+}
+.story h2{font-size:50px;font-weight:400;color:var(--berry);margin:10px 0 20px}
+.story p{font-size:18px;line-height:1.9;color:var(--muted)}
+.collections{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.collection{
+  min-height:320px;padding:40px;display:flex;flex-direction:column;justify-content:end;
+  color:#fffaf5;border:1px solid rgba(185,154,104,.42)
+}
+.collection:first-child{background:linear-gradient(135deg,#e5c7c0,#b88c83)}
+.collection:last-child{background:linear-gradient(135deg,#dfe4d8,#a9b29b)}
+.collection h3{font-size:36px;font-weight:400;margin:0 0 7px}
+.collection p{font:12px Arial,sans-serif;color:#6e625c}
+.newsletter{text-align:center;background:#fffdf9}
+.newsletter h2{font-size:44px;font-weight:400;color:var(--berry)}
+.newsletter p{color:var(--muted)}
+form{display:flex;max-width:530px;margin:25px auto}
+input{flex:1;border:1px solid var(--line);padding:16px;background:#fffdf9af8;font:13px Arial;outline:none}
+button{
+  border:0;background:var(--berry);color:white;padding:0 23px;
+  font:10px Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase
+}
+footer{
+  background:#49372f;color:#f8e9e8;padding:50px 0 25px
+}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
+footer h3{font-weight:400;font-size:27px;margin:0 0 15px}
+footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
+.copyright{
+  border-top:1px solid rgba(255,255,255,.18);margin-top:35px;padding-top:20px;
+  font:9px Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#dfc9cf
+}
+@media(max-width:800px){
+  .nav-links{display:none}.nav-inner{justify-content:center}.nav-icons{display:none}
+  .hero{grid-template-columns:1fr;padding-top:55px}.hero-visual{min-height:440px}
+  .products,.story-grid,.collections,.footer-grid{grid-template-columns:1fr}
+  section{padding:70px 0}.product-img{height:350px}
+  .story-card{min-height:320px;padding:35px}.story h2{font-size:40px}
+  form{flex-direction:column;gap:8px}input{width:100%}button{height:50px}
+}
+</style>
+</head>
+<body>
+
+
+<nav>
+  <div class="container nav-inner">
+    <div class="nav-links"><a href="#shop">Shop</a><a href="#collections">Collections</a></div>
+    <a href="#" class="logo">
+      <span class="logo-main">SAANJH</span>
+      <span class="logo-sub">Chiffon · By Sanskriti</span>
+    </a>
+    <div class="nav-icons">♡ &nbsp; Bag (0)</div>
+  </div>
+</nav>
+
+<main>
+<section class="container hero">
+  <div class="hero-copy">
+    <div class="eyebrow">The Chiffon Edit · 2026</div>
+    <h1>Light as air.<br><em>Beautiful</em> as dusk.</h1>
+    <p>
+   
+Discover delicate chiffon sarees designed to move with you —
+      soft drapes, luminous colours and effortless Indian elegance.
+<p>The Art Of Indian Draping</p>
+    </p>
+    <a class="btn" href="#shop">Explore the collection</a>
+  </div>
+  <div class="hero-visual"></div>
+</section>
+
+<div class="marquee"><div class="marquee-inner">
+  ✦ Soft drapes &nbsp;&nbsp; ✦ Feminine silhouettes &nbsp;&nbsp; ✦ Modern Indian heirlooms &nbsp;&nbsp; ✦ Made for your saanjh &nbsp;&nbsp;
+  ✦ Soft drapes &nbsp;&nbsp; ✦ Feminine silhouettes &nbsp;&nbsp; ✦ Modern Indian heirlooms
+</div></div>
+
+<section id="shop" class="container">
+  <div class="section-head">
+    <div class="section-label">The signature edit</div>
+    <h2>Chiffon, softly spoken.</h2>
+    <p>Airy textures, graceful movement and colours inspired by Indian evenings.</p>
+  </div>
+  <div class="products">
+    <article class="product">
+      <div class="product-image.D3EBB94B-6A74-4303-8B8D-E67C07073710_1200x"><span>Blush · Limited</span></div>
+      <div class="product-info"><h3>Gulabi Saanjh</h3><p>Blush pink chiffon · Pearl border</p><p class="price">₹8,900</p></div>
+    </article>
+    <article class="product">
+      <div class="product-img peach"><span>New arrival</span></div>
+      <div class="product-info"><h3>Peach Noor</h3><p>Soft peach chiffon · Delicate zari</p><p class="price">₹9,600</p></div>
+    </article>
+    <article class="product">
+      <div class="product-img lilac"><span>Editor's pick</span></div>
+      <div class="product-info"><h3>Lavender Raat</h3><p>Lavender chiffon · Hand-finished edge</p><p class="price">₹10,800</p></div>
+    </article>
+  </div>
+</section>
+
+<section class="story">
+  <div class="container story-grid">
+    <div class="story-card"><div class="seal">Saanjh<br>Chiffon<br>Est. 2026</div></div>
+    <div>
+      <div class="section-label">Our philosophy</div>
+      <h2>For the woman who loves a little softness.</h2>
+      <p>
+        Saanjh Chiffon celebrates the beauty of an unhurried evening —
+        the first glow of sunset, a familiar fragrance, a saree that falls
+        perfectly and feels like second skin.
+      </p>
+      <p>
+        Every piece is imagined to be graceful without feeling precious,
+        romantic without feeling excessive, and timeless enough to return to.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="collections" class="container">
+  <div class="section-head">
+    <div class="section-label">Curated for you</div>
+    <h2>Two moods, one signature.</h2>
+  </div>
+  <div class="collections">
+    <a class="collection" href="#shop">
+      <h3>The Celebration Edit</h3>
+      <p>Soft shimmer · graceful borders · evenings worth remembering</p>
+    </a>
+    <a class="collection" href="#shop">
+      <h3>The Everyday Edit</h3>
+      <p>Fresh pastels · effortless drapes · beautiful ordinary days</p>
+    </a>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="container">
+    <div class="section-label">A little note from Saanjh</div>
+    <h2>Come, stay awhile.</h2>
+    <p>Be the first to know about new drops, private edits and festive collections.</p>
+    <form>
+      <input type="email" placeholder="Your Email Address">
+      <button type="button">Join us</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><h3>SAANJH</h3><p>Chiffon sarees for soft evenings and unforgettable moments.</p></div>
+      <div><h3>Explore</h3><p><a href="#shop">Shop</a><br><a href="#collections">Collections</a><br><a href="#">Our Story</a></p></div>
+      <div><h3>Connect</h3><p>Instagram<br>WhatsApp<br>hello@saanjhchiffon.in</p></div>
+    </div>
+    <div class="copyright">© 2026 Saanjh Chiffon · By Sanskriti · All rights reserved</div>
+  </div>
+</footer>
+</body>
+</html>
