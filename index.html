@@ -824,21 +824,51 @@ function placeOrder() {
   );
 
 
-  if (paymentMethod === "COD") {
+if (paymentMethod === "COD") {
+    try {
+      const createCodOrder = httpsCallable(
+        getFunctions(app),
+        "createCodOrder"
+      );
 
-    alert(
-      "COD order ready hai!\n\n" +
-      "Name: " + name +
-      "\nMobile: " + phone +
-      "\nTotal: ₹" + total
-    );
+      const result = await createCodOrder({
+        name: name,
+        phone: phone,
+        email: email,
+        address: address,
+        city: city,
+        state: state,
+        pincode: pincode,
+        items: cart.map((item) => ({
+          productId: item.id || item.productId,
+          name: item.name,
+          price: item.price,
+          qty: item.qty
+        })),
+        total: total,
+        paymentMethod: "COD"
+      });
 
+      alert(
+        "Order successfully place ho gaya! 🎉\n\n" +
+        "Order ID: " + result.data.orderId
+      );
+
+      cart = [];
+      localStorage.removeItem("cart");
+      closeCheckout();
+      renderCart();
+
+    } catch (error) {
+      console.error(error);
+
+      alert(
+        "Order place nahi ho paya.\n\n" +
+        (error.message || "Please try again.")
+      );
+    }
   } else {
-
-    alert(
-      "Online payment next step me Razorpay se connect karenge."
-    );
-
+    alert("Online payment next step me Razorpay se connect karenge.");
   }
 }
 window.changeCartQty = changeCartQty;
