@@ -869,8 +869,114 @@ if (paymentMethod === "COD") {
       );
     }
   } else {
-    alert("Online payment next step me Razorpay se connect karenge.");
+  try {
+    const createRazorpayOrder = httpsCallable(
+      getFunctions(app),
+      "createRazorpayOrder"
+    );
+
+    const orderResult = await createRazorpayOrder({
+      total: total
+    });
+
+    const razorpayOptions = {
+      key: orderResult.data.keyId,
+      amount: orderResult.data.amount,
+      currency: orderResult.data.currency,
+      name: "Saanjh Chiffon",
+      description: "Saree Purchase",
+      order_id: orderResult.data.orderId,
+
+      prefill: {
+        name: name,
+        email: email,
+        contact: phone
+      },
+
+      notes: {
+        address: address,
+        city: city,
+        state: state,
+        pincode: pincode
+      },
+
+      handler: async function (response) {
+        try {
+          const verifyRazorpayPayment = httpsCallable(
+            getFunctions(app),
+            "verifyRazorpayPayment"
+          );
+
+          const verifyResult = await verifyRazorpayPayment({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+
+            name: name,
+            phone: phone,
+            email: email,
+            address: address,
+            city: city,
+            state: state,
+            pincode: pincode,
+
+            items: cart.map((item) => ({
+              productId: item.id || item.productId,
+              name: item.name,
+              price: item.price,
+              qty: item.qty
+            })),
+
+            total: total
+          });
+
+          alert(
+            "Online payment successful! 🎉\n\n" +
+            "Order ID: " + verifyResult.data.orderId
+          );
+
+          cart = [];
+          localStorage.removeItem("cart");
+          closeCheckout();
+          renderCart();
+
+        } catch (error) {
+          console.error(error);
+
+          alert(
+            "Payment verify nahi ho paya.\n\n" +
+            (error.message || "Please contact us.")
+          );
+        }
+      },
+
+      theme: {
+        color: "#8b5e3c"
+      }
+    };
+
+    const razorpay = new Razorpay(razorpayOptions);
+
+    razorpay.on("payment.failed", function (response) {
+      console.error(response.error);
+
+      alert(
+        "Payment failed.\n\n" +
+        (response.error.description || "Please try again.")
+      );
+    });
+
+    razorpay.open();
+
+  } catch (error) {
+    console.error(error);
+
+    alert(
+      "Payment start nahi ho paya.\n\n" +
+      (error.message || "Please try again.")
+    );
   }
+}
 }
 window.changeCartQty = changeCartQty;
 window.checkout = checkout;
