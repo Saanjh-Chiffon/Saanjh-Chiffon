@@ -624,9 +624,222 @@ function checkout() {
     return;
   }
 
-  alert("Checkout system next step me connect karenge.");
+  let checkoutBox = document.getElementById("checkout-box");
+
+  if (!checkoutBox) {
+
+    checkoutBox = document.createElement("div");
+
+    checkoutBox.id = "checkout-box";
+
+    checkoutBox.style.cssText = `
+      position:fixed;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      width:420px;
+      max-width:90%;
+      max-height:90vh;
+      overflow:auto;
+      background:white;
+      padding:25px;
+      border-radius:15px;
+      box-shadow:0 5px 30px rgba(0,0,0,.3);
+      z-index:10000;
+    `;
+
+    document.body.appendChild(checkoutBox);
+  }
+
+  checkoutBox.innerHTML = `
+
+    <h2 style="margin-top:0;">Checkout</h2>
+
+    <p>Please enter your delivery details.</p>
+
+    <input
+      id="customer-name"
+      type="text"
+      placeholder="Full Name"
+      style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
+    >
+
+    <input
+      id="customer-phone"
+      type="tel"
+      placeholder="Mobile Number"
+      style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
+    >
+
+    <input
+      id="customer-email"
+      type="email"
+      placeholder="Email Address"
+      style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
+    >
+
+    <textarea
+      id="customer-address"
+      placeholder="Full Delivery Address"
+      rows="3"
+      style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
+    ></textarea>
+
+    <input
+      id="customer-city"
+      type="text"
+      placeholder="City"
+      style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
+    >
+
+    <input
+      id="customer-state"
+      type="text"
+      placeholder="State"
+      style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
+    >
+
+    <input
+      id="customer-pincode"
+      type="text"
+      placeholder="Pincode"
+      maxlength="6"
+      style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
+    >
+
+    <h3>Payment Method</h3>
+
+    <label style="display:block;margin:10px 0;">
+      <input
+        type="radio"
+        name="payment-method"
+        value="COD"
+        checked
+      >
+      Cash on Delivery
+    </label>
+
+    <label style="display:block;margin:10px 0;">
+      <input
+        type="radio"
+        name="payment-method"
+        value="ONLINE"
+      >
+      Online Payment
+    </label>
+
+    <h3>
+      Total: ₹${cart.reduce(
+        (total, item) => total + item.price * item.qty,
+        0
+      )}
+    </h3>
+
+    <button
+      onclick="placeOrder()"
+      style="
+        width:100%;
+        padding:14px;
+        border:none;
+        border-radius:7px;
+        background:#111;
+        color:white;
+        cursor:pointer;
+        margin-top:10px;
+      "
+    >
+      Place Order
+    </button>
+
+    <button
+      onclick="closeCheckout()"
+      style="
+        width:100%;
+        padding:12px;
+        border:1px solid #ccc;
+        border-radius:7px;
+        background:white;
+        cursor:pointer;
+        margin-top:8px;
+      "
+    >
+      Close
+    </button>
+  `;
+}
+function closeCheckout() {
+  const checkoutBox = document.getElementById("checkout-box");
+
+  if (checkoutBox) {
+    checkoutBox.remove();
+  }
 }
 
+
+function placeOrder() {
+
+  const name = document.getElementById("customer-name").value.trim();
+  const phone = document.getElementById("customer-phone").value.trim();
+  const email = document.getElementById("customer-email").value.trim();
+  const address = document.getElementById("customer-address").value.trim();
+  const city = document.getElementById("customer-city").value.trim();
+  const state = document.getElementById("customer-state").value.trim();
+  const pincode = document.getElementById("customer-pincode").value.trim();
+
+  const paymentMethod = document.querySelector(
+    'input[name="payment-method"]:checked'
+  ).value;
+
+
+  if (
+    !name ||
+    !phone ||
+    !email ||
+    !address ||
+    !city ||
+    !state ||
+    !pincode
+  ) {
+    alert("Please saari details fill karein.");
+    return;
+  }
+
+
+  if (!/^[0-9]{10}$/.test(phone)) {
+    alert("Please valid 10 digit mobile number enter karein.");
+    return;
+  }
+
+
+  if (!/^[0-9]{6}$/.test(pincode)) {
+    alert("Please valid 6 digit pincode enter karein.");
+    return;
+  }
+
+
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.qty,
+    0
+  );
+
+
+  if (paymentMethod === "COD") {
+
+    alert(
+      "COD order ready hai!\n\n" +
+      "Name: " + name +
+      "\nMobile: " + phone +
+      "\nTotal: ₹" + total
+    );
+
+  } else {
+
+    alert(
+      "Online payment next step me Razorpay se connect karenge."
+    );
+
+  }
+}
 window.changeCartQty = changeCartQty;
 window.checkout = checkout;
 
