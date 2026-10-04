@@ -473,10 +473,55 @@ window.editProduct = async function(id){
   }
 
 };
+window.updateProduct = async function(id){
+
+  const name = document.getElementById("productName-" + id).value;
+  const price = Number(
+    document.getElementById("productPrice-" + id).value
+  );
+  const stock = Number(
+    document.getElementById("productStock-" + id).value
+  );
+
+  const fileInput = document.getElementById("productImage-" + id);
+
+  try {
+
+    const productRef = doc(db, "PRODUCTS", id);
+
+    let image = "";
+
+    if (fileInput && fileInput.files.length > 0) {
+
+      const file = fileInput.files[0];
+
+      const storageRef = ref(
+        storage,
+        "products/" + id + "_" + Date.now() + "_" + file.name
+      );
+
+      await uploadBytes(storageRef, file);
+
+      image = await getDownloadURL(storageRef);
+    }
+
+    const updateData = {
+      Name: name,
+      price: Number(price),
+      stock: Number(stock)
+    };
+
+    if (image) {
+      updateData.image = image;
+    }
+
+    await updateDoc(productRef, updateData);
+
+    alert("Product updated successfully ✅");
 
     loadProducts();
 
-  }catch(error){
+  } catch(error) {
 
     console.error(error);
 
@@ -484,11 +529,9 @@ window.editProduct = async function(id){
       "Product update nahi hua ❌\n\n" +
       error.message
     );
-
   }
 
-};
-
+}; 
   window.addProduct = async function(){
 
     const name =
