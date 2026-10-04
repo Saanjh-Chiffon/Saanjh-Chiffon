@@ -405,7 +405,18 @@
 
     const imageFile =
   document.getElementById("productImage").files[0];
+let image = "";
 
+if (imageFile) {
+  const imageRef = ref(
+    storage,
+    "products/" + Date.now() + "_" + imageFile.name
+  );
+
+  await uploadBytes(imageRef, imageFile);
+
+  image = await getDownloadURL(imageRef);
+}
     if(!name || !price || stock < 0){
 
       alert("Product details complete karo.");
