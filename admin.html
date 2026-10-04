@@ -1,1 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Saanjh Admin Panel</title>
+
+  <style>
+    body{
+      font-family:Arial,sans-serif;
+      background:#f7f1eb;
+      margin:0;
+      padding:20px;
+      color:#333;
+    }
+
+    .box{
+      max-width:900px;
+      margin:auto;
+      background:white;
+      padding:25px;
+      border-radius:15px;
+      box-shadow:0 5px 20px #0001;
+    }
+
+    h1{
+      color:#8b5e3c;
+    }
+
+    input,button{
+      width:100%;
+      padding:12px;
+      margin:7px 0;
+      box-sizing:border-box;
+      border-radius:8px;
+      border:1px solid #ccc;
+    }
+
+    button{
+      background:#8b5e3c;
+      color:white;
+      border:none;
+      cursor:pointer;
+      font-weight:bold;
+    }
+
+    button:hover{
+      opacity:.9;
+    }
+
+    .product{
+      border:1px solid #ddd;
+      padding:15px;
+      margin:12px 0;
+      border-radius:10px;
+    }
+
+    .stock{
+      font-weight:bold;
+      color:#8b5e3c;
+    }
+
+    #adminPanel{
+      display:none;
+    }
+
+    .logout{
+      background:#555;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <h1>🌸 Saanjh Admin Panel</h1>
+
+  <!-- LOGIN -->
+  <div id="loginBox">
+
+    <h3>Admin Login</h3>
+
+    <input
+      type="email"
+      id="email"
+      placeholder="Admin Email"
+    >
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Password"
+    >
+
+    <button onclick="login()">
+      Login
+    </button>
+
+    <p id="loginMessage"></p>
+
+  </div>
+
+
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel">
+
+    <button class="logout" onclick="logout()">
+      Logout
+    </button>
+
+    <hr>
+
+    <h2>Add Product</h2>
+
+    <input
+      id="productName"
+      placeholder="Product Name"
+    >
+
+    <input
+      id="productPrice"
+      type="number"
+      placeholder="Price"
+    >
+
+    <input
+      id="productStock"
+      type="number"
+      placeholder="Stock Quantity"
+    >
+
+    <input
+      id="productImage"
+      placeholder="Product Image URL"
+    >
+
+    <button onclick="addProduct()">
+      Add Product
+    </button>
+
+    <hr>
+
+    <h2>Products</h2>
+
+    <div id="products">
+      Loading products...
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+  }
+    from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    collection,
+    getDocs,
+    addDoc,
+    updateDoc,
+    doc
+  }
+    from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+
+  const firebaseConfig = {
+
+    apiKey: "YOUR_FIREBASE_API_KEY",
+
+    authDomain:
+      "saanjhbysanskriti.firebaseapp.com",
+
+    projectId:
+      "saanjhbysanskriti",
+
+    storageBucket:
+      "saanjhbysanskriti.firebasestorage.app",
+
+    messagingSenderId:
+      "130853028955",
+
+    appId:
+      "1:130853028955:web:f95a16d3356d9710896b7e"
+
+  };
+
+
+  const app = initializeApp(firebaseConfig);
+
+  const auth = getAuth(app);
+
+  const db = getFirestore(app);
+
+
+  window.login = async function(){
+
+    const email =
+      document.getElementById("email").value;
+
+    const password =
+      document.getElementById("password").value;
+
+    const message =
+      document.getElementById("loginMessage");
+
+    try{
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      message.innerText =
+        "Login successful ✅";
+
+    }catch(error){
+
+      console.error(error);
+
+      message.innerText =
+        "Login failed ❌ " + error.message;
+
+    }
+
+  };
+
+
+  window.logout = async function(){
+
+    await signOut(auth);
+
+  };
+
+
+  onAuthStateChanged(auth, user => {
+
+    if(user){
+
+      document.getElementById("loginBox")
+        .style.display = "none";
+
+      document.getElementById("adminPanel")
+        .style.display = "block";
+
+      loadProducts();
+
+    }else{
+
+      document.getElementById("loginBox")
+        .style.display = "block";
+
+      document.getElementById("adminPanel")
+        .style.display = "none";
+
+    }
+
+  });
+
+
+  async function loadProducts(){
+
+    const container =
+      document.getElementById("products");
+
+    container.innerHTML =
+      "Loading products...";
+
+    try{
+
+      const snapshot =
+        await getDocs(
+          collection(db,"PRODUCTS")
+        );
+
+      container.innerHTML = "";
+
+      snapshot.forEach(productDoc => {
+
+        const product =
+          productDoc.data();
+
+        const id =
+          productDoc.id;
+
+        const div =
+          document.createElement("div");
+
+        div.className = "product";
+
+        div.innerHTML = `
+
+          <h3>${product.Name || "Product"}</h3>
+
+          <p>
+            Price: ₹${product.price || 0}
+          </p>
+
+          <p class="stock">
+            Stock: ${product.stock || 0}
+          </p>
+
+          <input
+            type="number"
+            id="stock-${id}"
+            value="${product.stock || 0}"
+            min="0"
+          >
+
+          <button
+            onclick="updateStock('${id}')"
+          >
+            Update Stock
+          </button>
+
+        `;
+
+        container.appendChild(div);
+
+      });
+
+    }catch(error){
+
+      console.error(error);
+
+      container.innerHTML =
+        "Products load nahi hue ❌";
+
+    }
+
+  }
+
+
+  window.updateStock = async function(id){
+
+    const input =
+      document.getElementById("stock-" + id);
+
+    const newStock =
+      Number(input.value);
+
+    try{
+
+      await updateDoc(
+        doc(db,"PRODUCTS",id),
+        {
+          stock:newStock
+        }
+      );
+
+      alert("Stock updated ✅");
+
+      loadProducts();
+
+    }catch(error){
+
+      console.error(error);
+
+      alert(
+        "Stock update nahi hua ❌\n\n" +
+        error.message
+      );
+
+    }
+
+  };
+
+
+  window.addProduct = async function(){
+
+    const name =
+      document.getElementById("productName").value;
+
+    const price =
+      Number(
+        document.getElementById("productPrice").value
+      );
+
+    const stock =
+      Number(
+        document.getElementById("productStock").value
+      );
+
+    const image =
+      document.getElementById("productImage").value;
+
+
+    if(!name || !price || stock < 0){
+
+      alert("Product details complete karo.");
+
+      return;
+
+    }
+
+
+    try{
+
+      await addDoc(
+        collection(db,"PRODUCTS"),
+        {
+          Name:name,
+          price:price,
+          stock:stock,
+          image:image
+        }
+      );
+
+      alert("Product added successfully ✅");
+
+      document.getElementById("productName").value = "";
+      document.getElementById("productPrice").value = "";
+      document.getElementById("productStock").value = "";
+      document.getElementById("productImage").value = "";
+
+      loadProducts();
+
+    }catch(error){
+
+      console.error(error);
+
+      alert(
+        "Product add nahi hua ❌\n\n" +
+        error.message
+      );
+
+    }
+
+  };
+
+</script>
+
+</body>
+</html>
