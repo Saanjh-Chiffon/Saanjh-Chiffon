@@ -460,7 +460,10 @@ if(fileInput && fileInput.files.length > 0){
 }
     
     }
-
+} catch (error) {
+    console.error("Error updating product:", error);
+    alert("Failed to update product. Please try again.");
+}
     await updateDoc(productRef, {
       Name: name,
       price: Number(price),
