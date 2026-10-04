@@ -460,6 +460,38 @@ if (imageFile) {
     }
 
   };
+  window.deleteProduct = async function(id){
+
+  const confirmDelete = confirm(
+    "Kya aap ye product delete karna chahte ho?"
+  );
+
+  if(!confirmDelete){
+    return;
+  }
+
+  try{
+
+    await deleteDoc(
+      doc(db, "PRODUCTS", id)
+    );
+
+    alert("Product deleted successfully ✅");
+
+    loadProducts();
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Product delete nahi hua ❌\n\n" +
+      error.message
+    );
+
+  }
+
+};
 
 </script>
 
