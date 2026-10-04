@@ -324,7 +324,19 @@
           <p class="stock">
             Stock: ${product.stock || 0}
           </p>
-
+<div class="product-images">
+  ${
+    (product.images && product.images.length
+      ? product.images
+      : (product.image ? [product.image] : [])
+    ).map(img => `
+      <img
+        src="${img}"
+        style="width:120px;height:120px;object-fit:cover;margin:5px;border-radius:8px;"
+      >
+    `).join("")
+  }
+</div>
           <input
             type="number"
             id="stock-${id}"
