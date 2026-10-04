@@ -400,22 +400,14 @@ window.editProduct = async function(id){
   try{
 
     const productRef = doc(db, "PRODUCTS", id);
-    const productSnap = await getDocs(
-      collection(db, "PRODUCTS")
-    );
+    const productSnap = await getDoc(productRef);
 
-    let currentProduct = null;
-
-    productSnap.forEach((item) => {
-      if(item.id === id){
-        currentProduct = item.data();
-      }
-    });
-
-    if(!currentProduct){
+    if(!productSnap.exists()){
       alert("Product nahi mila ❌");
       return;
     }
+
+    const currentProduct = productSnap.data();
 
     const name = prompt(
       "Product Name:",
@@ -438,12 +430,25 @@ window.editProduct = async function(id){
 
     if(stock === null) return;
 
-    const image = prompt(
-      "Product Image URL:",
-      currentProduct.image || ""
+    const fileInput = document.querySelector(
+      'input[type="file"]'
     );
 
-    if(image === null) return;
+    let image = currentProduct.image || "";
+
+    if(fileInput && fileInput.files.length > 0){
+
+      const file = fileInput.files[0];
+
+      const storageRef = ref(
+        storage,
+        "products/" + id + "_" + Date.now() + "_" + file.name
+      );
+
+      await uploadBytes(storageRef, file);
+
+      image = await getDownloadURL(storageRef);
+    }
 
     await updateDoc(productRef, {
       Name: name,
@@ -453,6 +458,21 @@ window.editProduct = async function(id){
     });
 
     alert("Product updated successfully ✅");
+
+    loadProducts();
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Product update nahi hua ❌\n\n" +
+      error.message
+    );
+
+  }
+
+};
 
     loadProducts();
 
