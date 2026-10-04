@@ -135,6 +135,7 @@
   id="productImage"
   type="file"
   accept="image/*"
+  multiple
 >
 
     <button onclick="addProduct()">
@@ -435,26 +436,37 @@ window.editProduct = async function(id){
     );
 
     let image = currentProduct.image || "";
+    let images = currentProduct.images || 
+    (currentProduct.image ? [currentProduct.image] : []);
+if(fileInput && fileInput.files.length > 0){
 
-    if(fileInput && fileInput.files.length > 0){
+    const files = Array.from(fileInput.files);
 
-      const file = fileInput.files[0];
+    for(const file of files){
 
-      const storageRef = ref(
-        storage,
-        "products/" + id + "_" + Date.now() + "_" + file.name
-      );
+        const storageRef = ref(
+            storage,
+            "products/" + id + "_" + Date.now() + "_" + file.name
+        );
 
-      await uploadBytes(storageRef, file);
+        await uploadBytes(storageRef, file);
 
-      image = await getDownloadURL(storageRef);
+        const imageUrl = await getDownloadURL(storageRef);
+
+        images.push(imageUrl);
+    }
+
+    image = images[0];
+}
+    
     }
 
     await updateDoc(productRef, {
       Name: name,
       price: Number(price),
       stock: Number(stock),
-      image: image
+      image: image,
+      images: images
     });
 
     alert("Product updated successfully ✅");
