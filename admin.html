@@ -132,9 +132,10 @@
     >
 
     <input
-      id="productImage"
-      placeholder="Product Image URL"
-    >
+  id="productImage"
+  type="file"
+  accept="image/*"
+>
 
     <button onclick="addProduct()">
       Add Product
@@ -175,7 +176,13 @@
     doc
   }
     from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-
+  
+  import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
 
   const firebaseConfig = {
 
@@ -203,6 +210,8 @@
   const auth = getAuth(app);
 
   const db = getFirestore(app);
+  
+  const storage = getStorage(app);
 
 
   window.login = async function(){
@@ -394,9 +403,8 @@
         document.getElementById("productStock").value
       );
 
-    const image =
-      document.getElementById("productImage").value;
-
+    const imageFile =
+  document.getElementById("productImage").files[0];
 
     if(!name || !price || stock < 0){
 
