@@ -367,11 +367,22 @@
           </button>
           <br><br>
 
-<button
-    onclick="editProduct('${id}')"
->
-    Edit Product
-</button>
+          <label style="display:block;margin:10px 0 6px;font-weight:600;">
+            Add more photos
+          </label>
+          <input
+            type="file"
+            id="productImage-${id}"
+            accept="image/*"
+            multiple
+          >
+          <br><br>
+
+          <button
+            onclick="editProduct('${id}')"
+          >
+            Edit Product & Save Photos
+          </button>
 
         `;
 
@@ -459,22 +470,24 @@ window.editProduct = async function(id){
 
     if(stock === null) return;
 
-    const fileInput = document.querySelector(
-      'input[type="file"]'
+    const fileInput = document.getElementById(
+      "productImage-" + id
     );
 
     let image = currentProduct.image || "";
-    let images = currentProduct.images || 
-    (currentProduct.image ? [currentProduct.image] : []);
-if(fileInput && fileInput.files.length > 0){
+    let images = Array.isArray(currentProduct.images)
+      ? [...currentProduct.images]
+      : (currentProduct.image ? [currentProduct.image] : []);
 
-    const files = Array.from(fileInput.files);
+    if(fileInput && fileInput.files.length > 0){
 
-    for(const file of files){
+      const files = Array.from(fileInput.files);
+
+      for(const file of files){
 
         const storageRef = ref(
-            storage,
-            "products/" + id + "_" + Date.now() + "_" + file.name
+          storage,
+          "products/" + id + "_" + Date.now() + "_" + file.name
         );
 
         await uploadBytes(storageRef, file);
@@ -482,10 +495,10 @@ if(fileInput && fileInput.files.length > 0){
         const imageUrl = await getDownloadURL(storageRef);
 
         images.push(imageUrl);
-    }
+      }
 
-    image = images[0];
-}
+      image = images[0] || "";
+    }
     
     await updateDoc(productRef, {
       Name: name,
