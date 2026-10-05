@@ -363,7 +363,7 @@ async function loadProducts() {
       article.innerHTML = `
        <div class="product-image">
   <div class="product-images">
-    ${(product.images || []).map(img => `
+    ${(product.images || (product.image ? [product.image] : [])).map(img => `
       <img
         src="${img}"
         alt="${product.Name || "Saanjh Saree"}"
