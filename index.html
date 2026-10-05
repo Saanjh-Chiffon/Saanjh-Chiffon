@@ -1364,23 +1364,30 @@ window.loadCustomerOrders = async function() {
   box.innerHTML = "Loading your orders...";
 
   try {
-    // Orders created by the current checkout contain the customer's email.
-    // Authenticated customers only see documents matching their own email.
-    let snap = await getDocs(query(
-      collection(db, "ORDERS"),
-      where("email", "==", user.email)
-    ));
+    // Orders are linked to the customer's login email.
+    // We keep the query server-side so one customer cannot read another customer's orders.
+    const email = String(user.email || "").trim();
 
-    // Support projects where the order collection is named `orders`.
+    let snap = await getDocs(
+      query(collection(db, "ORDERS"), where("email", "==", email))
+    );
+
+    // Support the lowercase collection name too.
     if (snap.empty) {
-      snap = await getDocs(query(
-        collection(db, "orders"),
-        where("email", "==", user.email)
-      ));
+      snap = await getDocs(
+        query(collection(db, "orders"), where("email", "==", email))
+      );
     }
 
     if (snap.empty) {
-      box.innerHTML = "<p>No orders found yet.</p>";
+      box.innerHTML = `
+        <div style="padding:14px;border:1px solid #eee;border-radius:12px;background:#fafafa;">
+          <b>No orders found.</b>
+          <div style="font-size:13px;color:#666;margin-top:6px;">
+            Your account is logged in as <b>${email}</b>.<br>
+            New orders placed with this email will appear here automatically.
+          </div>
+        </div>`;
       return;
     }
 
@@ -1392,21 +1399,34 @@ window.loadCustomerOrders = async function() {
 
     box.innerHTML = orderDocs.map(d => {
       const o = d.data();
-      const date = o.createdAt?.toDate ? o.createdAt.toDate().toLocaleString() : (o.createdAt || "");
+      const date = o.createdAt?.toDate
+        ? o.createdAt.toDate().toLocaleString("en-IN")
+        : (o.createdAt || "");
       const items = Array.isArray(o.items) ? o.items : [];
+      const status = o.orderStatus || o.status || "Order received";
+
       return `
         <div style="border:1px solid #e5e5e5;border-radius:12px;padding:14px;margin:10px 0;background:#fafafa;">
           <div style="font-weight:700;">Order #${d.id}</div>
           <div style="font-size:13px;color:#666;margin:5px 0;">${date}</div>
-          <div style="margin:8px 0;">${items.map(i => `${i.name || "Item"} × ${i.qty || 1}`).join("<br>")}</div>
+          <div style="margin:8px 0;">
+            ${items.length
+              ? items.map(i => `${i.name || "Item"} × ${i.qty || 1}`).join("<br>")
+              : "Order items"}
+          </div>
           <div><b>Total: ₹${o.total || 0}</b></div>
-          <div style="margin-top:5px;">Status: <b>${o.status || "Order received"}</b></div>
-          <div style="font-size:13px;color:#666;margin-top:4px;">Payment: ${o.paymentMethod || ""}</div>
+          <div style="margin-top:5px;">Status: <b>${status}</b></div>
+          <div style="font-size:13px;color:#666;margin-top:4px;">
+            Payment: ${o.paymentMethod || ""}
+          </div>
         </div>`;
     }).join("");
   } catch (error) {
-    console.error(error);
-    box.innerHTML = `<p style="color:#a33;">Order history load nahi ho paayi. Firebase Firestore rules/index ya order collection setup check karna hoga.</p>`;
+    console.error("Customer order history error:", error);
+    box.innerHTML = `
+      <p style="color:#a33;">
+        Order history load nahi ho paayi. Firebase rules check karo.
+      </p>`;
   }
 };
 
