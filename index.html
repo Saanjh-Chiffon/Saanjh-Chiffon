@@ -378,6 +378,7 @@ Discover delicate chiffon sarees designed to move with you —
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+  import { getStorage, ref as storageRef, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
     import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-functions.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
@@ -397,9 +398,36 @@ Discover delicate chiffon sarees designed to move with you —
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+  const storage = getStorage(app);
   const analytics = getAnalytics(app);
     let cart = [];
 let productsData = {};
+
+async function resolveProductImage(imageValue) {
+  if (!imageValue) return "";
+
+  // Already a normal web/data URL.
+  if (
+    typeof imageValue === "string" &&
+    (
+      imageValue.startsWith("http://") ||
+      imageValue.startsWith("https://") ||
+      imageValue.startsWith("data:") ||
+      imageValue.startsWith("blob:")
+    )
+  ) {
+    return imageValue;
+  }
+
+  // If Firestore contains a Firebase Storage path (for example products/photo.jpg),
+  // convert it to a public download URL.
+  try {
+    return await getDownloadURL(storageRef(storage, imageValue));
+  } catch (error) {
+    console.warn("Could not resolve product image:", imageValue, error);
+    return "";
+  }
+}
 
 async function loadProducts() {
   const productsContainer = document.getElementById("products");
@@ -424,9 +452,13 @@ async function loadProducts() {
       const article = document.createElement("article");
       article.className = "product";
 
-      const productImages = Array.isArray(product.images) && product.images.length
+      const rawProductImages = Array.isArray(product.images) && product.images.length
         ? product.images
         : (product.image ? [product.image] : []);
+
+      const productImages = (
+        await Promise.all(rawProductImages.map(resolveProductImage))
+      ).filter(Boolean);
 
       article.innerHTML = `
        <div class="product-image" data-gallery>
@@ -493,6 +525,15 @@ async function loadProducts() {
       }
 
       productsContainer.appendChild(article);
+
+      // If a stored URL is broken, hide only that broken image instead of
+      // leaving a confusing blank broken-image icon.
+      article.querySelectorAll(".product-slide").forEach((img) => {
+        img.addEventListener("error", () => {
+          console.warn("Product image failed to load:", img.src);
+          img.style.visibility = "hidden";
+        }, { once: true });
+      });
 
       // Enable swipe + arrows for every product gallery.
       if (productImages.length > 1) {
