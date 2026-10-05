@@ -454,9 +454,11 @@ async function loadProducts() {
         ? product.images
         : (product.image ? [product.image] : []);
 
-      const productImages = (
-        await Promise.all(rawProductImages.map(resolveProductImage))
-      ).filter(Boolean);
+      const productImages = [];
+      for (const imageValue of rawProductImages) {
+        const resolvedImage = await resolveProductImage(imageValue);
+        if (resolvedImage) productImages.push(resolvedImage);
+      }
 
       article.innerHTML = `
        <div class="product-image" data-gallery>
