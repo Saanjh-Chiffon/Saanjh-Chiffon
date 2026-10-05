@@ -174,26 +174,90 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
   .story-card{min-height:320px;padding:35px}.story h2{font-size:40px}
   form{flex-direction:column;gap:8px}input{width:100%}button{height:50px}
 }
-  .product-images {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  .product-image {
+  position: relative;
   width: 100%;
-  height: 100%;
-  scrollbar-width: none;
+  height: 430px;
+  overflow: hidden;
+  background: #f4ebe5;
 }
 
-.product-images::-webkit-scrollbar {
-  display: none;
+.product-images {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+  transition: transform .35s ease;
+  will-change: transform;
+}
+
+.product-images.dragging {
+  cursor: grabbing;
+  transition: none;
 }
 
 .product-images img {
-  min-width: 100%;
+  flex: 0 0 100%;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  scroll-snap-align: start;
-  flex-shrink: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.product-image .gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.75);
+  background: rgba(0,0,0,.35);
+  color: #fff;
+  padding: 0;
+  font: 24px/38px Arial,sans-serif;
+  z-index: 3;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image .gallery-prev { left: 12px; }
+.product-image .gallery-next { right: 12px; }
+
+.product-image .gallery-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 3;
+}
+
+.product-image .gallery-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.9);
+  background: rgba(255,255,255,.45);
+  cursor: pointer;
+}
+
+.product-image .gallery-dot.active {
+  background: #fff;
+}
+
+@media(max-width:800px){
+  .product-image { height: 420px; }
+  .product-image .gallery-btn { width: 34px; height: 34px; font-size: 21px; }
 }
   
 </style>
@@ -360,20 +424,35 @@ async function loadProducts() {
       const article = document.createElement("article");
       article.className = "product";
 
-      article.innerHTML = `
-       <div class="product-image">
-  <div class="product-images">
-  ${(product.images || (product.image ? [product.image] : [])).map((img, index) =>
-    `<img
-      src="${img}"
-      alt="${product.Name || "Saanjh Saree"}"
-      class="product-slide"
-    >`
-  ).join("")}
-</div>
+      const productImages = Array.isArray(product.images) && product.images.length
+        ? product.images
+        : (product.image ? [product.image] : []);
 
-  <span>${stock > 0 ? "In stock" : "Sold out"}</span>
-</div>
+      article.innerHTML = `
+       <div class="product-image" data-gallery>
+        <div class="product-images" data-track>
+          ${productImages.map((img) => `
+            <img
+              src="${img}"
+              alt="${product.Name || "Saanjh Saree"}"
+              class="product-slide"
+              draggable="false"
+            >
+          `).join("")}
+        </div>
+
+        ${productImages.length > 1 ? `
+          <button class="gallery-btn gallery-prev" type="button" aria-label="Previous photo">‹</button>
+          <button class="gallery-btn gallery-next" type="button" aria-label="Next photo">›</button>
+          <div class="gallery-dots">
+            ${productImages.map((_, i) => `
+              <button class="gallery-dot ${i === 0 ? "active" : ""}" type="button" data-index="${i}" aria-label="Photo ${i + 1}"></button>
+            `).join("")}
+          </div>
+        ` : ""}
+
+        <span>${stock > 0 ? "In stock" : "Sold out"}</span>
+       </div>
 
         <div class="product-info">
           <h3>${product.Name || "Saanjh Saree"}</h3>
@@ -414,6 +493,87 @@ async function loadProducts() {
       }
 
       productsContainer.appendChild(article);
+
+      // Enable swipe + arrows for every product gallery.
+      if (productImages.length > 1) {
+        const gallery = article.querySelector("[data-gallery]");
+        const track = article.querySelector("[data-track]");
+        const prev = article.querySelector(".gallery-prev");
+        const next = article.querySelector(".gallery-next");
+        const dots = [...article.querySelectorAll(".gallery-dot")];
+        let current = 0;
+        let startX = 0;
+        let startY = 0;
+        let dragging = false;
+
+        const goTo = (index, animate = true) => {
+          current = (index + productImages.length) % productImages.length;
+          track.style.transition = animate ? "transform .35s ease" : "none";
+          track.style.transform = `translateX(-${current * 100}%)`;
+          dots.forEach((dot, i) => dot.classList.toggle("active", i === current));
+        };
+
+        prev.addEventListener("click", (e) => {
+          e.stopPropagation();
+          goTo(current - 1);
+        });
+
+        next.addEventListener("click", (e) => {
+          e.stopPropagation();
+          goTo(current + 1);
+        });
+
+        dots.forEach(dot => {
+          dot.addEventListener("click", (e) => {
+            e.stopPropagation();
+            goTo(Number(dot.dataset.index));
+          });
+        });
+
+        gallery.addEventListener("touchstart", (e) => {
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+          dragging = true;
+          track.classList.add("dragging");
+        }, {passive:true});
+
+        gallery.addEventListener("touchend", (e) => {
+          if (!dragging) return;
+          dragging = false;
+          track.classList.remove("dragging");
+          const endX = e.changedTouches[0].clientX;
+          const endY = e.changedTouches[0].clientY;
+          const dx = endX - startX;
+          const dy = endY - startY;
+
+          if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+            goTo(current + (dx < 0 ? 1 : -1));
+          } else {
+            goTo(current);
+          }
+        }, {passive:true});
+
+        // Desktop mouse drag also works.
+        gallery.addEventListener("mousedown", (e) => {
+          startX = e.clientX;
+          startY = e.clientY;
+          dragging = true;
+          track.classList.add("dragging");
+        });
+
+        window.addEventListener("mouseup", (e) => {
+          if (!dragging) return;
+          dragging = false;
+          track.classList.remove("dragging");
+          const dx = e.clientX - startX;
+          const dy = e.clientY - startY;
+          if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+            goTo(current + (dx < 0 ? 1 : -1));
+          } else {
+            goTo(current);
+          }
+        });
+      }
     });
 
     createCartButton();
