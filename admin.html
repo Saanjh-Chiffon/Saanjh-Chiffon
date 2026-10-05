@@ -368,7 +368,7 @@
           <br><br>
 
           <label style="display:block;margin:10px 0 6px;font-weight:600;">
-            Add more photos
+            Replace photos (select all photos)
           </label>
           <input
             type="file"
@@ -381,7 +381,7 @@
           <button
             onclick="editProduct('${id}')"
           >
-            Edit Product & Save Photos
+            Edit Product & Replace Photos
           </button>
 
         `;
@@ -481,19 +481,24 @@ window.editProduct = async function(id){
 
     if(fileInput && fileInput.files.length > 0){
 
+      // When new photos are selected, REPLACE the old image list.
+      // This removes broken/old Storage URLs from the product.
+      images = [];
+
       const files = Array.from(fileInput.files);
 
-      for(const file of files){
+      for(let i = 0; i < files.length; i++){
 
+        const file = files[i];
+        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
         const storageRef = ref(
           storage,
-          "products/" + id + "_" + Date.now() + "_" + file.name
+          "products/" + id + "/" + Date.now() + "_" + i + "_" + safeName
         );
 
         await uploadBytes(storageRef, file);
 
         const imageUrl = await getDownloadURL(storageRef);
-
         images.push(imageUrl);
       }
 
