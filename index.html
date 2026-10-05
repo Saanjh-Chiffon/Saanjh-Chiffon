@@ -363,13 +363,14 @@ async function loadProducts() {
       article.innerHTML = `
        <div class="product-image">
   <div class="product-images">
-    ${(product.images || (product.image ? [product.image] : [])).map(img => `
-      <img
-        src="${img}"
-        alt="${product.Name || "Saanjh Saree"}"
-      >
-    `).join("")}
-  </div>
+  ${(product.images || (product.image ? [product.image] : [])).map((img, index) =>
+    `<img
+      src="${img}"
+      alt="${product.Name || "Saanjh Saree"}"
+      class="product-slide"
+    >`
+  ).join("")}
+</div>
 
   <span>${stock > 0 ? "In stock" : "Sold out"}</span>
 </div>
