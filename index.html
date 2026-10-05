@@ -266,7 +266,7 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
 
 <!-- CUSTOMER ACCOUNT -->
 <div id="customer-account-wrap" style="position:fixed;top:18px;right:18px;z-index:9999;font-family:Arial,sans-serif;display:flex;gap:7px;align-items:center;">
-  <button id="customer-account-btn" type="button" style="border:1px solid #ddd;background:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">👤 Login</button>
+  <button id="customer-account-btn" type="button" style="border:1px solid #ddd;background:#fff;color:#222;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">👤 Login</button>
   <button id="customer-create-btn" type="button" style="border:1px solid #111;background:#111;color:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">Create ID</button>
   <button id="customer-logout-btn" type="button" style="display:none;border:1px solid #ddd;background:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">Logout</button>
 </div>
@@ -278,7 +278,7 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
       <input id="customer-auth-email" type="email" placeholder="Email Address" style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;border:1px solid #ddd;border-radius:8px;">
       <input id="customer-auth-password" type="password" placeholder="Password (min 6 characters)" style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;border:1px solid #ddd;border-radius:8px;">
       <button id="customer-auth-submit" style="width:100%;padding:13px;margin-top:10px;border:0;border-radius:8px;background:#111;color:#fff;cursor:pointer;">Create Account</button>
-      <button id="customer-auth-toggle" style="width:100%;padding:10px;margin-top:8px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer;">Already have an account? Login</button>
+      <button id="customer-auth-toggle" style="width:100%;padding:10px;margin-top:8px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#222;cursor:pointer;">Already have an account? Login</button>
       <p id="customer-auth-message" style="font-size:14px;line-height:1.45;"></p>
     </div>
     <div id="customer-profile" style="display:none;margin-top:18px;">
@@ -403,7 +403,7 @@ Discover delicate chiffon sarees designed to move with you —
   <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
    import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
   import { getStorage, ref as storageRef, getDownloadURL, listAll } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
     import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-functions.js";
