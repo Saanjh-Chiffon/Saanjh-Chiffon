@@ -265,8 +265,10 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
 <body>
 
 <!-- CUSTOMER ACCOUNT -->
-<div id="customer-account-wrap" style="position:fixed;top:18px;right:18px;z-index:9999;font-family:Arial,sans-serif;">
-  <button id="customer-account-btn" style="border:1px solid #ddd;background:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">👤 Login</button>
+<div id="customer-account-wrap" style="position:fixed;top:18px;right:18px;z-index:9999;font-family:Arial,sans-serif;display:flex;gap:7px;align-items:center;">
+  <button id="customer-account-btn" type="button" style="border:1px solid #ddd;background:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">👤 Login</button>
+  <button id="customer-create-btn" type="button" style="border:1px solid #111;background:#111;color:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">Create ID</button>
+  <button id="customer-logout-btn" type="button" style="display:none;border:1px solid #ddd;background:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">Logout</button>
 </div>
 <div id="customer-account-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:10000;align-items:center;justify-content:center;font-family:Arial,sans-serif;">
   <div style="width:min(440px,92vw);max-height:88vh;overflow:auto;background:#fff;border-radius:18px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.22);">
@@ -1273,13 +1275,26 @@ window.placeOrder = placeOrder;
 window.closeCheckout = closeCheckout;
 
 // ================= CUSTOMER LOGIN / ORDER HISTORY =================
-let customerSignupMode = true;
+let customerSignupMode = false;
 
 const accountModal = document.getElementById("customer-account-modal");
 const accountBtn = document.getElementById("customer-account-btn");
+const createBtn = document.getElementById("customer-create-btn");
+const logoutBtn = document.getElementById("customer-logout-btn");
 const authSubmit = document.getElementById("customer-auth-submit");
 const authToggle = document.getElementById("customer-auth-toggle");
 const authMessage = document.getElementById("customer-auth-message");
+
+function setAuthMode(isSignup) {
+  customerSignupMode = isSignup;
+  const nameInput = document.getElementById("customer-auth-name");
+  const title = document.getElementById("account-title");
+  nameInput.style.display = isSignup ? "block" : "none";
+  authSubmit.textContent = isSignup ? "Create Account" : "Login";
+  authToggle.textContent = isSignup ? "Already have an account? Login" : "New customer? Create account";
+  title.textContent = isSignup ? "Create Customer Account" : "Customer Login";
+  authMessage.textContent = "";
+}
 
 function refreshCustomerAuthUI(user) {
   const form = document.getElementById("auth-form");
@@ -1289,36 +1304,42 @@ function refreshCustomerAuthUI(user) {
   const welcome = document.getElementById("customer-welcome");
 
   if (user) {
-    accountBtn.textContent = "👤 My Account";
+    accountBtn.style.display = "none";
+    createBtn.style.display = "none";
+    logoutBtn.style.display = "inline-block";
     form.style.display = "none";
     profile.style.display = "block";
     title.textContent = "My Account";
     welcome.textContent = `Welcome ${user.displayName || user.email}!`;
     nameInput.value = "";
   } else {
-    accountBtn.textContent = "👤 Login";
+    accountBtn.style.display = "inline-block";
+    createBtn.style.display = "inline-block";
+    logoutBtn.style.display = "none";
     form.style.display = "block";
     profile.style.display = "none";
-    title.textContent = customerSignupMode ? "Create Customer Account" : "Customer Login";
+    setAuthMode(customerSignupMode);
   }
 }
 
 accountBtn.addEventListener("click", () => {
+  setAuthMode(false);
   accountModal.style.display = "flex";
-  refreshCustomerAuthUI(auth.currentUser);
 });
+
+createBtn.addEventListener("click", () => {
+  setAuthMode(true);
+  accountModal.style.display = "flex";
+});
+
+logoutBtn.addEventListener("click", () => window.customerLogout());
 
 window.closeCustomerAccount = function() {
   accountModal.style.display = "none";
 };
 
 authToggle.addEventListener("click", () => {
-  customerSignupMode = !customerSignupMode;
-  document.getElementById("customer-auth-name").style.display = customerSignupMode ? "block" : "none";
-  authSubmit.textContent = customerSignupMode ? "Create Account" : "Login";
-  authToggle.textContent = customerSignupMode ? "Already have an account? Login" : "New customer? Create account";
-  document.getElementById("account-title").textContent = customerSignupMode ? "Create Customer Account" : "Customer Login";
-  authMessage.textContent = "";
+  setAuthMode(!customerSignupMode);
 });
 
 authSubmit.addEventListener("click", async () => {
@@ -1352,6 +1373,7 @@ window.customerLogout = async function() {
   customerSignupMode = false;
   refreshCustomerAuthUI(null);
 };
+
 
 window.loadCustomerOrders = async function() {
   const box = document.getElementById("customer-orders");
