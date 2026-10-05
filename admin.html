@@ -568,21 +568,26 @@ window.updateProduct = async function(id){
       Number(
         document.getElementById("productStock").value
       );
+const imageFiles =
+  document.getElementById("productImage").files;
 
-    const imageFile =
-  document.getElementById("productImage").files[0];
-let image = "";
+let images = [];
 
-if (imageFile) {
+for (const file of imageFiles) {
+
   const imageRef = ref(
     storage,
-    "products/" + Date.now() + "_" + imageFile.name
+    "products/" + Date.now() + "_" + file.name
   );
 
-  await uploadBytes(imageRef, imageFile);
+  await uploadBytes(imageRef, file);
 
-  image = await getDownloadURL(imageRef);
+  const imageUrl =
+    await getDownloadURL(imageRef);
+
+  images.push(imageUrl);
 }
+    
     if(!name || !price || stock < 0){
 
       alert("Product details complete karo.");
@@ -600,7 +605,8 @@ if (imageFile) {
           Name:name,
           price:price,
           stock:stock,
-          image:image
+          images:images,
+          image:images[0] || ""
         }
       );
 
@@ -610,6 +616,7 @@ if (imageFile) {
       document.getElementById("productPrice").value = "";
       document.getElementById("productStock").value = "";
       document.getElementById("productImage").value = "";
+      images = [];
 
       loadProducts();
 
