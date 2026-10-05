@@ -61,45 +61,6 @@
       color:#8b5e3c;
     }
 
-    .product-images{
-      display:flex;
-      gap:10px;
-      overflow-x:auto;
-      padding:8px 0 12px;
-      min-height:130px;
-    }
-
-    .product-images img{
-      flex:0 0 120px;
-      width:120px;
-      height:120px;
-      object-fit:cover;
-      border-radius:8px;
-      border:1px solid #ddd;
-      background:#f5f5f5;
-    }
-
-    .no-images{
-      color:#888;
-      padding:12px 0;
-      font-size:14px;
-    }
-
-    .selected-preview{
-      display:flex;
-      gap:8px;
-      overflow-x:auto;
-      margin:5px 0 10px;
-    }
-
-    .selected-preview img{
-      width:80px;
-      height:80px;
-      object-fit:cover;
-      border-radius:7px;
-      border:1px solid #ddd;
-    }
-
     #adminPanel{
       display:none;
     }
@@ -324,8 +285,24 @@
 
   async function loadProducts(){
 
-    const container =
+    let container =
       document.getElementById("products");
+
+    // Keep the admin panel working even if the products container
+    // is missing from an older/deployed admin.html.
+    if (!container) {
+      container = document.createElement("div");
+      container.id = "products";
+
+      const heading = [...document.querySelectorAll("h1,h2,h3")]
+        .find(el => el.textContent.trim().toLowerCase() === "products");
+
+      if (heading) {
+        heading.insertAdjacentElement("afterend", container);
+      } else {
+        document.body.appendChild(container);
+      }
+    }
 
     container.innerHTML =
       "Loading products...";
@@ -365,18 +342,15 @@
           </p>
 <div class="product-images">
   ${
-    (Array.isArray(product.images) && product.images.length
+    (product.images && product.images.length
       ? product.images
       : (product.image ? [product.image] : [])
-    ).filter(Boolean).map((img, index) => `
+    ).map(img => `
       <img
         src="${img}"
-        alt="${product.Name || "Saanjh Saree"} photo ${index + 1}"
-        loading="lazy"
-        onerror="this.style.display='none'"
+        style="width:120px;height:120px;object-fit:cover;margin:5px;border-radius:8px;"
       >
-    `).join("") ||
-    '<div class="no-images">No product photos saved yet.</div>'
+    `).join("")
   }
 </div>
           <input
@@ -485,31 +459,22 @@ window.editProduct = async function(id){
 
     if(stock === null) return;
 
-    let images = Array.isArray(currentProduct.images)
-      ? [...currentProduct.images]
-      : (currentProduct.image ? [currentProduct.image] : []);
-
-    const addMore = confirm(
-      "Kya is product me new photos add karni hain?\n\nOK = photos select karo\nCancel = sirf details update karo"
+    const fileInput = document.querySelector(
+      'input[type="file"]'
     );
 
-    if(addMore){
+    let image = currentProduct.image || "";
+    let images = currentProduct.images || 
+    (currentProduct.image ? [currentProduct.image] : []);
+if(fileInput && fileInput.files.length > 0){
 
-      const picker = document.createElement("input");
-      picker.type = "file";
-      picker.accept = "image/*";
-      picker.multiple = true;
+    const files = Array.from(fileInput.files);
 
-      const selectedFiles = await new Promise(resolve => {
-        picker.onchange = () => resolve(Array.from(picker.files || []));
-        picker.click();
-      });
-
-      for(const file of selectedFiles){
+    for(const file of files){
 
         const storageRef = ref(
-          storage,
-          "products/" + id + "_" + Date.now() + "_" + file.name
+            storage,
+            "products/" + id + "_" + Date.now() + "_" + file.name
         );
 
         await uploadBytes(storageRef, file);
@@ -517,22 +482,20 @@ window.editProduct = async function(id){
         const imageUrl = await getDownloadURL(storageRef);
 
         images.push(imageUrl);
-      }
     }
 
+    image = images[0];
+}
+    
     await updateDoc(productRef, {
       Name: name,
       price: Number(price),
       stock: Number(stock),
-      images: images,
-      image: images[0] || ""
+      image: image,
+      images: images
     });
 
-    alert(
-      images.length
-        ? "Product updated successfully ✅\nPhotos saved: " + images.length
-        : "Product updated successfully ✅"
-    );
+    alert("Product updated successfully ✅");
 
     loadProducts();
 
@@ -548,7 +511,6 @@ window.editProduct = async function(id){
   }
 
 };
-
 window.updateProduct = async function(id){
 
   const name = document.getElementById("productName-" + id).value;
@@ -608,30 +570,7 @@ window.updateProduct = async function(id){
   }
 
 }; 
-  document.getElementById("productImage").addEventListener("change", function(){
-
-  const preview = document.getElementById("selectedPreview");
-  preview.innerHTML = "";
-
-  Array.from(this.files || []).forEach(file => {
-
-    const img = document.createElement("img");
-    img.alt = file.name;
-
-    const reader = new FileReader();
-
-    reader.onload = function(e){
-      img.src = e.target.result;
-    };
-
-    reader.readAsDataURL(file);
-    preview.appendChild(img);
-
-  });
-
-});
-
-window.addProduct = async function(){
+  window.addProduct = async function(){
 
     const name =
       document.getElementById("productName").value;
@@ -693,7 +632,6 @@ for (const file of imageFiles) {
       document.getElementById("productPrice").value = "";
       document.getElementById("productStock").value = "";
       document.getElementById("productImage").value = "";
-      document.getElementById("selectedPreview").innerHTML = "";
       images = [];
 
       loadProducts();
