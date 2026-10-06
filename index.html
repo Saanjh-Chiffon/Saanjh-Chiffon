@@ -865,7 +865,7 @@ function collectionDisplayName(name){
 }
 async function getWebsiteCollections(){
   try{
-    const snap=await getDoc(doc(db,"PRODUCTS","__COLLECTIONS__"));
+    const snap=await getDoc(doc(db,"PRODUCTS","COLLECTIONS_META"));
     const map=snap.exists()&&snap.data().collections?snap.data().collections:{};
     const custom=Object.entries(map).map(([id,v])=>({id,name:String(v?.name||"").trim(),description:String(v?.description||""),order:Number(v?.order||0)})).filter(c=>c.name);
     const all=[...DEFAULT_COLLECTIONS];
@@ -909,7 +909,7 @@ async function loadProducts() {
     productsContainer.innerHTML = "";
 
     for (const doc of snapshot.docs) {
-      if (doc.id === "__COLLECTIONS__") continue;
+      if (doc.id === "COLLECTIONS_META") continue;
       const product = doc.data();
       const productId = doc.id;
       const productCollection = collectionDisplayName(product.collection);
