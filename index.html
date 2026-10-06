@@ -266,26 +266,26 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
 
 <!-- CUSTOMER ACCOUNT -->
 <div id="customer-account-wrap" style="position:fixed;top:18px;right:18px;z-index:9999;font-family:Arial,sans-serif;display:flex;gap:7px;align-items:center;">
-  <button id="customer-account-btn" type="button" style="border:1px solid #ddd;background:#fff;color:#222;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">👤 Login</button>
+  <button id="customer-account-btn" type="button" style="border:1px solid #ddd;background:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">👤 Login</button>
   <button id="customer-create-btn" type="button" style="border:1px solid #111;background:#111;color:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">Create ID</button>
-  <button id="customer-logout-btn" type="button" style="display:none;border:1px solid #ddd;background:#fff;color:#222;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">Logout</button>
+  <button id="customer-logout-btn" type="button" style="display:none;border:1px solid #ddd;background:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">Logout</button>
 </div>
 <div id="customer-account-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:10000;align-items:center;justify-content:center;font-family:Arial,sans-serif;">
   <div style="width:min(440px,92vw);max-height:88vh;overflow:auto;background:#fff;border-radius:18px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.22);">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;"><h2 id="account-title" style="margin:0;color:#222;">Customer Login</h2><button onclick="window.closeCustomerAccount()" style="border:0 !important;background:transparent !important;color:#222 !important;font-size:24px;line-height:1;cursor:pointer;padding:4px 8px;">×</button></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;"><h2 id="account-title" style="margin:0;color:#222;">Customer Login</h2><button onclick="window.closeCustomerAccount()" style="border:0;background:none;font-size:24px;cursor:pointer;">×</button></div>
     <div id="auth-form" style="margin-top:18px;">
       <input id="customer-auth-name" placeholder="Full Name (for new account)" style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;border:1px solid #ddd;border-radius:8px;">
       <input id="customer-auth-email" type="email" placeholder="Email Address" style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;border:1px solid #ddd;border-radius:8px;">
       <input id="customer-auth-password" type="password" placeholder="Password (min 6 characters)" style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;border:1px solid #ddd;border-radius:8px;">
       <button id="customer-auth-submit" style="width:100%;padding:13px;margin-top:10px;border:0;border-radius:8px;background:#111;color:#fff;cursor:pointer;">Create Account</button>
-      <button id="customer-auth-toggle" style="width:100%;padding:10px;margin-top:8px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#222;cursor:pointer;">Already have an account? Login</button>
+      <button id="customer-auth-toggle" style="width:100%;padding:10px;margin-top:8px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer;">Already have an account? Login</button>
       <p id="customer-auth-message" style="font-size:14px;line-height:1.45;"></p>
     </div>
     <div id="customer-profile" style="display:none;margin-top:18px;">
       <p id="customer-welcome" style="margin-bottom:14px;"></p>
       <button onclick="window.loadCustomerOrders()" style="width:100%;padding:12px;border:0;border-radius:8px;background:#111;color:#fff;cursor:pointer;">📦 My Orders & Order History</button>
       <div id="customer-orders" style="margin-top:14px;"></div>
-      <button onclick="window.customerLogout()" style="width:100%;padding:11px;margin-top:12px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#222 !important;cursor:pointer;">Logout</button>
+      <button onclick="window.customerLogout()" style="width:100%;padding:11px;margin-top:12px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer;">Logout</button>
     </div>
   </div>
 </div>
@@ -403,7 +403,7 @@ Discover delicate chiffon sarees designed to move with you —
   <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
    import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
   import { getStorage, ref as storageRef, getDownloadURL, listAll } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
     import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-functions.js";
@@ -1020,6 +1020,7 @@ function checkout() {
     </h3>
 
     <button
+      id="place-order-btn"
       onclick="window.placeOrder()"
       style="
         width:100%;
@@ -1032,7 +1033,7 @@ function checkout() {
         margin-top:10px;
       "
     >
-      Place Order
+      <span id="place-order-btn-text">Place Order</span>
     </button>
 
     <button
@@ -1060,7 +1061,21 @@ function closeCheckout() {
 }
 
 
+let isPlacingOrder = false;
+
+function setPlaceOrderButtonState(loading) {
+  const btn = document.getElementById("place-order-btn");
+  const text = document.getElementById("place-order-btn-text");
+  if (!btn) return;
+  btn.disabled = loading;
+  btn.style.opacity = loading ? "0.65" : "1";
+  btn.style.cursor = loading ? "not-allowed" : "pointer";
+  if (text) text.textContent = loading ? "Placing Order..." : "Place Order";
+}
+
 async function placeOrder() {
+  // Prevent accidental double/triple clicks from creating duplicate orders.
+  if (isPlacingOrder) return;
 
   if (!auth.currentUser) {
     alert("Please pehle customer account se login karein.");
@@ -1106,6 +1121,9 @@ async function placeOrder() {
     return;
   }
 
+  isPlacingOrder = true;
+  setPlaceOrderButtonState(true);
+
 
   const total = cart.reduce(
     (sum, item) => sum + item.price * item.qty,
@@ -1148,9 +1166,13 @@ if (paymentMethod === "COD") {
       localStorage.removeItem("cart");
       closeCheckout();
       renderCart();
+      isPlacingOrder = false;
+      setPlaceOrderButtonState(false);
 
     } catch (error) {
       console.error(error);
+      isPlacingOrder = false;
+      setPlaceOrderButtonState(false);
 
       alert(
         "Order place nahi ho paya.\n\n" +
@@ -1229,15 +1251,25 @@ if (paymentMethod === "COD") {
           localStorage.removeItem("cart");
           closeCheckout();
           renderCart();
+          isPlacingOrder = false;
+          setPlaceOrderButtonState(false);
 
         } catch (error) {
           console.error(error);
+          isPlacingOrder = false;
+          setPlaceOrderButtonState(false);
 
           alert(
             "Payment verify nahi ho paya.\n\n" +
             (error.message || "Please contact us.")
           );
         }
+      },
+
+      ondismiss: function () {
+        // Customer closed Razorpay without completing payment.
+        isPlacingOrder = false;
+        setPlaceOrderButtonState(false);
       },
 
       theme: {
@@ -1249,6 +1281,8 @@ if (paymentMethod === "COD") {
 
     razorpay.on("payment.failed", function (response) {
       console.error(response.error);
+      isPlacingOrder = false;
+      setPlaceOrderButtonState(false);
 
       alert(
         "Payment failed.\n\n" +
@@ -1260,6 +1294,8 @@ if (paymentMethod === "COD") {
 
   } catch (error) {
     console.error(error);
+    isPlacingOrder = false;
+    setPlaceOrderButtonState(false);
 
     alert(
       "Payment start nahi ho paya.\n\n" +
