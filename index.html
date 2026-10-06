@@ -186,7 +186,7 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
   display: flex;
   width: 100%;
   height: 100%;
-  overflow: visible;
+  overflow: hidden;
   touch-action: pan-y;
   user-select: none;
   cursor: grab;
@@ -260,88 +260,9 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
   .product-image .gallery-btn { width: 34px; height: 34px; font-size: 21px; }
 }
   
-
-/* Final checkout/account button visibility + interaction fixes */
-#checkout-box button[onclick="window.closeCheckout()"] {
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  width:100% !important;
-  min-height:44px !important;
-  padding:12px !important;
-  margin-top:8px !important;
-  background:#fff !important;
-  color:#111 !important;
-  border:1px solid #222 !important;
-  border-radius:7px !important;
-  font-size:13px !important;
-  font-weight:600 !important;
-  letter-spacing:0 !important;
-  opacity:1 !important;
-}
-#checkout-box button[onclick="window.placeOrder()"] {
-  color:#fff !important;
-  background:#111 !important;
-  min-height:46px !important;
-  font-size:13px !important;
-  font-weight:700 !important;
-  letter-spacing:.04em !important;
-}
-#customer-account-modal button[onclick="window.closeCustomerAccount()"] {
-  width:40px !important;
-  height:40px !important;
-  min-width:40px !important;
-  min-height:40px !important;
-  padding:0 !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  background:#fff !important;
-  color:#111 !important;
-  border:1px solid #222 !important;
-  border-radius:50% !important;
-  font-size:26px !important;
-  line-height:1 !important;
-  letter-spacing:0 !important;
-  font-weight:700 !important;
-}
-#customer-account-modal #customer-auth-toggle {
-  color:#111 !important;
-  background:#fff !important;
-  border:1px solid #222 !important;
-}
-#customer-account-modal #customer-auth-submit {
-  color:#fff !important;
-  background:#111 !important;
-}
 </style>
 </head>
 <body>
-
-<!-- CUSTOMER ACCOUNT -->
-<div id="customer-account-wrap" style="position:fixed;top:18px;right:18px;z-index:9999;font-family:Arial,sans-serif;">
-  <button id="customer-account-btn" style="border:1px solid #ddd;background:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">👤 Login</button>
-</div>
-<div id="customer-account-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:10000;align-items:center;justify-content:center;font-family:Arial,sans-serif;">
-  <div style="width:min(440px,92vw);max-height:88vh;overflow:auto;background:#fff;border-radius:18px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.22);">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;"><h2 id="account-title" style="margin:0;color:#222;">Customer Login</h2><button onclick="window.closeCustomerAccount()" style="border:0;background:none;font-size:24px;cursor:pointer;">×</button></div>
-    <div id="auth-form" style="margin-top:18px;">
-      <input id="customer-auth-name" placeholder="Full Name (for new account)" style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;border:1px solid #ddd;border-radius:8px;">
-      <input id="customer-auth-email" type="email" placeholder="Email Address" style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;border:1px solid #ddd;border-radius:8px;">
-      <input id="customer-auth-password" type="password" placeholder="Password (min 6 characters)" style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;border:1px solid #ddd;border-radius:8px;">
-      <button id="customer-auth-submit" style="width:100%;padding:13px;margin-top:10px;border:0;border-radius:8px;background:#111;color:#fff;cursor:pointer;">Create Account</button>
-      <button id="customer-auth-toggle" style="width:100%;padding:10px;margin-top:8px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer;">Already have an account? Login</button>
-      <p id="customer-auth-message" style="font-size:14px;line-height:1.45;"></p>
-    </div>
-    <div id="customer-profile" style="display:none;margin-top:18px;">
-      <p id="customer-welcome" style="margin-bottom:14px;"></p>
-      <button onclick="window.loadCustomerOrders()" style="width:100%;padding:12px;border:0;border-radius:8px;background:#111;color:#fff;cursor:pointer;">📦 My Orders & Order History</button>
-      <div id="customer-orders" style="margin-top:14px;"></div>
-      <button onclick="window.customerLogout()" style="width:100%;padding:11px;margin-top:12px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer;">Logout</button>
-    </div>
-  </div>
-</div>
-
 
 
 <nav>
@@ -455,9 +376,7 @@ Discover delicate chiffon sarees designed to move with you —
   <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-   import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-  import { getStorage, ref as storageRef, getDownloadURL, listAll } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
+   import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
     import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-functions.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
@@ -476,60 +395,26 @@ Discover delicate chiffon sarees designed to move with you —
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+  console.log("Saanjh: Firebase initialized");
     const db = getFirestore(app);
-  const auth = getAuth(app);
-  setPersistence(auth, browserLocalPersistence).catch((error) => console.error("Auth persistence setup failed:", error));
-  const storage = getStorage(app);
     let cart = [];
 let productsData = {};
 
-async function resolveProductImage(imageValue) {
+function resolveProductImage(imageValue) {
   if (!imageValue) return "";
-
-  if (typeof imageValue === "string" &&
-      (imageValue.startsWith("http://") ||
-       imageValue.startsWith("https://") ||
-       imageValue.startsWith("data:") ||
-       imageValue.startsWith("blob:"))) {
-    return imageValue;
-  }
-
-  try {
-    return await getDownloadURL(storageRef(storage, imageValue));
-  } catch (error) {
-    console.warn("Could not resolve product image:", imageValue, error);
-    return "";
-  }
-}
-
-// Newer admin uploads are stored under products/<productId>/.
-// If Firestore still contains an old/broken image URL, read the actual
-// files from that product folder instead.
-async function getFolderProductImages(productId) {
-  try {
-    const folderRef = storageRef(storage, `products/${productId}`);
-    const result = await listAll(folderRef);
-    if (!result.items.length) return [];
-
-    const urls = [];
-    for (const itemRef of result.items) {
-      try {
-        urls.push(await getDownloadURL(itemRef));
-      } catch (error) {
-        console.warn("Could not get product folder image:", itemRef.fullPath, error);
-      }
-    }
-    return urls;
-  } catch (error) {
-    return [];
-  }
+  return String(imageValue).trim();
 }
 
 async function loadProducts() {
   const productsContainer = document.getElementById("products");
 
   try {
-    const snapshot = await getDocs(collection(db, "PRODUCTS"));
+    const snapshot = await Promise.race([
+      getDocs(collection(db, "PRODUCTS")),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Firestore request timeout (10 seconds)")), 10000)
+      )
+    ]);
 
     productsContainer.innerHTML = "";
 
@@ -552,18 +437,10 @@ async function loadProducts() {
         ? product.images
         : (product.image ? [product.image] : []);
 
-      let productImages = [];
-
-      // Prefer the current product folder used by the fixed admin uploader.
-      const folderImages = await getFolderProductImages(productId);
-
-      if (folderImages.length) {
-        productImages = folderImages;
-      } else {
-        for (const imageValue of rawProductImages) {
-          const resolvedImage = await resolveProductImage(imageValue);
-          if (resolvedImage) productImages.push(resolvedImage);
-        }
+      const productImages = [];
+      for (const imageValue of rawProductImages) {
+        const resolvedImage = resolveProductImage(imageValue);
+        if (resolvedImage) productImages.push(resolvedImage);
       }
 
       article.innerHTML = `
@@ -729,6 +606,7 @@ async function loadProducts() {
     console.error("Error loading products:", error);
     productsContainer.innerHTML = `
       <p style="color:#8b536a;line-height:1.8;">Products load nahi ho paaye.<br>
+      <small style="color:#666;">${error?.message || "Firebase error"}</small><br>
       Please refresh the page once.</p>`;
   }
 }
@@ -1113,114 +991,76 @@ function closeCheckout() {
 }
 
 
-let orderSubmitting = false;
-
-function setPlaceOrderButtonState(isSubmitting) {
-  const btn = document.querySelector('#checkout-box button[onclick="window.placeOrder()"]');
-  if (!btn) return;
-
-  if (isSubmitting) {
-    btn.disabled = true;
-    btn.dataset.originalText = btn.dataset.originalText || btn.textContent.trim() || "Place Order";
-    btn.textContent = "Placing Order...";
-    btn.style.opacity = "0.65";
-    btn.style.cursor = "not-allowed";
-    btn.setAttribute("aria-disabled", "true");
-  } else {
-    btn.disabled = false;
-    btn.textContent = btn.dataset.originalText || "Place Order";
-    btn.style.opacity = "1";
-    btn.style.cursor = "pointer";
-    btn.removeAttribute("aria-disabled");
-  }
-}
-
 async function placeOrder() {
-  // Hard client-side lock: repeated taps/clicks cannot start another request.
-  if (orderSubmitting) return;
 
-  const placeBtn = document.querySelector('#checkout-box button[onclick="window.placeOrder()"]');
-  if (!placeBtn) return;
+  const name = document.getElementById("customer-name").value.trim();
+  const phone = document.getElementById("customer-phone").value.trim();
+  const email = document.getElementById("customer-email").value.trim();
+  const address = document.getElementById("customer-address").value.trim();
+  const city = document.getElementById("customer-city").value.trim();
+  const state = document.getElementById("customer-state").value.trim();
+  const pincode = document.getElementById("customer-pincode").value.trim();
 
-  orderSubmitting = true;
-  setPlaceOrderButtonState(true);
+  const paymentMethod = document.querySelector(
+    'input[name="payment-method"]:checked'
+  ).value;
 
-  try {
-    if (!auth.currentUser) {
-      alert("Please pehle customer account se login karein.");
-      accountModal.style.display = "flex";
-      orderSubmitting = false;
-      setPlaceOrderButtonState(false);
-      return;
-    }
 
-    const name = document.getElementById("customer-name").value.trim();
-    const phone = document.getElementById("customer-phone").value.trim();
-    const email = document.getElementById("customer-email").value.trim();
-    const address = document.getElementById("customer-address").value.trim();
-    const city = document.getElementById("customer-city").value.trim();
-    const state = document.getElementById("customer-state").value.trim();
-    const pincode = document.getElementById("customer-pincode").value.trim();
+  if (
+    !name ||
+    !phone ||
+    !email ||
+    !address ||
+    !city ||
+    !state ||
+    !pincode
+  ) {
+    alert("Please saari details fill karein.");
+    return;
+  }
 
-    const paymentMethod = document.querySelector(
-      'input[name="payment-method"]:checked'
-    )?.value;
 
-    if (!name || !phone || !email || !address || !city || !state || !pincode) {
-      alert("Please saari details fill karein.");
-      return;
-    }
+  if (!/^[0-9]{10}$/.test(phone)) {
+    alert("Please valid 10 digit mobile number enter karein.");
+    return;
+  }
 
-    if (!/^[0-9]{10}$/.test(phone)) {
-      alert("Please valid 10 digit mobile number enter karein.");
-      return;
-    }
 
-    if (!/^[0-9]{6}$/.test(pincode)) {
-      alert("Please valid 6 digit pincode enter karein.");
-      return;
-    }
+  if (!/^[0-9]{6}$/.test(pincode)) {
+    alert("Please valid 6 digit pincode enter karein.");
+    return;
+  }
 
-    if (!paymentMethod) {
-      alert("Please payment method select karein.");
-      return;
-    }
 
-    if (!Array.isArray(cart) || cart.length === 0) {
-      alert("Cart empty hai.");
-      return;
-    }
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.qty,
+    0
+  );
 
-    const total = cart.reduce(
-      (sum, item) => sum + Number(item.price || 0) * Number(item.qty || 0),
-      0
-    );
 
-    const orderItems = cart.map((item) => ({
-      productId: item.id || item.productId,
-      name: item.name,
-      price: item.price,
-      qty: item.qty
-    }));
-
-    if (paymentMethod === "COD") {
+if (paymentMethod === "COD") {
+    try {
       const createCodOrder = httpsCallable(
         getFunctions(app),
         "createCodOrder"
       );
 
       const result = await createCodOrder({
-        name,
-        phone,
-        email,
-        address,
-        city,
-        state,
-        pincode,
-        items: orderItems,
-        total,
-        paymentMethod: "COD",
-        customerUid: auth.currentUser.uid
+        name: name,
+        phone: phone,
+        email: email,
+        address: address,
+        city: city,
+        state: state,
+        pincode: pincode,
+        items: cart.map((item) => ({
+          productId: item.id || item.productId,
+          name: item.name,
+          price: item.price,
+          qty: item.qty
+        })),
+        total: total,
+        paymentMethod: "COD"
       });
 
       alert(
@@ -1232,15 +1072,25 @@ async function placeOrder() {
       localStorage.removeItem("cart");
       closeCheckout();
       renderCart();
-      return;
-    }
 
+    } catch (error) {
+      console.error(error);
+
+      alert(
+        "Order place nahi ho paya.\n\n" +
+        (error.message || "Please try again.")
+      );
+    }
+  } else {
+  try {
     const createRazorpayOrder = httpsCallable(
       getFunctions(app),
       "createRazorpayOrder"
     );
 
-    const orderResult = await createRazorpayOrder({ total });
+    const orderResult = await createRazorpayOrder({
+      total: total
+    });
 
     const razorpayOptions = {
       key: orderResult.data.keyId,
@@ -1251,19 +1101,19 @@ async function placeOrder() {
       order_id: orderResult.data.orderId,
 
       prefill: {
-        name,
-        email,
+        name: name,
+        email: email,
         contact: phone
       },
 
       notes: {
-        address,
-        city,
-        state,
-        pincode
+        address: address,
+        city: city,
+        state: state,
+        pincode: pincode
       },
 
-      handler: async function(response) {
+      handler: async function (response) {
         try {
           const verifyRazorpayPayment = httpsCallable(
             getFunctions(app),
@@ -1274,16 +1124,23 @@ async function placeOrder() {
             razorpay_order_id: response.razorpay_order_id,
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_signature: response.razorpay_signature,
-            name,
-            phone,
-            email,
-            address,
-            city,
-            state,
-            pincode,
-            items: orderItems,
-            total,
-            customerUid: auth.currentUser.uid
+
+            name: name,
+            phone: phone,
+            email: email,
+            address: address,
+            city: city,
+            state: state,
+            pincode: pincode,
+
+            items: cart.map((item) => ({
+              productId: item.id || item.productId,
+              name: item.name,
+              price: item.price,
+              qty: item.qty
+            })),
+
+            total: total
           });
 
           alert(
@@ -1295,23 +1152,14 @@ async function placeOrder() {
           localStorage.removeItem("cart");
           closeCheckout();
           renderCart();
+
         } catch (error) {
           console.error(error);
+
           alert(
             "Payment verify nahi ho paya.\n\n" +
             (error.message || "Please contact us.")
           );
-        } finally {
-          orderSubmitting = false;
-          setPlaceOrderButtonState(false);
-        }
-      },
-
-      modal: {
-        ondismiss: function() {
-          // Payment window closed without completing payment.
-          orderSubmitting = false;
-          setPlaceOrderButtonState(false);
         }
       },
 
@@ -1321,22 +1169,35 @@ async function placeOrder() {
     };
 
     const razorpay = new Razorpay(razorpayOptions);
+
+    razorpay.on("payment.failed", function (response) {
+      console.error(response.error);
+
+      alert(
+        "Payment failed.\n\n" +
+        (response.error.description || "Please try again.")
+      );
+    });
+
     razorpay.open();
 
   } catch (error) {
-    console.error("Place order error:", error);
+    console.error(error);
+
     alert(
-      "Order place nahi ho paya.\n\n" +
+      "Payment start nahi ho paya.\n\n" +
       (error.message || "Please try again.")
     );
-  } finally {
-    // COD success returns above after closing checkout.
-    // On COD failure, unlock so the customer can retry once.
-    if (!cart || cart.length > 0) {
-      orderSubmitting = false;
-      setPlaceOrderButtonState(false);
-    }
   }
 }
-
+}
+window.changeCartQty = changeCartQty;
+window.checkout = checkout;
 window.placeOrder = placeOrder;
+window.closeCheckout = closeCheckout;
+
+loadProducts();
+
+</script>
+</body>
+</html>
