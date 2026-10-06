@@ -367,6 +367,46 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
 .order-card-total{margin-top:8px;font-weight:700}
 .order-status{margin-top:5px}
 
+
+/* ===== FINAL SAANJH VISUAL POLISH ===== */
+html{scroll-behavior:smooth}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button,a,input{outline:none}
+button{transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.btn{transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(80,45,55,.12)}
+.product{overflow:hidden;border-radius:2px}
+.product-info{background:rgba(255,253,249,.96)}
+.product-info .price{font-size:15px;letter-spacing:.03em}
+.menu-trigger{width:44px;height:44px;border-radius:50%;display:flex!important;align-items:center;justify-content:center;padding:0!important;font-size:24px!important;line-height:1;background:transparent!important;color:var(--berry)!important;border:1px solid rgba(120,80,90,.22)!important}
+.menu-trigger:hover{background:var(--cream)!important;transform:translateY(-1px)}
+.side-menu{box-shadow:-18px 0 55px rgba(45,25,30,.16);border-left:1px solid rgba(120,80,90,.10)}
+.side-menu-link{border-radius:10px!important;margin:3px 0!important;padding:14px 12px!important}
+.side-menu-link:hover{background:#fbf5f1!important;color:var(--berry)!important}
+.side-menu-close,.login-close{transition:transform .2s ease,background-color .2s ease!important}
+.side-menu-close:hover,.login-close:hover{transform:rotate(90deg);background:#faf5f1!important}
+.login-modal{box-shadow:0 28px 80px rgba(45,25,30,.20);border:1px solid rgba(120,80,90,.12)!important}
+.login-modal input:focus{border-color:var(--berry)!important;box-shadow:0 0 0 3px rgba(139,83,106,.08)}
+#login-submit:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(30,20,20,.12)}
+.order-card{box-shadow:0 5px 18px rgba(70,45,50,.04);transition:transform .18s ease,box-shadow .18s ease}
+.order-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(70,45,50,.08)}
+#checkout-box{box-shadow:0 30px 90px rgba(35,20,25,.22)!important;border:1px solid rgba(120,80,90,.14)!important}
+#checkout-box button[onclick="window.placeOrder()"]:hover:not(:disabled){background:#2b2023!important;transform:translateY(-1px);box-shadow:0 8px 18px rgba(20,15,15,.16)}
+#checkout-box button[onclick="window.placeOrder()"]:disabled{cursor:not-allowed!important;opacity:.65!important;transform:none!important}
+#checkout-box button[onclick="window.closeCheckout()"]:hover:not(:disabled){background:#faf7f4!important}
+:focus-visible{outline:2px solid var(--berry);outline-offset:3px}
+@media(max-width:800px){
+  .side-menu{width:min(88vw,360px)!important;padding:26px 20px!important}
+  .login-modal{width:min(92vw,520px)!important;max-height:88vh;overflow:auto}
+  #checkout-box{width:min(92vw,420px)!important;max-height:88vh;overflow:auto}
+  .menu-trigger{width:40px;height:40px}
+}
+@media(max-width:480px){
+  .product-info{padding:17px!important}
+  .product-info h3{font-size:21px!important}
+  .login-modal-head h2{font-size:25px!important}
+}
+
 </style>
 </head>
 <body>
