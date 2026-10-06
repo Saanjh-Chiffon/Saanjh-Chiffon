@@ -268,11 +268,11 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
 <div id="customer-account-wrap" style="position:fixed;top:18px;right:18px;z-index:9999;font-family:Arial,sans-serif;display:flex;gap:7px;align-items:center;">
   <button id="customer-account-btn" type="button" style="border:1px solid #ddd;background:#fff;color:#222;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">👤 Login</button>
   <button id="customer-create-btn" type="button" style="border:1px solid #111;background:#111;color:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">Create ID</button>
-  <button id="customer-logout-btn" type="button" style="display:none;border:1px solid #ddd;background:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">Logout</button>
+  <button id="customer-logout-btn" type="button" style="display:none;border:1px solid #ddd;background:#fff;color:#222;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">Logout</button>
 </div>
 <div id="customer-account-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:10000;align-items:center;justify-content:center;font-family:Arial,sans-serif;">
   <div style="width:min(440px,92vw);max-height:88vh;overflow:auto;background:#fff;border-radius:18px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.22);">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;"><h2 id="account-title" style="margin:0;color:#222;">Customer Login</h2><button onclick="window.closeCustomerAccount()" style="border:0;background:none;font-size:24px;cursor:pointer;">×</button></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;"><h2 id="account-title" style="margin:0;color:#222;">Customer Login</h2><button onclick="window.closeCustomerAccount()" style="border:0 !important;background:transparent !important;color:#222 !important;font-size:24px;line-height:1;cursor:pointer;padding:4px 8px;">×</button></div>
     <div id="auth-form" style="margin-top:18px;">
       <input id="customer-auth-name" placeholder="Full Name (for new account)" style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;border:1px solid #ddd;border-radius:8px;">
       <input id="customer-auth-email" type="email" placeholder="Email Address" style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;border:1px solid #ddd;border-radius:8px;">
@@ -285,7 +285,7 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
       <p id="customer-welcome" style="margin-bottom:14px;"></p>
       <button onclick="window.loadCustomerOrders()" style="width:100%;padding:12px;border:0;border-radius:8px;background:#111;color:#fff;cursor:pointer;">📦 My Orders & Order History</button>
       <div id="customer-orders" style="margin-top:14px;"></div>
-      <button onclick="window.customerLogout()" style="width:100%;padding:11px;margin-top:12px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer;">Logout</button>
+      <button onclick="window.customerLogout()" style="width:100%;padding:11px;margin-top:12px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#222 !important;cursor:pointer;">Logout</button>
     </div>
   </div>
 </div>
