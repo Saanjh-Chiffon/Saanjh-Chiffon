@@ -174,270 +174,28 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
   .story-card{min-height:320px;padding:35px}.story h2{font-size:40px}
   form{flex-direction:column;gap:8px}input{width:100%}button{height:50px}
 }
-  .product-image {
-  position: relative;
-  width: 100%;
-  height: 430px;
-  overflow: hidden;
-  background: #f4ebe5;
-}
-
-.product-images {
+  .product-images {
   display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  touch-action: pan-y;
-  user-select: none;
-  cursor: grab;
-  transition: transform .35s ease;
-  will-change: transform;
+  scrollbar-width: none;
 }
 
-.product-images.dragging {
-  cursor: grabbing;
-  transition: none;
+.product-images::-webkit-scrollbar {
+  display: none;
 }
 
 .product-images img {
-  flex: 0 0 100%;
+  min-width: 100%;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  pointer-events: none;
-}
-
-.product-image .gallery-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.75);
-  background: rgba(0,0,0,.35);
-  color: #fff;
-  padding: 0;
-  font: 24px/38px Arial,sans-serif;
-  z-index: 3;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.product-image .gallery-prev { left: 12px; }
-.product-image .gallery-next { right: 12px; }
-
-.product-image .gallery-dots {
-  position: absolute;
-  left: 50%;
-  bottom: 12px;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 6px;
-  z-index: 3;
-}
-
-.product-image .gallery-dot {
-  width: 7px;
-  height: 7px;
-  padding: 0;
-  margin: 0;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.9);
-  background: rgba(255,255,255,.45);
-  cursor: pointer;
-}
-
-.product-image .gallery-dot.active {
-  background: #fff;
-}
-
-@media(max-width:800px){
-  .product-image { height: 420px; }
-  .product-image .gallery-btn { width: 34px; height: 34px; font-size: 21px; }
+  scroll-snap-align: start;
+  flex-shrink: 0;
 }
   
-
-/* ===== Saanjh menu + login + button visibility fixes ===== */
-.menu-trigger{
-  width:44px !important;height:44px !important;min-width:44px !important;
-  padding:0 !important;margin:0 !important;border:1px solid var(--line) !important;
-  border-radius:50% !important;background:#fffdf9 !important;color:var(--berry) !important;
-  display:flex !important;align-items:center !important;justify-content:center !important;
-  font-size:25px !important;line-height:1 !important;letter-spacing:0 !important;
-  cursor:pointer !important;box-shadow:0 5px 16px rgba(80,50,40,.08);
-}
-.menu-trigger:hover{background:var(--blush) !important;color:var(--berry) !important}
-.side-menu-overlay{
-  position:fixed;inset:0;background:rgba(45,32,27,.35);z-index:20000;
-  opacity:0;visibility:hidden;transition:.25s;
-}
-.side-menu-overlay.open{opacity:1;visibility:visible}
-.side-menu{
-  position:fixed;top:0;right:0;width:min(360px,88vw);height:100vh;
-  background:#fffdf9;z-index:20001;padding:28px 24px;
-  box-shadow:-12px 0 35px rgba(50,35,30,.18);
-  transform:translateX(100%);transition:.3s;overflow:auto;
-}
-.side-menu.open{transform:translateX(0)}
-.side-menu-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:35px}
-.side-menu-head h3{margin:0;color:var(--berry);font-size:28px;font-weight:400}
-.side-menu-close{
-  width:40px !important;height:40px !important;min-width:40px !important;
-  padding:0 !important;margin:0 !important;border:1px solid #222 !important;
-  border-radius:50% !important;background:#fff !important;color:#111 !important;
-  display:flex !important;align-items:center !important;justify-content:center !important;
-  font-size:24px !important;line-height:1 !important;letter-spacing:0 !important;
-}
-.side-menu-link{
-  width:100% !important;display:flex !important;align-items:center !important;
-  justify-content:space-between !important;padding:17px 4px !important;
-  margin:0 !important;border:0 !important;border-bottom:1px solid var(--line) !important;
-  background:transparent !important;color:var(--text) !important;
-  font:13px Arial,sans-serif !important;letter-spacing:.12em !important;
-  text-transform:uppercase !important;text-align:left !important;cursor:pointer !important;
-}
-.side-menu-link:hover{color:var(--mauve) !important}
-.login-modal-overlay{
-  position:fixed;inset:0;background:rgba(45,32,27,.45);z-index:21000;
-  display:none;align-items:center;justify-content:center;padding:18px;
-}
-.login-modal-overlay.open{display:flex}
-.login-modal{
-  width:min(430px,100%);max-height:90vh;overflow:auto;background:#fffdf9;
-  border-radius:16px;padding:26px;box-shadow:0 15px 45px rgba(0,0,0,.25);
-}
-.login-modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.login-modal-head h2{margin:0;color:var(--berry);font-size:30px;font-weight:400}
-.login-close{
-  width:40px !important;height:40px !important;min-width:40px !important;
-  padding:0 !important;margin:0 !important;border:1px solid #222 !important;
-  border-radius:50% !important;background:#fff !important;color:#111 !important;
-  display:flex !important;align-items:center !important;justify-content:center !important;
-  font-size:24px !important;line-height:1 !important;letter-spacing:0 !important;
-}
-.login-modal input{
-  width:100% !important;display:block !important;flex:none !important;
-  border:1px solid var(--line) !important;background:#fff !important;
-  padding:13px !important;margin:8px 0 !important;font:14px Arial,sans-serif !important;
-}
-.login-action{
-  width:100% !important;min-height:46px !important;margin:10px 0 0 !important;
-  padding:13px !important;border:0 !important;border-radius:7px !important;
-  background:#111 !important;color:#fff !important;display:flex !important;
-  align-items:center !important;justify-content:center !important;
-  font:12px Arial,sans-serif !important;letter-spacing:.08em !important;
-  text-transform:uppercase !important;cursor:pointer !important;
-}
-.login-switch{
-  width:100% !important;background:transparent !important;color:var(--berry) !important;
-  border:0 !important;padding:12px !important;margin-top:8px !important;
-  font:12px Arial,sans-serif !important;letter-spacing:.04em !important;
-  cursor:pointer !important;
-}
-/* Prevent the global button rule from making checkout controls look blank. */
-#checkout-box button[onclick="window.placeOrder()"]{
-  display:flex !important;align-items:center !important;justify-content:center !important;
-  width:100% !important;min-height:48px !important;background:#111 !important;
-  color:#fff !important;border:0 !important;font-size:13px !important;
-  font-weight:700 !important;letter-spacing:.04em !important;opacity:1 !important;
-}
-#checkout-box button[onclick="window.closeCheckout()"]{
-  display:flex !important;align-items:center !important;justify-content:center !important;
-  width:100% !important;min-height:46px !important;background:#fff !important;
-  color:#111 !important;border:1px solid #222 !important;font-size:13px !important;
-  font-weight:600 !important;letter-spacing:0 !important;opacity:1 !important;
-}
-@media(max-width:800px){
-  .menu-trigger{position:absolute;right:18px;top:17px}
-}
-
-
-.orders-empty{
-  padding:16px;border:1px solid #eee;border-radius:12px;background:#fafafa;
-}
-.order-card{
-  border:1px solid #e5e5e5;border-radius:12px;padding:14px;margin:10px 0;background:#fafafa;
-}
-.order-card-title{font-weight:700;color:var(--berry)}
-.order-card-meta{font-size:12px;color:#777;margin:5px 0}
-.order-card-total{margin-top:8px;font-weight:700}
-.order-status{margin-top:5px}
-
-
-/* ===== FINAL SAANJH VISUAL POLISH ===== */
-html{scroll-behavior:smooth}
-body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-button,a,input{outline:none}
-button{transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease}
-.btn{transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease}
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(80,45,55,.12)}
-.product{overflow:hidden;border-radius:2px}
-.product-info{background:rgba(255,253,249,.96)}
-.product-info .price{font-size:15px;letter-spacing:.03em}
-.menu-trigger{width:44px;height:44px;border-radius:50%;display:flex!important;align-items:center;justify-content:center;padding:0!important;font-size:24px!important;line-height:1;background:transparent!important;color:var(--berry)!important;border:1px solid rgba(120,80,90,.22)!important}
-.menu-trigger:hover{background:var(--cream)!important;transform:translateY(-1px)}
-.side-menu{box-shadow:-18px 0 55px rgba(45,25,30,.16);border-left:1px solid rgba(120,80,90,.10)}
-.side-menu-link{border-radius:10px!important;margin:3px 0!important;padding:14px 12px!important}
-.side-menu-link:hover{background:#fbf5f1!important;color:var(--berry)!important}
-.side-menu-close,.login-close{transition:transform .2s ease,background-color .2s ease!important}
-.side-menu-close:hover,.login-close:hover{transform:rotate(90deg);background:#faf5f1!important}
-.login-modal{box-shadow:0 28px 80px rgba(45,25,30,.20);border:1px solid rgba(120,80,90,.12)!important}
-.login-modal input:focus{border-color:var(--berry)!important;box-shadow:0 0 0 3px rgba(139,83,106,.08)}
-#login-submit:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(30,20,20,.12)}
-.order-card{box-shadow:0 5px 18px rgba(70,45,50,.04);transition:transform .18s ease,box-shadow .18s ease}
-.order-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(70,45,50,.08)}
-#checkout-box{box-shadow:0 30px 90px rgba(35,20,25,.22)!important;border:1px solid rgba(120,80,90,.14)!important}
-#checkout-box button[onclick="window.placeOrder()"]:hover:not(:disabled){background:#2b2023!important;transform:translateY(-1px);box-shadow:0 8px 18px rgba(20,15,15,.16)}
-#checkout-box button[onclick="window.placeOrder()"]:disabled{cursor:not-allowed!important;opacity:.65!important;transform:none!important}
-#checkout-box button[onclick="window.closeCheckout()"]:hover:not(:disabled){background:#faf7f4!important}
-:focus-visible{outline:2px solid var(--berry);outline-offset:3px}
-@media(max-width:800px){
-  .side-menu{width:min(88vw,360px)!important;padding:26px 20px!important}
-  .login-modal{width:min(92vw,520px)!important;max-height:88vh;overflow:auto}
-  #checkout-box{width:min(92vw,420px)!important;max-height:88vh;overflow:auto}
-  .menu-trigger{width:40px;height:40px}
-}
-@media(max-width:480px){
-  .product-info{padding:17px!important}
-  .product-info h3{font-size:21px!important}
-  .login-modal-head h2{font-size:25px!important}
-}
-
-
-/* ===== Product details modal ===== */
-.product{cursor:pointer;transition:transform .25s ease,box-shadow .25s ease}
-.product:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(0,0,0,.08)}
-.product .add-cart-btn,.product .gallery-btn,.product .gallery-dot{position:relative;z-index:5}
-.product-details-overlay{position:fixed;inset:0;background:rgba(20,14,12,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:10000}
-.product-details-overlay.open{display:flex}
-.product-details-modal{width:min(940px,96vw);max-height:92vh;overflow:auto;background:#fff;border-radius:18px;box-shadow:0 25px 80px rgba(0,0,0,.25);position:relative}
-.product-details-close{position:absolute;right:14px;top:12px;width:42px;height:42px;border-radius:50%;background:#fff!important;color:#111!important;border:1px solid #ddd!important;font:28px/1 Arial!important;z-index:20;cursor:pointer}
-.product-details-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:0}
-.product-details-gallery{background:#f7f3f1;min-height:560px;display:flex;align-items:center;justify-content:center;padding:28px}
-.product-details-gallery img{width:100%;height:520px;object-fit:contain;border-radius:10px}
-.product-details-info{padding:55px 42px 38px}
-.product-details-eyebrow{font:11px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#8b536a;margin-bottom:12px}
-.product-details-info h2{font-family:Georgia,serif;font-size:36px;font-weight:400;margin:0 0 12px;color:#2f2420}
-.product-details-price{font:700 20px Arial,sans-serif;margin:16px 0;color:#111}
-.product-details-description{color:#625650;line-height:1.8;margin:18px 0}
-.product-details-meta{border-top:1px solid #eee;border-bottom:1px solid #eee;padding:15px 0;margin:22px 0;color:#51443f;line-height:1.8}
-.product-details-add{width:100%;min-height:50px;background:#111!important;color:#fff!important;border:0!important;font:700 13px Arial,sans-serif!important;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
-.product-details-add:disabled{background:#aaa!important;cursor:not-allowed}
-.product-details-thumbs{display:flex;gap:8px;overflow:auto;margin-top:12px}
-.product-details-thumbs button{padding:0;border:1px solid #ddd!important;background:#fff!important;width:62px;height:72px;cursor:pointer}
-.product-details-thumbs img{width:100%;height:100%;object-fit:cover}
-@media(max-width:760px){.product-details-grid{grid-template-columns:1fr}.product-details-gallery{min-height:340px;padding:18px}.product-details-gallery img{height:340px}.product-details-info{padding:30px 24px}.product-details-info h2{font-size:29px}}
-.details-spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;margin-top:2px}
-.details-spec-grid div{padding:11px 0;border-bottom:1px solid #eee}
-.details-spec-grid span{display:block;font:9px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8b7b74;margin-bottom:5px}
-.details-spec-grid strong{display:block;font:13px Arial,sans-serif;color:#3f332f;font-weight:600;line-height:1.45}
-@media(max-width:760px){.details-spec-grid{grid-template-columns:1fr}}
-
-
 </style>
 </head>
 <body>
@@ -450,112 +208,9 @@ button{transition:background-color .2s ease,color .2s ease,border-color .2s ease
       <span class="logo-main">SAANJH</span>
       <span class="logo-sub">Chiffon · By Sanskriti</span>
     </a>
-    <button class="menu-trigger" type="button" aria-label="Open menu" onclick="openSideMenu()">⋮</button>
+    <div class="nav-icons">♡ &nbsp; Bag (0)</div>
   </div>
 </nav>
-
-
-<!-- ===== Product Details ===== -->
-<div id="product-details-overlay" class="product-details-overlay" onclick="closeProductDetails(event)">
-  <div class="product-details-modal" role="dialog" aria-modal="true" aria-labelledby="product-details-title" onclick="event.stopPropagation()">
-    <button class="product-details-close" type="button" onclick="closeProductDetails()" aria-label="Close product details">×</button>
-    <div class="product-details-grid">
-      <div class="product-details-gallery">
-        <div style="width:100%">
-          <img id="product-details-image" src="" alt="Saanjh saree">
-          <div id="product-details-thumbs" class="product-details-thumbs"></div>
-        </div>
-      </div>
-      <div class="product-details-info">
-        <div class="product-details-eyebrow">Saanjh Chiffon · Saree Details</div>
-        <h2 id="product-details-title">Saanjh Saree</h2>
-        <div id="product-details-price" class="product-details-price"></div>
-        <div id="product-details-description" class="product-details-description"></div>
-        <div id="product-details-meta" class="product-details-meta"></div>
-        <button id="product-details-add" class="product-details-add" type="button">Add to Cart</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== Three-dot side menu ===== -->
-<div id="side-menu-overlay" class="side-menu-overlay" onclick="closeSideMenu()"></div>
-<aside id="side-menu" class="side-menu" aria-label="Saanjh menu">
-  <div class="side-menu-head">
-    <h3>SAANJH</h3>
-    <button class="side-menu-close" type="button" onclick="closeSideMenu()" aria-label="Close menu">×</button>
-  </div>
-  <button class="side-menu-link" type="button" onclick="handleAccountMenu();">
-    <span id="menu-account-label">Login / Create ID</span><span>›</span>
-  </button>
-  <button class="side-menu-link" type="button" onclick="openOrders();">
-    <span>My Orders</span><span>›</span>
-  </button>
-  <button class="side-menu-link" type="button" onclick="goToSection('collections');">
-    <span>Collections</span><span>›</span>
-  </button>
-  <button class="side-menu-link" type="button" onclick="goToSection('about-us');">
-    <span>About Us</span><span>›</span>
-  </button>
-  <button class="side-menu-link" type="button" onclick="goToSection('shop');">
-    <span>Shop</span><span>›</span>
-  </button>
-
-  <div style="height:1px;background:var(--line);margin:26px 0 10px;"></div>
-  <button id="menu-logout" class="side-menu-link" type="button"
-          onclick="handleLogout();" style="display:none;color:#9a3f3f !important;">
-    <span>Logout</span><span>↪</span>
-  </button>
-</aside>
-
-<!-- ===== Customer Login / Create ID ===== -->
-<div id="login-modal-overlay" class="login-modal-overlay">
-  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
-    <div class="login-modal-head">
-      <h2 id="login-title">Customer Login</h2>
-      <button class="login-close" type="button" onclick="closeLogin()" aria-label="Close login">×</button>
-    </div>
-    <p id="login-subtitle" style="color:#796d67;line-height:1.6;margin-top:0;">
-      Login to your Saanjh account.
-    </p>
-    <input id="login-email" type="email" placeholder="Email Address" autocomplete="email">
-    <input id="login-password" type="password" placeholder="Password" autocomplete="current-password">
-    <button id="login-submit" class="login-action" type="button" onclick="handleLogin()">Login</button>
-    <button id="login-switch" class="login-switch" type="button" onclick="toggleLoginMode()">Create a new account</button>
-    <p id="login-status" style="font:12px Arial,sans-serif;color:#8b536a;line-height:1.5;margin:12px 0 0;"></p>
-  </div>
-</div>
-
-
-<!-- ===== My Account ===== -->
-<div id="account-modal-overlay" class="login-modal-overlay">
-  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="account-title">
-    <div class="login-modal-head">
-      <h2 id="account-title">My Account</h2>
-      <button class="login-close" type="button" onclick="closeAccount()" aria-label="Close account">×</button>
-    </div>
-    <div style="padding:10px 0 4px;">
-      <p style="margin:0 0 6px;font-size:12px;color:#8a7b74;text-transform:uppercase;letter-spacing:.12em;">Signed in as</p>
-      <p id="account-email" style="margin:0;font-size:15px;color:#3f332f;word-break:break-word;"></p>
-    </div>
-    <button class="login-action" type="button" onclick="closeAccount();openOrders();">My Orders</button>
-    <button class="login-switch" type="button" onclick="closeAccount();handleLogout();">Logout</button>
-  </div>
-</div>
-
-
-<!-- ===== My Orders ===== -->
-<div id="orders-modal-overlay" class="login-modal-overlay">
-  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="orders-title">
-    <div class="login-modal-head">
-      <h2 id="orders-title">My Orders</h2>
-      <button class="login-close" type="button" onclick="closeOrders()" aria-label="Close orders">×</button>
-    </div>
-    <div id="customer-orders" style="font:13px Arial,sans-serif;color:#3f332f;line-height:1.55;">
-      Please login to view your orders.
-    </div>
-  </div>
-</div>
 
 <main>
 <section class="container hero">
@@ -584,12 +239,18 @@ Discover delicate chiffon sarees designed to move with you —
     <h2>Chiffon, softly spoken.</h2>
     <p>Airy textures, graceful movement and colours inspired by Indian evenings.</p>
   </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 22px;">
+    <button type="button" onclick="showCollection('All')" style="padding:10px 18px;border:1px solid #222;background:#111;color:#fff;border-radius:999px;cursor:pointer;">All Sarees</button>
+    <button type="button" onclick="showCollection('Celebration')" style="padding:10px 18px;border:1px solid #222;background:#fff;color:#111;border-radius:999px;cursor:pointer;">Celebration Edit</button>
+    <button type="button" onclick="showCollection('Everyday')" style="padding:10px 18px;border:1px solid #222;background:#fff;color:#111;border-radius:999px;cursor:pointer;">Everyday Edit</button>
+  </div>
+  <p id="collectionHeading" style="display:none;margin:0 0 18px;font-weight:600;letter-spacing:.05em;"></p>
   <div class="products" id="products">
     <p>Loading products...</p>
 </div>
 </section>
 
-<section id="about-us" class="story">
+<section class="story">
   <div class="container story-grid">
     <div class="story-card"><div class="seal">Saanjh<br>Chiffon<br>Est. 2026</div></div>
     <div>
@@ -614,11 +275,11 @@ Discover delicate chiffon sarees designed to move with you —
     <h2>Two moods, one signature.</h2>
   </div>
   <div class="collections">
-    <a class="collection" href="#shop">
+    <a class="collection" href="#shop" onclick="showCollection('Celebration'); return true;">
       <h3>The Celebration Edit</h3>
       <p>Soft shimmer · graceful borders · evenings worth remembering</p>
     </a>
-    <a class="collection" href="#shop">
+    <a class="collection" href="#shop" onclick="showCollection('Everyday'); return true;">
       <h3>The Everyday Edit</h3>
       <p>Fresh pastels · effortless drapes · beautiful ordinary days</p>
     </a>
@@ -657,8 +318,8 @@ Discover delicate chiffon sarees designed to move with you —
   <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-   import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-  import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
+   import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
     import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-functions.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
@@ -677,258 +338,42 @@ Discover delicate chiffon sarees designed to move with you —
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  console.log("Saanjh: Firebase initialized");
     const db = getFirestore(app);
-    const auth = getAuth(app);
-    setPersistence(auth, browserLocalPersistence).catch((error) => console.error("Auth persistence setup failed:", error));
+  const analytics = getAnalytics(app);
     let cart = [];
-let isOrderSubmitting = false;
-let checkoutOrderKey = null;
-    let currentUser = null;
 let productsData = {};
 
-function resolveProductImage(imageValue) {
-  if (!imageValue) return "";
-  return String(imageValue).trim();
-}
+async let selectedCollection = "All";
 
-
-let loginMode = "login";
-
-function openSideMenu(){
-  document.getElementById("side-menu")?.classList.add("open");
-  document.getElementById("side-menu-overlay")?.classList.add("open");
-}
-function closeSideMenu(){
-  document.getElementById("side-menu")?.classList.remove("open");
-  document.getElementById("side-menu-overlay")?.classList.remove("open");
-}
-function goToSection(id){
-  closeSideMenu();
-  setTimeout(() => document.getElementById(id)?.scrollIntoView({behavior:"smooth"}), 80);
-}
-function openLogin(){
-  document.getElementById("login-modal-overlay")?.classList.add("open");
-  document.getElementById("login-email")?.focus();
-}
-function closeLogin(){
-  document.getElementById("login-modal-overlay")?.classList.remove("open");
-}
-async function handleLogout(){
-  try{
-    await signOut(auth);
-    closeOrders();
-    closeSideMenu();
-    alert("Logout ho gaya.");
-  }catch(error){
-    console.error("Logout error:", error);
-    alert("Logout nahi ho paya. Please try again.");
+window.showCollection = function(collectionName) {
+  selectedCollection = collectionName || "All";
+  const heading = document.getElementById("collectionHeading");
+  if (heading) {
+    heading.style.display = selectedCollection === "All" ? "none" : "block";
+    heading.textContent = selectedCollection === "Celebration"
+      ? "The Celebration Edit"
+      : "The Everyday Edit";
   }
-}
-
-function handleAccountMenu(){
-  closeSideMenu();
-  if (currentUser){
-    openAccount();
-  } else {
-    openLogin();
-  }
-}
-
-function openAccount(){
-  const overlay = document.getElementById("account-modal-overlay");
-  const emailBox = document.getElementById("account-email");
-  if (!overlay) return;
-  if (emailBox) emailBox.textContent = currentUser?.email || "Customer";
-  overlay.classList.add("open");
-}
-
-function closeAccount(){
-  document.getElementById("account-modal-overlay")?.classList.remove("open");
-}
-
-function openOrders(){
-  closeSideMenu();
-  const overlay = document.getElementById("orders-modal-overlay");
-  if (!overlay) return;
-  overlay.classList.add("open");
-  loadCustomerOrders();
-}
-
-function closeOrders(){
-  document.getElementById("orders-modal-overlay")?.classList.remove("open");
-}
-
-async function loadCustomerOrders(){
-  const box = document.getElementById("customer-orders");
-  if (!box) return;
-
-  const user = auth.currentUser;
-  if (!user){
-    box.innerHTML = `
-      <div class="orders-empty">
-        <b>Please login first.</b>
-        <div style="font-size:12px;color:#666;margin-top:6px;">
-          Login karke aap apne orders aur order status yahan dekh sakte hain.
-        </div>
-        <button class="login-action" type="button" onclick="closeOrders(); openLogin();">Login / Create ID</button>
-      </div>`;
-    return;
-  }
-
-  box.innerHTML = `<div style="padding:16px;text-align:center;color:#777;">Loading your orders...</div>`;
-
-  try{
-    const email = String(user.email || "").trim();
-
-    let snap = await getDocs(
-      query(collection(db, "ORDERS"), where("email", "==", email))
-    );
-
-    if (snap.empty){
-      snap = await getDocs(
-        query(collection(db, "orders"), where("email", "==", email))
-      );
-    }
-
-    if (snap.empty){
-      box.innerHTML = `
-        <div class="orders-empty">
-          <b>No orders found.</b>
-          <div style="font-size:12px;color:#666;margin-top:6px;">
-            ${email}<br>
-            Aapka naya order isi account me automatically dikh jayega.
-          </div>
-        </div>`;
-      return;
-    }
-
-    const docs = [...snap.docs].sort((a,b) => {
-      const av = a.data().createdAt?.toMillis ? a.data().createdAt.toMillis() : 0;
-      const bv = b.data().createdAt?.toMillis ? b.data().createdAt.toMillis() : 0;
-      return bv - av;
-    });
-
-    box.innerHTML = docs.map(d => {
-      const o = d.data();
-      const date = o.createdAt?.toDate
-        ? o.createdAt.toDate().toLocaleString("en-IN")
-        : (o.createdAt || "");
-      const items = Array.isArray(o.items) ? o.items : [];
-      const status = o.orderStatus || o.status || "Order received";
-      const payment = o.paymentMethod || "—";
-
-      return `
-        <div class="order-card">
-          <div class="order-card-title">Order #${d.id}</div>
-          <div class="order-card-meta">${date}</div>
-          <div>
-            ${items.length
-              ? items.map(i => `${i.name || "Item"} × ${i.qty || 1}`).join("<br>")
-              : "Order items"}
-          </div>
-          <div class="order-card-total">Total: ₹${o.total || 0}</div>
-          <div class="order-status">Status: <b>${status}</b></div>
-          <div class="order-card-meta">Payment: ${payment}</div>
-        </div>`;
-    }).join("");
-
-  }catch(error){
-    console.error("Customer order history error:", error);
-    box.innerHTML = `
-      <div class="orders-empty" style="color:#9a3f3f;">
-        Order history load nahi ho paayi.<br>
-        <small>${error?.message || "Please try again."}</small>
-      </div>`;
-  }
-}
-
-function toggleLoginMode(){
-  loginMode = loginMode === "login" ? "signup" : "login";
-  const title = document.getElementById("login-title");
-  const subtitle = document.getElementById("login-subtitle");
-  const submit = document.getElementById("login-submit");
-  const sw = document.getElementById("login-switch");
-  const status = document.getElementById("login-status");
-  if (loginMode === "signup"){
-    title.textContent = "Create Account";
-    subtitle.textContent = "Create your Saanjh customer account.";
-    submit.textContent = "Create Account";
-    sw.textContent = "Already have an account? Login";
-  } else {
-    title.textContent = "Customer Login";
-    subtitle.textContent = "Login to your Saanjh account.";
-    submit.textContent = "Login";
-    sw.textContent = "Create a new account";
-  }
-  if (status) status.textContent = "";
-}
-async function handleLogin(){
-  const email = String(document.getElementById("login-email")?.value || "").trim();
-  const password = String(document.getElementById("login-password")?.value || "");
-  const status = document.getElementById("login-status");
-  if (!email || !password){
-    if (status) status.textContent = "Please email aur password fill karein.";
-    return;
-  }
-  if (password.length < 6){
-    if (status) status.textContent = "Password kam se kam 6 characters ka hona chahiye.";
-    return;
-  }
-  const submit = document.getElementById("login-submit");
-  submit.disabled = true;
-  submit.textContent = loginMode === "signup" ? "Creating..." : "Logging in...";
-  try{
-    if (loginMode === "signup"){
-      await createUserWithEmailAndPassword(auth, email, password);
-      if (status) status.textContent = "Account create ho gaya. 🎉";
-    } else {
-      await signInWithEmailAndPassword(auth, email, password);
-      if (status) status.textContent = "Login successful. 🎉";
-    }
-    setTimeout(closeLogin, 500);
-  }catch(error){
-    console.error("Login error:", error);
-    const code = error?.code || "";
-    if (status){
-      if (code.includes("invalid-credential") || code.includes("wrong-password") || code.includes("user-not-found")){
-        status.textContent = "Email ya password incorrect hai.";
-      } else if (code.includes("email-already-in-use")){
-        status.textContent = "Is email se account already bana hua hai.";
-      } else {
-        status.textContent = error?.message || "Login nahi ho paya. Please try again.";
-      }
-    }
-  }finally{
-    submit.disabled = false;
-    submit.textContent = loginMode === "signup" ? "Create Account" : "Login";
-  }
-}
-
-onAuthStateChanged(auth, (user) => {
-  currentUser = user;
-  const label = document.getElementById("menu-account-label");
-  const logout = document.getElementById("menu-logout");
-  if (label) label.textContent = user ? "My Account" : "Login / Create ID";
-  if (logout) logout.style.display = user ? "flex" : "none";
-});
+  loadProducts();
+  const shop = document.getElementById("shop");
+  if (shop && location.hash !== "#shop") shop.scrollIntoView({behavior:"smooth"});
+};
 
 async function loadProducts() {
   const productsContainer = document.getElementById("products");
 
   try {
-    const snapshot = await Promise.race([
-      getDocs(collection(db, "PRODUCTS")),
-      new Promise((_, reject) =>
-        setTimeout(() => reject(new Error("Firestore request timeout (10 seconds)")), 10000)
-      )
-    ]);
+    const snapshot = await getDocs(collection(db, "PRODUCTS"));
 
     productsContainer.innerHTML = "";
 
-    for (const doc of snapshot.docs) {
+    snapshot.forEach((doc) => {
       const product = doc.data();
       const productId = doc.id;
+
+      if (selectedCollection !== "All" && product.collection !== selectedCollection) {
+        return;
+      }
 
       productsData[productId] = {
         id: productId,
@@ -940,46 +385,21 @@ async function loadProducts() {
 
       const article = document.createElement("article");
       article.className = "product";
-      article.addEventListener("click", (event) => {
-        if (event.target.closest("button")) return;
-        openProductDetails(productId);
-      });
-
-      const rawProductImages = Array.isArray(product.images) && product.images.length
-        ? product.images
-        : (product.image ? [product.image] : []);
-
-      const productImages = [];
-      for (const imageValue of rawProductImages) {
-        const resolvedImage = resolveProductImage(imageValue);
-        if (resolvedImage) productImages.push(resolvedImage);
-      }
 
       article.innerHTML = `
-       <div class="product-image" data-gallery>
-        <div class="product-images" data-track>
-          ${productImages.map((img) => `
-            <img
-              src="${img}"
-              alt="${product.Name || "Saanjh Saree"}"
-              class="product-slide"
-              draggable="false"
-            >
-          `).join("")}
-        </div>
+       <div class="product-image">
+  <div class="product-images">
+  ${(product.images || (product.image ? [product.image] : [])).map((img, index) =>
+    `<img
+      src="${img}"
+      alt="${product.Name || "Saanjh Saree"}"
+      class="product-slide"
+    >`
+  ).join("")}
+</div>
 
-        ${productImages.length > 1 ? `
-          <button class="gallery-btn gallery-prev" type="button" aria-label="Previous photo">‹</button>
-          <button class="gallery-btn gallery-next" type="button" aria-label="Next photo">›</button>
-          <div class="gallery-dots">
-            ${productImages.map((_, i) => `
-              <button class="gallery-dot ${i === 0 ? "active" : ""}" type="button" data-index="${i}" aria-label="Photo ${i + 1}"></button>
-            `).join("")}
-          </div>
-        ` : ""}
-
-        <span>${stock > 0 ? "In stock" : "Sold out"}</span>
-       </div>
+  <span>${stock > 0 ? "In stock" : "Sold out"}</span>
+</div>
 
         <div class="product-info">
           <h3>${product.Name || "Saanjh Saree"}</h3>
@@ -1020,169 +440,19 @@ async function loadProducts() {
       }
 
       productsContainer.appendChild(article);
+    });
 
-      // If a stored URL is broken, hide only that broken image instead of
-      // leaving a confusing blank broken-image icon.
-      article.querySelectorAll(".product-slide").forEach((img) => {
-        img.addEventListener("error", () => {
-          console.warn("Product image failed to load:", img.src);
-          img.style.visibility = "hidden";
-        }, { once: true });
-      });
-
-      // Enable swipe + arrows for every product gallery.
-      if (productImages.length > 1) {
-        const gallery = article.querySelector("[data-gallery]");
-        const track = article.querySelector("[data-track]");
-        const prev = article.querySelector(".gallery-prev");
-        const next = article.querySelector(".gallery-next");
-        const dots = [...article.querySelectorAll(".gallery-dot")];
-        let current = 0;
-        let startX = 0;
-        let startY = 0;
-        let dragging = false;
-
-        const goTo = (index, animate = true) => {
-          current = (index + productImages.length) % productImages.length;
-          track.style.transition = animate ? "transform .35s ease" : "none";
-          track.style.transform = `translateX(-${current * 100}%)`;
-          dots.forEach((dot, i) => dot.classList.toggle("active", i === current));
-        };
-
-        prev.addEventListener("click", (e) => {
-          e.stopPropagation();
-          goTo(current - 1);
-        });
-
-        next.addEventListener("click", (e) => {
-          e.stopPropagation();
-          goTo(current + 1);
-        });
-
-        dots.forEach(dot => {
-          dot.addEventListener("click", (e) => {
-            e.stopPropagation();
-            goTo(Number(dot.dataset.index));
-          });
-        });
-
-        gallery.addEventListener("touchstart", (e) => {
-          startX = e.touches[0].clientX;
-          startY = e.touches[0].clientY;
-          dragging = true;
-          track.classList.add("dragging");
-        }, {passive:true});
-
-        gallery.addEventListener("touchend", (e) => {
-          if (!dragging) return;
-          dragging = false;
-          track.classList.remove("dragging");
-          const endX = e.changedTouches[0].clientX;
-          const endY = e.changedTouches[0].clientY;
-          const dx = endX - startX;
-          const dy = endY - startY;
-
-          if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
-            goTo(current + (dx < 0 ? 1 : -1));
-          } else {
-            goTo(current);
-          }
-        }, {passive:true});
-
-        // Desktop mouse drag also works.
-        gallery.addEventListener("mousedown", (e) => {
-          startX = e.clientX;
-          startY = e.clientY;
-          dragging = true;
-          track.classList.add("dragging");
-        });
-
-        window.addEventListener("mouseup", (e) => {
-          if (!dragging) return;
-          dragging = false;
-          track.classList.remove("dragging");
-          const dx = e.clientX - startX;
-          const dy = e.clientY - startY;
-          if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
-            goTo(current + (dx < 0 ? 1 : -1));
-          } else {
-            goTo(current);
-          }
-        });
-      }
+    if (!productsContainer.children.length) {
+      productsContainer.innerHTML = `<p style="padding:20px 0;color:#777;">Is collection mein abhi koi saree available nahi hai.</p>`;
     }
 
     createCartButton();
 
   } catch (error) {
     console.error("Error loading products:", error);
-    productsContainer.innerHTML = `
-      <p style="color:#8b536a;line-height:1.8;">Products load nahi ho paaye.<br>
-      <small style="color:#666;">${error?.message || "Firebase error"}</small><br>
-      Please refresh the page once.</p>`;
+    productsContainer.innerHTML =
+      "<p>Products load nahi ho paaye.</p>";
   }
-}
-
-
-function openProductDetails(productId){
-  const product = productsData[productId];
-  if(!product) return;
-  const overlay=document.getElementById("product-details-overlay");
-  const title=document.getElementById("product-details-title");
-  const price=document.getElementById("product-details-price");
-  const desc=document.getElementById("product-details-description");
-  const meta=document.getElementById("product-details-meta");
-  const main=document.getElementById("product-details-image");
-  const thumbs=document.getElementById("product-details-thumbs");
-  const add=document.getElementById("product-details-add");
-  if(!overlay||!title||!price||!desc||!meta||!main||!thumbs||!add) return;
-
-  const rawImages=Array.isArray(product.images)&&product.images.length?product.images:(product.image?[product.image]:[]);
-  const images=rawImages.map(resolveProductImage).filter(Boolean);
-  const stock=Number(product.stock||0);
-  const productName=product.Name||product.name||"Saanjh Saree";
-  const productDescription=product.description||product.Description||product.details||"Beautiful chiffon saree designed for a soft, graceful drape.";
-  const color=product.color||product.Color||"Elegant shade";
-  const border=product.borderWork||product.border||product.Border||"Delicate finish";
-  const occasion=product.occasion||product.Occasion||"Festive & special occasions";
-  const sareeLength=product.sareeLength||product.length||product.Length||"Approx. 5.5 m";
-  const blouseDetails=product.blouseDetails||product.blouse||product.Blouse||"Blouse piece included";
-
-  title.textContent=productName;
-  price.textContent="₹"+Number(product.price||0).toLocaleString("en-IN");
-  desc.textContent=productDescription;
-  meta.innerHTML=`
-    <div class="details-spec-grid">
-      <div><span>Fabric</span><strong>Chiffon</strong></div>
-      <div><span>Colour</span><strong>${color}</strong></div>
-      <div><span>Border / Work</span><strong>${border}</strong></div>
-      <div><span>Occasion</span><strong>${occasion}</strong></div>
-      <div><span>Saree Length</span><strong>${sareeLength}</strong></div>
-      <div><span>Blouse</span><strong>${blouseDetails}</strong></div>
-      <div><span>Availability</span><strong>${stock>0?stock+" available":"Currently unavailable"}</strong></div>
-    </div>`;
-  main.src=images[0]||"";
-  main.alt=productName;
-  thumbs.innerHTML="";
-  images.forEach((src,i)=>{
-    const b=document.createElement("button");
-    b.type="button";
-    b.setAttribute("aria-label","View photo "+(i+1));
-    b.innerHTML=`<img src="${src}" alt="">`;
-    b.addEventListener("click",()=>{main.src=src;});
-    thumbs.appendChild(b);
-  });
-  add.disabled=stock<=0;
-  add.textContent=stock>0?"Add to Cart":"Sold Out";
-  add.onclick=()=>{ if(stock>0){ addToCart(productId); closeProductDetails(); } };
-  overlay.classList.add("open");
-  document.body.style.overflow="hidden";
-}
-
-function closeProductDetails(event){
-  if(event && event.target!==event.currentTarget) return;
-  document.getElementById("product-details-overlay")?.classList.remove("open");
-  document.body.style.overflow="";
 }
 
 
@@ -1420,8 +690,6 @@ function checkout() {
     checkoutBox = document.createElement("div");
 
     checkoutBox.id = "checkout-box";
-    checkoutOrderKey = (crypto.randomUUID ? crypto.randomUUID() : (Date.now() + "-" + Math.random().toString(36).slice(2)));
-    isOrderSubmitting = false;
 
     checkoutBox.style.cssText = `
       position:fixed;
@@ -1569,11 +837,6 @@ function closeCheckout() {
 
 async function placeOrder() {
 
-  // Prevent accidental double-clicks / repeated order submissions.
-  if (isOrderSubmitting) {
-    return;
-  }
-
   const name = document.getElementById("customer-name").value.trim();
   const phone = document.getElementById("customer-phone").value.trim();
   const email = document.getElementById("customer-email").value.trim();
@@ -1618,23 +881,6 @@ async function placeOrder() {
     0
   );
 
-  // Lock the checkout immediately so a second click cannot create another order.
-  isOrderSubmitting = true;
-  const placeButton = document.querySelector('#checkout-box button[onclick="window.placeOrder()"]');
-  const closeButton = document.querySelector('#checkout-box button[onclick="window.closeCheckout()"]');
-  if (placeButton) {
-    placeButton.disabled = true;
-    placeButton.style.pointerEvents = "none";
-    placeButton.style.opacity = "0.65";
-    placeButton.textContent = "Processing…";
-  }
-  if (closeButton) {
-    closeButton.disabled = true;
-    closeButton.style.pointerEvents = "none";
-    closeButton.style.opacity = "0.55";
-  }
-
-  const clientOrderId = checkoutOrderKey || (crypto.randomUUID ? crypto.randomUUID() : (Date.now() + "-" + Math.random().toString(36).slice(2)));
 
 if (paymentMethod === "COD") {
     try {
@@ -1658,8 +904,7 @@ if (paymentMethod === "COD") {
           qty: item.qty
         })),
         total: total,
-        paymentMethod: "COD",
-        clientOrderId: clientOrderId
+        paymentMethod: "COD"
       });
 
       alert(
@@ -1674,18 +919,6 @@ if (paymentMethod === "COD") {
 
     } catch (error) {
       console.error(error);
-      isOrderSubmitting = false;
-      if (placeButton) {
-        placeButton.disabled = false;
-        placeButton.style.pointerEvents = "auto";
-        placeButton.style.opacity = "1";
-        placeButton.textContent = "Place Order";
-      }
-      if (closeButton) {
-        closeButton.disabled = false;
-        closeButton.style.pointerEvents = "auto";
-        closeButton.style.opacity = "1";
-      }
 
       alert(
         "Order place nahi ho paya.\n\n" +
@@ -1700,8 +933,7 @@ if (paymentMethod === "COD") {
     );
 
     const orderResult = await createRazorpayOrder({
-      total: total,
-      clientOrderId: clientOrderId
+      total: total
     });
 
     const razorpayOptions = {
@@ -1752,8 +984,7 @@ if (paymentMethod === "COD") {
               qty: item.qty
             })),
 
-            total: total,
-            clientOrderId: clientOrderId
+            total: total
           });
 
           alert(
@@ -1768,8 +999,7 @@ if (paymentMethod === "COD") {
 
         } catch (error) {
           console.error(error);
-          // Keep the submission locked after a successful payment attempt so
-          // the customer cannot accidentally create a second order.
+
           alert(
             "Payment verify nahi ho paya.\n\n" +
             (error.message || "Please contact us.")
@@ -1786,18 +1016,6 @@ if (paymentMethod === "COD") {
 
     razorpay.on("payment.failed", function (response) {
       console.error(response.error);
-      isOrderSubmitting = false;
-      if (placeButton) {
-        placeButton.disabled = false;
-        placeButton.style.pointerEvents = "auto";
-        placeButton.style.opacity = "1";
-        placeButton.textContent = "Place Order";
-      }
-      if (closeButton) {
-        closeButton.disabled = false;
-        closeButton.style.pointerEvents = "auto";
-        closeButton.style.opacity = "1";
-      }
 
       alert(
         "Payment failed.\n\n" +
@@ -1809,18 +1027,6 @@ if (paymentMethod === "COD") {
 
   } catch (error) {
     console.error(error);
-    isOrderSubmitting = false;
-    if (placeButton) {
-      placeButton.disabled = false;
-      placeButton.style.pointerEvents = "auto";
-      placeButton.style.opacity = "1";
-      placeButton.textContent = "Place Order";
-    }
-    if (closeButton) {
-      closeButton.disabled = false;
-      closeButton.style.pointerEvents = "auto";
-      closeButton.style.opacity = "1";
-    }
 
     alert(
       "Payment start nahi ho paya.\n\n" +
@@ -1829,22 +1035,6 @@ if (paymentMethod === "COD") {
   }
 }
 }
-window.openProductDetails = openProductDetails;
-window.closeProductDetails = closeProductDetails;
-window.openOrders = openOrders;
-window.closeOrders = closeOrders;
-window.loadCustomerOrders = loadCustomerOrders;
-window.handleAccountMenu = handleAccountMenu;
-window.openAccount = openAccount;
-window.closeAccount = closeAccount;
-window.openSideMenu = openSideMenu;
-window.closeSideMenu = closeSideMenu;
-window.goToSection = goToSection;
-window.openLogin = openLogin;
-window.closeLogin = closeLogin;
-window.toggleLoginMode = toggleLoginMode;
-window.handleLogin = handleLogin;
-window.handleLogout = handleLogout;
 window.changeCartQty = changeCartQty;
 window.checkout = checkout;
 window.placeOrder = placeOrder;
