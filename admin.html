@@ -167,6 +167,12 @@
     <input id="productColor" placeholder="Color">
     <input id="productWork" placeholder="Border / Work">
     <input id="productOccasion" placeholder="Occasion">
+
+    <label style="display:block;margin:10px 0 5px;font-weight:700;color:#5d4a43;">Collection</label>
+    <select id="productCollection">
+      <option value="Celebration">The Celebration Edit</option>
+      <option value="Everyday">The Everyday Edit</option>
+    </select>
     <input id="productSareeLength" placeholder="Saree Length (e.g. Approx. 5.5 m)">
     <input id="productBlouseDetails" placeholder="Blouse Details">
     <input id="productFabric" placeholder="Fabric" value="Chiffon">
@@ -237,6 +243,12 @@
 
     <label>Occasion</label>
     <input id="editProductOccasion" placeholder="Occasion">
+
+    <label>Collection</label>
+    <select id="editProductCollection">
+      <option value="Celebration">The Celebration Edit</option>
+      <option value="Everyday">The Everyday Edit</option>
+    </select>
 
     <label>Saree Length</label>
     <input id="editProductSareeLength" placeholder="Approx. 5.5 m">
@@ -451,6 +463,7 @@
             ${product.color ? "Color: " + product.color + "<br>" : ""}
             ${product.borderWork ? "Border / Work: " + product.borderWork + "<br>" : ""}
             ${product.occasion ? "Occasion: " + product.occasion + "<br>" : ""}
+            <strong>Collection: ${product.collection === "Celebration" ? "The Celebration Edit" : product.collection === "Everyday" ? "The Everyday Edit" : "Not set"}</strong><br>
             ${product.sareeLength ? "Saree Length: " + product.sareeLength + "<br>" : ""}
             ${product.blouseDetails ? "Blouse: " + product.blouseDetails + "<br>" : ""}
             ${product.fabric ? "Fabric: " + product.fabric : ""}
@@ -563,6 +576,8 @@ window.openEditPanel = async function(id){
       p.borderWork || p.border || p.Border || "";
     document.getElementById("editProductOccasion").value =
       p.occasion || p.Occasion || "";
+    document.getElementById("editProductCollection").value =
+      p.collection === "Celebration" ? "Celebration" : "Everyday";
     document.getElementById("editProductSareeLength").value =
       p.sareeLength || p.length || p.Length || "";
     document.getElementById("editProductBlouseDetails").value =
@@ -635,6 +650,7 @@ window.saveEditPanel = async function(){
   const color = document.getElementById("editProductColor").value.trim();
   const work = document.getElementById("editProductWork").value.trim();
   const occasion = document.getElementById("editProductOccasion").value.trim();
+  const collectionName = document.getElementById("editProductCollection").value;
   const sareeLength = document.getElementById("editProductSareeLength").value.trim();
   const blouseDetails = document.getElementById("editProductBlouseDetails").value.trim();
   const fabric = document.getElementById("editProductFabric").value.trim() || "Chiffon";
@@ -716,6 +732,7 @@ window.saveEditPanel = async function(){
       color: color,
       borderWork: work,
       occasion: occasion,
+      collection: collectionName,
       sareeLength: sareeLength,
       blouseDetails: blouseDetails,
       fabric: fabric,
@@ -749,6 +766,7 @@ window.editProduct = window.openEditPanel;
     const color = document.getElementById("productColor").value.trim();
     const work = document.getElementById("productWork").value.trim();
     const occasion = document.getElementById("productOccasion").value.trim();
+    const collectionName = document.getElementById("productCollection").value;
     const sareeLength = document.getElementById("productSareeLength").value.trim();
     const blouseDetails = document.getElementById("productBlouseDetails").value.trim();
     const fabric = document.getElementById("productFabric").value.trim() || "Chiffon";
@@ -786,6 +804,7 @@ window.editProduct = window.openEditPanel;
           color:color,
           borderWork:work,
           occasion:occasion,
+          collection:collectionName,
           sareeLength:sareeLength,
           blouseDetails:blouseDetails,
           fabric:fabric,
@@ -803,6 +822,7 @@ window.editProduct = window.openEditPanel;
       document.getElementById("productColor").value = "";
       document.getElementById("productWork").value = "";
       document.getElementById("productOccasion").value = "";
+      document.getElementById("productCollection").value = "Celebration";
       document.getElementById("productSareeLength").value = "";
       document.getElementById("productBlouseDetails").value = "";
       document.getElementById("productFabric").value = "Chiffon";
