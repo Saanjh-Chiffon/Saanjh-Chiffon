@@ -452,7 +452,7 @@
       snapshot.forEach(productDoc => {
 
         // Reserved metadata document used for custom collection definitions.
-        if(productDoc.id === "__COLLECTIONS__") return;
+        if(productDoc.id === "COLLECTIONS_META") return;
 
         const product =
           productDoc.data();
@@ -538,7 +538,7 @@
 
 
 async function getCollectionDefinitions(){
-  const metadataRef = doc(db, "PRODUCTS", "__COLLECTIONS__");
+  const metadataRef = doc(db, "PRODUCTS", "COLLECTIONS_META");
   const metadataSnap = await getDoc(metadataRef);
   const map = metadataSnap.exists() && metadataSnap.data().collections
     ? metadataSnap.data().collections
@@ -561,7 +561,7 @@ async function saveCollectionDefinitions(collections){
       createdAt: c.createdAt || new Date().toISOString()
     };
   });
-  await setDoc(doc(db, "PRODUCTS", "__COLLECTIONS__"), {collections: map}, {merge: true});
+  await setDoc(doc(db, "PRODUCTS", "COLLECTIONS_META"), {collections: map}, {merge: true});
 }
 
 async function refreshCollectionSelects(){
