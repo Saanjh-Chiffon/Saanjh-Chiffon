@@ -131,6 +131,14 @@
       placeholder="Stock Quantity"
     >
 
+    <textarea id="productDescription" placeholder="Description" rows="3"></textarea>
+    <input id="productColor" placeholder="Color">
+    <input id="productWork" placeholder="Border / Work">
+    <input id="productOccasion" placeholder="Occasion">
+    <input id="productSareeLength" placeholder="Saree Length (e.g. Approx. 5.5 m)">
+    <input id="productBlouseDetails" placeholder="Blouse Details">
+    <input id="productFabric" placeholder="Fabric" value="Chiffon">
+
     <input
   id="productImage"
   type="file"
@@ -285,24 +293,8 @@
 
   async function loadProducts(){
 
-    let container =
+    const container =
       document.getElementById("products");
-
-    // Keep the admin panel working even if the products container
-    // is missing from an older/deployed admin.html.
-    if (!container) {
-      container = document.createElement("div");
-      container.id = "products";
-
-      const heading = [...document.querySelectorAll("h1,h2,h3")]
-        .find(el => el.textContent.trim().toLowerCase() === "products");
-
-      if (heading) {
-        heading.insertAdjacentElement("afterend", container);
-      } else {
-        document.body.appendChild(container);
-      }
-    }
 
     container.innerHTML =
       "Loading products...";
@@ -340,6 +332,14 @@
           <p class="stock">
             Stock: ${product.stock || 0}
           </p>
+          <p style="line-height:1.7;color:#6b5a55;">
+            ${product.color ? "Color: " + product.color + "<br>" : ""}
+            ${product.borderWork ? "Border / Work: " + product.borderWork + "<br>" : ""}
+            ${product.occasion ? "Occasion: " + product.occasion + "<br>" : ""}
+            ${product.sareeLength ? "Saree Length: " + product.sareeLength + "<br>" : ""}
+            ${product.blouseDetails ? "Blouse: " + product.blouseDetails + "<br>" : ""}
+            ${product.fabric ? "Fabric: " + product.fabric : ""}
+          </p>
 <div class="product-images">
   ${
     (product.images && product.images.length
@@ -367,22 +367,11 @@
           </button>
           <br><br>
 
-          <label style="display:block;margin:10px 0 6px;font-weight:600;">
-            Replace photos (select all photos)
-          </label>
-          <input
-            type="file"
-            id="productImage-${id}"
-            accept="image/*"
-            multiple
-          >
-          <br><br>
-
-          <button
-            onclick="editProduct('${id}')"
-          >
-            Edit Product & Replace Photos
-          </button>
+<button
+    onclick="editProduct('${id}')"
+>
+    Edit Product
+</button>
 
         `;
 
@@ -449,30 +438,44 @@ window.editProduct = async function(id){
 
     const currentProduct = productSnap.data();
 
-    const name = prompt(
-      "Product Name:",
-      currentProduct.Name || ""
-    );
-
+    const name = prompt("Product Name:", currentProduct.Name || "");
     if(name === null) return;
 
-    const price = prompt(
-      "Price:",
-      currentProduct.price || 0
-    );
-
+    const price = prompt("Price:", currentProduct.price || 0);
     if(price === null) return;
 
-    const stock = prompt(
-      "Stock Quantity:",
-      currentProduct.stock || 0
-    );
-
+    const stock = prompt("Stock Quantity:", currentProduct.stock || 0);
     if(stock === null) return;
 
-    const fileInput = document.getElementById(
-      "productImage-" + id
-    );
+    const description = prompt("Description:",
+      currentProduct.description || currentProduct.Description || "");
+    if(description === null) return;
+
+    const color = prompt("Color:",
+      currentProduct.color || currentProduct.Color || "");
+    if(color === null) return;
+
+    const work = prompt("Border / Work:",
+      currentProduct.borderWork || currentProduct.border || currentProduct.Border || "");
+    if(work === null) return;
+
+    const occasion = prompt("Occasion:",
+      currentProduct.occasion || currentProduct.Occasion || "");
+    if(occasion === null) return;
+
+    const sareeLength = prompt("Saree Length:",
+      currentProduct.sareeLength || currentProduct.length || currentProduct.Length || "Approx. 5.5 m");
+    if(sareeLength === null) return;
+
+    const blouseDetails = prompt("Blouse Details:",
+      currentProduct.blouseDetails || currentProduct.blouse || currentProduct.Blouse || "");
+    if(blouseDetails === null) return;
+
+    const fabric = prompt("Fabric:",
+      currentProduct.fabric || currentProduct.Fabric || "Chiffon");
+    if(fabric === null) return;
+
+    const fileInput = document.getElementById("productImage");
 
     let image = currentProduct.image || "";
     let images = Array.isArray(currentProduct.images)
@@ -481,40 +484,42 @@ window.editProduct = async function(id){
 
     if(fileInput && fileInput.files.length > 0){
 
-      // When new photos are selected, REPLACE the old image list.
-      // This removes broken/old Storage URLs from the product.
+      const files = Array.from(fileInput.files);
       images = [];
 
-      const files = Array.from(fileInput.files);
+      for(const file of files){
 
-      for(let i = 0; i < files.length; i++){
-
-        const file = files[i];
-        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
         const storageRef = ref(
           storage,
-          "products/" + id + "/" + Date.now() + "_" + i + "_" + safeName
+          "products/" + id + "_" + Date.now() + "_" + file.name
         );
 
         await uploadBytes(storageRef, file);
-
         const imageUrl = await getDownloadURL(storageRef);
         images.push(imageUrl);
       }
 
       image = images[0] || "";
     }
-    
+
     await updateDoc(productRef, {
       Name: name,
       price: Number(price),
       stock: Number(stock),
+      description: description,
+      color: color,
+      borderWork: work,
+      occasion: occasion,
+      sareeLength: sareeLength,
+      blouseDetails: blouseDetails,
+      fabric: fabric || "Chiffon",
       image: image,
       images: images
     });
 
-    alert("Product updated successfully ✅");
+    if(fileInput) fileInput.value = "";
 
+    alert("Product updated successfully ✅");
     loadProducts();
 
   }catch(error){
@@ -529,6 +534,7 @@ window.editProduct = async function(id){
   }
 
 };
+
 window.updateProduct = async function(id){
 
   const name = document.getElementById("productName-" + id).value;
@@ -590,48 +596,40 @@ window.updateProduct = async function(id){
 }; 
   window.addProduct = async function(){
 
-    const name =
-      document.getElementById("productName").value;
+    const name = document.getElementById("productName").value.trim();
+    const price = Number(document.getElementById("productPrice").value);
+    const stock = Number(document.getElementById("productStock").value);
 
-    const price =
-      Number(
-        document.getElementById("productPrice").value
-      );
+    const description = document.getElementById("productDescription").value.trim();
+    const color = document.getElementById("productColor").value.trim();
+    const work = document.getElementById("productWork").value.trim();
+    const occasion = document.getElementById("productOccasion").value.trim();
+    const sareeLength = document.getElementById("productSareeLength").value.trim();
+    const blouseDetails = document.getElementById("productBlouseDetails").value.trim();
+    const fabric = document.getElementById("productFabric").value.trim() || "Chiffon";
 
-    const stock =
-      Number(
-        document.getElementById("productStock").value
-      );
-const imageFiles =
-  document.getElementById("productImage").files;
+    const imageFiles = document.getElementById("productImage").files;
 
-let images = [];
-
-for (const file of imageFiles) {
-
-  const imageRef = ref(
-    storage,
-    "products/" + Date.now() + "_" + file.name
-  );
-
-  await uploadBytes(imageRef, file);
-
-  const imageUrl =
-    await getDownloadURL(imageRef);
-
-  images.push(imageUrl);
-}
-    
     if(!name || !price || stock < 0){
-
       alert("Product details complete karo.");
-
       return;
-
     }
 
-
     try{
+
+      let images = [];
+
+      for (const file of imageFiles) {
+
+        const imageRef = ref(
+          storage,
+          "products/" + Date.now() + "_" + file.name
+        );
+
+        await uploadBytes(imageRef, file);
+        const imageUrl = await getDownloadURL(imageRef);
+        images.push(imageUrl);
+      }
 
       await addDoc(
         collection(db,"PRODUCTS"),
@@ -639,6 +637,13 @@ for (const file of imageFiles) {
           Name:name,
           price:price,
           stock:stock,
+          description:description,
+          color:color,
+          borderWork:work,
+          occasion:occasion,
+          sareeLength:sareeLength,
+          blouseDetails:blouseDetails,
+          fabric:fabric,
           images:images,
           image:images[0] || ""
         }
@@ -649,8 +654,14 @@ for (const file of imageFiles) {
       document.getElementById("productName").value = "";
       document.getElementById("productPrice").value = "";
       document.getElementById("productStock").value = "";
+      document.getElementById("productDescription").value = "";
+      document.getElementById("productColor").value = "";
+      document.getElementById("productWork").value = "";
+      document.getElementById("productOccasion").value = "";
+      document.getElementById("productSareeLength").value = "";
+      document.getElementById("productBlouseDetails").value = "";
+      document.getElementById("productFabric").value = "Chiffon";
       document.getElementById("productImage").value = "";
-      images = [];
 
       loadProducts();
 
@@ -666,7 +677,8 @@ for (const file of imageFiles) {
     }
 
   };
-  window.deleteProduct = async function(id){
+
+window.deleteProduct = async function(id){
 
   const confirmDelete = confirm(
     "Kya aap ye product delete karna chahte ho?"
