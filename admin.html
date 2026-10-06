@@ -190,6 +190,17 @@
 
     <hr>
 
+    <h2>Collections / Edits</h2>
+    <p style="color:#6b5a55;line-height:1.6;">Yahan se Celebration, Everyday ya apna koi naya Edit/Section bana sakte ho. Naya section banne ke baad woh Add Product aur Edit Product me automatically aa jayega.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <input id="newCollectionName" placeholder="New Edit Name (e.g. Wedding Edit)">
+      <input id="newCollectionDescription" placeholder="Short description">
+    </div>
+    <button type="button" onclick="addCollection()">+ Create New Edit / Section</button>
+    <div id="collectionManager" style="margin:14px 0;"></div>
+
+    <hr>
+
     <h2>Products</h2>
 
     <div id="products">
@@ -403,6 +414,7 @@
       document.getElementById("adminPanel")
         .style.display = "block";
 
+      refreshCollectionSelects();
       loadProducts();
 
     }else{
@@ -518,6 +530,51 @@
     }
 
   }
+
+
+async function refreshCollectionSelects(){
+  try{
+    const snap = await getDocs(collection(db, "COLLECTIONS"));
+    const collections = [{id:"__celebration",name:"Celebration Edit",description:"Soft shimmer · graceful borders · evenings worth remembering",order:-2},{id:"__everyday",name:"Everyday Edit",description:"Fresh pastels · effortless drapes · beautiful ordinary days",order:-1}];
+    snap.forEach(d => collections.push({id:d.id, ...d.data()}));
+    collections.sort((a,b) => Number(a.order||0)-Number(b.order||0) || String(a.name||"").localeCompare(String(b.name||"")));
+    const selects = [document.getElementById("productCollection"), document.getElementById("editProductCollection")].filter(Boolean);
+    selects.forEach(select => {
+      const current = select.value;
+      select.innerHTML = "";
+      collections.forEach(c => {
+          const opt = document.createElement("option"); opt.value = c.name; opt.textContent = c.name; select.appendChild(opt);
+        });
+      if(current) select.value = current;
+    });
+    const manager = document.getElementById("collectionManager");
+    if(manager){
+      manager.innerHTML = collections.length ? collections.map(c => `
+        <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid #eadfd9;border-radius:12px;padding:12px;margin:8px 0;background:#fff;">
+          <div><strong>${escapeHtml(c.name)}</strong><div style="font-size:12px;color:#777;margin-top:3px;">${escapeHtml(c.description||"")}</div></div>
+          <button type="button" onclick="deleteCollection('${c.id}')" style="background:#b42318;padding:8px 12px;">Delete</button>
+        </div>`).join("") : '<p style="color:#777;">No custom edits yet. Default Celebration / Everyday will still work.</p>';
+    }
+  }catch(error){ console.error("Collection load error", error); }
+}
+function escapeHtml(value){ return String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch])); }
+window.addCollection = async function(){
+  const name=document.getElementById("newCollectionName").value.trim(); const description=document.getElementById("newCollectionDescription").value.trim();
+  if(!name){ alert("Edit / Section ka naam likho."); return; }
+  try{
+    const snap=await getDocs(collection(db,"COLLECTIONS"));
+    if(snap.docs.some(d=>String(d.data().name||"").toLowerCase()===name.toLowerCase())){ alert("Ye Edit already bana hua hai."); return; }
+    await addDoc(collection(db,"COLLECTIONS"),{name,description,order:snap.size+1,createdAt:new Date().toISOString()});
+    document.getElementById("newCollectionName").value=""; document.getElementById("newCollectionDescription").value="";
+    await refreshCollectionSelects(); alert("New Edit / Section create ho gaya ✅");
+  }catch(error){ alert("New Edit create nahi hua ❌\n\n"+error.message); }
+};
+window.deleteCollection = async function(id){
+  if(id === "__celebration" || id === "__everyday"){ alert("Default Edit delete nahi kiya ja sakta."); return; }
+  if(!confirm("Ye section delete karna hai? Isse products delete nahi honge.")) return;
+  try{ await deleteDoc(doc(db,"COLLECTIONS",id)); await refreshCollectionSelects(); loadProducts(); }
+  catch(error){ alert("Section delete nahi hua ❌\n\n"+error.message); }
+};
 
 
   window.updateStock = async function(id){
