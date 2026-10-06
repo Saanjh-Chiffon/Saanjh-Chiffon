@@ -367,10 +367,21 @@
           </button>
           <br><br>
 
-<button
-    onclick="editProduct('${id}')"
+<label style="display:block;margin:12px 0 6px;font-weight:700;color:#5d4a43;">
+    Change / Replace Photos
+</label>
+<input
+    type="file"
+    id="productImage-${id}"
+    accept="image/*"
+    multiple
+    style="background:#fff;"
 >
-    Edit Product
+<button type="button" onclick="editProduct('${id}')">
+    Save Product Changes + Photos
+</button>
+<button type="button" onclick="deleteProduct('${id}')" style="background:#b42318;margin-top:8px;">
+    Delete Product
 </button>
 
         `;
@@ -475,7 +486,7 @@ window.editProduct = async function(id){
       currentProduct.fabric || currentProduct.Fabric || "Chiffon");
     if(fabric === null) return;
 
-    const fileInput = document.getElementById("productImage");
+    const fileInput = document.getElementById("productImage-" + id);
 
     let image = currentProduct.image || "";
     let images = Array.isArray(currentProduct.images)
@@ -535,65 +546,6 @@ window.editProduct = async function(id){
 
 };
 
-window.updateProduct = async function(id){
-
-  const name = document.getElementById("productName-" + id).value;
-  const price = Number(
-    document.getElementById("productPrice-" + id).value
-  );
-  const stock = Number(
-    document.getElementById("productStock-" + id).value
-  );
-
-  const fileInput = document.getElementById("productImage-" + id);
-
-  try {
-
-    const productRef = doc(db, "PRODUCTS", id);
-
-    let image = "";
-
-    if (fileInput && fileInput.files.length > 0) {
-
-      const file = fileInput.files[0];
-
-      const storageRef = ref(
-        storage,
-        "products/" + id + "_" + Date.now() + "_" + file.name
-      );
-
-      await uploadBytes(storageRef, file);
-
-      image = await getDownloadURL(storageRef);
-    }
-
-    const updateData = {
-      Name: name,
-      price: Number(price),
-      stock: Number(stock)
-    };
-
-    if (image) {
-      updateData.image = image;
-    }
-
-    await updateDoc(productRef, updateData);
-
-    alert("Product updated successfully ✅");
-
-    loadProducts();
-
-  } catch(error) {
-
-    console.error(error);
-
-    alert(
-      "Product update nahi hua ❌\n\n" +
-      error.message
-    );
-  }
-
-}; 
   window.addProduct = async function(){
 
     const name = document.getElementById("productName").value.trim();
