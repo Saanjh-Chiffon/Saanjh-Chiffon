@@ -431,6 +431,12 @@ button{transition:background-color .2s ease,color .2s ease,border-color .2s ease
 .product-details-thumbs button{padding:0;border:1px solid #ddd!important;background:#fff!important;width:62px;height:72px;cursor:pointer}
 .product-details-thumbs img{width:100%;height:100%;object-fit:cover}
 @media(max-width:760px){.product-details-grid{grid-template-columns:1fr}.product-details-gallery{min-height:340px;padding:18px}.product-details-gallery img{height:340px}.product-details-info{padding:30px 24px}.product-details-info h2{font-size:29px}}
+.details-spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;margin-top:2px}
+.details-spec-grid div{padding:11px 0;border-bottom:1px solid #eee}
+.details-spec-grid span{display:block;font:9px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8b7b74;margin-bottom:5px}
+.details-spec-grid strong{display:block;font:13px Arial,sans-serif;color:#3f332f;font-weight:600;line-height:1.45}
+@media(max-width:760px){.details-spec-grid{grid-template-columns:1fr}}
+
 
 </style>
 </head>
@@ -1135,12 +1141,26 @@ function openProductDetails(productId){
   const images=rawImages.map(resolveProductImage).filter(Boolean);
   const stock=Number(product.stock||0);
   const productName=product.Name||product.name||"Saanjh Saree";
-  const productDescription=product.description||product.Description||product.details||product.fabric||"Beautiful chiffon saree designed for a soft, graceful drape.";
+  const productDescription=product.description||product.Description||product.details||"Beautiful chiffon saree designed for a soft, graceful drape.";
+  const color=product.color||product.Color||"Elegant shade";
+  const border=product.borderWork||product.border||product.Border||"Delicate finish";
+  const occasion=product.occasion||product.Occasion||"Festive & special occasions";
+  const sareeLength=product.sareeLength||product.length||product.Length||"Approx. 5.5 m";
+  const blouseDetails=product.blouseDetails||product.blouse||product.Blouse||"Blouse piece included";
 
   title.textContent=productName;
   price.textContent="₹"+Number(product.price||0).toLocaleString("en-IN");
   desc.textContent=productDescription;
-  meta.innerHTML=`<strong>Fabric:</strong> Chiffon<br><strong>Availability:</strong> ${stock>0?stock+" available":"Currently unavailable"}`;
+  meta.innerHTML=`
+    <div class="details-spec-grid">
+      <div><span>Fabric</span><strong>Chiffon</strong></div>
+      <div><span>Colour</span><strong>${color}</strong></div>
+      <div><span>Border / Work</span><strong>${border}</strong></div>
+      <div><span>Occasion</span><strong>${occasion}</strong></div>
+      <div><span>Saree Length</span><strong>${sareeLength}</strong></div>
+      <div><span>Blouse</span><strong>${blouseDetails}</strong></div>
+      <div><span>Availability</span><strong>${stock>0?stock+" available":"Currently unavailable"}</strong></div>
+    </div>`;
   main.src=images[0]||"";
   main.alt=productName;
   thumbs.innerHTML="";
