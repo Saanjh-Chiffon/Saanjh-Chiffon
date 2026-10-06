@@ -260,6 +260,29 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
   .product-image .gallery-btn { width: 34px; height: 34px; font-size: 21px; }
 }
   
+
+/* FINAL BUTTON TEXT VISIBILITY FIX */
+button[style*="background:#fff"],
+button[style*="background: #fff"],
+button[style*="background:white"],
+button[style*="background: white"],
+button[style*="background:none"],
+button[style*="background: none"] {
+  color:#111 !important;
+}
+
+/* Customer account buttons: dark buttons keep white text */
+#customer-account-modal button[style*="background:#111"],
+#customer-account-modal button[style*="background: #111"] {
+  color:#fff !important;
+}
+
+/* Customer modal close button */
+#customer-account-modal button[style*="background:none"],
+#customer-account-modal button[style*="background: none"] {
+  color:#111 !important;
+  font-weight:700 !important;
+}
 </style>
 </head>
 <body>
