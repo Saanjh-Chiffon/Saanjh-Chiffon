@@ -567,18 +567,19 @@ async function saveCollectionDefinitions(collections){
 async function refreshCollectionSelects(){
   // Always render the two default edits first, so the manager never appears blank
   // even if the optional custom-collection metadata read is temporarily unavailable.
+  const saved = await getCollectionDefinitions().catch(error => { console.warn("Collection metadata read failed", error); return []; });
+  const celebrationSaved = saved.find(c => c.id === "__celebration");
+  const everydaySaved = saved.find(c => c.id === "__everyday");
   const collections = [
-    {id:"__celebration",name:"Celebration Edit",description:"Soft shimmer · graceful borders · evenings worth remembering",order:-2},
-    {id:"__everyday",name:"Everyday Edit",description:"Fresh pastels · effortless drapes · beautiful ordinary days",order:-1}
+    celebrationSaved || {id:"__celebration",name:"Celebration Edit",description:"Soft shimmer · graceful borders · evenings worth remembering",order:-2},
+    everydaySaved || {id:"__everyday",name:"Everyday Edit",description:"Fresh pastels · effortless drapes · beautiful ordinary days",order:-1}
   ];
 
-  try{
-    const custom = await getCollectionDefinitions();
-    custom.forEach(c => {
-      if(!collections.some(x => x.name.toLowerCase() === c.name.toLowerCase())){
-        collections.push(c);
-      }
-    });
+  saved.forEach(c => {
+    if(!collections.some(x => x.id === c.id)){
+      collections.push(c);
+    }
+  });
   }catch(error){
     console.warn("Custom collection metadata could not be loaded. Showing default edits.", error);
   }
@@ -621,11 +622,12 @@ async function refreshCollectionSelects(){
               ${escapeHtml(c.description||"")}
             </div>
           </div>
-          ${
-            isDefault
+          <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:flex-end;">
+            <button type="button" onclick="editCollection('${c.id}')" style="background:#fff!important;color:#6b3f2b!important;border:1px solid #c9b1a5;border-radius:8px;padding:8px 12px;font-weight:700;cursor:pointer;white-space:nowrap;">Edit</button>
+            ${isDefault
               ? '<span style="font-size:11px;color:#777;border:1px solid #ddd;border-radius:999px;padding:6px 9px;white-space:nowrap;">Default</span>'
-              : `<button type="button" onclick="deleteCollection('${c.id}')" style="background:#b42318!important;color:#fff!important;border:0;border-radius:8px;padding:9px 13px;font-weight:700;cursor:pointer;white-space:nowrap;">Delete Section</button>`
-          }
+              : `<button type="button" onclick="deleteCollection('${c.id}')" style="background:#b42318!important;color:#fff!important;border:0;border-radius:8px;padding:9px 13px;font-weight:700;cursor:pointer;white-space:nowrap;">Delete Section</button>`}
+          </div>
         </div>`;
     }).join("");
   }
@@ -649,6 +651,31 @@ window.addCollection = async function(){
     alert("New Edit / Section create ho gaya ✅");
   }catch(error){ console.error(error); alert("New Edit create nahi hua ❌\n\nFirebase permission issue aa raha tha, ab metadata PRODUCTS ke andar save hota hai. Agar phir bhi aaye to Firestore PRODUCTS write rule check karna hoga.\n\n"+error.message); }
 };
+window.editCollection = async function(id){
+  const defaults = {
+    "__celebration": {name:"Celebration Edit", description:"Soft shimmer · graceful borders · evenings worth remembering", order:-2},
+    "__everyday": {name:"Everyday Edit", description:"Fresh pastels · effortless drapes · beautiful ordinary days", order:-1}
+  };
+  try{
+    const existing = await getCollectionDefinitions();
+    const current = existing.find(c => c.id === id) || defaults[id];
+    if(!current){ alert("Edit nahi mila."); return; }
+    const name = prompt("Edit / Section ka naam:", current.name || "");
+    if(name === null) return;
+    const cleanName = name.trim();
+    if(!cleanName){ alert("Naam empty nahi ho sakta."); return; }
+    if(existing.some(c => c.id !== id && c.name.toLowerCase() === cleanName.toLowerCase())){ alert("Ye naam already use ho raha hai."); return; }
+    const description = prompt("Short description:", current.description || "");
+    if(description === null) return;
+    const updated = existing.filter(c => c.id !== id);
+    updated.push({id, name:cleanName, description:description.trim(), order:Number(current.order ?? (id === "__celebration" ? -2 : id === "__everyday" ? -1 : updated.length + 1)), createdAt:current.createdAt || new Date().toISOString()});
+    await saveCollectionDefinitions(updated);
+    await refreshCollectionSelects();
+    loadProducts();
+    alert("Edit update ho gaya ✅");
+  }catch(error){ console.error(error); alert("Edit update nahi hua ❌\n\n" + error.message); }
+};
+
 window.deleteCollection = async function(id){
   if(id === "__celebration" || id === "__everyday"){ alert("Default Edit delete nahi kiya ja sakta."); return; }
   if(!confirm("Ye section delete karna hai? Isse products delete nahi honge.")) return;
