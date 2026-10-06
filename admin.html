@@ -580,9 +580,6 @@ async function refreshCollectionSelects(){
       collections.push(c);
     }
   });
-  }catch(error){
-    console.warn("Custom collection metadata could not be loaded. Showing default edits.", error);
-  }
 
   collections.sort((a,b) =>
     Number(a.order||0)-Number(b.order||0) ||
