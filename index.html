@@ -433,6 +433,23 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
 </div>
 
 
+<!-- ===== My Account ===== -->
+<div id="account-modal-overlay" class="login-modal-overlay">
+  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="account-title">
+    <div class="login-modal-head">
+      <h2 id="account-title">My Account</h2>
+      <button class="login-close" type="button" onclick="closeAccount()" aria-label="Close account">×</button>
+    </div>
+    <div style="padding:10px 0 4px;">
+      <p style="margin:0 0 6px;font-size:12px;color:#8a7b74;text-transform:uppercase;letter-spacing:.12em;">Signed in as</p>
+      <p id="account-email" style="margin:0;font-size:15px;color:#3f332f;word-break:break-word;"></p>
+    </div>
+    <button class="login-action" type="button" onclick="closeAccount();openOrders();">My Orders</button>
+    <button class="login-switch" type="button" onclick="closeAccount();handleLogout();">Logout</button>
+  </div>
+</div>
+
+
 <!-- ===== My Orders ===== -->
 <div id="orders-modal-overlay" class="login-modal-overlay">
   <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="orders-title">
@@ -571,6 +588,8 @@ Discover delicate chiffon sarees designed to move with you —
     const auth = getAuth(app);
     setPersistence(auth, browserLocalPersistence).catch((error) => console.error("Auth persistence setup failed:", error));
     let cart = [];
+let isOrderSubmitting = false;
+let checkoutOrderKey = null;
     let currentUser = null;
 let productsData = {};
 
@@ -616,10 +635,22 @@ async function handleLogout(){
 function handleAccountMenu(){
   closeSideMenu();
   if (currentUser){
-    openOrders();
+    openAccount();
   } else {
     openLogin();
   }
+}
+
+function openAccount(){
+  const overlay = document.getElementById("account-modal-overlay");
+  const emailBox = document.getElementById("account-email");
+  if (!overlay) return;
+  if (emailBox) emailBox.textContent = currentUser?.email || "Customer";
+  overlay.classList.add("open");
+}
+
+function closeAccount(){
+  document.getElementById("account-modal-overlay")?.classList.remove("open");
 }
 
 function openOrders(){
@@ -1229,6 +1260,8 @@ function checkout() {
     checkoutBox = document.createElement("div");
 
     checkoutBox.id = "checkout-box";
+    checkoutOrderKey = (crypto.randomUUID ? crypto.randomUUID() : (Date.now() + "-" + Math.random().toString(36).slice(2)));
+    isOrderSubmitting = false;
 
     checkoutBox.style.cssText = `
       position:fixed;
@@ -1376,6 +1409,11 @@ function closeCheckout() {
 
 async function placeOrder() {
 
+  // Prevent accidental double-clicks / repeated order submissions.
+  if (isOrderSubmitting) {
+    return;
+  }
+
   const name = document.getElementById("customer-name").value.trim();
   const phone = document.getElementById("customer-phone").value.trim();
   const email = document.getElementById("customer-email").value.trim();
@@ -1420,6 +1458,23 @@ async function placeOrder() {
     0
   );
 
+  // Lock the checkout immediately so a second click cannot create another order.
+  isOrderSubmitting = true;
+  const placeButton = document.querySelector('#checkout-box button[onclick="window.placeOrder()"]');
+  const closeButton = document.querySelector('#checkout-box button[onclick="window.closeCheckout()"]');
+  if (placeButton) {
+    placeButton.disabled = true;
+    placeButton.style.pointerEvents = "none";
+    placeButton.style.opacity = "0.65";
+    placeButton.textContent = "Processing…";
+  }
+  if (closeButton) {
+    closeButton.disabled = true;
+    closeButton.style.pointerEvents = "none";
+    closeButton.style.opacity = "0.55";
+  }
+
+  const clientOrderId = checkoutOrderKey || (crypto.randomUUID ? crypto.randomUUID() : (Date.now() + "-" + Math.random().toString(36).slice(2)));
 
 if (paymentMethod === "COD") {
     try {
@@ -1443,7 +1498,8 @@ if (paymentMethod === "COD") {
           qty: item.qty
         })),
         total: total,
-        paymentMethod: "COD"
+        paymentMethod: "COD",
+        clientOrderId: clientOrderId
       });
 
       alert(
@@ -1458,6 +1514,18 @@ if (paymentMethod === "COD") {
 
     } catch (error) {
       console.error(error);
+      isOrderSubmitting = false;
+      if (placeButton) {
+        placeButton.disabled = false;
+        placeButton.style.pointerEvents = "auto";
+        placeButton.style.opacity = "1";
+        placeButton.textContent = "Place Order";
+      }
+      if (closeButton) {
+        closeButton.disabled = false;
+        closeButton.style.pointerEvents = "auto";
+        closeButton.style.opacity = "1";
+      }
 
       alert(
         "Order place nahi ho paya.\n\n" +
@@ -1472,7 +1540,8 @@ if (paymentMethod === "COD") {
     );
 
     const orderResult = await createRazorpayOrder({
-      total: total
+      total: total,
+      clientOrderId: clientOrderId
     });
 
     const razorpayOptions = {
@@ -1523,7 +1592,8 @@ if (paymentMethod === "COD") {
               qty: item.qty
             })),
 
-            total: total
+            total: total,
+            clientOrderId: clientOrderId
           });
 
           alert(
@@ -1538,7 +1608,8 @@ if (paymentMethod === "COD") {
 
         } catch (error) {
           console.error(error);
-
+          // Keep the submission locked after a successful payment attempt so
+          // the customer cannot accidentally create a second order.
           alert(
             "Payment verify nahi ho paya.\n\n" +
             (error.message || "Please contact us.")
@@ -1555,6 +1626,18 @@ if (paymentMethod === "COD") {
 
     razorpay.on("payment.failed", function (response) {
       console.error(response.error);
+      isOrderSubmitting = false;
+      if (placeButton) {
+        placeButton.disabled = false;
+        placeButton.style.pointerEvents = "auto";
+        placeButton.style.opacity = "1";
+        placeButton.textContent = "Place Order";
+      }
+      if (closeButton) {
+        closeButton.disabled = false;
+        closeButton.style.pointerEvents = "auto";
+        closeButton.style.opacity = "1";
+      }
 
       alert(
         "Payment failed.\n\n" +
@@ -1566,6 +1649,18 @@ if (paymentMethod === "COD") {
 
   } catch (error) {
     console.error(error);
+    isOrderSubmitting = false;
+    if (placeButton) {
+      placeButton.disabled = false;
+      placeButton.style.pointerEvents = "auto";
+      placeButton.style.opacity = "1";
+      placeButton.textContent = "Place Order";
+    }
+    if (closeButton) {
+      closeButton.disabled = false;
+      closeButton.style.pointerEvents = "auto";
+      closeButton.style.opacity = "1";
+    }
 
     alert(
       "Payment start nahi ho paya.\n\n" +
@@ -1578,6 +1673,8 @@ window.openOrders = openOrders;
 window.closeOrders = closeOrders;
 window.loadCustomerOrders = loadCustomerOrders;
 window.handleAccountMenu = handleAccountMenu;
+window.openAccount = openAccount;
+window.closeAccount = closeAccount;
 window.openSideMenu = openSideMenu;
 window.closeSideMenu = closeSideMenu;
 window.goToSection = goToSection;
