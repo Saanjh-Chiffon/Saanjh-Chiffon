@@ -68,7 +68,31 @@
     .logout{
       background:#555;
     }
-  </style>
+  
+    #editProductOverlay label{
+      display:block;
+      margin:12px 0 5px;
+      font-weight:700;
+      color:#5d4a43;
+    }
+    #editProductOverlay input,
+    #editProductOverlay textarea{
+      width:100%;
+      padding:12px;
+      box-sizing:border-box;
+      border:1px solid #ccc;
+      border-radius:8px;
+      font:inherit;
+      background:#fff;
+    }
+    #editProductOverlay button{
+      width:100%;
+    }
+    @media(max-width:600px){
+      #editProductOverlay{padding:10px!important}
+      #editProductOverlay > div{padding:18px!important}
+    }
+</style>
 </head>
 
 <body>
@@ -162,6 +186,92 @@
 
 </div>
 
+
+
+<!-- FULL PRODUCT EDIT PANEL -->
+<div id="editProductOverlay" style="
+  display:none;position:fixed;inset:0;background:rgba(20,14,12,.58);
+  z-index:9999;align-items:center;justify-content:center;padding:18px;
+">
+  <div style="
+    width:min(900px,96vw);max-height:94vh;overflow:auto;background:#fff;
+    border-radius:18px;padding:24px;box-shadow:0 25px 80px rgba(0,0,0,.25);
+  ">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <h2 style="margin:0;color:#5d4a43;">Edit Product</h2>
+      <button type="button" onclick="closeEditPanel()" style="
+        width:44px;padding:10px;margin:0;background:#fff;color:#333;
+        border:1px solid #ddd;font-size:22px;
+      ">×</button>
+    </div>
+
+    <p id="editProductStatus" style="color:#8b5e3c;margin:10px 0 18px;"></p>
+
+    <input type="hidden" id="editProductId">
+
+    <label>Product Name</label>
+    <input id="editProductName" placeholder="Product Name">
+
+    <label>Price</label>
+    <input id="editProductPrice" type="number" min="0" placeholder="Price">
+
+    <label>Stock Quantity</label>
+    <input id="editProductStock" type="number" min="0" placeholder="Stock Quantity">
+
+    <label>Description</label>
+    <textarea id="editProductDescription" rows="4" placeholder="Description"></textarea>
+
+    <label>Color</label>
+    <input id="editProductColor" placeholder="Color">
+
+    <label>Border / Work</label>
+    <input id="editProductWork" placeholder="Border / Work">
+
+    <label>Occasion</label>
+    <input id="editProductOccasion" placeholder="Occasion">
+
+    <label>Saree Length</label>
+    <input id="editProductSareeLength" placeholder="Approx. 5.5 m">
+
+    <label>Blouse Details</label>
+    <input id="editProductBlouseDetails" placeholder="Blouse Details">
+
+    <label>Fabric</label>
+    <input id="editProductFabric" placeholder="Fabric">
+
+    <hr style="border:0;border-top:1px solid #eee;margin:22px 0;">
+
+    <h3 style="margin:0 0 8px;color:#5d4a43;">Current Photos</h3>
+    <div id="editCurrentPhotos" style="
+      display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;
+    "></div>
+
+    <label style="font-weight:700;color:#5d4a43;">
+      Replace Photos
+    </label>
+    <p style="font-size:13px;color:#777;margin:5px 0 8px;">
+      New photos select karoge to purani photos replace ho jayengi. Multiple photos ek saath select kar sakte ho.
+    </p>
+    <input
+      id="editProductImages"
+      type="file"
+      accept="image/*"
+      multiple
+      style="background:#fff;"
+    >
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;">
+      <button type="button" onclick="saveEditPanel()" id="saveEditPanelBtn">
+        Save All Changes
+      </button>
+      <button type="button" onclick="closeEditPanel()" style="
+        background:#fff;color:#333;border:1px solid #bbb;
+      ">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
 
 <script type="module">
 
@@ -367,18 +477,8 @@
           </button>
           <br><br>
 
-<label style="display:block;margin:12px 0 6px;font-weight:700;color:#5d4a43;">
-    Change / Replace Photos
-</label>
-<input
-    type="file"
-    id="productImage-${id}"
-    accept="image/*"
-    multiple
-    style="background:#fff;"
->
-<button type="button" onclick="editProduct('${id}')">
-    Save Product Changes + Photos
+<button type="button" onclick="openEditPanel('${id}')">
+    Edit Product — All Details & Photos
 </button>
 <button type="button" onclick="deleteProduct('${id}')" style="background:#b42318;margin-top:8px;">
     Delete Product
@@ -435,79 +535,128 @@
     }
 
   };
-window.editProduct = async function(id){
-
+window.openEditPanel = async function(id){
   try{
+    const snap = await getDoc(doc(db, "PRODUCTS", id));
 
-    const productRef = doc(db, "PRODUCTS", id);
-    const productSnap = await getDoc(productRef);
-
-    if(!productSnap.exists()){
+    if(!snap.exists()){
       alert("Product nahi mila ❌");
       return;
     }
 
-    const currentProduct = productSnap.data();
+    const p = snap.data();
 
-    const name = prompt("Product Name:", currentProduct.Name || "");
-    if(name === null) return;
+    document.getElementById("editProductId").value = id;
+    document.getElementById("editProductName").value = p.Name || "";
+    document.getElementById("editProductPrice").value = p.price ?? "";
+    document.getElementById("editProductStock").value = p.stock ?? 0;
+    document.getElementById("editProductDescription").value =
+      p.description || p.Description || "";
+    document.getElementById("editProductColor").value =
+      p.color || p.Color || "";
+    document.getElementById("editProductWork").value =
+      p.borderWork || p.border || p.Border || "";
+    document.getElementById("editProductOccasion").value =
+      p.occasion || p.Occasion || "";
+    document.getElementById("editProductSareeLength").value =
+      p.sareeLength || p.length || p.Length || "";
+    document.getElementById("editProductBlouseDetails").value =
+      p.blouseDetails || p.blouse || p.Blouse || "";
+    document.getElementById("editProductFabric").value =
+      p.fabric || p.Fabric || "Chiffon";
+    document.getElementById("editProductImages").value = "";
 
-    const price = prompt("Price:", currentProduct.price || 0);
-    if(price === null) return;
+    const images = Array.isArray(p.images) && p.images.length
+      ? p.images
+      : (p.image ? [p.image] : []);
 
-    const stock = prompt("Stock Quantity:", currentProduct.stock || 0);
-    if(stock === null) return;
+    const current = document.getElementById("editCurrentPhotos");
+    current.innerHTML = images.length
+      ? images.map((url, i) => `
+          <div style="width:120px;">
+            <img src="${url}" alt="Photo ${i+1}" style="
+              width:120px;height:120px;object-fit:cover;border-radius:10px;
+              border:1px solid #ddd;display:block;
+            ">
+            <small style="display:block;text-align:center;color:#777;margin-top:4px;">
+              Photo ${i+1}
+            </small>
+          </div>
+        `).join("")
+      : '<p style="color:#777;">No photos found.</p>';
 
-    const description = prompt("Description:",
-      currentProduct.description || currentProduct.Description || "");
-    if(description === null) return;
+    document.getElementById("editProductStatus").textContent =
+      "Sabhi product details ek hi panel me edit kar sakte ho.";
 
-    const color = prompt("Color:",
-      currentProduct.color || currentProduct.Color || "");
-    if(color === null) return;
+    document.getElementById("editProductOverlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }catch(error){
+    console.error(error);
+    alert("Edit panel open nahi hua ❌\n\n" + error.message);
+  }
+};
 
-    const work = prompt("Border / Work:",
-      currentProduct.borderWork || currentProduct.border || currentProduct.Border || "");
-    if(work === null) return;
+window.closeEditPanel = function(){
+  document.getElementById("editProductOverlay").style.display = "none";
+  document.body.style.overflow = "";
+};
 
-    const occasion = prompt("Occasion:",
-      currentProduct.occasion || currentProduct.Occasion || "");
-    if(occasion === null) return;
+window.saveEditPanel = async function(){
+  const id = document.getElementById("editProductId").value;
+  const button = document.getElementById("saveEditPanelBtn");
 
-    const sareeLength = prompt("Saree Length:",
-      currentProduct.sareeLength || currentProduct.length || currentProduct.Length || "Approx. 5.5 m");
-    if(sareeLength === null) return;
+  if(!id) return;
 
-    const blouseDetails = prompt("Blouse Details:",
-      currentProduct.blouseDetails || currentProduct.blouse || currentProduct.Blouse || "");
-    if(blouseDetails === null) return;
+  const name = document.getElementById("editProductName").value.trim();
+  const price = Number(document.getElementById("editProductPrice").value);
+  const stock = Number(document.getElementById("editProductStock").value);
+  const description = document.getElementById("editProductDescription").value.trim();
+  const color = document.getElementById("editProductColor").value.trim();
+  const work = document.getElementById("editProductWork").value.trim();
+  const occasion = document.getElementById("editProductOccasion").value.trim();
+  const sareeLength = document.getElementById("editProductSareeLength").value.trim();
+  const blouseDetails = document.getElementById("editProductBlouseDetails").value.trim();
+  const fabric = document.getElementById("editProductFabric").value.trim() || "Chiffon";
+  const fileInput = document.getElementById("editProductImages");
 
-    const fabric = prompt("Fabric:",
-      currentProduct.fabric || currentProduct.Fabric || "Chiffon");
-    if(fabric === null) return;
+  if(!name || !Number.isFinite(price) || price < 0 || !Number.isFinite(stock) || stock < 0){
+    alert("Product name, price aur stock sahi fill karo.");
+    return;
+  }
 
-    const fileInput = document.getElementById("productImage-" + id);
+  try{
+    button.disabled = true;
+    button.textContent = "Saving...";
 
-    let image = currentProduct.image || "";
-    let images = Array.isArray(currentProduct.images)
-      ? [...currentProduct.images]
-      : (currentProduct.image ? [currentProduct.image] : []);
+    const productRef = doc(db, "PRODUCTS", id);
+    const snap = await getDoc(productRef);
 
+    if(!snap.exists()){
+      throw new Error("Product nahi mila.");
+    }
+
+    const current = snap.data();
+    let images = Array.isArray(current.images)
+      ? [...current.images]
+      : (current.image ? [current.image] : []);
+    let image = current.image || images[0] || "";
+
+    // If new photos are selected, replace the entire photo set.
     if(fileInput && fileInput.files.length > 0){
-
-      const files = Array.from(fileInput.files);
       images = [];
 
-      for(const file of files){
+      const files = Array.from(fileInput.files);
 
+      for(let i = 0; i < files.length; i++){
+        const file = files[i];
+        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
         const storageRef = ref(
           storage,
-          "products/" + id + "_" + Date.now() + "_" + file.name
+          "products/" + id + "/" + Date.now() + "_" + i + "_" + safeName
         );
 
         await uploadBytes(storageRef, file);
-        const imageUrl = await getDownloadURL(storageRef);
-        images.push(imageUrl);
+        images.push(await getDownloadURL(storageRef));
       }
 
       image = images[0] || "";
@@ -515,36 +664,34 @@ window.editProduct = async function(id){
 
     await updateDoc(productRef, {
       Name: name,
-      price: Number(price),
-      stock: Number(stock),
+      price: price,
+      stock: stock,
       description: description,
       color: color,
       borderWork: work,
       occasion: occasion,
       sareeLength: sareeLength,
       blouseDetails: blouseDetails,
-      fabric: fabric || "Chiffon",
+      fabric: fabric,
       image: image,
       images: images
     });
 
-    if(fileInput) fileInput.value = "";
-
-    alert("Product updated successfully ✅");
+    alert("Product ki saari details successfully update ho gayi ✅");
+    closeEditPanel();
     loadProducts();
 
   }catch(error){
-
     console.error(error);
-
-    alert(
-      "Product update nahi hua ❌\n\n" +
-      error.message
-    );
-
+    alert("Product update nahi hua ❌\n\n" + error.message);
+  }finally{
+    button.disabled = false;
+    button.textContent = "Save All Changes";
   }
-
 };
+
+// Keep old function name compatible with any existing calls.
+window.editProduct = window.openEditPanel;
 
   window.addProduct = async function(){
 
