@@ -239,11 +239,7 @@ Discover delicate chiffon sarees designed to move with you —
     <h2>Chiffon, softly spoken.</h2>
     <p>Airy textures, graceful movement and colours inspired by Indian evenings.</p>
   </div>
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 22px;">
-    <button type="button" onclick="showCollection('All')" style="padding:10px 18px;border:1px solid #222;background:#111;color:#fff;border-radius:999px;cursor:pointer;">All Sarees</button>
-    <button type="button" onclick="showCollection('Celebration')" style="padding:10px 18px;border:1px solid #222;background:#fff;color:#111;border-radius:999px;cursor:pointer;">Celebration Edit</button>
-    <button type="button" onclick="showCollection('Everyday')" style="padding:10px 18px;border:1px solid #222;background:#fff;color:#111;border-radius:999px;cursor:pointer;">Everyday Edit</button>
-  </div>
+  <div id="collectionFilters" style="display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 22px;"></div>
   <p id="collectionHeading" style="display:none;margin:0 0 18px;font-weight:600;letter-spacing:.05em;"></p>
   <div class="products" id="products">
     <p>Loading products...</p>
@@ -274,16 +270,7 @@ Discover delicate chiffon sarees designed to move with you —
     <div class="section-label">Curated for you</div>
     <h2>Two moods, one signature.</h2>
   </div>
-  <div class="collections">
-    <a class="collection" href="#shop" onclick="showCollection('Celebration'); return true;">
-      <h3>The Celebration Edit</h3>
-      <p>Soft shimmer · graceful borders · evenings worth remembering</p>
-    </a>
-    <a class="collection" href="#shop" onclick="showCollection('Everyday'); return true;">
-      <h3>The Everyday Edit</h3>
-      <p>Fresh pastels · effortless drapes · beautiful ordinary days</p>
-    </a>
-  </div>
+  <div class="collections" id="collectionCards"></div>
 </section>
 
 <section class="newsletter">
@@ -342,21 +329,38 @@ Discover delicate chiffon sarees designed to move with you —
   const analytics = getAnalytics(app);
     let cart = [];
 let productsData = {};
+let siteCollections = [
+  {name:"Celebration Edit", description:"Soft shimmer · graceful borders · evenings worth remembering"},
+  {name:"Everyday Edit", description:"Fresh pastels · effortless drapes · beautiful ordinary days"}
+];
+let selectedCollection = "All";
 
-async let selectedCollection = "All";
-
-window.showCollection = function(collectionName) {
+async function loadCollections(){
+  try{
+    const snap = await getDocs(collection(db,"COLLECTIONS"));
+    const custom = []; snap.forEach(d => custom.push({id:d.id,...d.data()}));
+    siteCollections = [
+      {name:"Celebration Edit", description:"Soft shimmer · graceful borders · evenings worth remembering"},
+      {name:"Everyday Edit", description:"Fresh pastels · effortless drapes · beautiful ordinary days"},
+      ...custom
+    ];
+  }catch(error){ console.error("Collections load error", error); }
+  renderCollectionUI();
+}
+function renderCollectionUI(){
+  const cards=document.getElementById("collectionCards");
+  if(cards){ cards.innerHTML=siteCollections.map(c=>`<a class="collection" href="#shop" onclick="showCollection(${JSON.stringify(c.name)});return true;"><h3>${escapeHtml(c.name)}</h3><p>${escapeHtml(c.description||"")}</p></a>`).join(""); }
+  const filters=document.getElementById("collectionFilters");
+  if(filters){ filters.innerHTML=`<button type="button" onclick="showCollection('All')">All Sarees</button>`+siteCollections.map(c=>`<button type="button" onclick="showCollection(${JSON.stringify(c.name)})">${escapeHtml(c.name)}</button>`).join(""); }
+}
+function escapeHtml(value){ return String(value ?? "").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch])); }
+window.showCollection = function(collectionName){
   selectedCollection = collectionName || "All";
-  const heading = document.getElementById("collectionHeading");
-  if (heading) {
-    heading.style.display = selectedCollection === "All" ? "none" : "block";
-    heading.textContent = selectedCollection === "Celebration"
-      ? "The Celebration Edit"
-      : "The Everyday Edit";
-  }
+  const heading=document.getElementById("collectionHeading");
+  if(heading){ heading.style.display=selectedCollection==="All"?"none":"block"; heading.textContent=selectedCollection==="All"?"":selectedCollection; }
   loadProducts();
-  const shop = document.getElementById("shop");
-  if (shop && location.hash !== "#shop") shop.scrollIntoView({behavior:"smooth"});
+  const shop=document.getElementById("shop");
+  if(shop && location.hash!=="#shop") shop.scrollIntoView({behavior:"smooth"});
 };
 
 async function loadProducts() {
@@ -371,7 +375,8 @@ async function loadProducts() {
       const product = doc.data();
       const productId = doc.id;
 
-      if (selectedCollection !== "All" && product.collection !== selectedCollection) {
+      const matchesCollection = selectedCollection === "All" || product.collection === selectedCollection || (selectedCollection === "Celebration Edit" && product.collection === "Celebration") || (selectedCollection === "Everyday Edit" && product.collection === "Everyday");
+      if (!matchesCollection) {
         return;
       }
 
@@ -1040,6 +1045,7 @@ window.checkout = checkout;
 window.placeOrder = placeOrder;
 window.closeCheckout = closeCheckout;
 
+loadCollections();
 loadProducts();
 
 </script>
