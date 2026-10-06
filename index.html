@@ -355,6 +355,18 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
   .menu-trigger{position:absolute;right:18px;top:17px}
 }
 
+
+.orders-empty{
+  padding:16px;border:1px solid #eee;border-radius:12px;background:#fafafa;
+}
+.order-card{
+  border:1px solid #e5e5e5;border-radius:12px;padding:14px;margin:10px 0;background:#fafafa;
+}
+.order-card-title{font-weight:700;color:var(--berry)}
+.order-card-meta{font-size:12px;color:#777;margin:5px 0}
+.order-card-total{margin-top:8px;font-weight:700}
+.order-status{margin-top:5px}
+
 </style>
 </head>
 <body>
@@ -379,8 +391,11 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
     <h3>SAANJH</h3>
     <button class="side-menu-close" type="button" onclick="closeSideMenu()" aria-label="Close menu">×</button>
   </div>
-  <button class="side-menu-link" type="button" onclick="currentUser ? handleLogout() : (openLogin(), closeSideMenu());">
-    <span>Login / Create ID</span><span>›</span>
+  <button class="side-menu-link" type="button" onclick="handleAccountMenu();">
+    <span id="menu-account-label">Login / Create ID</span><span>›</span>
+  </button>
+  <button class="side-menu-link" type="button" onclick="openOrders();">
+    <span>My Orders</span><span>›</span>
   </button>
   <button class="side-menu-link" type="button" onclick="goToSection('collections');">
     <span>Collections</span><span>›</span>
@@ -390,6 +405,12 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
   </button>
   <button class="side-menu-link" type="button" onclick="goToSection('shop');">
     <span>Shop</span><span>›</span>
+  </button>
+
+  <div style="height:1px;background:var(--line);margin:26px 0 10px;"></div>
+  <button id="menu-logout" class="side-menu-link" type="button"
+          onclick="handleLogout();" style="display:none;color:#9a3f3f !important;">
+    <span>Logout</span><span>↪</span>
   </button>
 </aside>
 
@@ -408,6 +429,20 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
     <button id="login-submit" class="login-action" type="button" onclick="handleLogin()">Login</button>
     <button id="login-switch" class="login-switch" type="button" onclick="toggleLoginMode()">Create a new account</button>
     <p id="login-status" style="font:12px Arial,sans-serif;color:#8b536a;line-height:1.5;margin:12px 0 0;"></p>
+  </div>
+</div>
+
+
+<!-- ===== My Orders ===== -->
+<div id="orders-modal-overlay" class="login-modal-overlay">
+  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="orders-title">
+    <div class="login-modal-head">
+      <h2 id="orders-title">My Orders</h2>
+      <button class="login-close" type="button" onclick="closeOrders()" aria-label="Close orders">×</button>
+    </div>
+    <div id="customer-orders" style="font:13px Arial,sans-serif;color:#3f332f;line-height:1.55;">
+      Please login to view your orders.
+    </div>
   </div>
 </div>
 
@@ -511,8 +546,8 @@ Discover delicate chiffon sarees designed to move with you —
   <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-   import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-  import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+   import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+  import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
     import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-functions.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
@@ -534,6 +569,7 @@ Discover delicate chiffon sarees designed to move with you —
   console.log("Saanjh: Firebase initialized");
     const db = getFirestore(app);
     const auth = getAuth(app);
+    setPersistence(auth, browserLocalPersistence).catch((error) => console.error("Auth persistence setup failed:", error));
     let cart = [];
     let currentUser = null;
 let productsData = {};
@@ -568,6 +604,7 @@ function closeLogin(){
 async function handleLogout(){
   try{
     await signOut(auth);
+    closeOrders();
     closeSideMenu();
     alert("Logout ho gaya.");
   }catch(error){
@@ -575,6 +612,112 @@ async function handleLogout(){
     alert("Logout nahi ho paya. Please try again.");
   }
 }
+
+function handleAccountMenu(){
+  closeSideMenu();
+  if (currentUser){
+    openOrders();
+  } else {
+    openLogin();
+  }
+}
+
+function openOrders(){
+  closeSideMenu();
+  const overlay = document.getElementById("orders-modal-overlay");
+  if (!overlay) return;
+  overlay.classList.add("open");
+  loadCustomerOrders();
+}
+
+function closeOrders(){
+  document.getElementById("orders-modal-overlay")?.classList.remove("open");
+}
+
+async function loadCustomerOrders(){
+  const box = document.getElementById("customer-orders");
+  if (!box) return;
+
+  const user = auth.currentUser;
+  if (!user){
+    box.innerHTML = `
+      <div class="orders-empty">
+        <b>Please login first.</b>
+        <div style="font-size:12px;color:#666;margin-top:6px;">
+          Login karke aap apne orders aur order status yahan dekh sakte hain.
+        </div>
+        <button class="login-action" type="button" onclick="closeOrders(); openLogin();">Login / Create ID</button>
+      </div>`;
+    return;
+  }
+
+  box.innerHTML = `<div style="padding:16px;text-align:center;color:#777;">Loading your orders...</div>`;
+
+  try{
+    const email = String(user.email || "").trim();
+
+    let snap = await getDocs(
+      query(collection(db, "ORDERS"), where("email", "==", email))
+    );
+
+    if (snap.empty){
+      snap = await getDocs(
+        query(collection(db, "orders"), where("email", "==", email))
+      );
+    }
+
+    if (snap.empty){
+      box.innerHTML = `
+        <div class="orders-empty">
+          <b>No orders found.</b>
+          <div style="font-size:12px;color:#666;margin-top:6px;">
+            ${email}<br>
+            Aapka naya order isi account me automatically dikh jayega.
+          </div>
+        </div>`;
+      return;
+    }
+
+    const docs = [...snap.docs].sort((a,b) => {
+      const av = a.data().createdAt?.toMillis ? a.data().createdAt.toMillis() : 0;
+      const bv = b.data().createdAt?.toMillis ? b.data().createdAt.toMillis() : 0;
+      return bv - av;
+    });
+
+    box.innerHTML = docs.map(d => {
+      const o = d.data();
+      const date = o.createdAt?.toDate
+        ? o.createdAt.toDate().toLocaleString("en-IN")
+        : (o.createdAt || "");
+      const items = Array.isArray(o.items) ? o.items : [];
+      const status = o.orderStatus || o.status || "Order received";
+      const payment = o.paymentMethod || "—";
+
+      return `
+        <div class="order-card">
+          <div class="order-card-title">Order #${d.id}</div>
+          <div class="order-card-meta">${date}</div>
+          <div>
+            ${items.length
+              ? items.map(i => `${i.name || "Item"} × ${i.qty || 1}`).join("<br>")
+              : "Order items"}
+          </div>
+          <div class="order-card-total">Total: ₹${o.total || 0}</div>
+          <div class="order-status">Status: <b>${status}</b></div>
+          <div class="order-card-meta">Payment: ${payment}</div>
+        </div>`;
+    }).join("");
+
+  }catch(error){
+    console.error("Customer order history error:", error);
+    box.innerHTML = `
+      <div class="orders-empty" style="color:#9a3f3f;">
+        Order history load nahi ho paayi.<br>
+        <small>${error?.message || "Please try again."}</small>
+      </div>`;
+  }
+}
+
 function toggleLoginMode(){
   loginMode = loginMode === "login" ? "signup" : "login";
   const title = document.getElementById("login-title");
@@ -639,11 +782,10 @@ async function handleLogin(){
 
 onAuthStateChanged(auth, (user) => {
   currentUser = user;
-  const loginLink = document.querySelector('.side-menu-link');
-  if (loginLink){
-    const firstSpan = loginLink.querySelector("span");
-    if (firstSpan) firstSpan.textContent = user ? "My Account / Logout" : "Login / Create ID";
-  }
+  const label = document.getElementById("menu-account-label");
+  const logout = document.getElementById("menu-logout");
+  if (label) label.textContent = user ? "My Account" : "Login / Create ID";
+  if (logout) logout.style.display = user ? "flex" : "none";
 });
 
 async function loadProducts() {
@@ -1432,6 +1574,10 @@ if (paymentMethod === "COD") {
   }
 }
 }
+window.openOrders = openOrders;
+window.closeOrders = closeOrders;
+window.loadCustomerOrders = loadCustomerOrders;
+window.handleAccountMenu = handleAccountMenu;
 window.openSideMenu = openSideMenu;
 window.closeSideMenu = closeSideMenu;
 window.goToSection = goToSection;
