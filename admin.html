@@ -197,6 +197,8 @@
       <input id="newCollectionDescription" placeholder="Short description">
     </div>
     <button type="button" onclick="addCollection()">+ Create New Edit / Section</button>
+    <div style="margin:16px 0 6px;font-weight:700;color:#5d4a43;">Manage Existing Edits / Sections</div>
+    <div style="font-size:12px;color:#777;margin-bottom:10px;line-height:1.5;">Custom sections ko yahin se delete kar sakti ho. Delete karne se products delete nahi honge.</div>
     <div id="collectionManager" style="margin:14px 0;"></div>
 
     <hr>
@@ -449,6 +451,9 @@
 
       snapshot.forEach(productDoc => {
 
+        // Reserved metadata document used for custom collection definitions.
+        if(productDoc.id === "__COLLECTIONS__") return;
+
         const product =
           productDoc.data();
 
@@ -532,48 +537,99 @@
   }
 
 
+async function getCollectionDefinitions(){
+  const metadataRef = doc(db, "PRODUCTS", "__COLLECTIONS__");
+  const metadataSnap = await getDoc(metadataRef);
+  const map = metadataSnap.exists() && metadataSnap.data().collections
+    ? metadataSnap.data().collections
+    : {};
+  return Object.entries(map).map(([id, value]) => ({
+    id,
+    name: String(value?.name || "").trim(),
+    description: String(value?.description || ""),
+    order: Number(value?.order || 0)
+  })).filter(c => c.name);
+}
+
+async function saveCollectionDefinitions(collections){
+  const map = {};
+  collections.forEach(c => {
+    map[c.id] = {
+      name: c.name,
+      description: c.description || "",
+      order: Number(c.order || 0),
+      createdAt: c.createdAt || new Date().toISOString()
+    };
+  });
+  await setDoc(doc(db, "PRODUCTS", "__COLLECTIONS__"), {collections: map}, {merge: true});
+}
+
 async function refreshCollectionSelects(){
   try{
-    const snap = await getDocs(collection(db, "COLLECTIONS"));
-    const collections = [{id:"__celebration",name:"Celebration Edit",description:"Soft shimmer · graceful borders · evenings worth remembering",order:-2},{id:"__everyday",name:"Everyday Edit",description:"Fresh pastels · effortless drapes · beautiful ordinary days",order:-1}];
-    snap.forEach(d => collections.push({id:d.id, ...d.data()}));
+    const collections = [
+      {id:"__celebration",name:"Celebration Edit",description:"Soft shimmer · graceful borders · evenings worth remembering",order:-2},
+      {id:"__everyday",name:"Everyday Edit",description:"Fresh pastels · effortless drapes · beautiful ordinary days",order:-1}
+    ];
+    const custom = await getCollectionDefinitions();
+    custom.forEach(c => { if(!collections.some(x => x.name.toLowerCase() === c.name.toLowerCase())) collections.push(c); });
     collections.sort((a,b) => Number(a.order||0)-Number(b.order||0) || String(a.name||"").localeCompare(String(b.name||"")));
     const selects = [document.getElementById("productCollection"), document.getElementById("editProductCollection")].filter(Boolean);
     selects.forEach(select => {
       const current = select.value;
       select.innerHTML = "";
       collections.forEach(c => {
-          const opt = document.createElement("option"); opt.value = c.name; opt.textContent = c.name; select.appendChild(opt);
-        });
+        const opt = document.createElement("option");
+        opt.value = c.name;
+        opt.textContent = c.name;
+        select.appendChild(opt);
+      });
       if(current) select.value = current;
     });
     const manager = document.getElementById("collectionManager");
     if(manager){
-      manager.innerHTML = collections.length ? collections.map(c => `
-        <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid #eadfd9;border-radius:12px;padding:12px;margin:8px 0;background:#fff;">
-          <div><strong>${escapeHtml(c.name)}</strong><div style="font-size:12px;color:#777;margin-top:3px;">${escapeHtml(c.description||"")}</div></div>
-          <button type="button" onclick="deleteCollection('${c.id}')" style="background:#b42318;padding:8px 12px;">Delete</button>
-        </div>`).join("") : '<p style="color:#777;">No custom edits yet. Default Celebration / Everyday will still work.</p>';
+      manager.innerHTML = collections.map(c => {
+        const isDefault = c.id === "__celebration" || c.id === "__everyday";
+        return `
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;border:1px solid #eadfd9;border-radius:12px;padding:12px;margin:8px 0;background:#fff;">
+          <div style="min-width:0;flex:1;"><strong>${escapeHtml(c.name)}</strong><div style="font-size:12px;color:#777;margin-top:3px;">${escapeHtml(c.description||"")}</div></div>
+          ${isDefault
+            ? '<span style="font-size:11px;color:#777;border:1px solid #ddd;border-radius:999px;padding:6px 9px;white-space:nowrap;">Default</span>'
+            : `<button type="button" onclick="deleteCollection('${c.id}')" style="background:#b42318!important;color:#fff!important;border:0;border-radius:8px;padding:9px 13px;font-weight:700;cursor:pointer;white-space:nowrap;">Delete Section</button>`}
+        </div>`;
+      }).join("");
     }
   }catch(error){ console.error("Collection load error", error); }
 }
 function escapeHtml(value){ return String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch])); }
 window.addCollection = async function(){
-  const name=document.getElementById("newCollectionName").value.trim(); const description=document.getElementById("newCollectionDescription").value.trim();
+  const name=document.getElementById("newCollectionName").value.trim();
+  const description=document.getElementById("newCollectionDescription").value.trim();
   if(!name){ alert("Edit / Section ka naam likho."); return; }
   try{
-    const snap=await getDocs(collection(db,"COLLECTIONS"));
-    if(snap.docs.some(d=>String(d.data().name||"").toLowerCase()===name.toLowerCase())){ alert("Ye Edit already bana hua hai."); return; }
-    await addDoc(collection(db,"COLLECTIONS"),{name,description,order:snap.size+1,createdAt:new Date().toISOString()});
-    document.getElementById("newCollectionName").value=""; document.getElementById("newCollectionDescription").value="";
-    await refreshCollectionSelects(); alert("New Edit / Section create ho gaya ✅");
-  }catch(error){ alert("New Edit create nahi hua ❌\n\n"+error.message); }
+    const existing = await getCollectionDefinitions();
+    if(existing.some(c => c.name.toLowerCase() === name.toLowerCase()) || ["Celebration Edit","Everyday Edit"].some(n => n.toLowerCase() === name.toLowerCase())){
+      alert("Ye Edit already bana hua hai."); return;
+    }
+    const id = "custom_" + Date.now();
+    existing.push({id,name,description,order:existing.length+1,createdAt:new Date().toISOString()});
+    await saveCollectionDefinitions(existing);
+    document.getElementById("newCollectionName").value="";
+    document.getElementById("newCollectionDescription").value="";
+    await refreshCollectionSelects();
+    alert("New Edit / Section create ho gaya ✅");
+  }catch(error){ console.error(error); alert("New Edit create nahi hua ❌\n\nFirebase permission issue aa raha tha, ab metadata PRODUCTS ke andar save hota hai. Agar phir bhi aaye to Firestore PRODUCTS write rule check karna hoga.\n\n"+error.message); }
 };
 window.deleteCollection = async function(id){
   if(id === "__celebration" || id === "__everyday"){ alert("Default Edit delete nahi kiya ja sakta."); return; }
   if(!confirm("Ye section delete karna hai? Isse products delete nahi honge.")) return;
-  try{ await deleteDoc(doc(db,"COLLECTIONS",id)); await refreshCollectionSelects(); loadProducts(); }
-  catch(error){ alert("Section delete nahi hua ❌\n\n"+error.message); }
+  try{
+    const existing = await getCollectionDefinitions();
+    const updated = existing.filter(c => c.id !== id);
+    await saveCollectionDefinitions(updated);
+    await refreshCollectionSelects();
+    loadProducts();
+    alert("Section delete ho gaya ✅");
+  }catch(error){ alert("Section delete nahi hua ❌\n\n"+error.message); }
 };
 
 
