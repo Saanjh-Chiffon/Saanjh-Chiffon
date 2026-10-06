@@ -261,82 +261,83 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
 }
   
 
-/* CUSTOMER ACCOUNT VISIBILITY FIX */
-#customer-account-modal .customer-close-btn {
-  width:42px !important;
-  height:42px !important;
-  padding:0 !important;
-  margin:0 !important;
-  border:1px solid #222 !important;
-  border-radius:50% !important;
-  background:#fff !important;
-  color:#111 !important;
-  font-family:Arial,sans-serif !important;
-  font-size:28px !important;
-  font-weight:700 !important;
-  line-height:38px !important;
-  text-align:center !important;
-  text-transform:none !important;
-  letter-spacing:0 !important;
+/* Final checkout/account button visibility + interaction fixes */
+#checkout-box button[onclick="window.closeCheckout()"] {
   display:flex !important;
   align-items:center !important;
   justify-content:center !important;
-  cursor:pointer !important;
-  flex:0 0 42px !important;
-}
-#customer-account-modal .customer-close-btn span {
-  display:block !important;
-  color:#111 !important;
-  font:700 28px/1 Arial,sans-serif !important;
-}
-#customer-account-modal .customer-profile-logout {
   width:100% !important;
-  min-height:46px !important;
+  min-height:44px !important;
   padding:12px !important;
-  margin-top:12px !important;
-  border:1px solid #222 !important;
-  border-radius:8px !important;
+  margin-top:8px !important;
   background:#fff !important;
   color:#111 !important;
-  font:700 13px/1.2 Arial,sans-serif !important;
-  letter-spacing:.08em !important;
-  text-transform:uppercase !important;
-  display:block !important;
-  cursor:pointer !important;
-  text-align:center !important;
+  border:1px solid #222 !important;
+  border-radius:7px !important;
+  font-size:13px !important;
+  font-weight:600 !important;
+  letter-spacing:0 !important;
+  opacity:1 !important;
 }
-#customer-account-modal .customer-profile-logout span {
-  display:inline-block !important;
+#checkout-box button[onclick="window.placeOrder()"] {
+  color:#fff !important;
+  background:#111 !important;
+  min-height:46px !important;
+  font-size:13px !important;
+  font-weight:700 !important;
+  letter-spacing:.04em !important;
+}
+#customer-account-modal button[onclick="window.closeCustomerAccount()"] {
+  width:40px !important;
+  height:40px !important;
+  min-width:40px !important;
+  min-height:40px !important;
+  padding:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background:#fff !important;
   color:#111 !important;
-  font:700 13px/1.2 Arial,sans-serif !important;
+  border:1px solid #222 !important;
+  border-radius:50% !important;
+  font-size:26px !important;
+  line-height:1 !important;
+  letter-spacing:0 !important;
+  font-weight:700 !important;
 }
-
+#customer-account-modal #customer-auth-toggle {
+  color:#111 !important;
+  background:#fff !important;
+  border:1px solid #222 !important;
+}
+#customer-account-modal #customer-auth-submit {
+  color:#fff !important;
+  background:#111 !important;
+}
 </style>
 </head>
 <body>
 
 <!-- CUSTOMER ACCOUNT -->
-<div id="customer-account-wrap" style="position:fixed;top:18px;right:18px;z-index:9999;font-family:Arial,sans-serif;display:flex;gap:7px;align-items:center;">
-  <button id="customer-account-btn" type="button" style="border:1px solid #ddd;background:#fff;color:#222;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">👤 Login</button>
-  <button id="customer-create-btn" type="button" style="border:1px solid #111;background:#111;color:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">Create ID</button>
-  <button id="customer-logout-btn" type="button" style="display:none;border:1px solid #ddd;background:#fff;color:#222;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">Logout</button>
+<div id="customer-account-wrap" style="position:fixed;top:18px;right:18px;z-index:9999;font-family:Arial,sans-serif;">
+  <button id="customer-account-btn" style="border:1px solid #ddd;background:#fff;padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.08);">👤 Login</button>
 </div>
 <div id="customer-account-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:10000;align-items:center;justify-content:center;font-family:Arial,sans-serif;">
   <div style="width:min(440px,92vw);max-height:88vh;overflow:auto;background:#fff;border-radius:18px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.22);">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;"><h2 id="account-title" style="margin:0;color:#222;">Customer Login</h2><button class="customer-close-btn" type="button" onclick="window.closeCustomerAccount()"><span>×</span></button></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;"><h2 id="account-title" style="margin:0;color:#222;">Customer Login</h2><button onclick="window.closeCustomerAccount()" style="border:0;background:none;font-size:24px;cursor:pointer;">×</button></div>
     <div id="auth-form" style="margin-top:18px;">
       <input id="customer-auth-name" placeholder="Full Name (for new account)" style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;border:1px solid #ddd;border-radius:8px;">
       <input id="customer-auth-email" type="email" placeholder="Email Address" style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;border:1px solid #ddd;border-radius:8px;">
       <input id="customer-auth-password" type="password" placeholder="Password (min 6 characters)" style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;border:1px solid #ddd;border-radius:8px;">
       <button id="customer-auth-submit" style="width:100%;padding:13px;margin-top:10px;border:0;border-radius:8px;background:#111;color:#fff;cursor:pointer;">Create Account</button>
-      <button id="customer-auth-toggle" style="width:100%;padding:10px;margin-top:8px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#222;cursor:pointer;">Already have an account? Login</button>
+      <button id="customer-auth-toggle" style="width:100%;padding:10px;margin-top:8px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer;">Already have an account? Login</button>
       <p id="customer-auth-message" style="font-size:14px;line-height:1.45;"></p>
     </div>
     <div id="customer-profile" style="display:none;margin-top:18px;">
       <p id="customer-welcome" style="margin-bottom:14px;"></p>
       <button onclick="window.loadCustomerOrders()" style="width:100%;padding:12px;border:0;border-radius:8px;background:#111;color:#fff;cursor:pointer;">📦 My Orders & Order History</button>
       <div id="customer-orders" style="margin-top:14px;"></div>
-      <button class="customer-profile-logout" type="button" onclick="window.customerLogout()"><span>Logout</span></button>
+      <button onclick="window.customerLogout()" style="width:100%;padding:11px;margin-top:12px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer;">Logout</button>
     </div>
   </div>
 </div>
@@ -477,14 +478,7 @@ Discover delicate chiffon sarees designed to move with you —
   const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
   const auth = getAuth(app);
-
-  // Keep customer login active across page/browser restarts.
-  // We also await this before login/signup so the session is stored locally.
-  const authPersistenceReady = setPersistence(auth, browserLocalPersistence)
-    .catch((error) => {
-      console.warn("Could not enable local auth persistence:", error);
-    });
-
+  setPersistence(auth, browserLocalPersistence).catch((error) => console.error("Auth persistence setup failed:", error));
   const storage = getStorage(app);
     let cart = [];
 let productsData = {};
@@ -1119,83 +1113,114 @@ function closeCheckout() {
 }
 
 
+let orderSubmitting = false;
+
+function setPlaceOrderButtonState(isSubmitting) {
+  const btn = document.querySelector('#checkout-box button[onclick="window.placeOrder()"]');
+  if (!btn) return;
+
+  if (isSubmitting) {
+    btn.disabled = true;
+    btn.dataset.originalText = btn.dataset.originalText || btn.textContent.trim() || "Place Order";
+    btn.textContent = "Placing Order...";
+    btn.style.opacity = "0.65";
+    btn.style.cursor = "not-allowed";
+    btn.setAttribute("aria-disabled", "true");
+  } else {
+    btn.disabled = false;
+    btn.textContent = btn.dataset.originalText || "Place Order";
+    btn.style.opacity = "1";
+    btn.style.cursor = "pointer";
+    btn.removeAttribute("aria-disabled");
+  }
+}
+
 async function placeOrder() {
+  // Hard client-side lock: repeated taps/clicks cannot start another request.
+  if (orderSubmitting) return;
 
-  if (!auth.currentUser) {
-    alert("Please pehle customer account se login karein.");
-    accountModal.style.display = "flex";
-    return;
-  }
+  const placeBtn = document.querySelector('#checkout-box button[onclick="window.placeOrder()"]');
+  if (!placeBtn) return;
 
-  const name = document.getElementById("customer-name").value.trim();
-  const phone = document.getElementById("customer-phone").value.trim();
-  const email = document.getElementById("customer-email").value.trim();
-  const address = document.getElementById("customer-address").value.trim();
-  const city = document.getElementById("customer-city").value.trim();
-  const state = document.getElementById("customer-state").value.trim();
-  const pincode = document.getElementById("customer-pincode").value.trim();
+  orderSubmitting = true;
+  setPlaceOrderButtonState(true);
 
-  const paymentMethod = document.querySelector(
-    'input[name="payment-method"]:checked'
-  ).value;
+  try {
+    if (!auth.currentUser) {
+      alert("Please pehle customer account se login karein.");
+      accountModal.style.display = "flex";
+      orderSubmitting = false;
+      setPlaceOrderButtonState(false);
+      return;
+    }
 
+    const name = document.getElementById("customer-name").value.trim();
+    const phone = document.getElementById("customer-phone").value.trim();
+    const email = document.getElementById("customer-email").value.trim();
+    const address = document.getElementById("customer-address").value.trim();
+    const city = document.getElementById("customer-city").value.trim();
+    const state = document.getElementById("customer-state").value.trim();
+    const pincode = document.getElementById("customer-pincode").value.trim();
 
-  if (
-    !name ||
-    !phone ||
-    !email ||
-    !address ||
-    !city ||
-    !state ||
-    !pincode
-  ) {
-    alert("Please saari details fill karein.");
-    return;
-  }
+    const paymentMethod = document.querySelector(
+      'input[name="payment-method"]:checked'
+    )?.value;
 
+    if (!name || !phone || !email || !address || !city || !state || !pincode) {
+      alert("Please saari details fill karein.");
+      return;
+    }
 
-  if (!/^[0-9]{10}$/.test(phone)) {
-    alert("Please valid 10 digit mobile number enter karein.");
-    return;
-  }
+    if (!/^[0-9]{10}$/.test(phone)) {
+      alert("Please valid 10 digit mobile number enter karein.");
+      return;
+    }
 
+    if (!/^[0-9]{6}$/.test(pincode)) {
+      alert("Please valid 6 digit pincode enter karein.");
+      return;
+    }
 
-  if (!/^[0-9]{6}$/.test(pincode)) {
-    alert("Please valid 6 digit pincode enter karein.");
-    return;
-  }
+    if (!paymentMethod) {
+      alert("Please payment method select karein.");
+      return;
+    }
 
+    if (!Array.isArray(cart) || cart.length === 0) {
+      alert("Cart empty hai.");
+      return;
+    }
 
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.qty,
-    0
-  );
+    const total = cart.reduce(
+      (sum, item) => sum + Number(item.price || 0) * Number(item.qty || 0),
+      0
+    );
 
+    const orderItems = cart.map((item) => ({
+      productId: item.id || item.productId,
+      name: item.name,
+      price: item.price,
+      qty: item.qty
+    }));
 
-if (paymentMethod === "COD") {
-    try {
+    if (paymentMethod === "COD") {
       const createCodOrder = httpsCallable(
         getFunctions(app),
         "createCodOrder"
       );
 
       const result = await createCodOrder({
-        name: name,
-        phone: phone,
-        email: email,
-        address: address,
-        city: city,
-        state: state,
-        pincode: pincode,
-        items: cart.map((item) => ({
-          productId: item.id || item.productId,
-          name: item.name,
-          price: item.price,
-          qty: item.qty
-        })),
-        total: total,
+        name,
+        phone,
+        email,
+        address,
+        city,
+        state,
+        pincode,
+        items: orderItems,
+        total,
         paymentMethod: "COD",
-        customerUid: auth.currentUser ? auth.currentUser.uid : null
+        customerUid: auth.currentUser.uid
       });
 
       alert(
@@ -1207,25 +1232,15 @@ if (paymentMethod === "COD") {
       localStorage.removeItem("cart");
       closeCheckout();
       renderCart();
-
-    } catch (error) {
-      console.error(error);
-
-      alert(
-        "Order place nahi ho paya.\n\n" +
-        (error.message || "Please try again.")
-      );
+      return;
     }
-  } else {
-  try {
+
     const createRazorpayOrder = httpsCallable(
       getFunctions(app),
       "createRazorpayOrder"
     );
 
-    const orderResult = await createRazorpayOrder({
-      total: total
-    });
+    const orderResult = await createRazorpayOrder({ total });
 
     const razorpayOptions = {
       key: orderResult.data.keyId,
@@ -1236,19 +1251,19 @@ if (paymentMethod === "COD") {
       order_id: orderResult.data.orderId,
 
       prefill: {
-        name: name,
-        email: email,
+        name,
+        email,
         contact: phone
       },
 
       notes: {
-        address: address,
-        city: city,
-        state: state,
-        pincode: pincode
+        address,
+        city,
+        state,
+        pincode
       },
 
-      handler: async function (response) {
+      handler: async function(response) {
         try {
           const verifyRazorpayPayment = httpsCallable(
             getFunctions(app),
@@ -1259,24 +1274,16 @@ if (paymentMethod === "COD") {
             razorpay_order_id: response.razorpay_order_id,
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_signature: response.razorpay_signature,
-
-            name: name,
-            phone: phone,
-            email: email,
-            address: address,
-            city: city,
-            state: state,
-            pincode: pincode,
-
-            items: cart.map((item) => ({
-              productId: item.id || item.productId,
-              name: item.name,
-              price: item.price,
-              qty: item.qty
-            })),
-
-            total: total,
-            customerUid: auth.currentUser ? auth.currentUser.uid : null
+            name,
+            phone,
+            email,
+            address,
+            city,
+            state,
+            pincode,
+            items: orderItems,
+            total,
+            customerUid: auth.currentUser.uid
           });
 
           alert(
@@ -1288,14 +1295,23 @@ if (paymentMethod === "COD") {
           localStorage.removeItem("cart");
           closeCheckout();
           renderCart();
-
         } catch (error) {
           console.error(error);
-
           alert(
             "Payment verify nahi ho paya.\n\n" +
             (error.message || "Please contact us.")
           );
+        } finally {
+          orderSubmitting = false;
+          setPlaceOrderButtonState(false);
+        }
+      },
+
+      modal: {
+        ondismiss: function() {
+          // Payment window closed without completing payment.
+          orderSubmitting = false;
+          setPlaceOrderButtonState(false);
         }
       },
 
@@ -1305,227 +1321,22 @@ if (paymentMethod === "COD") {
     };
 
     const razorpay = new Razorpay(razorpayOptions);
-
-    razorpay.on("payment.failed", function (response) {
-      console.error(response.error);
-
-      alert(
-        "Payment failed.\n\n" +
-        (response.error.description || "Please try again.")
-      );
-    });
-
     razorpay.open();
 
   } catch (error) {
-    console.error(error);
-
+    console.error("Place order error:", error);
     alert(
-      "Payment start nahi ho paya.\n\n" +
+      "Order place nahi ho paya.\n\n" +
       (error.message || "Please try again.")
     );
+  } finally {
+    // COD success returns above after closing checkout.
+    // On COD failure, unlock so the customer can retry once.
+    if (!cart || cart.length > 0) {
+      orderSubmitting = false;
+      setPlaceOrderButtonState(false);
+    }
   }
 }
-}
-window.changeCartQty = changeCartQty;
-window.checkout = checkout;
+
 window.placeOrder = placeOrder;
-
-window.closeCheckout = closeCheckout;
-
-// ================= CUSTOMER LOGIN / ORDER HISTORY =================
-let customerSignupMode = false;
-
-const accountModal = document.getElementById("customer-account-modal");
-const accountBtn = document.getElementById("customer-account-btn");
-const createBtn = document.getElementById("customer-create-btn");
-const logoutBtn = document.getElementById("customer-logout-btn");
-const authSubmit = document.getElementById("customer-auth-submit");
-const authToggle = document.getElementById("customer-auth-toggle");
-const authMessage = document.getElementById("customer-auth-message");
-
-function setAuthMode(isSignup) {
-  customerSignupMode = isSignup;
-  const nameInput = document.getElementById("customer-auth-name");
-  const title = document.getElementById("account-title");
-  nameInput.style.display = isSignup ? "block" : "none";
-  authSubmit.textContent = isSignup ? "Create Account" : "Login";
-  authToggle.textContent = isSignup ? "Already have an account? Login" : "New customer? Create account";
-  title.textContent = isSignup ? "Create Customer Account" : "Customer Login";
-  authMessage.textContent = "";
-}
-
-function refreshCustomerAuthUI(user) {
-  const form = document.getElementById("auth-form");
-  const profile = document.getElementById("customer-profile");
-  const nameInput = document.getElementById("customer-auth-name");
-  const title = document.getElementById("account-title");
-  const welcome = document.getElementById("customer-welcome");
-
-  if (user) {
-    accountBtn.style.display = "none";
-    createBtn.style.display = "none";
-    logoutBtn.style.display = "inline-block";
-    form.style.display = "none";
-    profile.style.display = "block";
-    title.textContent = "My Account";
-    welcome.textContent = `Welcome ${user.displayName || user.email}!`;
-    nameInput.value = "";
-  } else {
-    accountBtn.style.display = "inline-block";
-    createBtn.style.display = "inline-block";
-    logoutBtn.style.display = "none";
-    form.style.display = "block";
-    profile.style.display = "none";
-    setAuthMode(customerSignupMode);
-  }
-}
-
-accountBtn.addEventListener("click", () => {
-  setAuthMode(false);
-  accountModal.style.display = "flex";
-});
-
-createBtn.addEventListener("click", () => {
-  setAuthMode(true);
-  accountModal.style.display = "flex";
-});
-
-logoutBtn.addEventListener("click", () => window.customerLogout());
-
-window.closeCustomerAccount = function() {
-  accountModal.style.display = "none";
-};
-
-authToggle.addEventListener("click", () => {
-  setAuthMode(!customerSignupMode);
-});
-
-authSubmit.addEventListener("click", async () => {
-  const name = document.getElementById("customer-auth-name").value.trim();
-  const email = document.getElementById("customer-auth-email").value.trim();
-  const password = document.getElementById("customer-auth-password").value;
-  authMessage.textContent = "";
-
-  try {
-    // Make sure Firebase has switched to browser-local persistence before
-    // creating/signing into the customer account.
-    await authPersistenceReady;
-
-    let credential;
-    if (customerSignupMode) {
-      if (!name) throw new Error("Please enter your name.");
-      if (password.length < 6) throw new Error("Password must be at least 6 characters.");
-      credential = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(credential.user, { displayName: name });
-      authMessage.textContent = "Account created successfully ✅";
-    } else {
-      credential = await signInWithEmailAndPassword(auth, email, password);
-      authMessage.textContent = "Login successful ✅";
-    }
-    refreshCustomerAuthUI(auth.currentUser);
-  } catch (error) {
-    console.error(error);
-    authMessage.textContent = "❌ " + (error.message || "Login failed.");
-  }
-});
-
-window.customerLogout = async function() {
-  await signOut(auth);
-  document.getElementById("customer-orders").innerHTML = "";
-  customerSignupMode = false;
-  refreshCustomerAuthUI(null);
-};
-
-
-window.loadCustomerOrders = async function() {
-  const box = document.getElementById("customer-orders");
-  const user = auth.currentUser;
-  if (!user) {
-    box.innerHTML = "Please login first.";
-    return;
-  }
-
-  box.innerHTML = "Loading your orders...";
-
-  try {
-    // Orders are linked to the customer's login email.
-    // We keep the query server-side so one customer cannot read another customer's orders.
-    const email = String(user.email || "").trim();
-
-    let snap = await getDocs(
-      query(collection(db, "ORDERS"), where("email", "==", email))
-    );
-
-    // Support the lowercase collection name too.
-    if (snap.empty) {
-      snap = await getDocs(
-        query(collection(db, "orders"), where("email", "==", email))
-      );
-    }
-
-    if (snap.empty) {
-      box.innerHTML = `
-        <div style="padding:14px;border:1px solid #eee;border-radius:12px;background:#fafafa;">
-          <b>No orders found.</b>
-          <div style="font-size:13px;color:#666;margin-top:6px;">
-            Your account is logged in as <b>${email}</b>.<br>
-            New orders placed with this email will appear here automatically.
-          </div>
-        </div>`;
-      return;
-    }
-
-    const orderDocs = [...snap.docs].sort((a, b) => {
-      const av = a.data().createdAt?.toMillis ? a.data().createdAt.toMillis() : 0;
-      const bv = b.data().createdAt?.toMillis ? b.data().createdAt.toMillis() : 0;
-      return bv - av;
-    });
-
-    box.innerHTML = orderDocs.map(d => {
-      const o = d.data();
-      const date = o.createdAt?.toDate
-        ? o.createdAt.toDate().toLocaleString("en-IN")
-        : (o.createdAt || "");
-      const items = Array.isArray(o.items) ? o.items : [];
-      const status = o.orderStatus || o.status || "Order received";
-
-      return `
-        <div style="border:1px solid #e5e5e5;border-radius:12px;padding:14px;margin:10px 0;background:#fafafa;">
-          <div style="font-weight:700;">Order #${d.id}</div>
-          <div style="font-size:13px;color:#666;margin:5px 0;">${date}</div>
-          <div style="margin:8px 0;">
-            ${items.length
-              ? items.map(i => `${i.name || "Item"} × ${i.qty || 1}`).join("<br>")
-              : "Order items"}
-          </div>
-          <div><b>Total: ₹${o.total || 0}</b></div>
-          <div style="margin-top:5px;">Status: <b>${status}</b></div>
-          <div style="font-size:13px;color:#666;margin-top:4px;">
-            Payment: ${o.paymentMethod || ""}
-          </div>
-        </div>`;
-    }).join("");
-  } catch (error) {
-    console.error("Customer order history error:", error);
-    box.innerHTML = `
-      <p style="color:#a33;">
-        Order history load nahi ho paayi. Firebase rules check karo.
-      </p>`;
-  }
-};
-
-onAuthStateChanged(auth, user => {
-  refreshCustomerAuthUI(user);
-  if (user) {
-    // Pre-fill checkout email when the customer is logged in.
-    const emailInput = document.getElementById("customer-email");
-    if (emailInput && user.email) emailInput.value = user.email;
-  }
-});
-
-loadProducts();
-
-</script>
-</body>
-</html>
