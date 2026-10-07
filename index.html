@@ -1271,6 +1271,8 @@ onAuthStateChanged(auth, (user) => {
 
 async function loadProducts() {
   const productsContainer = document.getElementById("products");
+  if (!productsContainer) return;
+  productsContainer.innerHTML = '<p style="padding:28px 10px;text-align:center;color:#777;">Loading products...</p>';
 
   try {
     const snapshot = await Promise.race([
@@ -1576,7 +1578,9 @@ async function loadProductReviews(productId, productName){
       return bv-av;
     });
     if(!reviews.length){
-      box.innerHTML='<button type="button" id="product-first-review-btn" class="product-review-empty product-review-first-btn">Be the first customer to share your experience</button>';\n      const firstReviewBtn=document.getElementById("product-first-review-btn");\n      if(firstReviewBtn) firstReviewBtn.onclick=()=>openProductReviewFromPage(productId, productName);
+      box.innerHTML='<button type="button" id="product-first-review-btn" class="product-review-empty product-review-first-btn">Be the first customer to share your experience</button>';
+      const firstReviewBtn=document.getElementById("product-first-review-btn");
+      if(firstReviewBtn) firstReviewBtn.onclick=()=>openProductReviewFromPage(productId, productName);
       return;
     }
     box.innerHTML=reviews.map(r=>{
