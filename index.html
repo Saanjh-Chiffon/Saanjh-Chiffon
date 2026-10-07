@@ -440,6 +440,28 @@ button{transition:background-color .2s ease,color .2s ease,border-color .2s ease
 @media(max-width:760px){.details-spec-grid{grid-template-columns:1fr}}
 
 
+
+/* ===== Product Reviews ===== */
+.product-reviews{margin-top:28px;padding-top:24px;border-top:1px solid #eee}
+.product-reviews h3{font:600 20px Georgia,serif;color:#2f2420;margin:0 0 8px}
+.reviews-summary{display:flex;align-items:center;gap:10px;margin-bottom:16px;color:#625650;font-size:14px}
+.review-stars{color:#b48a3b;letter-spacing:2px;font-size:18px}
+.review-list{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
+.review-card{padding:14px 15px;background:#faf7f5;border:1px solid #eee3de;border-radius:10px}
+.review-card strong{color:#2f2420;font-size:14px}
+.review-card .review-date{font-size:11px;color:#8a7c76;margin-left:8px}
+.review-card p{margin:7px 0 0;color:#5f514b;line-height:1.6;font-size:14px}
+.review-form{padding:16px;background:#fffaf7;border:1px solid #eee3de;border-radius:12px}
+.review-form label{display:block;font-size:12px;font-weight:700;color:#51443f;margin-bottom:8px}
+.review-rating{display:flex;gap:5px;margin-bottom:14px}
+.review-rating button{width:34px;height:34px;padding:0;border:1px solid #d9ccc5!important;background:#fff!important;color:#b48a3b!important;border-radius:50%;font-size:18px;cursor:pointer}
+.review-rating button.active{background:#b48a3b!important;color:#fff!important;border-color:#b48a3b!important}
+.review-form textarea{width:100%;min-height:90px;padding:11px;border:1px solid #ddd0c9;border-radius:8px;resize:vertical;font:14px Arial,sans-serif;box-sizing:border-box;margin-bottom:10px}
+.review-submit{min-height:42px;padding:0 18px;background:#111!important;color:#fff!important;border:0!important;border-radius:6px;font-weight:700;cursor:pointer}
+.review-submit:disabled{opacity:.55;cursor:not-allowed}
+.review-login-note{font-size:13px;color:#6b5d57;line-height:1.6}
+@media(max-width:760px){.review-rating button{width:32px;height:32px}}
+
 </style>
 </head>
 <body>
@@ -475,6 +497,13 @@ button{transition:background-color .2s ease,color .2s ease,border-color .2s ease
         <div id="product-details-description" class="product-details-description"></div>
         <div id="product-details-meta" class="product-details-meta"></div>
         <button id="product-details-add" class="product-details-add" type="button">Add to Cart</button>
+
+        <section class="product-reviews" aria-labelledby="product-reviews-title">
+          <h3 id="product-reviews-title">Customer Reviews</h3>
+          <div id="reviews-summary" class="reviews-summary">Loading reviews...</div>
+          <div id="review-list" class="review-list"></div>
+          <div id="review-form-area"></div>
+        </section>
       </div>
     </div>
   </div>
@@ -659,7 +688,7 @@ Discover delicate chiffon sarees designed to move with you —
   <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-   import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+   import { getFirestore, collection, getDocs, query, where, addDoc } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
   import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
     import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-functions.js";
   // TODO: Add SDKs for Firebase products that you want to use
@@ -1194,7 +1223,9 @@ function openProductDetails(productId){
   add.disabled=stock<=0;
   add.textContent=stock>0?"Add to Cart":"Sold Out";
   add.onclick=()=>{ if(stock>0){ addToCart(productId); closeProductDetails(); } };
+  activeReviewProductId = productId;
   overlay.classList.add("open");
+  loadProductReviews(productId);
   document.body.style.overflow="hidden";
 }
 
@@ -1203,7 +1234,7 @@ function closeProductDetails(event){
   document.getElementById("product-details-overlay")?.classList.remove("open");
   document.body.style.overflow="";
 }
-
+\nlet activeReviewProductId = null;\nlet selectedReviewRating = 5;\n\nfunction renderReviewStars(rating){\n  const value = Math.max(0, Math.min(5, Number(rating)||0));\n  return "★".repeat(Math.round(value)) + "☆".repeat(5-Math.round(value));\n}\n\nfunction escapeReviewText(value){\n  return String(value ?? "").replace(/[&<>"']/g, (char) => ({\n    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;"\n  })[char]);\n}\n\nasync function loadProductReviews(productId){\n  const summary = document.getElementById("reviews-summary");\n  const list = document.getElementById("review-list");\n  const formArea = document.getElementById("review-form-area");\n  if(!summary || !list || !formArea) return;\n  summary.textContent = "Loading reviews...";\n  list.innerHTML = "";\n  try{\n    const snap = await getDocs(query(collection(db,"REVIEWS"), where("productId","==",productId)));\n    const reviews = snap.docs.map((doc) => ({id:doc.id,...doc.data()}))\n      .sort((a,b) => Number(b.createdAt||0) - Number(a.createdAt||0));\n    const average = reviews.length ? reviews.reduce((sum,r)=>sum+Number(r.rating||0),0)/reviews.length : 0;\n    summary.innerHTML = reviews.length\n      ? `<span class="review-stars">${renderReviewStars(average)}</span><strong>${average.toFixed(1)}</strong><span>${reviews.length} review${reviews.length===1?"":"s"}</span>`\n      : `<span>No reviews yet.</span>`;\n\n    if(!reviews.length){\n      list.innerHTML = `<div style="font-size:13px;color:#7b6d66;line-height:1.6;margin-bottom:14px;">Be the first to share your experience with this saree.</div>`;\n    } else {\n      reviews.forEach((review)=>{\n        const card=document.createElement("div");\n        card.className="review-card";\n        const date=review.createdAt ? new Date(Number(review.createdAt)).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"}) : "";\n        card.innerHTML=`<div><strong>${escapeReviewText(review.userName||"Customer")}</strong>${date?`<span class="review-date">${date}</span>`:""}</div><div class="review-stars">${renderReviewStars(review.rating)}</div><p>${escapeReviewText(review.comment||"")}</p>`;\n        list.appendChild(card);\n      });\n    }\n\n    renderReviewForm(productId,reviews);\n  }catch(error){\n    console.error("Reviews load error:",error);\n    summary.textContent="Reviews unavailable right now.";\n    list.innerHTML="";\n    renderReviewForm(productId,[]);\n  }\n}\n\nfunction renderReviewForm(productId,reviews=[]){\n  const area=document.getElementById("review-form-area");\n  if(!area) return;\n  const user=currentUser;\n  if(!user){\n    area.innerHTML=`<div class="review-login-note">Please login/create your Saanjh account to leave a review.</div>`;\n    return;\n  }\n  const alreadyReviewed=reviews.some(r=>r.userId===user.uid);\n  if(alreadyReviewed){\n    area.innerHTML=`<div class="review-login-note">You have already reviewed this saree. Thank you for your feedback. ♥</div>`;\n    return;\n  }\n  selectedReviewRating=5;\n  area.innerHTML=`\n    <div class="review-form">\n      <label>Your rating</label>\n      <div id="review-rating" class="review-rating" role="radiogroup" aria-label="Rating from 1 to 5 stars">\n        ${[1,2,3,4,5].map(n=>`<button type="button" class="active" data-rating="${n}" aria-label="${n} star${n>1?"s":""}">★</button>`).join("")}\n      </div>\n      <label for="review-comment">Your review</label>\n      <textarea id="review-comment" maxlength="600" placeholder="Tell us about the saree, quality, fabric or your experience..."></textarea>\n      <button id="review-submit" class="review-submit" type="button">Submit Review</button>\n    </div>`;\n  area.querySelectorAll("[data-rating]").forEach((button)=>{\n    button.addEventListener("click",()=>{\n      selectedReviewRating=Number(button.dataset.rating);\n      area.querySelectorAll("[data-rating]").forEach((b)=>b.classList.toggle("active",Number(b.dataset.rating)<=selectedReviewRating));\n    });\n  });\n  document.getElementById("review-submit")?.addEventListener("click",()=>submitProductReview(productId));\n}\n\nasync function submitProductReview(productId){\n  if(!currentUser){ alert("Please login first."); return; }\n  const commentEl=document.getElementById("review-comment");\n  const submit=document.getElementById("review-submit");\n  const comment=(commentEl?.value||"").trim();\n  if(!comment){ alert("Please write your review."); return; }\n  if(!selectedReviewRating){ alert("Please select a rating."); return; }\n  if(submit){submit.disabled=true;submit.textContent="Submitting...";}\n  try{\n    await addDoc(collection(db,"REVIEWS"),{\n      productId,\n      userId:currentUser.uid,\n      userName:currentUser.displayName || currentUser.email?.split("@")[0] || "Customer",\n      rating:selectedReviewRating,\n      comment,\n      createdAt:Date.now()\n    });\n    await loadProductReviews(productId);\n    alert("Thank you! Your review has been added.");\n  }catch(error){\n    console.error("Review submit error:",error);\n    alert("Review submit nahi ho paayi. Please try again.");\n    if(submit){submit.disabled=false;submit.textContent="Submit Review";}\n  }\n}\n
 
 function addToCart(productId) {
   const product = productsData[productId];
