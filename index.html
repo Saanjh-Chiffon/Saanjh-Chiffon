@@ -462,6 +462,53 @@ button{transition:background-color .2s ease,color .2s ease,border-color .2s ease
 .replacement-btn{width:100%!important;min-height:44px!important;margin-top:12px!important;background:#fff!important;color:var(--berry)!important;border:1px solid rgba(96,69,61,.35)!important;border-radius:7px!important;font:11px Arial,sans-serif!important;letter-spacing:.06em!important;text-transform:uppercase!important;cursor:pointer!important}
 .replacement-btn:hover{background:#fbf5f1!important;transform:translateY(-1px)}
 .replacement-note{font:11px Arial,sans-serif;color:#796d67;line-height:1.55;margin-top:8px}
+
+/* ===== FINAL SMOOTH SHOP POLISH ===== */
+:root{--shadow-soft:0 12px 34px rgba(54,35,31,.08);--shadow-deep:0 24px 70px rgba(42,26,29,.16)}
+body{background:#fbf8f5;color:#3b302b}
+img{max-width:100%}
+button,a{ -webkit-tap-highlight-color:transparent }
+.product{border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(54,35,31,.055)}
+.product:hover{box-shadow:0 18px 42px rgba(54,35,31,.10)}
+.product-image{background:linear-gradient(135deg,#f7eee8,#eee2da);isolation:isolate}
+.product-image .product-images{height:100%}
+.product-image .product-slide{background:#f7eee8;object-fit:cover}
+.product-image .gallery-btn{backdrop-filter:blur(5px);box-shadow:0 5px 15px rgba(0,0,0,.12);opacity:.9}
+.product-image .gallery-btn:hover{transform:translateY(-50%) scale(1.04);background:rgba(35,24,22,.58)}
+.product-image .gallery-dot{box-shadow:0 1px 5px rgba(0,0,0,.18)}
+.product-info h3{letter-spacing:-.01em}
+.add-cart-btn{min-height:46px!important;width:100%;font-weight:700!important;letter-spacing:.08em!important;transition:.2s!important}
+.add-cart-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 18px rgba(30,20,20,.12)}
+#cart-button{backdrop-filter:blur(10px);background:rgba(35,27,29,.96)!important;min-height:48px;display:flex;align-items:center;justify-content:center;gap:6px}
+#cart-box{border:1px solid rgba(120,80,90,.14);box-shadow:var(--shadow-deep)!important}
+#cart-box h3{font-family:Georgia,serif;font-weight:400;color:var(--berry)}
+#cart-box button{border-radius:7px!important}
+.product-details-overlay{backdrop-filter:blur(4px)}
+.product-details-modal{animation:pageIn .25s ease}
+@keyframes pageIn{from{opacity:.6;transform:translateY(8px)}to{opacity:1;transform:none}}
+.product-details-gallery{border:1px solid #eadfd8;box-shadow:var(--shadow-soft)}
+.product-details-gallery img{background:#f5ece6}
+.product-details-thumbs button{border-radius:5px;overflow:hidden;transition:.18s}
+.product-details-thumbs button:hover{transform:translateY(-2px)}
+.product-details-actions button{transition:.2s!important}
+.product-details-actions button:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 10px 22px rgba(35,25,25,.10)}
+.product-review-empty{border-radius:10px;cursor:pointer;transition:.2s;display:block;width:100%;text-align:left}
+.product-review-empty:hover{background:#fbf5f1;transform:translateY(-1px)}
+.login-modal-overlay{backdrop-filter:blur(3px)}
+.login-modal{animation:modalIn .22s ease}
+@keyframes modalIn{from{opacity:0;transform:translateY(10px) scale(.99)}to{opacity:1;transform:none}}
+.orders-empty,.order-card{border-radius:12px}
+.replacement-btn{font-weight:700!important}
+#checkout-box input,#checkout-box textarea,#checkout-box select{border-radius:7px;border-color:#ddd2cc!important;background:#fff!important}
+#checkout-box input:focus,#checkout-box textarea:focus{border-color:var(--berry)!important;box-shadow:0 0 0 3px rgba(139,83,106,.08)}
+.saanjh-toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:30000;background:#2f2420;color:#fff;padding:13px 18px;border-radius:999px;font:12px Arial,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.18);transition:.25s;max-width:min(92vw,520px);text-align:center}
+.saanjh-toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:800px){
+  .product-details-gallery img{object-fit:contain}
+  #cart-button{right:14px!important;bottom:14px!important}
+  #cart-box{right:12px!important;bottom:72px!important;width:min(360px,calc(100vw - 24px))!important;max-width:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -822,6 +869,7 @@ Discover delicate chiffon sarees designed to move with you —
     const auth = getAuth(app);
     setPersistence(auth, browserLocalPersistence).catch((error) => console.error("Auth persistence setup failed:", error));
     let cart = [];
+try { cart = JSON.parse(localStorage.getItem("saanjh_cart") || "[]"); if (!Array.isArray(cart)) cart = []; } catch(e) { cart = []; }
 let isOrderSubmitting = false;
 let checkoutOrderKey = null;
     let currentUser = null;
@@ -1444,7 +1492,7 @@ async function openProductDetails(productId){
   if(!overlay||!title||!price||!desc||!meta||!main||!thumbs||!add||!buy) return;
 
   const rawImages=Array.isArray(product.images)&&product.images.length?product.images:(product.image?[product.image]:[]);
-  const images=rawImages.map(resolveProductImage).filter(Boolean);
+  const images=[...new Set(rawImages.map(resolveProductImage).filter(Boolean))];
   const stock=Number(product.stock||0);
   const productName=product.Name||product.name||"Saanjh Saree";
   const productDescription=product.description||product.Description||product.details||"Beautiful chiffon saree designed for a soft, graceful drape.";
@@ -1571,6 +1619,14 @@ async function openProductReviewFromPage(productId, productName){
   }
 }
 
+function showSaanjhToast(message){
+  let toast=document.getElementById("saanjh-toast");
+  if(!toast){ toast=document.createElement("div"); toast.id="saanjh-toast"; toast.className="saanjh-toast"; document.body.appendChild(toast); }
+  toast.textContent=message; toast.classList.add("show");
+  clearTimeout(window.__saanjhToastTimer);
+  window.__saanjhToastTimer=setTimeout(()=>toast.classList.remove("show"),2200);
+}
+
 function addToCart(productId) {
   const product = productsData[productId];
 
@@ -1606,6 +1662,7 @@ function addToCart(productId) {
   }
 
   renderCart();
+  showSaanjhToast("Added to cart");
 }
 
 
@@ -1710,6 +1767,8 @@ function renderCart() {
     (total, item) => total + item.price * item.qty,
     0
   );
+
+  try { localStorage.setItem("saanjh_cart", JSON.stringify(cart)); } catch(e) {}
 
   if (cartCount) {
     cartCount.textContent = totalItems;
@@ -1851,6 +1910,7 @@ function checkout() {
       id="customer-email"
       type="email"
       placeholder="Email Address"
+      value="${currentUser?.email || ""}"
       style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
     >
 
@@ -2230,6 +2290,8 @@ window.setReviewRating = setReviewRating;
 window.openReview = openReview;
 window.closeReview = closeReview;
 window.submitReview = submitReview;
+window.openProductReviewFromPage = openProductReviewFromPage;
+window.showSaanjhToast = showSaanjhToast;
 window.handleAccountMenu = handleAccountMenu;
 window.openAccount = openAccount;
 window.closeAccount = closeAccount;
@@ -2245,6 +2307,27 @@ window.changeCartQty = changeCartQty;
 window.checkout = checkout;
 window.placeOrder = placeOrder;
 window.closeCheckout = closeCheckout;
+
+
+// ===== Global interaction polish =====
+function closeAnyOpenLayer(){
+  const ids=["login-modal-overlay","account-modal-overlay","orders-modal-overlay","policy-modal-overlay","customer-care-modal-overlay","review-modal-overlay","replacement-modal-overlay"];
+  ids.forEach(id=>document.getElementById(id)?.classList.remove("open"));
+  document.getElementById("side-menu")?.classList.remove("open");
+  document.getElementById("side-menu-overlay")?.classList.remove("open");
+  document.body.style.overflow="";
+}
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Escape") return;
+  if(document.getElementById("product-details-overlay")?.classList.contains("open")){ closeProductDetails(); return; }
+  closeAnyOpenLayer();
+});
+["login-modal-overlay","account-modal-overlay","orders-modal-overlay","policy-modal-overlay","replacement-modal-overlay","review-modal-overlay"].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el) el.addEventListener("click",e=>{ if(e.target===el) el.classList.remove("open"); });
+});
+const careOverlay=document.getElementById("customer-care-modal-overlay");
+if(careOverlay) careOverlay.addEventListener("click",e=>{if(e.target===careOverlay) closeCustomerCare();});
 
 loadProducts();
 
