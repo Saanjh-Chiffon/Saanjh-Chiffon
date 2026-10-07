@@ -949,9 +949,9 @@ async function loadCustomerOrders(){
           <div class="order-card-total">Total: ₹${o.total || 0}</div>
           <div class="order-status">Status: <b>${status}</b></div>
           <div class="order-card-meta">Payment: ${payment}</div>
+          ${String(status).trim().toLowerCase() === "delivered" ? `
           <button class="replacement-btn" type="button" onclick='openReplacement(${JSON.stringify(d.id)}, ${JSON.stringify(items)})'>Request Replacement</button>
-          <div class="replacement-note">For wrong, damaged or defective items only.</div>
-          <button class="review-btn" type="button" onclick='openReview(${JSON.stringify(d.id)}, ${JSON.stringify(items)})'>Write a Review</button>
+          <div class="replacement-note">Available after delivery for wrong, damaged or defective items only.</div>` : ""}
         </div>`;
     }).join("");
 
