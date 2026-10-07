@@ -1285,14 +1285,8 @@ async function loadProducts() {
     productsContainer.innerHTML = "";
 
     for (const doc of snapshot.docs) {
-      const product = doc.data() || {};
+      const product = doc.data();
       const productId = doc.id;
-      const productName = String(product.Name || product.name || "").trim();
-
-      // Ignore empty/non-product documents in the PRODUCTS collection.
-      // This prevents placeholder cards such as “Saanjh Saree / ₹0 / Currently unavailable”
-      // from appearing when a metadata/test document has no actual product name.
-      if (!productName) continue;
 
       productsData[productId] = {
         id: productId,
@@ -1325,7 +1319,7 @@ async function loadProducts() {
           ${productImages.map((img) => `
             <img
               src="${img}"
-              alt="${productName}"
+              alt="${product.Name || "Saanjh Saree"}"
               loading="lazy"
               class="product-slide"
               draggable="false"
@@ -1347,14 +1341,14 @@ async function loadProducts() {
        </div>
 
         <div class="product-info">
-          <h3>${productName}</h3>
+          <h3>${product.Name || "Saanjh Saree"}</h3>
 
           <p>Beautiful chiffon saree</p>
 
           <p class="price">₹${price}</p>
 
           <p style="font-size:14px;">
-            ${stock > 0 ? `${stock} available` : "Currently unavailable"}
+            ${stock > 0 ? "" : "Currently unavailable"}
           </p>
 
           <button 
