@@ -261,6 +261,11 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
 }
   
 
+/* ===== Menu interaction hardening ===== */
+nav, .nav, .navbar, header { position: relative; z-index: 25000 !important; }
+.menu-trigger { position: relative !important; z-index: 30001 !important; pointer-events: auto !important; touch-action: manipulation !important; }
+.side-menu-overlay { z-index: 30000 !important; }
+.side-menu { z-index: 30002 !important; }
 /* ===== Saanjh menu + login + button visibility fixes ===== */
 .menu-trigger{
   width:44px !important;height:44px !important;min-width:44px !important;
@@ -830,7 +835,7 @@ Discover delicate chiffon sarees designed to move with you —
   <div class="container">
     <div class="footer-grid">
       <div><h3>SAANJH</h3><p>Chiffon sarees for soft evenings and unforgettable moments.</p></div>
-      <div><h3>Explore</h3><p><a href="#shop">Shop</a><br><a href="#collections">Collections</a><br><a href="#">Our Story</a></p></div>
+      <div><h3>Explore</h3><p><a href="#shop">Shop</a><br><a href="#collections">Collections</a><br><a href="#">Our Story</a><br><a href="#" onclick="event.preventDefault(); openPolicy();">Replacement &amp; Policy</a><br><a href="#" onclick="event.preventDefault(); openCustomerCare();">Customer Care</a></p></div>
     <div><h3>Connect</h3><p>
 <a href="https://www.instagram.com/Saanjhbysanskriti/" target="_blank">Instagram</a><br>
 <a href="https://wa.me/917771855001" target="_blank">WhatsApp</a><br>
@@ -2303,6 +2308,17 @@ window.closeSideMenu = closeSideMenu;
 window.goToSection = goToSection;
 window.openLogin = openLogin;
 window.closeLogin = closeLogin;
+
+// Robust three-dot menu click/touch handler (module-safe)
+const __saanjhMenuTrigger = document.querySelector('.menu-trigger');
+if (__saanjhMenuTrigger) {
+  __saanjhMenuTrigger.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    openSideMenu();
+  });
+}
+
 window.toggleLoginMode = toggleLoginMode;
 window.handleLogin = handleLogin;
 window.handleLogout = handleLogout;
