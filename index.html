@@ -440,6 +440,18 @@ button{transition:background-color .2s ease,color .2s ease,border-color .2s ease
 
 
 
+/* ===== Customer Care + Reviews ===== */
+.customer-care-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 20px}
+.customer-care-card{display:block;text-decoration:none;background:#fffdf9;border:1px solid var(--line);border-radius:10px;padding:16px;color:var(--text);font-family:Arial,sans-serif}
+.customer-care-card strong{display:block;color:var(--berry);font-size:13px;margin-bottom:5px}
+.customer-care-card span{font-size:12px;color:#6f625d;line-height:1.5}
+.review-btn{width:100%!important;min-height:44px!important;margin-top:10px!important;background:var(--berry)!important;color:#fff!important;border:1px solid var(--berry)!important;border-radius:7px!important;font:11px Arial,sans-serif!important;letter-spacing:.06em!important;text-transform:uppercase!important;cursor:pointer!important}
+.review-btn:hover{opacity:.92;transform:translateY(-1px)}
+.review-stars{display:flex;gap:8px;margin:8px 0 16px}
+.review-star{border:1px solid var(--line);background:#fff;padding:8px 11px;border-radius:7px;cursor:pointer;font-size:20px;line-height:1}
+.review-star.active{background:#fbf1e9;border-color:#b88d73}
+@media(max-width:600px){.customer-care-grid{grid-template-columns:1fr}}
+
 /* ===== Replacement workflow ===== */
 .replacement-btn{width:100%!important;min-height:44px!important;margin-top:12px!important;background:#fff!important;color:var(--berry)!important;border:1px solid rgba(96,69,61,.35)!important;border-radius:7px!important;font:11px Arial,sans-serif!important;letter-spacing:.06em!important;text-transform:uppercase!important;cursor:pointer!important}
 .replacement-btn:hover{background:#fbf5f1!important;transform:translateY(-1px)}
@@ -511,26 +523,73 @@ button{transition:background-color .2s ease,color .2s ease,border-color .2s ease
   </div>
 </div>
 
-<!-- ===== Replacement & Return Policy ===== -->
-<section id="replacement-policy" class="container" style="padding:70px 0 20px;">
-  <div class="section-head">
-    <div class="section-label">Customer care</div>
-    <h2>Replacement & Return Policy</h2>
-    <p>Our policy is designed to keep the replacement process simple and transparent.</p>
+<!-- ===== Replacement & Return Policy (opened from 3-dot menu) ===== -->
+<div id="policy-modal-overlay" class="login-modal-overlay" onclick="if(event.target===this)closePolicy()">
+  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="policy-title" style="max-height:88vh;overflow:auto;">
+    <div class="login-modal-head">
+      <h2 id="policy-title">Replacement & Return Policy</h2>
+      <button class="login-close" type="button" onclick="closePolicy()" aria-label="Close policy">×</button>
+    </div>
+    <p style="color:#796d67;line-height:1.6;margin-top:0;">Our policy is designed to keep the replacement process simple and transparent.</p>
+    <div style="line-height:1.8;color:var(--text);font-family:Arial,sans-serif;font-size:13px;">
+      <p><strong>1. No routine returns:</strong> We do not accept returns or exchanges for change of mind, colour preference, fit preference, styling preference, or an order placed incorrectly by the customer.</p>
+      <p><strong>2. Replacement is available for genuine issues:</strong> If you receive a wrong, damaged, or defective product, you can submit a replacement request from <strong>My Orders</strong>.</p>
+      <p><strong>3. Report promptly:</strong> Please raise the request as soon as possible after delivery. We recommend submitting it within <strong>48 hours of delivery</strong> so the issue can be reviewed quickly.</p>
+      <p><strong>4. Condition & evidence:</strong> The saree should be unused and in its original condition with tags/packaging where applicable. For damage or wrong-item claims, photos and an unboxing video may be requested.</p>
+      <p><strong>5. Approval & stock:</strong> Every replacement request is reviewed by Saanjh. Replacement is subject to verification and stock availability.</p>
+      <p><strong>6. If replacement is unavailable:</strong> If an approved replacement cannot be fulfilled, Saanjh will contact the customer regarding the available resolution, subject to applicable law.</p>
+      <p><strong>7. Shipping:</strong> Once a replacement is approved, the replacement dispatch/pickup process will be communicated to the customer. Any applicable shipping charges will be communicated before they are charged.</p>
+      <p><strong>8. Order cancellation:</strong> Cancellation requests should be made before the order is dispatched. Once dispatched, cancellation may not be possible.</p>
+      <p><strong>9. Questions / grievances:</strong> Email <a href="mailto:sanskritisinghthagele14@gmail.com" style="color:var(--berry);font-weight:700;">sanskritisinghthagele14@gmail.com</a> with your order ID and issue details. Saanjh will review and respond to the grievance.</p>
+      <p style="margin-bottom:0;color:#796d67;font-size:11px;">This policy is a customer-facing draft and should be reviewed for your business's final legal/compliance requirements before publication.</p>
+    </div>
   </div>
-  <div style="max-width:900px;margin:0 auto 40px;background:#fffdf9;border:1px solid var(--line);border-radius:14px;padding:28px;line-height:1.8;color:var(--text);font-family:Arial,sans-serif;font-size:13px;">
-    <p><strong>1. No routine returns:</strong> We do not accept returns or exchanges for change of mind, colour preference, fit preference, styling preference, or an order placed incorrectly by the customer.</p>
-    <p><strong>2. Replacement is available for genuine issues:</strong> If you receive a wrong, damaged, or defective product, you can submit a replacement request from <strong>My Orders</strong>.</p>
-    <p><strong>3. Report promptly:</strong> Please raise the request as soon as possible after delivery. We recommend submitting it within <strong>48 hours of delivery</strong> so the issue can be reviewed quickly.</p>
-    <p><strong>4. Condition & evidence:</strong> The saree should be unused and in its original condition with tags/packaging where applicable. For damage or wrong-item claims, photos and an unboxing video may be requested.</p>
-    <p><strong>5. Approval & stock:</strong> Every replacement request is reviewed by Saanjh. Replacement is subject to verification and stock availability.</p>
-    <p><strong>6. If replacement is unavailable:</strong> If an approved replacement cannot be fulfilled, Saanjh will contact the customer regarding the available resolution, subject to applicable law.</p>
-    <p><strong>7. Shipping:</strong> Once a replacement is approved, the replacement dispatch/pickup process will be communicated to the customer. Any applicable shipping charges will be communicated before they are charged.</p>
-    <p><strong>8. Order cancellation:</strong> Cancellation requests should be made before the order is dispatched. Once dispatched, cancellation may not be possible.</p>
-    <p><strong>9. Questions / grievances:</strong> Email <a href="mailto:sanskritisinghthagele14@gmail.com" style="color:var(--berry);font-weight:700;">sanskritisinghthagele14@gmail.com</a> with your order ID and issue details. Saanjh will review and respond to the grievance.</p>
-    <p style="margin-bottom:0;color:#796d67;font-size:11px;">This policy is a customer-facing draft and should be reviewed for your business's final legal/compliance requirements before publication.</p>
+</div>
+
+<!-- ===== Customer Care ===== -->
+<div id="customer-care-modal-overlay" class="login-modal-overlay" onclick="if(event.target===this)closeCustomerCare()">
+  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="customer-care-title">
+    <div class="login-modal-head">
+      <h2 id="customer-care-title">Customer Care</h2>
+      <button class="login-close" type="button" onclick="closeCustomerCare()" aria-label="Close customer care">×</button>
+    </div>
+    <p style="color:#796d67;line-height:1.6;margin-top:0;">Order, replacement, payment ya kisi bhi help ke liye humse contact karein.</p>
+    <div class="customer-care-grid">
+      <a class="customer-care-card" href="mailto:sanskritisinghthagele14@gmail.com">
+        <strong>Email</strong><span>sanskritisinghthagele14@gmail.com</span>
+      </a>
+      <a class="customer-care-card" href="https://wa.me/917771855001" target="_blank" rel="noopener">
+        <strong>WhatsApp</strong><span>Chat with Saanjh Customer Care</span>
+      </a>
+    </div>
+    <p style="font-size:12px;color:#796d67;line-height:1.6;margin:0;">Replacement ke liye pehle <strong>My Orders</strong> me order open karke <strong>Request Replacement</strong> use karein.</p>
   </div>
-</section>
+</div>
+
+<!-- ===== Review ===== -->
+<div id="review-modal-overlay" class="login-modal-overlay" onclick="if(event.target===this)closeReview()">
+  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="review-title">
+    <div class="login-modal-head">
+      <h2 id="review-title">Write a Review</h2>
+      <button class="login-close" type="button" onclick="closeReview()" aria-label="Close review">×</button>
+    </div>
+    <p id="review-order-label" style="color:#796d67;line-height:1.6;margin-top:0;"></p>
+    <input type="hidden" id="review-order-id">
+    <label style="font:11px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#796d67;">Product</label>
+    <select id="review-item" style="width:100%;padding:13px;border:1px solid var(--line);margin:8px 0 14px;font:14px Arial,sans-serif;background:#fff;"><option value="">Select product</option></select>
+    <label style="font:11px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#796d67;">Rating</label>
+    <div class="review-stars" id="review-stars">
+      <button class="review-star" type="button" data-rating="1" onclick="setReviewRating(1)">★</button>
+      <button class="review-star" type="button" data-rating="2" onclick="setReviewRating(2)">★</button>
+      <button class="review-star" type="button" data-rating="3" onclick="setReviewRating(3)">★</button>
+      <button class="review-star" type="button" data-rating="4" onclick="setReviewRating(4)">★</button>
+      <button class="review-star" type="button" data-rating="5" onclick="setReviewRating(5)">★</button>
+    </div>
+    <label style="font:11px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#796d67;">Your Review</label>
+    <textarea id="review-text" rows="5" placeholder="Tell us about the saree and your experience..." style="width:100%;padding:13px;border:1px solid var(--line);margin:8px 0 14px;font:14px Arial,sans-serif;resize:vertical;"></textarea>
+    <button id="review-submit" class="login-action" type="button" onclick="submitReview()">Submit Review</button>
+  </div>
+</div>
 
 <!-- ===== Three-dot side menu ===== -->
 <div id="side-menu-overlay" class="side-menu-overlay" onclick="closeSideMenu()"></div>
@@ -554,8 +613,11 @@ button{transition:background-color .2s ease,color .2s ease,border-color .2s ease
   <button class="side-menu-link" type="button" onclick="goToSection('shop');">
     <span>Shop</span><span>›</span>
   </button>
-  <button class="side-menu-link" type="button" onclick="goToSection('replacement-policy');">
+  <button class="side-menu-link" type="button" onclick="openPolicy();">
     <span>Replacement & Policy</span><span>›</span>
+  </button>
+  <button class="side-menu-link" type="button" onclick="openCustomerCare();">
+    <span>Customer Care</span><span>›</span>
   </button>
 
   <div style="height:1px;background:var(--line);margin:26px 0 10px;"></div>
@@ -700,7 +762,7 @@ Discover delicate chiffon sarees designed to move with you —
   <div class="container">
     <div class="footer-grid">
       <div><h3>SAANJH</h3><p>Chiffon sarees for soft evenings and unforgettable moments.</p></div>
-      <div><h3>Explore</h3><p><a href="#shop">Shop</a><br><a href="#collections">Collections</a><br><a href="#replacement-policy">Replacement & Policy</a><br><a href="#">Our Story</a></p></div>
+      <div><h3>Explore</h3><p><a href="#shop">Shop</a><br><a href="#collections">Collections</a><br><a href="#">Our Story</a></p></div>
     <div><h3>Connect</h3><p>
 <a href="https://www.instagram.com/Saanjhbysanskriti/" target="_blank">Instagram</a><br>
 <a href="https://wa.me/917771855001" target="_blank">WhatsApp</a><br>
@@ -888,7 +950,8 @@ async function loadCustomerOrders(){
           <div class="order-status">Status: <b>${status}</b></div>
           <div class="order-card-meta">Payment: ${payment}</div>
           <button class="replacement-btn" type="button" onclick='openReplacement(${JSON.stringify(d.id)}, ${JSON.stringify(items)})'>Request Replacement</button>
-          <div class="replacement-note">For wrong, damaged or defective items only. See Replacement & Policy.</div>
+          <div class="replacement-note">For wrong, damaged or defective items only.</div>
+          <button class="review-btn" type="button" onclick='openReview(${JSON.stringify(d.id)}, ${JSON.stringify(items)})'>Write a Review</button>
         </div>`;
     }).join("");
 
@@ -899,6 +962,93 @@ async function loadCustomerOrders(){
         Order history load nahi ho paayi.<br>
         <small>${error?.message || "Please try again."}</small>
       </div>`;
+  }
+}
+
+function openPolicy(){
+  closeSideMenu();
+  document.getElementById("policy-modal-overlay")?.classList.add("open");
+}
+function closePolicy(){
+  document.getElementById("policy-modal-overlay")?.classList.remove("open");
+}
+function openCustomerCare(){
+  closeSideMenu();
+  document.getElementById("customer-care-modal-overlay")?.classList.add("open");
+}
+function closeCustomerCare(){
+  document.getElementById("customer-care-modal-overlay")?.classList.remove("open");
+}
+
+let selectedReviewRating = 0;
+function setReviewRating(rating){
+  selectedReviewRating = Number(rating)||0;
+  document.querySelectorAll("#review-stars .review-star").forEach(btn=>{
+    btn.classList.toggle("active", Number(btn.dataset.rating)<=selectedReviewRating);
+  });
+}
+function openReview(orderId, items){
+  const user=auth.currentUser;
+  if(!user){alert("Please login first.");return;}
+  const overlay=document.getElementById("review-modal-overlay");
+  const select=document.getElementById("review-item");
+  if(!overlay||!select)return;
+  document.getElementById("review-order-id").value=orderId;
+  document.getElementById("review-order-label").textContent=`Order #${orderId} — select the product you want to review.`;
+  select.innerHTML=`<option value="">Select product</option>`+(Array.isArray(items)?items:[]).map((item,i)=>{
+    const name=String(item?.name||item?.Name||"Product");
+    const qty=Number(item?.qty||1);
+    return `<option value="${i}">${name} × ${qty}</option>`;
+  }).join("");
+  document.getElementById("review-text").value="";
+  setReviewRating(0);
+  overlay.classList.add("open");
+}
+function closeReview(){
+  document.getElementById("review-modal-overlay")?.classList.remove("open");
+}
+async function submitReview(){
+  const user=auth.currentUser;
+  if(!user){alert("Please login first.");return;}
+  const orderId=document.getElementById("review-order-id")?.value;
+  const itemIndex=document.getElementById("review-item")?.value;
+  const review=document.getElementById("review-text")?.value.trim();
+  const button=document.getElementById("review-submit");
+  if(itemIndex===""){alert("Please select the product.");return;}
+  if(!selectedReviewRating){alert("Please select a rating.");return;}
+  if(!review){alert("Please write your review.");return;}
+  if(button){button.disabled=true;button.textContent="Submitting...";}
+  try{
+    let orderSnap=null;
+    for(const collectionName of ["ORDERS","orders"]){
+      const snap=await getDocs(query(collection(db,collectionName),where("email","==",String(user.email||"").trim())));
+      const match=snap.docs.find(d=>d.id===orderId);
+      if(match){orderSnap=match;break;}
+    }
+    if(!orderSnap) throw new Error("Order not found for this account.");
+    const order=orderSnap.data();
+    const items=Array.isArray(order.items)?order.items:[];
+    const item=items[Number(itemIndex)];
+    if(!item) throw new Error("Selected product was not found in this order.");
+    await addDoc(collection(db,"CUSTOMER_REVIEWS"),{
+      orderId,
+      customerUid:user.uid,
+      customerEmail:user.email||"",
+      customerName:order.name||order.customerName||"",
+      productId:item.id||item.productId||"",
+      productName:item.name||item.Name||"Product",
+      rating:selectedReviewRating,
+      review,
+      status:"Pending",
+      createdAt:serverTimestamp()
+    });
+    closeReview();
+    alert("Thank you! Aapka review submit ho gaya hai.");
+  }catch(error){
+    console.error("Review submit error:",error);
+    alert("Review submit nahi ho paya. Please try again.\n\n"+(error?.message||""));
+  }finally{
+    if(button){button.disabled=false;button.textContent="Submit Review";}
   }
 }
 
