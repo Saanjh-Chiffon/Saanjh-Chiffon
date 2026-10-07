@@ -1271,7 +1271,7 @@ async function loadProducts() {
     const snapshot = await Promise.race([
       getDocs(collection(db, "PRODUCTS")),
       new Promise((_, reject) =>
-        setTimeout(() => reject(new Error("Firestore request timeout (10 seconds)")), 10000)
+        setTimeout(() => reject(new Error("Products are taking too long to load. Please try again.")), 8000)
       )
     ]);
 
@@ -1469,9 +1469,12 @@ async function loadProducts() {
   } catch (error) {
     console.error("Error loading products:", error);
     productsContainer.innerHTML = `
-      <p style="color:#8b536a;line-height:1.8;">Products load nahi ho paaye.<br>
-      <small style="color:#666;">${error?.message || "Firebase error"}</small><br>
-      Please refresh the page once.</p>`;
+      <div style="padding:28px 10px;text-align:center;color:#6f5660;line-height:1.8;">
+        <p style="margin:0 0 12px;font-size:18px;">Products load nahi ho paaye.</p>
+        <small style="display:block;color:#777;margin-bottom:16px;">${String(error?.message || "Firebase error").replace(/</g,"&lt;")}</small>
+        <button type="button" id="retry-products" style="padding:12px 22px;border:0;border-radius:8px;background:#111;color:#fff;cursor:pointer;">Try Again</button>
+      </div>`;
+    document.getElementById("retry-products")?.addEventListener("click", loadProducts);
   }
 }
 
@@ -2329,7 +2332,9 @@ document.addEventListener("keydown",e=>{
 const careOverlay=document.getElementById("customer-care-modal-overlay");
 if(careOverlay) careOverlay.addEventListener("click",e=>{if(e.target===careOverlay) closeCustomerCare();});
 
-loadProducts();
+window.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => loadProducts(), 0);
+});
 
 </script>
 </body>
