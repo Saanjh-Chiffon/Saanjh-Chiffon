@@ -514,6 +514,27 @@ button,a{ -webkit-tap-highlight-color:transparent }
   #cart-box{right:12px!important;bottom:72px!important;width:min(360px,calc(100vw - 24px))!important;max-width:none!important}
 }
 
+
+/* ===== Homepage trust + featured sections ===== */
+.saan-jh-trust-section{padding-top:18px;padding-bottom:70px}
+.saanjh-trust-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #ddd2cc;background:#fffdf9}
+.saanjh-trust-card{min-height:145px;padding:30px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border-right:1px solid #ddd2cc}
+.saanjh-trust-card:last-child{border-right:0}
+.saanjh-trust-title{font-size:15px;letter-spacing:.10em;color:#5d4740;margin-bottom:15px}
+.saanjh-trust-text{font:16px Arial,sans-serif;color:#786d67;line-height:1.55}
+.saan-jh-feature-section{padding-top:28px;padding-bottom:70px}
+.saanjh-feature-heading{border:1px solid #ddd2cc;border-radius:28px;padding:28px 48px;margin-bottom:28px;background:#fffdf9}
+.saanjh-feature-heading h2{margin:7px 0 0;font-size:48px;font-weight:400;color:var(--berry)}
+.saan-jh-feature-products{min-height:80px}
+@media(max-width:800px){
+  .saanjh-trust-grid{grid-template-columns:1fr}
+  .saanjh-trust-card{min-height:120px;border-right:0;border-bottom:1px solid #ddd2cc}
+  .saanjh-trust-card:last-child{border-bottom:0}
+  .saanjh-feature-heading{padding:25px 28px;border-radius:24px}
+  .saanjh-feature-heading h2{font-size:38px}
+  .saan-jh-feature-section{padding-top:20px;padding-bottom:50px}
+}
+
 </style>
 </head>
 <body>
@@ -781,6 +802,45 @@ Discover delicate chiffon sarees designed to move with you —
 </div>
 </section>
 
+<!-- ===== Trust / Customer Confidence ===== -->
+<section class="container saan-jh-trust-section" aria-label="Saanjh customer benefits">
+  <div class="saanjh-trust-grid">
+    <div class="saanjh-trust-card">
+      <div class="saanjh-trust-title">SECURE CHECKOUT</div>
+      <div class="saanjh-trust-text">COD &amp; secure online payment</div>
+    </div>
+    <div class="saanjh-trust-card">
+      <div class="saanjh-trust-title">QUALITY CHECKED</div>
+      <div class="saanjh-trust-text">Every saree is prepared with care</div>
+    </div>
+    <div class="saanjh-trust-card">
+      <div class="saanjh-trust-title">REPLACEMENT SUPPORT</div>
+      <div class="saanjh-trust-text">For eligible wrong, damaged or defective items</div>
+    </div>
+    <div class="saanjh-trust-card">
+      <div class="saanjh-trust-title">CUSTOMER CARE</div>
+      <div class="saanjh-trust-text">WhatsApp &amp; email support</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Featured Home Edits ===== -->
+<section class="container saan-jh-feature-section" id="best-sellers">
+  <div class="saanjh-feature-heading">
+    <div class="section-label">Curated favourites</div>
+    <h2>Best Sellers</h2>
+  </div>
+  <div id="best-sellers-products" class="products saan-jh-feature-products"></div>
+</section>
+
+<section class="container saan-jh-feature-section" id="new-arrivals">
+  <div class="saanjh-feature-heading">
+    <div class="section-label">Just arrived</div>
+    <h2>New Arrivals</h2>
+  </div>
+  <div id="new-arrivals-products" class="products saan-jh-feature-products"></div>
+</section>
+
 <section id="about-us" class="story">
   <div class="container story-grid">
     <div class="story-card"><div class="seal">Saanjh<br>Chiffon<br>Est. 2026</div></div>
@@ -847,17 +907,6 @@ Discover delicate chiffon sarees designed to move with you —
 </footer>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script type="module">
-
-function escapeHtml(value){
-  return String(value ?? "").replace(/[&<>"']/g, ch => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
-  }[ch]));
-}
-
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
    import { getFirestore, collection, getDocs, query, where, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
@@ -1279,6 +1328,30 @@ onAuthStateChanged(auth, (user) => {
   if (label) label.textContent = user ? "My Account" : "Login / Create ID";
   if (logout) logout.style.display = user ? "flex" : "none";
 });
+
+
+function renderHomeFeaturedSections(){
+  const all = Object.values(productsData || {}).filter(p => p && String(p.name || p.Name || "").trim());
+  const best = all.filter(p => p.bestSeller === true || p.isBestSeller === true || String(p.featured || "").toLowerCase() === "bestseller").slice(0,4);
+  const newest = [...all].sort((a,b) => {
+    const ad = a.createdAt?.seconds || a.createdAt?.toMillis?.() || 0;
+    const bd = b.createdAt?.seconds || b.createdAt?.toMillis?.() || 0;
+    return bd - ad;
+  }).slice(0,4);
+
+  const render = (items, targetId) => {
+    const box = document.getElementById(targetId);
+    if (!box) return;
+    if (!items.length){
+      box.innerHTML = '<p style="padding:10px;color:#777;text-align:center;">New sarees coming soon.</p>';
+      return;
+    }
+    box.innerHTML = items.map(p => typeof renderProductCard === "function" ? renderProductCard(p) : "").join("");
+  };
+
+  render(best, "best-sellers-products");
+  render(newest, "new-arrivals-products");
+}
 
 async function loadProducts() {
   const productsContainer = document.getElementById("products");
@@ -2368,7 +2441,7 @@ const careOverlay=document.getElementById("customer-care-modal-overlay");
 if(careOverlay) careOverlay.addEventListener("click",e=>{if(e.target===careOverlay) closeCustomerCare();});
 
 window.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => loadProducts(), 0);
+  setTimeout(() => { loadProducts(); setTimeout(renderHomeFeaturedSections, 1200); }, 0);
 });
 
 </script>
