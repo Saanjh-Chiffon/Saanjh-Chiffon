@@ -408,50 +408,55 @@ button{transition:background-color .2s ease,color .2s ease,border-color .2s ease
 }
 
 
-/* ===== Product details modal ===== */
+/* ===== Full Product Page ===== */
 .product{cursor:pointer;transition:transform .25s ease,box-shadow .25s ease}
 .product:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(0,0,0,.08)}
 .product .add-cart-btn,.product .gallery-btn,.product .gallery-dot{position:relative;z-index:5}
-.product-details-overlay{position:fixed;inset:0;background:rgba(20,14,12,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:10000}
-.product-details-overlay.open{display:flex}
-.product-details-modal{width:min(940px,96vw);max-height:92vh;overflow:auto;background:#fff;border-radius:18px;box-shadow:0 25px 80px rgba(0,0,0,.25);position:relative}
-.product-details-close{position:absolute;right:14px;top:12px;width:42px;height:42px;border-radius:50%;background:#fff!important;color:#111!important;border:1px solid #ddd!important;font:28px/1 Arial!important;z-index:20;cursor:pointer}
-.product-details-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:0}
-.product-details-gallery{background:#f7f3f1;min-height:560px;display:flex;align-items:center;justify-content:center;padding:28px}
-.product-details-gallery img{width:100%;height:520px;object-fit:contain;border-radius:10px}
-.product-details-info{padding:55px 42px 38px}
+.product-details-overlay{position:fixed;inset:0;background:#fbf8f5;display:none;z-index:10000;overflow-y:auto}
+.product-details-overlay.open{display:block}
+.product-details-modal{width:100%;min-height:100vh;background:#fbf8f5;position:relative;border-radius:0;box-shadow:none;overflow:visible}
+.product-details-close{position:fixed;right:24px;top:20px;width:44px;height:44px;border-radius:50%;background:#fff!important;color:#111!important;border:1px solid #ddd!important;font:28px/1 Arial!important;z-index:10020;cursor:pointer;box-shadow:0 5px 18px rgba(0,0,0,.08)}
+.product-details-grid{max-width:1200px;margin:0 auto;padding:70px 36px 55px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:55px}
+.product-details-gallery{background:#f4eee9;min-height:650px;display:flex;align-items:center;justify-content:center;padding:28px;border-radius:2px;position:sticky;top:25px;align-self:start}
+.product-details-gallery img{width:100%;height:min(650px,72vh);object-fit:contain;border-radius:4px}
+.product-details-info{padding:20px 10px 38px}
 .product-details-eyebrow{font:11px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#8b536a;margin-bottom:12px}
-.product-details-info h2{font-family:Georgia,serif;font-size:36px;font-weight:400;margin:0 0 12px;color:#2f2420}
-.product-details-price{font:700 20px Arial,sans-serif;margin:16px 0;color:#111}
-.product-details-description{color:#625650;line-height:1.8;margin:18px 0}
-.product-details-meta{border-top:1px solid #eee;border-bottom:1px solid #eee;padding:15px 0;margin:22px 0;color:#51443f;line-height:1.8}
-.product-details-add{width:100%;min-height:50px;background:#111!important;color:#fff!important;border:0!important;font:700 13px Arial,sans-serif!important;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
-.product-details-add:disabled{background:#aaa!important;cursor:not-allowed}
-.product-details-thumbs{display:flex;gap:8px;overflow:auto;margin-top:12px}
-.product-details-thumbs button{padding:0;border:1px solid #ddd!important;background:#fff!important;width:62px;height:72px;cursor:pointer}
-.product-details-thumbs img{width:100%;height:100%;object-fit:cover}
-@media(max-width:760px){.product-details-grid{grid-template-columns:1fr}.product-details-gallery{min-height:340px;padding:18px}.product-details-gallery img{height:340px}.product-details-info{padding:30px 24px}.product-details-info h2{font-size:29px}}
-.details-spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;margin-top:2px}
-.details-spec-grid div{padding:11px 0;border-bottom:1px solid #eee}
-.details-spec-grid span{display:block;font:9px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8b7b74;margin-bottom:5px}
-.details-spec-grid strong{display:block;font:13px Arial,sans-serif;color:#3f332f;font-weight:600;line-height:1.45}
-@media(max-width:760px){.details-spec-grid{grid-template-columns:1fr}}
-
-
-
-
-/* ===== Customer Care + Reviews ===== */
-.customer-care-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 20px}
-.customer-care-card{display:block;text-decoration:none;background:#fffdf9;border:1px solid var(--line);border-radius:10px;padding:16px;color:var(--text);font-family:Arial,sans-serif}
-.customer-care-card strong{display:block;color:var(--berry);font-size:13px;margin-bottom:5px}
-.customer-care-card span{font-size:12px;color:#6f625d;line-height:1.5}
-.review-btn{width:100%!important;min-height:44px!important;margin-top:10px!important;background:var(--berry)!important;color:#fff!important;border:1px solid var(--berry)!important;border-radius:7px!important;font:11px Arial,sans-serif!important;letter-spacing:.06em!important;text-transform:uppercase!important;cursor:pointer!important}
-.review-btn:hover{opacity:.92;transform:translateY(-1px)}
-.review-stars{display:flex;gap:8px;margin:8px 0 16px}
-.review-star{border:1px solid var(--line);background:#fff;padding:8px 11px;border-radius:7px;cursor:pointer;font-size:20px;line-height:1}
-.review-star.active{background:#fbf1e9;border-color:#b88d73}
-@media(max-width:600px){.customer-care-grid{grid-template-columns:1fr}}
-
+.product-details-info h2{font-family:Georgia,serif;font-size:44px;line-height:1.12;font-weight:400;margin:0 0 12px;color:#2f2420}
+.product-details-price{font:700 22px Arial,sans-serif;margin:16px 0;color:#111}
+.product-details-description{color:#625650;line-height:1.9;margin:18px 0;font-size:15px}
+.product-details-meta{border-top:1px solid #e6ded8;border-bottom:1px solid #e6ded8;padding:18px 0;margin:25px 0;color:#51443f;line-height:1.8}
+.details-spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 25px}
+.details-spec-grid div{display:flex;flex-direction:column;gap:3px}
+.details-spec-grid span{font:10px Arial,sans-serif;text-transform:uppercase;letter-spacing:.1em;color:#9a8981}
+.details-spec-grid strong{font:14px Arial,sans-serif;font-weight:500;color:#3b2f2a}
+.product-details-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.product-details-add,.product-details-buy{width:100%;min-height:54px;border-radius:2px!important;font:700 12px Arial,sans-serif!important;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.product-details-add{background:#fff!important;color:#111!important;border:1px solid #222!important}
+.product-details-buy{background:#111!important;color:#fff!important;border:1px solid #111!important}
+.product-details-add:disabled,.product-details-buy:disabled{background:#aaa!important;color:#fff!important;border-color:#aaa!important;cursor:not-allowed}
+.product-details-thumbs{display:flex;gap:8px;margin-top:14px;overflow-x:auto;padding-bottom:4px}
+.product-details-thumbs button{width:72px;height:82px;padding:2px;border:1px solid #ddd;background:#fff;cursor:pointer;flex:0 0 auto}
+.product-details-thumbs img{width:100%;height:100%;object-fit:cover;border-radius:0}
+.product-reviews{max-width:1200px;margin:0 auto;padding:0 36px 75px}
+.product-reviews-head{border-top:1px solid #e6ded8;padding-top:38px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:end;gap:20px}
+.product-reviews-head h3{font:400 30px Georgia,serif;color:#2f2420;margin:0}
+.product-reviews-sub{font:12px Arial,sans-serif;color:#88766e;margin-top:7px}
+.product-review-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.product-review-card{background:#fff;border:1px solid #e8dfda;padding:20px;border-radius:3px}
+.product-review-stars{letter-spacing:2px;color:#b07888;font-size:16px}
+.product-review-name{font:600 13px Arial,sans-serif;color:#332925;margin-top:9px}
+.product-review-text{font:14px Arial,sans-serif;color:#625650;line-height:1.75;margin-top:8px}
+.product-review-empty{background:#fff;border:1px solid #e8dfda;padding:25px;color:#796d67;font:13px Arial,sans-serif;line-height:1.7}
+@media(max-width:800px){
+ .product-details-grid{grid-template-columns:1fr;padding:62px 18px 35px;gap:25px}
+ .product-details-gallery{min-height:auto;position:relative;top:auto;padding:14px}
+ .product-details-gallery img{height:58vh;max-height:520px}
+ .product-details-info{padding:5px 2px 25px}
+ .product-details-info h2{font-size:32px}
+ .product-reviews{padding:0 18px 55px}
+ .product-review-list{grid-template-columns:1fr}
+ .product-details-close{right:14px;top:14px}
+}
 /* ===== Replacement workflow ===== */
 .replacement-btn{width:100%!important;min-height:44px!important;margin-top:12px!important;background:#fff!important;color:var(--berry)!important;border:1px solid rgba(96,69,61,.35)!important;border-radius:7px!important;font:11px Arial,sans-serif!important;letter-spacing:.06em!important;text-transform:uppercase!important;cursor:pointer!important}
 .replacement-btn:hover{background:#fbf5f1!important;transform:translateY(-1px)}
@@ -473,7 +478,7 @@ button{transition:background-color .2s ease,color .2s ease,border-color .2s ease
 </nav>
 
 
-<!-- ===== Product Details ===== -->
+<!-- ===== Full Product Details Page ===== -->
 <div id="product-details-overlay" class="product-details-overlay" onclick="closeProductDetails(event)">
   <div class="product-details-modal" role="dialog" aria-modal="true" aria-labelledby="product-details-title" onclick="event.stopPropagation()">
     <button class="product-details-close" type="button" onclick="closeProductDetails()" aria-label="Close product details">×</button>
@@ -490,9 +495,24 @@ button{transition:background-color .2s ease,color .2s ease,border-color .2s ease
         <div id="product-details-price" class="product-details-price"></div>
         <div id="product-details-description" class="product-details-description"></div>
         <div id="product-details-meta" class="product-details-meta"></div>
-        <button id="product-details-add" class="product-details-add" type="button">Add to Cart</button>
+        <div id="product-details-actions" class="product-details-actions">
+          <button id="product-details-add" class="product-details-add" type="button">Add to Cart</button>
+          <button id="product-details-buy" class="product-details-buy" type="button">Buy Now</button>
+        </div>
+        <div id="product-details-policy-note" style="margin-top:18px;font:12px Arial,sans-serif;color:#796d67;line-height:1.7;"></div>
       </div>
     </div>
+    <section class="product-reviews" aria-labelledby="product-reviews-title">
+      <div class="product-reviews-head">
+        <div>
+          <h3 id="product-reviews-title">Customer Reviews</h3>
+          <div class="product-reviews-sub">Real customer feedback for this saree</div>
+        </div>
+      </div>
+      <div id="product-reviews-list" class="product-review-list">
+        <div class="product-review-empty">Loading reviews...</div>
+      </div>
+    </section>
   </div>
 </div>
 
@@ -1402,7 +1422,7 @@ async function loadProducts() {
 }
 
 
-function openProductDetails(productId){
+async function openProductDetails(productId){
   const product = productsData[productId];
   if(!product) return;
   const overlay=document.getElementById("product-details-overlay");
@@ -1413,7 +1433,9 @@ function openProductDetails(productId){
   const main=document.getElementById("product-details-image");
   const thumbs=document.getElementById("product-details-thumbs");
   const add=document.getElementById("product-details-add");
-  if(!overlay||!title||!price||!desc||!meta||!main||!thumbs||!add) return;
+  const buy=document.getElementById("product-details-buy");
+  const reviewsBox=document.getElementById("product-reviews-list");
+  if(!overlay||!title||!price||!desc||!meta||!main||!thumbs||!add||!buy) return;
 
   const rawImages=Array.isArray(product.images)&&product.images.length?product.images:(product.image?[product.image]:[]);
   const images=rawImages.map(resolveProductImage).filter(Boolean);
@@ -1425,13 +1447,14 @@ function openProductDetails(productId){
   const occasion=product.occasion||product.Occasion||"Festive & special occasions";
   const sareeLength=product.sareeLength||product.length||product.Length||"Approx. 5.5 m";
   const blouseDetails=product.blouseDetails||product.blouse||product.Blouse||"Blouse piece included";
+  const fabric=product.fabric||product.Fabric||"Chiffon";
 
   title.textContent=productName;
   price.textContent="₹"+Number(product.price||0).toLocaleString("en-IN");
   desc.textContent=productDescription;
   meta.innerHTML=`
     <div class="details-spec-grid">
-      <div><span>Fabric</span><strong>Chiffon</strong></div>
+      <div><span>Fabric</span><strong>${fabric}</strong></div>
       <div><span>Colour</span><strong>${color}</strong></div>
       <div><span>Border / Work</span><strong>${border}</strong></div>
       <div><span>Occasion</span><strong>${occasion}</strong></div>
@@ -1450,11 +1473,20 @@ function openProductDetails(productId){
     b.addEventListener("click",()=>{main.src=src;});
     thumbs.appendChild(b);
   });
+
   add.disabled=stock<=0;
+  buy.disabled=stock<=0;
   add.textContent=stock>0?"Add to Cart":"Sold Out";
-  add.onclick=()=>{ if(stock>0){ addToCart(productId); closeProductDetails(); } };
+  buy.textContent=stock>0?"Buy Now":"Sold Out";
+  add.onclick=()=>{ if(stock>0){ addToCart(productId); } };
+  buy.onclick=()=>{ if(stock>0){ addToCart(productId); closeProductDetails(); setTimeout(()=>checkout(),80); } };
+
+  const note=document.getElementById("product-details-policy-note");
+  if(note) note.innerHTML = "<strong>Replacement:</strong> Available after delivery for wrong, damaged or defective items, subject to Saanjh Replacement & Return Policy. <a href=\"#\" onclick=\"event.preventDefault();closeProductDetails();openPolicy();\">View policy</a>";
+
   overlay.classList.add("open");
   document.body.style.overflow="hidden";
+  await loadProductReviews(productId, productName);
 }
 
 function closeProductDetails(event){
@@ -1463,6 +1495,33 @@ function closeProductDetails(event){
   document.body.style.overflow="";
 }
 
+async function loadProductReviews(productId, productName){
+  const box=document.getElementById("product-reviews-list");
+  if(!box) return;
+  box.innerHTML='<div class="product-review-empty">Loading reviews...</div>';
+  try{
+    const snap=await getDocs(query(collection(db,"CUSTOMER_REVIEWS"),where("productId","==",String(productId))));
+    const reviews=snap.docs.map(d=>({id:d.id,...d.data()})).filter(r=>String(r.status||"Pending").toLowerCase()==="approved").sort((a,b)=>{
+      const av=a.createdAt?.toMillis?a.createdAt.toMillis():0;
+      const bv=b.createdAt?.toMillis?b.createdAt.toMillis():0;
+      return bv-av;
+    });
+    if(!reviews.length){
+      box.innerHTML='<div class="product-review-empty">Abhi is saree ke liye koi approved review nahi hai. Be the first customer to share your experience.</div>';
+      return;
+    }
+    box.innerHTML=reviews.map(r=>{
+      const rating=Math.max(1,Math.min(5,Number(r.rating||5)));
+      const stars="★".repeat(rating)+"☆".repeat(5-rating);
+      const name=String(r.customerName||"Verified Customer");
+      const text=String(r.review||"");
+      return `<article class="product-review-card"><div class="product-review-stars">${stars}</div><div class="product-review-name">${name}</div><div class="product-review-text">${text}</div></article>`;
+    }).join("");
+  }catch(error){
+    console.error("Product reviews load error:",error);
+    box.innerHTML='<div class="product-review-empty">Reviews abhi load nahi ho paaye. Please try again.</div>';
+  }
+}
 
 function addToCart(productId) {
   const product = productsData[productId];
