@@ -1507,7 +1507,7 @@ async function loadProductReviews(productId, productName){
       return bv-av;
     });
     if(!reviews.length){
-      box.innerHTML='<div class="product-review-empty">Abhi is saree ke liye koi approved review nahi hai. Be the first customer to share your experience.</div>';
+      box.innerHTML='<button type="button" id="product-first-review-btn" class="product-review-empty product-review-first-btn">Be the first customer to share your experience</button>';\n      const firstReviewBtn=document.getElementById("product-first-review-btn");\n      if(firstReviewBtn) firstReviewBtn.onclick=()=>openProductReviewFromPage(productId, productName);
       return;
     }
     box.innerHTML=reviews.map(r=>{
@@ -1520,6 +1520,41 @@ async function loadProductReviews(productId, productName){
   }catch(error){
     console.error("Product reviews load error:",error);
     box.innerHTML='<div class="product-review-empty">Reviews abhi load nahi ho paaye. Please try again.</div>';
+  }
+}
+
+async function openProductReviewFromPage(productId, productName){
+  const user=auth.currentUser;
+  if(!user){ alert("Please login first to share your experience."); return; }
+
+  let deliveredOrder=null;
+  try{
+    for(const collectionName of ["ORDERS","orders"]){
+      const snap=await getDocs(query(collection(db,collectionName),where("email","==",String(user.email||"").trim())));
+      const match=snap.docs.find(d=>{
+        const o=d.data()||{};
+        const status=String(o.status||o.orderStatus||"").toLowerCase();
+        const items=Array.isArray(o.items)?o.items:[];
+        const hasProduct=items.some(item=>String(item?.id||item?.productId||"")===String(productId));
+        return status==="delivered" && hasProduct;
+      });
+      if(match){ deliveredOrder=match; break; }
+    }
+    if(!deliveredOrder){
+      alert("Review dene ke liye ye product delivered hona chahiye.");
+      return;
+    }
+    const order=deliveredOrder.data()||{};
+    const items=Array.isArray(order.items)?order.items:[];
+    openReview(deliveredOrder.id, items);
+    const select=document.getElementById("review-item");
+    if(select){
+      const index=items.findIndex(item=>String(item?.id||item?.productId||"")===String(productId));
+      if(index>=0) select.value=String(index);
+    }
+  }catch(error){
+    console.error("Product review open error:",error);
+    alert("Review form open nahi ho paaya. Please try again.");
   }
 }
 
