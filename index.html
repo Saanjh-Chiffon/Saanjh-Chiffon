@@ -1285,8 +1285,12 @@ async function loadProducts() {
     productsContainer.innerHTML = "";
 
     for (const doc of snapshot.docs) {
-      const product = doc.data();
+      const product = doc.data() || {};
       const productId = doc.id;
+
+      // Never show empty/test Firebase documents as products.
+      const productName = String(product.Name || product.name || "").trim();
+      if (!productName) continue;
 
       productsData[productId] = {
         id: productId,
