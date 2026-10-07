@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Saanjh Chiffon · Admin Priority 1–12 companion build -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -112,6 +113,7 @@
 <div class="box">
 
   <h1>🌸 Saanjh Admin Panel</h1>
+<p class="muted-note" style="margin-top:-8px;">Product changes here control what customers see on the Saanjh storefront. Customer-facing stock quantity is never shown.</p>
 
   <!-- LOGIN -->
   <div id="loginBox">
@@ -236,6 +238,7 @@
     <hr>
 
     <h2>Products</h2>
+<p class="muted-note">Only products with a real product name are published to the storefront. Use Edit/Delete to keep the live catalogue clean.</p>
 
     <div id="products">
       Loading products...
@@ -501,7 +504,7 @@
 
         div.innerHTML = `
 
-          <h3>${product.Name || "Product"} ${product.featured ? '<span class="status-pill">Featured</span>' : ''}</h3>
+          <h3>${adminEsc(product.Name || "Product")} ${product.featured ? '<span class="status-pill">Featured</span>' : ''}</h3>
 
           <p>
             Price: ₹${product.price || 0}
@@ -511,9 +514,9 @@
             Stock: ${product.stock || 0}
           </p>
           <p style="line-height:1.7;color:#6b5a55;">
-            ${product.color ? "Color: " + product.color + "<br>" : ""}
-            ${product.borderWork ? "Border / Work: " + product.borderWork + "<br>" : ""}
-            ${product.occasion ? "Occasion: " + product.occasion + "<br>" : ""}
+            ${product.color ? "Color: " + adminEsc(product.color) + "<br>" : ""}
+            ${product.borderWork ? "Border / Work: " + adminEsc(product.borderWork) + "<br>" : ""}
+            ${product.occasion ? "Occasion: " + adminEsc(product.occasion) + "<br>" : ""}
             <strong>Collection: ${product.collection === "Celebration" ? "The Celebration Edit" : product.collection === "Everyday" ? "The Everyday Edit" : "Not set"}</strong><br>
             ${product.sareeLength ? "Saree Length: " + product.sareeLength + "<br>" : ""}
             ${product.blouseDetails ? "Blouse: " + product.blouseDetails + "<br>" : ""}
