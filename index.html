@@ -1524,7 +1524,7 @@ async function openProductDetails(productId){
       <div><span>Occasion</span><strong>${occasion}</strong></div>
       <div><span>Saree Length</span><strong>${sareeLength}</strong></div>
       <div><span>Blouse</span><strong>${blouseDetails}</strong></div>
-      <div><span>Availability</span><strong>${stock>0?stock+" available":"Currently unavailable"}</strong></div>
+      ${stock>0 ? "" : '<div><span>Availability</span><strong>Currently unavailable</strong></div>'}
     </div>`;
   main.src=images[0]||"";
   main.alt=productName;
