@@ -407,7 +407,39 @@ button{transition:background-color .2s ease,color .2s ease,border-color .2s ease
   .login-modal-head h2{font-size:25px!important}
 }
 
-.collection-filters{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 28px;align-items:center}.collection-filter{appearance:none;border:1px solid rgba(120,80,90,.22)!important;background:#fff!important;color:var(--berry)!important;padding:11px 16px!important;border-radius:999px!important;font-size:11px!important;letter-spacing:.04em!important;text-transform:none!important;cursor:pointer!important}.collection-filter:hover,.collection-filter.active{background:var(--berry)!important;color:#fff!important;border-color:var(--berry)!important}@media(max-width:600px){.collection-filters{gap:7px}.collection-filter{padding:10px 13px!important;font-size:10px!important}}
+
+/* ===== Product details modal ===== */
+.product{cursor:pointer;transition:transform .25s ease,box-shadow .25s ease}
+.product:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(0,0,0,.08)}
+.product .add-cart-btn,.product .gallery-btn,.product .gallery-dot{position:relative;z-index:5}
+.product-details-overlay{position:fixed;inset:0;background:rgba(20,14,12,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:10000}
+.product-details-overlay.open{display:flex}
+.product[data-product-id]{cursor:pointer}
+.product .product-image,.product .product-info h3,.product .product-info p{cursor:pointer}
+.product-details-modal{width:min(940px,96vw);max-height:92vh;overflow:auto;background:#fff;border-radius:18px;box-shadow:0 25px 80px rgba(0,0,0,.25);position:relative}
+.product-details-close{position:absolute;right:14px;top:12px;width:42px;height:42px;border-radius:50%;background:#fff!important;color:#111!important;border:1px solid #ddd!important;font:28px/1 Arial!important;z-index:20;cursor:pointer}
+.product-details-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:0}
+.product-details-gallery{background:#f7f3f1;min-height:560px;display:flex;align-items:center;justify-content:center;padding:28px}
+.product-details-gallery img{width:100%;height:520px;object-fit:contain;border-radius:10px}
+.product-details-info{padding:55px 42px 38px}
+.product-details-eyebrow{font:11px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#8b536a;margin-bottom:12px}
+.product-details-info h2{font-family:Georgia,serif;font-size:36px;font-weight:400;margin:0 0 12px;color:#2f2420}
+.product-details-price{font:700 20px Arial,sans-serif;margin:16px 0;color:#111}
+.product-details-description{color:#625650;line-height:1.8;margin:18px 0}
+.product-details-meta{border-top:1px solid #eee;border-bottom:1px solid #eee;padding:15px 0;margin:22px 0;color:#51443f;line-height:1.8}
+.product-details-add{width:100%;min-height:50px;background:#111!important;color:#fff!important;border:0!important;font:700 13px Arial,sans-serif!important;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.product-details-add:disabled{background:#aaa!important;cursor:not-allowed}
+.product-details-thumbs{display:flex;gap:8px;overflow:auto;margin-top:12px}
+.product-details-thumbs button{padding:0;border:1px solid #ddd!important;background:#fff!important;width:62px;height:72px;cursor:pointer}
+.product-details-thumbs img{width:100%;height:100%;object-fit:cover}
+@media(max-width:760px){.product-details-grid{grid-template-columns:1fr}.product-details-gallery{min-height:340px;padding:18px}.product-details-gallery img{height:340px}.product-details-info{padding:30px 24px}.product-details-info h2{font-size:29px}}
+.details-spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;margin-top:2px}
+.details-spec-grid div{padding:11px 0;border-bottom:1px solid #eee}
+.details-spec-grid span{display:block;font:9px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8b7b74;margin-bottom:5px}
+.details-spec-grid strong{display:block;font:13px Arial,sans-serif;color:#3f332f;font-weight:600;line-height:1.45}
+@media(max-width:760px){.details-spec-grid{grid-template-columns:1fr}}
+
+
 </style>
 </head>
 <body>
@@ -424,6 +456,29 @@ button{transition:background-color .2s ease,color .2s ease,border-color .2s ease
   </div>
 </nav>
 
+
+<!-- ===== Product Details ===== -->
+<div id="product-details-overlay" class="product-details-overlay" onclick="closeProductDetails(event)">
+  <div class="product-details-modal" role="dialog" aria-modal="true" aria-labelledby="product-details-title" onclick="event.stopPropagation()">
+    <button class="product-details-close" type="button" onclick="closeProductDetails()" aria-label="Close product details">×</button>
+    <div class="product-details-grid">
+      <div class="product-details-gallery">
+        <div style="width:100%">
+          <img id="product-details-image" src="" alt="Saanjh saree">
+          <div id="product-details-thumbs" class="product-details-thumbs"></div>
+        </div>
+      </div>
+      <div class="product-details-info">
+        <div class="product-details-eyebrow">Saanjh Chiffon · Saree Details</div>
+        <h2 id="product-details-title">Saanjh Saree</h2>
+        <div id="product-details-price" class="product-details-price"></div>
+        <div id="product-details-description" class="product-details-description"></div>
+        <div id="product-details-meta" class="product-details-meta"></div>
+        <button id="product-details-add" class="product-details-add" type="button">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ===== Three-dot side menu ===== -->
 <div id="side-menu-overlay" class="side-menu-overlay" onclick="closeSideMenu()"></div>
@@ -528,13 +583,12 @@ Discover delicate chiffon sarees designed to move with you —
 <section id="shop" class="container">
   <div class="section-head">
     <div class="section-label">The signature edit</div>
-    <h2 id="shop-title">Chiffon, softly spoken.</h2>
-    <p id="shop-subtitle">Airy textures, graceful movement and colours inspired by Indian evenings.</p>
+    <h2>Chiffon, softly spoken.</h2>
+    <p>Airy textures, graceful movement and colours inspired by Indian evenings.</p>
   </div>
-  <div id="collection-filters" class="collection-filters" aria-label="Shop by edit"></div>
   <div class="products" id="products">
     <p>Loading products...</p>
-  </div>
+</div>
 </section>
 
 <section id="about-us" class="story">
@@ -561,7 +615,16 @@ Discover delicate chiffon sarees designed to move with you —
     <div class="section-label">Curated for you</div>
     <h2>Two moods, one signature.</h2>
   </div>
-  <div id="collections-list" class="collections"></div>
+  <div class="collections">
+    <a class="collection" href="#shop">
+      <h3>The Celebration Edit</h3>
+      <p>Soft shimmer · graceful borders · evenings worth remembering</p>
+    </a>
+    <a class="collection" href="#shop">
+      <h3>The Everyday Edit</h3>
+      <p>Fresh pastels · effortless drapes · beautiful ordinary days</p>
+    </a>
+  </div>
 </section>
 
 <section class="newsletter">
@@ -596,7 +659,7 @@ Discover delicate chiffon sarees designed to move with you —
   <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-   import { getFirestore, collection, getDocs, getDoc, doc, query, where } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+   import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
   import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
     import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-functions.js";
   // TODO: Add SDKs for Firebase products that you want to use
@@ -852,49 +915,6 @@ onAuthStateChanged(auth, (user) => {
   if (logout) logout.style.display = user ? "flex" : "none";
 });
 
-let selectedCollection = "All";
-const DEFAULT_COLLECTIONS = [
-  {id:"__celebration",name:"Celebration Edit",description:"Soft shimmer · graceful borders · evenings worth remembering",order:-2},
-  {id:"__everyday",name:"Everyday Edit",description:"Fresh pastels · effortless drapes · beautiful ordinary days",order:-1}
-];
-function collectionDisplayName(name){
-  const value=String(name||"").trim();
-  if(value==="Celebration") return "Celebration Edit";
-  if(value==="Everyday") return "Everyday Edit";
-  return value;
-}
-async function getWebsiteCollections(){
-  try{
-    const snap=await getDoc(doc(db,"PRODUCTS","COLLECTIONS_META"));
-    const map=snap.exists()&&snap.data().collections?snap.data().collections:{};
-    const custom=Object.entries(map).map(([id,v])=>({id,name:String(v?.name||"").trim(),description:String(v?.description||""),order:Number(v?.order||0)})).filter(c=>c.name);
-    const all=[...DEFAULT_COLLECTIONS];
-    custom.forEach(c=>{if(!all.some(x=>x.name.toLowerCase()===c.name.toLowerCase())) all.push(c);});
-    all.sort((a,b)=>Number(a.order||0)-Number(b.order||0)||String(a.name).localeCompare(String(b.name)));
-    return all;
-  }catch(e){return [...DEFAULT_COLLECTIONS];}
-}
-function escapeCollectionHtml(v){return String(v??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[ch]));}
-function renderCollectionFilters(collections){
-  const box=document.getElementById("collection-filters");
-  const list=document.getElementById("collections-list");
-  const defs=[{name:"All Sarees"},...collections];
-  if(box) box.innerHTML=defs.map(c=>{const name=c.name==="All Sarees"?"All":c.name;return `<button type="button" class="collection-filter ${selectedCollection===name?"active":""}" onclick='showCollection(${JSON.stringify(name)})'>${escapeCollectionHtml(c.name)}</button>`;}).join("");
-  if(list) list.innerHTML=collections.map(c=>`<a class="collection" href="#shop" onclick='showCollection(${JSON.stringify(c.name)});return false;'><h3>The ${escapeCollectionHtml(c.name)}</h3><p>${escapeCollectionHtml(c.description||"Explore this curated Saanjh edit.")}</p></a>`).join("");
-}
-window.showCollection=async function(name){
-  selectedCollection=name||"All";
-  const collections=await getWebsiteCollections();
-  renderCollectionFilters(collections);
-  const title=document.getElementById("shop-title"), sub=document.getElementById("shop-subtitle");
-  const chosen=collections.find(c=>c.name===selectedCollection);
-  if(title) title.textContent=selectedCollection==="All"?"Chiffon, softly spoken.":`The ${selectedCollection}`;
-  if(sub) sub.textContent=selectedCollection==="All"?"Airy textures, graceful movement and colours inspired by Indian evenings.":(chosen?.description||"A curated Saanjh edit, made for beautiful moments.");
-  await loadProducts();
-  document.getElementById("shop")?.scrollIntoView({behavior:"smooth",block:"start"});
-};
-async function initializeCollections(){renderCollectionFilters(await getWebsiteCollections());}
-
 async function loadProducts() {
   const productsContainer = document.getElementById("products");
 
@@ -909,11 +929,8 @@ async function loadProducts() {
     productsContainer.innerHTML = "";
 
     for (const doc of snapshot.docs) {
-      if (doc.id === "COLLECTIONS_META") continue;
       const product = doc.data();
       const productId = doc.id;
-      const productCollection = collectionDisplayName(product.collection);
-      if (selectedCollection !== "All" && productCollection !== selectedCollection) continue;
 
       productsData[productId] = {
         id: productId,
@@ -925,6 +942,19 @@ async function loadProducts() {
 
       const article = document.createElement("article");
       article.className = "product";
+      article.dataset.productId = productId;
+      article.setAttribute("role", "button");
+      article.setAttribute("tabindex", "0");
+      article.addEventListener("click", (event) => {
+        if (event.target.closest("button")) return;
+        openProductDetails(productId);
+      });
+      article.addEventListener("keydown", (event) => {
+        if ((event.key === "Enter" || event.key === " ") && !event.target.closest("button")) {
+          event.preventDefault();
+          openProductDetails(productId);
+        }
+      });
 
       const rawProductImages = Array.isArray(product.images) && product.images.length
         ? product.images
@@ -962,7 +992,7 @@ async function loadProducts() {
         <span>${stock > 0 ? "In stock" : "Sold out"}</span>
        </div>
 
-        <div class="product-info">
+        <div class="product-info" data-product-open="${productId}">
           <h3>${product.Name || "Saanjh Saree"}</h3>
 
           <p>Beautiful chiffon saree</p>
@@ -991,6 +1021,14 @@ async function loadProducts() {
           </button>
         </div>
       `;
+
+      article.querySelectorAll("[data-product-open], .product-image, .product-info h3, .product-info p:not(.price)").forEach((el) => {
+        el.addEventListener("click", (event) => {
+          if (event.target.closest("button")) return;
+          event.stopPropagation();
+          openProductDetails(productId);
+        });
+      });
 
       const button = article.querySelector(".add-cart-btn");
 
@@ -1093,9 +1131,6 @@ async function loadProducts() {
       }
     }
 
-    if (!productsContainer.querySelector(".product")) {
-      productsContainer.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:#796d67;padding:40px 10px;">Is Edit mein abhi koi saree available nahi hai.</p>`;
-    }
     createCartButton();
 
   } catch (error) {
@@ -1105,6 +1140,68 @@ async function loadProducts() {
       <small style="color:#666;">${error?.message || "Firebase error"}</small><br>
       Please refresh the page once.</p>`;
   }
+}
+
+
+function openProductDetails(productId){
+  const product = productsData[productId];
+  if(!product) return;
+  const overlay=document.getElementById("product-details-overlay");
+  const title=document.getElementById("product-details-title");
+  const price=document.getElementById("product-details-price");
+  const desc=document.getElementById("product-details-description");
+  const meta=document.getElementById("product-details-meta");
+  const main=document.getElementById("product-details-image");
+  const thumbs=document.getElementById("product-details-thumbs");
+  const add=document.getElementById("product-details-add");
+  if(!overlay||!title||!price||!desc||!meta||!main||!thumbs||!add) return;
+
+  const rawImages=Array.isArray(product.images)&&product.images.length?product.images:(product.image?[product.image]:[]);
+  const images=rawImages.map(resolveProductImage).filter(Boolean);
+  const stock=Number(product.stock||0);
+  const productName=product.Name||product.name||"Saanjh Saree";
+  const productDescription=product.description||product.Description||product.details||"Beautiful chiffon saree designed for a soft, graceful drape.";
+  const color=product.color||product.Color||"Elegant shade";
+  const border=product.borderWork||product.border||product.Border||"Delicate finish";
+  const occasion=product.occasion||product.Occasion||"Festive & special occasions";
+  const sareeLength=product.sareeLength||product.length||product.Length||"Approx. 5.5 m";
+  const blouseDetails=product.blouseDetails||product.blouse||product.Blouse||"Blouse piece included";
+
+  title.textContent=productName;
+  price.textContent="₹"+Number(product.price||0).toLocaleString("en-IN");
+  desc.textContent=productDescription;
+  meta.innerHTML=`
+    <div class="details-spec-grid">
+      <div><span>Fabric</span><strong>Chiffon</strong></div>
+      <div><span>Colour</span><strong>${color}</strong></div>
+      <div><span>Border / Work</span><strong>${border}</strong></div>
+      <div><span>Occasion</span><strong>${occasion}</strong></div>
+      <div><span>Saree Length</span><strong>${sareeLength}</strong></div>
+      <div><span>Blouse</span><strong>${blouseDetails}</strong></div>
+      <div><span>Availability</span><strong>${stock>0?stock+" available":"Currently unavailable"}</strong></div>
+    </div>`;
+  main.src=images[0]||"";
+  main.alt=productName;
+  thumbs.innerHTML="";
+  images.forEach((src,i)=>{
+    const b=document.createElement("button");
+    b.type="button";
+    b.setAttribute("aria-label","View photo "+(i+1));
+    b.innerHTML=`<img src="${src}" alt="">`;
+    b.addEventListener("click",()=>{main.src=src;});
+    thumbs.appendChild(b);
+  });
+  add.disabled=stock<=0;
+  add.textContent=stock>0?"Add to Cart":"Sold Out";
+  add.onclick=()=>{ if(stock>0){ addToCart(productId); closeProductDetails(); } };
+  overlay.classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+function closeProductDetails(event){
+  if(event && event.target!==event.currentTarget) return;
+  document.getElementById("product-details-overlay")?.classList.remove("open");
+  document.body.style.overflow="";
 }
 
 
@@ -1751,6 +1848,8 @@ if (paymentMethod === "COD") {
   }
 }
 }
+window.openProductDetails = openProductDetails;
+window.closeProductDetails = closeProductDetails;
 window.openOrders = openOrders;
 window.closeOrders = closeOrders;
 window.loadCustomerOrders = loadCustomerOrders;
@@ -1770,7 +1869,7 @@ window.checkout = checkout;
 window.placeOrder = placeOrder;
 window.closeCheckout = closeCheckout;
 
-initializeCollections().then(() => loadProducts());
+loadProducts();
 
 </script>
 </body>
