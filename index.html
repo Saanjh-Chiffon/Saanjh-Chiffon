@@ -436,6 +436,7 @@ button{transition:background-color .2s ease,color .2s ease,border-color .2s ease
 .product-details-add:disabled,.product-details-buy:disabled{background:#aaa!important;color:#fff!important;border-color:#aaa!important;cursor:not-allowed}
 .product-details-thumbs{display:flex;gap:8px;margin-top:14px;overflow-x:auto;padding-bottom:4px}
 .product-details-thumbs button{width:72px;height:82px;padding:2px;border:1px solid #ddd;background:#fff;cursor:pointer;flex:0 0 auto}
+.product-details-thumbs button.active{border:2px solid #2f2420;outline:none}
 .product-details-thumbs img{width:100%;height:100%;object-fit:cover;border-radius:0}
 .product-reviews{max-width:1200px;margin:0 auto;padding:0 36px 75px}
 .product-reviews-head{border-top:1px solid #e6ded8;padding-top:38px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:end;gap:20px}
@@ -828,6 +829,10 @@ let productsData = {};
 
 function resolveProductImage(imageValue) {
   if (!imageValue) return "";
+  if (typeof imageValue === "object") {
+    const candidate = imageValue.url || imageValue.downloadURL || imageValue.downloadUrl || imageValue.src || imageValue.image || imageValue.path || imageValue.fullPath || "";
+    return candidate ? String(candidate).trim() : "";
+  }
   return String(imageValue).trim();
 }
 
@@ -1250,7 +1255,7 @@ async function loadProducts() {
       const productImages = [];
       for (const imageValue of rawProductImages) {
         const resolvedImage = resolveProductImage(imageValue);
-        if (resolvedImage) productImages.push(resolvedImage);
+        if (resolvedImage && !productImages.includes(resolvedImage)) productImages.push(resolvedImage);
       }
 
       article.innerHTML = `
@@ -1260,6 +1265,7 @@ async function loadProducts() {
             <img
               src="${img}"
               alt="${product.Name || "Saanjh Saree"}"
+              loading="lazy"
               class="product-slide"
               draggable="false"
             >
@@ -1464,15 +1470,22 @@ async function openProductDetails(productId){
     </div>`;
   main.src=images[0]||"";
   main.alt=productName;
+  main.onerror=()=>{ main.style.visibility="hidden"; };
+  main.onload=()=>{ main.style.visibility="visible"; };
   thumbs.innerHTML="";
   images.forEach((src,i)=>{
     const b=document.createElement("button");
     b.type="button";
     b.setAttribute("aria-label","View photo "+(i+1));
-    b.innerHTML=`<img src="${src}" alt="">`;
-    b.addEventListener("click",()=>{main.src=src;});
+    b.innerHTML=`<img src="${src}" alt="Photo ${i+1}" loading="lazy">`;
+    b.addEventListener("click",()=>{
+      main.src=src;
+      main.style.visibility="visible";
+      thumbs.querySelectorAll("button").forEach((btn,idx)=>btn.classList.toggle("active",idx===i));
+    });
     thumbs.appendChild(b);
   });
+  if (thumbs.firstElementChild) thumbs.firstElementChild.classList.add("active");
 
   add.disabled=stock<=0;
   buy.disabled=stock<=0;
