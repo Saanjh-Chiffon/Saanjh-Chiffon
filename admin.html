@@ -1,2319 +1,1154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Saanjh Chiffon — Grace in Every Fold</title>
-<meta name="description" content="Saanjh Chiffon — graceful, effortless chiffon sarees for modern Indian women.">
-<meta name="theme-color" content="#60453d">
-<meta property="og:title" content="Saanjh Chiffon — Grace in Every Fold">
-<meta property="og:description" content="Graceful chiffon sarees for soft evenings and unforgettable moments.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://saanjh-chiffon.github.io/Saanjh-Chiffon/">
-<meta property="og:image" content="logo.png.jpeg">
-<link rel="canonical" href="https://saanjh-chiffon.github.io/Saanjh-Chiffon/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Saanjh Chiffon","url":"https://saanjh-chiffon.github.io/Saanjh-Chiffon/","description":"Graceful chiffon sarees for modern Indian women.","sameAs":["https://www.instagram.com/Saanjhbysanskriti/"]}</script>
-<style>
-:root{
-  --ivory:#f5eee6;
-  --white:#fffdf9;
-  --rose:#ead7d0;
-  --blush:#f3e5df;
-  --peach:#e7c9b7;
-  --lilac:#ddd5df;
-  --sage:#dfe4d8;
-  --mauve:#9a6d60;
-  --berry:#60453d;
-  --gold:#b99a68;
-  --text:#3f332f;
-  --muted:#796d67;
-  --line:#dfd1c7;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  color:var(--text);
-  background:radial-gradient(circle at 8% 8%,rgba(234,215,208,.45),transparent 28%),radial-gradient(circle at 92% 30%,rgba(223,213,224,.35),transparent 25%),var(--ivory);
-  font-family:Georgia,"Times New Roman",serif;
-}
-a{text-decoration:none;color:inherit}
-.container{width:min(1180px,88%);margin:auto}
-.topbar{
-  background:var(--berry);color:#fff8f5;text-align:center;
-  padding:9px;font:10px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase
-}
-nav{
-  position:sticky;top:0;z-index:20;background:rgba(255,253,249,.93);
-  backdrop-filter:blur(15px);border-bottom:1px solid var(--line)
-}
-.nav-inner{
-  min-height:78px;display:flex;align-items:center;justify-content:space-between
-}
-.logo{text-align:center;line-height:1}
-.logo-main{font-size:28px;letter-spacing:.12em;color:var(--berry)}
-.logo-sub{
-  display:block;margin-top:8px;font:9px Arial,sans-serif;letter-spacing:.35em;
-  color:var(--gold);text-transform:uppercase
-}
-.nav-links{display:flex;gap:28px;font:11px Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase}
-.nav-links a:hover{color:var(--mauve)}
-.nav-icons{font:12px Arial,sans-serif;color:var(--mauve)}
-.hero{
-  min-height:680px;display:grid;grid-template-columns:1fr 1fr;align-items:center;
-  gap:6%;padding:70px 0 80px;overflow:hidden
-}
-.hero-copy .eyebrow,.section-label{
-  font:10px Arial,sans-serif;letter-spacing:.32em;text-transform:uppercase;
-  color:var(--mauve);font-weight:bold
-}
-.hero h1{
-  font-size:clamp(56px,7vw,94px);line-height:.88;font-weight:400;
-  color:var(--berry);margin:22px 0
-}
-.hero h1 em{color:#b77b8c}
-.hero p{max-width:520px;font-size:18px;line-height:1.8;color:var(--muted)}
-.btn{
-  display:inline-block;margin-top:25px;padding:16px 30px;
-  background:var(--berry);color:white;border:1px solid var(--gold);
-  font:11px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;
-  box-shadow:0 12px 28px rgba(120,72,93,.16);transition:.25s
-}
-.btn:hover{transform:translateY(-2px);background:#8b536a}
-.hero-visual{
-  min-height:570px;position:relative;border-radius:48% 48% 12px 12px;
-  background:
-    radial-gradient(circle at 30% 22%,#fff 0 7%,transparent 8%),
-    linear-gradient(145deg,#ead5c8,#c9a99a 46%,#876c60);
-  overflow:hidden;box-shadow:0 28px 60px rgba(120,72,93,.15);
-  border:1px solid rgba(199,160,100,.45)
-}
-.hero-visual:before{
-  content:"";position:absolute;width:65%;height:120%;left:18%;top:-10%;
-  border-radius:50% 45% 48% 52%;
-  background:linear-gradient(130deg,rgba(255,255,255,.85),rgba(244,225,216,.55),rgba(255,255,255,.12));
-  transform:rotate(15deg);box-shadow:25px 30px 60px rgba(87,63,53,.18)
-}
-.hero-visual:after{
-  content:"";
-  position:absolute;
-  width:120%;
-  height:120%;
-  background:url("logo.png.jpeg") center/contain no-repeat;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-}
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  padding:15px 0;overflow:hidden;background:#5a433a;color:#f5e7d5
-}
-.marquee-inner{
-  white-space:nowrap;font:10px Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase
-}
-section{padding:100px 0}
-.section-head{text-align:center;margin-bottom:46px}
-.section-head h2{
-  font-size:48px;font-weight:400;color:var(--berry);margin:12px 0
-}
-.section-head p{max-width:570px;margin:auto;color:var(--muted);line-height:1.7}
-.products{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.product{background:#fffdf9;border:1px solid var(--line);transition:.3s;box-shadow:0 10px 30px rgba(100,70,80,.05)}
-.product:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(100,70,80,.10)}
-.product-image img{width:100%;height:100%;object-fit:contain;display:block;margin:auto}
-.product-img span{
-  position:absolute;left:18px;bottom:18px;color:white;
-  font:10px Arial,sans-serif;letter-spacing:.15em;text-transform:uppercase
-}
-.pink{background:linear-gradient(145deg,#b78379,#ead2cc 52%,#85625a)}
-.peach{background:linear-gradient(145deg,#b88b70,#f0dfd0 50%,#8f6b58)}
-.lilac{background:linear-gradient(145deg,#9d879e,#e5dce7 50%,#766174)}
-.product-info{padding:22px}
-.product-info h3{margin:0 0 7px;font-size:24px;font-weight:400;color:var(--berry)}
-.product-info p{margin:0;color:var(--muted);font:12px Arial,sans-serif}
-.product-info .price{margin-top:14px;color:var(--berry);font-weight:bold}
-.story{
-  background:linear-gradient(135deg,#5a443b,#75584c 50%,#4d3b35);
-}
-.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:8%;align-items:center}
-.story-card{
-  min-height:430px;background:rgba(255,255,255,.10);border:1px solid rgba(199,160,100,.35);
-  padding:55px;display:flex;align-items:center;justify-content:center;text-align:center
-}
-.story-card .seal{
-  width:150px;height:150px;border:1px solid var(--gold);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;color:var(--berry);
-  font:12px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase
-}
-.story h2{font-size:50px;font-weight:400;color:var(--berry);margin:10px 0 20px}
-.story p{font-size:18px;line-height:1.9;color:var(--muted)}
-.collections{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.collection{
-  min-height:320px;padding:40px;display:flex;flex-direction:column;justify-content:end;
-  color:#fffaf5;border:1px solid rgba(185,154,104,.42)
-}
-.collection:first-child{background:linear-gradient(135deg,#e5c7c0,#b88c83)}
-.collection:last-child{background:linear-gradient(135deg,#dfe4d8,#a9b29b)}
-.collection h3{font-size:36px;font-weight:400;margin:0 0 7px}
-.collection p{font:12px Arial,sans-serif;color:#6e625c}
-.newsletter{text-align:center;background:#fffdf9}
-.newsletter h2{font-size:44px;font-weight:400;color:var(--berry)}
-.newsletter p{color:var(--muted)}
-form{display:flex;max-width:530px;margin:25px auto}
-input{flex:1;border:1px solid var(--line);padding:16px;background:#fffdf9af8;font:13px Arial;outline:none}
-button{
-  border:0;background:var(--berry);color:white;padding:0 23px;
-  font:10px Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase
-}
-footer{
-  background:#49372f;color:#f8e9e8;padding:50px 0 25px
-}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
-footer h3{font-weight:400;font-size:27px;margin:0 0 15px}
-footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
-.copyright{
-  border-top:1px solid rgba(255,255,255,.18);margin-top:35px;padding-top:20px;
-  font:9px Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#dfc9cf
-}
-@media(max-width:800px){
-  .nav-links{display:none}.nav-inner{justify-content:center}.nav-icons{display:none}
-  .hero{grid-template-columns:1fr;padding-top:55px}.hero-visual{min-height:440px}
-  .products,.story-grid,.collections,.footer-grid{grid-template-columns:1fr}
-  section{padding:70px 0}.product-img{height:350px}
-  .story-card{min-height:320px;padding:35px}.story h2{font-size:40px}
-  form{flex-direction:column;gap:8px}input{width:100%}button{height:50px}
-}
-  .product-image {
-  position: relative;
-  width: 100%;
-  height: 430px;
-  overflow: hidden;
-  background: #f4ebe5;
-}
-
-.product-images {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  touch-action: pan-y;
-  user-select: none;
-  cursor: grab;
-  transition: transform .35s ease;
-  will-change: transform;
-}
-
-.product-images.dragging {
-  cursor: grabbing;
-  transition: none;
-}
-
-.product-images img {
-  flex: 0 0 100%;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  pointer-events: none;
-}
-
-.product-image .gallery-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.75);
-  background: rgba(0,0,0,.35);
-  color: #fff;
-  padding: 0;
-  font: 24px/38px Arial,sans-serif;
-  z-index: 3;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.product-image .gallery-prev { left: 12px; }
-.product-image .gallery-next { right: 12px; }
-
-.product-image .gallery-dots {
-  position: absolute;
-  left: 50%;
-  bottom: 12px;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 6px;
-  z-index: 3;
-}
-
-.product-image .gallery-dot {
-  width: 7px;
-  height: 7px;
-  padding: 0;
-  margin: 0;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.9);
-  background: rgba(255,255,255,.45);
-  cursor: pointer;
-}
-
-.product-image .gallery-dot.active {
-  background: #fff;
-}
-
-@media(max-width:800px){
-  .product-image { height: 420px; }
-  .product-image .gallery-btn { width: 34px; height: 34px; font-size: 21px; }
-}
-  
-
-/* ===== Menu interaction hardening ===== */
-nav, .nav, .navbar, header { position: relative; z-index: 25000 !important; }
-.menu-trigger { position: relative !important; z-index: 30001 !important; pointer-events: auto !important; touch-action: manipulation !important; }
-.side-menu-overlay { z-index: 30000 !important; }
-.side-menu { z-index: 30002 !important; }
-/* ===== Saanjh menu + login + button visibility fixes ===== */
-.menu-trigger{
-  width:44px !important;height:44px !important;min-width:44px !important;
-  padding:0 !important;margin:0 !important;border:1px solid var(--line) !important;
-  border-radius:50% !important;background:#fffdf9 !important;color:var(--berry) !important;
-  display:flex !important;align-items:center !important;justify-content:center !important;
-  font-size:25px !important;line-height:1 !important;letter-spacing:0 !important;
-  cursor:pointer !important;box-shadow:0 5px 16px rgba(80,50,40,.08);
-}
-.menu-trigger:hover{background:var(--blush) !important;color:var(--berry) !important}
-.side-menu-overlay{
-  position:fixed;inset:0;background:rgba(45,32,27,.35);z-index:20000;
-  opacity:0;visibility:hidden;transition:.25s;
-}
-.side-menu-overlay.open{opacity:1;visibility:visible}
-.side-menu{
-  position:fixed;top:0;right:0;width:min(360px,88vw);height:100vh;
-  background:#fffdf9;z-index:20001;padding:28px 24px;
-  box-shadow:-12px 0 35px rgba(50,35,30,.18);
-  transform:translateX(100%);transition:.3s;overflow:auto;
-}
-.side-menu.open{transform:translateX(0)}
-.side-menu-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:35px}
-.side-menu-head h3{margin:0;color:var(--berry);font-size:28px;font-weight:400}
-.side-menu-close{
-  width:40px !important;height:40px !important;min-width:40px !important;
-  padding:0 !important;margin:0 !important;border:1px solid #222 !important;
-  border-radius:50% !important;background:#fff !important;color:#111 !important;
-  display:flex !important;align-items:center !important;justify-content:center !important;
-  font-size:24px !important;line-height:1 !important;letter-spacing:0 !important;
-}
-.side-menu-link{
-  width:100% !important;display:flex !important;align-items:center !important;
-  justify-content:space-between !important;padding:17px 4px !important;
-  margin:0 !important;border:0 !important;border-bottom:1px solid var(--line) !important;
-  background:transparent !important;color:var(--text) !important;
-  font:13px Arial,sans-serif !important;letter-spacing:.12em !important;
-  text-transform:uppercase !important;text-align:left !important;cursor:pointer !important;
-}
-.side-menu-link:hover{color:var(--mauve) !important}
-.login-modal-overlay{
-  position:fixed;inset:0;background:rgba(45,32,27,.45);z-index:21000;
-  display:none;align-items:center;justify-content:center;padding:18px;
-}
-.login-modal-overlay.open{display:flex}
-.login-modal{
-  width:min(430px,100%);max-height:90vh;overflow:auto;background:#fffdf9;
-  border-radius:16px;padding:26px;box-shadow:0 15px 45px rgba(0,0,0,.25);
-}
-.login-modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.login-modal-head h2{margin:0;color:var(--berry);font-size:30px;font-weight:400}
-.login-close{
-  width:40px !important;height:40px !important;min-width:40px !important;
-  padding:0 !important;margin:0 !important;border:1px solid #222 !important;
-  border-radius:50% !important;background:#fff !important;color:#111 !important;
-  display:flex !important;align-items:center !important;justify-content:center !important;
-  font-size:24px !important;line-height:1 !important;letter-spacing:0 !important;
-}
-.login-modal input{
-  width:100% !important;display:block !important;flex:none !important;
-  border:1px solid var(--line) !important;background:#fff !important;
-  padding:13px !important;margin:8px 0 !important;font:14px Arial,sans-serif !important;
-}
-.login-action{
-  width:100% !important;min-height:46px !important;margin:10px 0 0 !important;
-  padding:13px !important;border:0 !important;border-radius:7px !important;
-  background:#111 !important;color:#fff !important;display:flex !important;
-  align-items:center !important;justify-content:center !important;
-  font:12px Arial,sans-serif !important;letter-spacing:.08em !important;
-  text-transform:uppercase !important;cursor:pointer !important;
-}
-.login-switch{
-  width:100% !important;background:transparent !important;color:var(--berry) !important;
-  border:0 !important;padding:12px !important;margin-top:8px !important;
-  font:12px Arial,sans-serif !important;letter-spacing:.04em !important;
-  cursor:pointer !important;
-}
-/* Prevent the global button rule from making checkout controls look blank. */
-#checkout-box button[onclick="window.placeOrder()"]{
-  display:flex !important;align-items:center !important;justify-content:center !important;
-  width:100% !important;min-height:48px !important;background:#111 !important;
-  color:#fff !important;border:0 !important;font-size:13px !important;
-  font-weight:700 !important;letter-spacing:.04em !important;opacity:1 !important;
-}
-#checkout-box button[onclick="window.closeCheckout()"]{
-  display:flex !important;align-items:center !important;justify-content:center !important;
-  width:100% !important;min-height:46px !important;background:#fff !important;
-  color:#111 !important;border:1px solid #222 !important;font-size:13px !important;
-  font-weight:600 !important;letter-spacing:0 !important;opacity:1 !important;
-}
-@media(max-width:800px){
-  .menu-trigger{position:absolute;right:18px;top:17px}
-}
-
-
-.orders-empty{
-  padding:16px;border:1px solid #eee;border-radius:12px;background:#fafafa;
-}
-.order-card{
-  border:1px solid #e5e5e5;border-radius:12px;padding:14px;margin:10px 0;background:#fafafa;
-}
-.order-card-title{font-weight:700;color:var(--berry)}
-.order-card-meta{font-size:12px;color:#777;margin:5px 0}
-.order-card-total{margin-top:8px;font-weight:700}
-.order-status{margin-top:5px}
-
-
-/* ===== FINAL SAANJH VISUAL POLISH ===== */
-html{scroll-behavior:smooth}
-body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-button,a,input{outline:none}
-button{transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease}
-.btn{transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease}
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(80,45,55,.12)}
-.product{overflow:hidden;border-radius:2px}
-.product-info{background:rgba(255,253,249,.96)}
-.product-info .price{font-size:15px;letter-spacing:.03em}
-.menu-trigger{width:44px;height:44px;border-radius:50%;display:flex!important;align-items:center;justify-content:center;padding:0!important;font-size:24px!important;line-height:1;background:transparent!important;color:var(--berry)!important;border:1px solid rgba(120,80,90,.22)!important}
-.menu-trigger:hover{background:var(--cream)!important;transform:translateY(-1px)}
-.side-menu{box-shadow:-18px 0 55px rgba(45,25,30,.16);border-left:1px solid rgba(120,80,90,.10)}
-.side-menu-link{border-radius:10px!important;margin:3px 0!important;padding:14px 12px!important}
-.side-menu-link:hover{background:#fbf5f1!important;color:var(--berry)!important}
-.side-menu-close,.login-close{transition:transform .2s ease,background-color .2s ease!important}
-.side-menu-close:hover,.login-close:hover{transform:rotate(90deg);background:#faf5f1!important}
-.login-modal{box-shadow:0 28px 80px rgba(45,25,30,.20);border:1px solid rgba(120,80,90,.12)!important}
-.login-modal input:focus{border-color:var(--berry)!important;box-shadow:0 0 0 3px rgba(139,83,106,.08)}
-#login-submit:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(30,20,20,.12)}
-.order-card{box-shadow:0 5px 18px rgba(70,45,50,.04);transition:transform .18s ease,box-shadow .18s ease}
-.order-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(70,45,50,.08)}
-#checkout-box{box-shadow:0 30px 90px rgba(35,20,25,.22)!important;border:1px solid rgba(120,80,90,.14)!important}
-#checkout-box button[onclick="window.placeOrder()"]:hover:not(:disabled){background:#2b2023!important;transform:translateY(-1px);box-shadow:0 8px 18px rgba(20,15,15,.16)}
-#checkout-box button[onclick="window.placeOrder()"]:disabled{cursor:not-allowed!important;opacity:.65!important;transform:none!important}
-#checkout-box button[onclick="window.closeCheckout()"]:hover:not(:disabled){background:#faf7f4!important}
-:focus-visible{outline:2px solid var(--berry);outline-offset:3px}
-@media(max-width:800px){
-  .side-menu{width:min(88vw,360px)!important;padding:26px 20px!important}
-  .login-modal{width:min(92vw,520px)!important;max-height:88vh;overflow:auto}
-  #checkout-box{width:min(92vw,420px)!important;max-height:88vh;overflow:auto}
-  .menu-trigger{width:40px;height:40px}
-}
-@media(max-width:480px){
-  .product-info{padding:17px!important}
-  .product-info h3{font-size:21px!important}
-  .login-modal-head h2{font-size:25px!important}
-}
-
-
-/* ===== Full Product Page ===== */
-.product{cursor:pointer;transition:transform .25s ease,box-shadow .25s ease}
-.product:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(0,0,0,.08)}
-.product .add-cart-btn,.product .gallery-btn,.product .gallery-dot{position:relative;z-index:5}
-.product-details-overlay{position:fixed;inset:0;background:#fbf8f5;display:none;z-index:10000;overflow-y:auto}
-.product-details-overlay.open{display:block}
-.product-details-modal{width:100%;min-height:100vh;background:#fbf8f5;position:relative;border-radius:0;box-shadow:none;overflow:visible}
-.product-details-close{position:fixed;right:24px;top:20px;width:44px;height:44px;border-radius:50%;background:#fff!important;color:#111!important;border:1px solid #ddd!important;font:28px/1 Arial!important;z-index:10020;cursor:pointer;box-shadow:0 5px 18px rgba(0,0,0,.08)}
-.product-details-grid{max-width:1200px;margin:0 auto;padding:70px 36px 55px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:55px}
-.product-details-gallery{background:#f4eee9;min-height:650px;display:flex;align-items:center;justify-content:center;padding:28px;border-radius:2px;position:sticky;top:25px;align-self:start}
-.product-details-gallery img{width:100%;height:min(650px,72vh);object-fit:contain;border-radius:4px}
-.product-details-info{padding:20px 10px 38px}
-.product-details-eyebrow{font:11px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#8b536a;margin-bottom:12px}
-.product-details-info h2{font-family:Georgia,serif;font-size:44px;line-height:1.12;font-weight:400;margin:0 0 12px;color:#2f2420}
-.product-details-price{font:700 22px Arial,sans-serif;margin:16px 0;color:#111}
-.product-details-description{color:#625650;line-height:1.9;margin:18px 0;font-size:15px}
-.product-details-meta{border-top:1px solid #e6ded8;border-bottom:1px solid #e6ded8;padding:18px 0;margin:25px 0;color:#51443f;line-height:1.8}
-.details-spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 25px}
-.details-spec-grid div{display:flex;flex-direction:column;gap:3px}
-.details-spec-grid span{font:10px Arial,sans-serif;text-transform:uppercase;letter-spacing:.1em;color:#9a8981}
-.details-spec-grid strong{font:14px Arial,sans-serif;font-weight:500;color:#3b2f2a}
-.product-details-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
-.product-details-add,.product-details-buy{width:100%;min-height:54px;border-radius:2px!important;font:700 12px Arial,sans-serif!important;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
-.product-details-add{background:#fff!important;color:#111!important;border:1px solid #222!important}
-.product-details-buy{background:#111!important;color:#fff!important;border:1px solid #111!important}
-.product-details-add:disabled,.product-details-buy:disabled{background:#aaa!important;color:#fff!important;border-color:#aaa!important;cursor:not-allowed}
-.product-details-thumbs{display:flex;gap:8px;margin-top:14px;overflow-x:auto;padding-bottom:4px}
-.product-details-thumbs button{width:72px;height:82px;padding:2px;border:1px solid #ddd;background:#fff;cursor:pointer;flex:0 0 auto}
-.product-details-thumbs button.active{border:2px solid #2f2420;outline:none}
-.product-details-thumbs img{width:100%;height:100%;object-fit:cover;border-radius:0}
-.product-reviews{max-width:1200px;margin:0 auto;padding:0 36px 75px}
-.product-reviews-head{border-top:1px solid #e6ded8;padding-top:38px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:end;gap:20px}
-.product-reviews-head h3{font:400 30px Georgia,serif;color:#2f2420;margin:0}
-.product-reviews-sub{font:12px Arial,sans-serif;color:#88766e;margin-top:7px}
-.product-review-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-.product-review-card{background:#fff;border:1px solid #e8dfda;padding:20px;border-radius:3px}
-.product-review-stars{letter-spacing:2px;color:#b07888;font-size:16px}
-.product-review-name{font:600 13px Arial,sans-serif;color:#332925;margin-top:9px}
-.product-review-text{font:14px Arial,sans-serif;color:#625650;line-height:1.75;margin-top:8px}
-.product-review-empty{background:#fff;border:1px solid #e8dfda;padding:25px;color:#796d67;font:13px Arial,sans-serif;line-height:1.7}
-@media(max-width:800px){
- .product-details-grid{grid-template-columns:1fr;padding:62px 18px 35px;gap:25px}
- .product-details-gallery{min-height:auto;position:relative;top:auto;padding:14px}
- .product-details-gallery img{height:58vh;max-height:520px}
- .product-details-info{padding:5px 2px 25px}
- .product-details-info h2{font-size:32px}
- .product-reviews{padding:0 18px 55px}
- .product-review-list{grid-template-columns:1fr}
- .product-details-close{right:14px;top:14px}
-}
-/* ===== Replacement workflow ===== */
-.replacement-btn{width:100%!important;min-height:44px!important;margin-top:12px!important;background:#fff!important;color:var(--berry)!important;border:1px solid rgba(96,69,61,.35)!important;border-radius:7px!important;font:11px Arial,sans-serif!important;letter-spacing:.06em!important;text-transform:uppercase!important;cursor:pointer!important}
-.replacement-btn:hover{background:#fbf5f1!important;transform:translateY(-1px)}
-.replacement-note{font:11px Arial,sans-serif;color:#796d67;line-height:1.55;margin-top:8px}
-
-/* ===== FINAL SMOOTH SHOP POLISH ===== */
-:root{--shadow-soft:0 12px 34px rgba(54,35,31,.08);--shadow-deep:0 24px 70px rgba(42,26,29,.16)}
-body{background:#fbf8f5;color:#3b302b}
-img{max-width:100%}
-button,a{ -webkit-tap-highlight-color:transparent }
-.product{border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(54,35,31,.055)}
-.product:hover{box-shadow:0 18px 42px rgba(54,35,31,.10)}
-.product-image{background:linear-gradient(135deg,#f7eee8,#eee2da);isolation:isolate}
-.product-image .product-images{height:100%}
-.product-image .product-slide{background:#f7eee8;object-fit:cover}
-.product-image .gallery-btn{backdrop-filter:blur(5px);box-shadow:0 5px 15px rgba(0,0,0,.12);opacity:.9}
-.product-image .gallery-btn:hover{transform:translateY(-50%) scale(1.04);background:rgba(35,24,22,.58)}
-.product-image .gallery-dot{box-shadow:0 1px 5px rgba(0,0,0,.18)}
-.product-info h3{letter-spacing:-.01em}
-.add-cart-btn{min-height:46px!important;width:100%;font-weight:700!important;letter-spacing:.08em!important;transition:.2s!important}
-.add-cart-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 18px rgba(30,20,20,.12)}
-#cart-button{backdrop-filter:blur(10px);background:rgba(35,27,29,.96)!important;min-height:48px;display:flex;align-items:center;justify-content:center;gap:6px}
-#cart-box{border:1px solid rgba(120,80,90,.14);box-shadow:var(--shadow-deep)!important}
-#cart-box h3{font-family:Georgia,serif;font-weight:400;color:var(--berry)}
-#cart-box button{border-radius:7px!important}
-.product-details-overlay{backdrop-filter:blur(4px)}
-.product-details-modal{animation:pageIn .25s ease}
-@keyframes pageIn{from{opacity:.6;transform:translateY(8px)}to{opacity:1;transform:none}}
-.product-details-gallery{border:1px solid #eadfd8;box-shadow:var(--shadow-soft)}
-.product-details-gallery img{background:#f5ece6}
-.product-details-thumbs button{border-radius:5px;overflow:hidden;transition:.18s}
-.product-details-thumbs button:hover{transform:translateY(-2px)}
-.product-details-actions button{transition:.2s!important}
-.product-details-actions button:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 10px 22px rgba(35,25,25,.10)}
-.product-review-empty{border-radius:10px;cursor:pointer;transition:.2s;display:block;width:100%;text-align:left}
-.product-review-empty:hover{background:#fbf5f1;transform:translateY(-1px)}
-.login-modal-overlay{backdrop-filter:blur(3px)}
-.login-modal{animation:modalIn .22s ease}
-@keyframes modalIn{from{opacity:0;transform:translateY(10px) scale(.99)}to{opacity:1;transform:none}}
-.orders-empty,.order-card{border-radius:12px}
-.replacement-btn{font-weight:700!important}
-#checkout-box input,#checkout-box textarea,#checkout-box select{border-radius:7px;border-color:#ddd2cc!important;background:#fff!important}
-#checkout-box input:focus,#checkout-box textarea:focus{border-color:var(--berry)!important;box-shadow:0 0 0 3px rgba(139,83,106,.08)}
-.saanjh-toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:30000;background:#2f2420;color:#fff;padding:13px 18px;border-radius:999px;font:12px Arial,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.18);transition:.25s;max-width:min(92vw,520px);text-align:center}
-.saanjh-toast.show{opacity:1;transform:translate(-50%,0)}
-@media(max-width:800px){
-  .product-details-gallery img{object-fit:contain}
-  #cart-button{right:14px!important;bottom:14px!important}
-  #cart-box{right:12px!important;bottom:72px!important;width:min(360px,calc(100vw - 24px))!important;max-width:none!important}
-}
-
-
-/* ===== 2026 storefront upgrades ===== */
-.shop-toolbar{display:grid;grid-template-columns:minmax(220px,1.5fr) 1fr 1fr;gap:10px;margin:0 0 28px;padding:14px;background:rgba(255,253,249,.86);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 24px rgba(100,70,80,.05)}
-.shop-toolbar input,.shop-toolbar select{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:9px;background:#fff;font:13px Arial,sans-serif;color:var(--text);outline:none}
-.shop-toolbar input:focus,.shop-toolbar select:focus{border-color:var(--mauve);box-shadow:0 0 0 3px rgba(154,109,96,.08)}
-.product-card-top{position:relative}.wishlist-btn{position:absolute;top:12px;right:12px;z-index:8;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.7);background:rgba(255,253,249,.92);color:#7b625a;font-size:21px;line-height:1;cursor:pointer;box-shadow:0 6px 18px rgba(50,30,30,.12)}
-.wishlist-btn.active{color:#a04f67}.mini-sections{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:50px}.mini-section{background:rgba(255,253,249,.65);border:1px solid var(--line);padding:28px;border-radius:18px}.mini-section h3{font-size:30px;font-weight:400;color:var(--berry);margin:0 0 18px}.mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.mini-card{background:#fff;border:1px solid var(--line);padding:10px;border-radius:12px}.mini-card img{width:100%;height:210px;object-fit:cover;border-radius:9px;background:#f3eee9}.mini-card h4{font:400 18px Georgia,serif;color:var(--berry);margin:10px 2px 5px}.mini-card .mini-price{font:bold 13px Arial,sans-serif;color:var(--berry);margin:0 2px 9px}.mini-card button{width:100%;padding:10px;border:0;border-radius:8px;background:var(--berry);color:#fff;font:bold 11px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}.trust-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:30px 0 0}.trust-item{background:rgba(255,253,249,.88);padding:22px;text-align:center}.trust-item strong{display:block;font:12px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--berry);margin-bottom:6px}.trust-item span{font:12px Arial,sans-serif;color:var(--muted);line-height:1.5}.legal-modal{position:fixed;inset:0;background:rgba(35,25,25,.48);display:none;z-index:12000;align-items:center;justify-content:center;padding:18px}.legal-modal.open{display:flex}.legal-card{width:min(760px,94vw);max-height:88vh;overflow:auto;background:#fffdf9;border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 30px 90px rgba(35,20,25,.25)}.legal-card h2{font:400 32px Georgia,serif;color:var(--berry);margin:0 0 18px}.legal-card h3{color:var(--berry);margin-top:22px}.legal-card p,.legal-card li{font:14px Arial,sans-serif;line-height:1.7;color:#625650}.legal-close{float:right;width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:#fff;font-size:22px;cursor:pointer}.details-wishlist{margin-top:10px;width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--berry);font-weight:700;cursor:pointer}.details-wishlist.active{background:#fbf0f3;border-color:#d8aab7}.wishlist-empty{text-align:center;padding:30px;color:var(--muted);font:14px Arial,sans-serif}
-@media(max-width:800px){.products{grid-template-columns:1fr 1fr}.mini-sections{grid-template-columns:1fr}.trust-strip{grid-template-columns:1fr 1fr}.shop-toolbar{grid-template-columns:1fr 1fr}.shop-toolbar input{grid-column:1/-1}}
-@media(max-width:560px){.products{grid-template-columns:1fr}.mini-grid{grid-template-columns:1fr 1fr}.trust-strip{grid-template-columns:1fr}.shop-toolbar{grid-template-columns:1fr}.shop-toolbar input{grid-column:auto}.mini-card img{height:160px}}
-
-.order-progress{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:14px 0 4px}.order-step{text-align:center;font:10px Arial,sans-serif;color:#a0928b}.order-step i{display:block;width:12px;height:12px;border-radius:50%;border:1px solid #cdbeb7;background:#fff;margin:0 auto 5px}.order-step.active{color:var(--berry);font-weight:bold}.order-step.active i{background:var(--berry);border-color:var(--berry)}.order-progress.cancelled{display:block;color:#9a3f3f;font:bold 12px Arial,sans-serif}@media(max-width:520px){.order-step{font-size:8px}}
-
-</style>
-</head>
-<body>
-
-
-<nav>
-  <div class="container nav-inner">
-    <div class="nav-links"><a href="#shop">Shop</a><a href="#collections">Collections</a></div>
-    <a href="#" class="logo">
-      <span class="logo-main">SAANJH</span>
-      <span class="logo-sub">Chiffon · By Sanskriti</span>
-    </a>
-    <button class="menu-trigger" type="button" aria-label="Open menu" onclick="openSideMenu()">⋮</button>
-  </div>
-</nav>
-
-
-<!-- ===== Full Product Details Page ===== -->
-<div id="product-details-overlay" class="product-details-overlay" onclick="closeProductDetails(event)">
-  <div class="product-details-modal" role="dialog" aria-modal="true" aria-labelledby="product-details-title" onclick="event.stopPropagation()">
-    <button class="product-details-close" type="button" onclick="closeProductDetails()" aria-label="Close product details">×</button>
-    <div class="product-details-grid">
-      <div class="product-details-gallery">
-        <div style="width:100%">
-          <img id="product-details-image" src="" alt="Saanjh saree">
-          <div id="product-details-thumbs" class="product-details-thumbs"></div>
-        </div>
-      </div>
-      <div class="product-details-info">
-        <div class="product-details-eyebrow">Saanjh Chiffon · Saree Details</div>
-        <h2 id="product-details-title">Saanjh Saree</h2>
-        <div id="product-details-price" class="product-details-price"></div>
-        <div id="product-details-description" class="product-details-description"></div>
-        <div id="product-details-meta" class="product-details-meta"></div>
-        <div id="product-details-actions" class="product-details-actions">
-          <button id="product-details-add" class="product-details-add" type="button">Add to Cart</button>
-          <button id="product-details-buy" class="product-details-buy" type="button">Buy Now</button>
-          <button id="product-details-wishlist" class="details-wishlist" type="button">♡ Add to Wishlist</button>
-        </div>
-        <div id="product-details-policy-note" style="margin-top:18px;font:12px Arial,sans-serif;color:#796d67;line-height:1.7;"></div>
-      </div>
-    </div>
-    <section class="product-reviews" aria-labelledby="product-reviews-title">
-      <div class="product-reviews-head">
-        <div>
-          <h3 id="product-reviews-title">Customer Reviews</h3>
-          <div class="product-reviews-sub">Real customer feedback for this saree</div>
-        </div>
-      </div>
-      <div id="product-reviews-list" class="product-review-list">
-        <div class="product-review-empty">Loading reviews...</div>
-      </div>
-    </section>
-  </div>
-</div>
-
-<!-- ===== Replacement Request ===== -->
-<div id="replacement-modal-overlay" class="login-modal-overlay">
-  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="replacement-title">
-    <div class="login-modal-head">
-      <h2 id="replacement-title">Request Replacement</h2>
-      <button class="login-close" type="button" onclick="closeReplacement()" aria-label="Close replacement">×</button>
-    </div>
-    <p id="replacement-order-label" style="color:#796d67;line-height:1.6;margin-top:0;"></p>
-    <input type="hidden" id="replacement-order-id">
-    <label style="font:11px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#796d67;">Product</label>
-    <select id="replacement-item" style="width:100%;padding:13px;border:1px solid var(--line);margin:8px 0 14px;font:14px Arial,sans-serif;background:#fff;">
-      <option value="">Select product</option>
-    </select>
-    <label style="font:11px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#796d67;">Reason</label>
-    <select id="replacement-reason" style="width:100%;padding:13px;border:1px solid var(--line);margin:8px 0 14px;font:14px Arial,sans-serif;background:#fff;">
-      <option value="Wrong product received">Wrong product received</option>
-      <option value="Product damaged">Product damaged</option>
-      <option value="Product defective">Product defective</option>
-      <option value="Other issue">Other issue</option>
-    </select>
-    <label style="font:11px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#796d67;">Details</label>
-    <textarea id="replacement-details" rows="4" placeholder="Please describe the issue..." style="width:100%;padding:13px;border:1px solid var(--line);margin:8px 0 14px;font:14px Arial,sans-serif;resize:vertical;"></textarea>
-    <p style="font:11px Arial,sans-serif;color:#777;line-height:1.6;margin:0 0 14px;">Replacement requests are subject to the Saanjh Replacement & Return Policy. Please keep the saree unused, with original packaging/tags, and keep photos/unboxing evidence if the item arrived damaged or incorrect.</p>
-    <button id="replacement-submit" class="login-action" type="button" onclick="submitReplacementRequest()">Submit Replacement Request</button>
-  </div>
-</div>
-
-<!-- ===== Replacement & Return Policy (opened from 3-dot menu) ===== -->
-<div id="policy-modal-overlay" class="login-modal-overlay" onclick="if(event.target===this)closePolicy()">
-  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="policy-title" style="max-height:88vh;overflow:auto;">
-    <div class="login-modal-head">
-      <h2 id="policy-title">Replacement & Return Policy</h2>
-      <button class="login-close" type="button" onclick="closePolicy()" aria-label="Close policy">×</button>
-    </div>
-    <p style="color:#796d67;line-height:1.6;margin-top:0;">Our policy is designed to keep the replacement process simple and transparent.</p>
-    <div style="line-height:1.8;color:var(--text);font-family:Arial,sans-serif;font-size:13px;">
-      <p><strong>1. No routine returns:</strong> We do not accept returns or exchanges for change of mind, colour preference, fit preference, styling preference, or an order placed incorrectly by the customer.</p>
-      <p><strong>2. Replacement is available for genuine issues:</strong> If you receive a wrong, damaged, or defective product, you can submit a replacement request from <strong>My Orders</strong>.</p>
-      <p><strong>3. Report promptly:</strong> Please raise the request as soon as possible after delivery. We recommend submitting it within <strong>48 hours of delivery</strong> so the issue can be reviewed quickly.</p>
-      <p><strong>4. Condition & evidence:</strong> The saree should be unused and in its original condition with tags/packaging where applicable. For damage or wrong-item claims, photos and an unboxing video may be requested.</p>
-      <p><strong>5. Approval & stock:</strong> Every replacement request is reviewed by Saanjh. Replacement is subject to verification and stock availability.</p>
-      <p><strong>6. If replacement is unavailable:</strong> If an approved replacement cannot be fulfilled, Saanjh will contact the customer regarding the available resolution, subject to applicable law.</p>
-      <p><strong>7. Shipping:</strong> Once a replacement is approved, the replacement dispatch/pickup process will be communicated to the customer. Any applicable shipping charges will be communicated before they are charged.</p>
-      <p><strong>8. Order cancellation:</strong> Cancellation requests should be made before the order is dispatched. Once dispatched, cancellation may not be possible.</p>
-      <p><strong>9. Questions / grievances:</strong> Email <a href="mailto:sanskritisinghthagele14@gmail.com" style="color:var(--berry);font-weight:700;">sanskritisinghthagele14@gmail.com</a> with your order ID and issue details. Saanjh will review and respond to the grievance.</p>
-      <p style="margin-bottom:0;color:#796d67;font-size:11px;">This policy is a customer-facing draft and should be reviewed for your business's final legal/compliance requirements before publication.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ===== Customer Care ===== -->
-<div id="customer-care-modal-overlay" class="login-modal-overlay" onclick="if(event.target===this)closeCustomerCare()">
-  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="customer-care-title">
-    <div class="login-modal-head">
-      <h2 id="customer-care-title">Customer Care</h2>
-      <button class="login-close" type="button" onclick="closeCustomerCare()" aria-label="Close customer care">×</button>
-    </div>
-    <p style="color:#796d67;line-height:1.6;margin-top:0;">Order, replacement, payment ya kisi bhi help ke liye humse contact karein.</p>
-    <div class="customer-care-grid">
-      <a class="customer-care-card" href="mailto:sanskritisinghthagele14@gmail.com">
-        <strong>Email</strong><span>sanskritisinghthagele14@gmail.com</span>
-      </a>
-      <a class="customer-care-card" href="https://wa.me/917771855001" target="_blank" rel="noopener">
-        <strong>WhatsApp</strong><span>Chat with Saanjh Customer Care</span>
-      </a>
-    </div>
-    <p style="font-size:12px;color:#796d67;line-height:1.6;margin:0;">Replacement ke liye pehle <strong>My Orders</strong> me order open karke <strong>Request Replacement</strong> use karein.</p>
-  </div>
-</div>
-
-<!-- ===== Review ===== -->
-<div id="review-modal-overlay" class="login-modal-overlay" onclick="if(event.target===this)closeReview()">
-  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="review-title">
-    <div class="login-modal-head">
-      <h2 id="review-title">Write a Review</h2>
-      <button class="login-close" type="button" onclick="closeReview()" aria-label="Close review">×</button>
-    </div>
-    <p id="review-order-label" style="color:#796d67;line-height:1.6;margin-top:0;"></p>
-    <input type="hidden" id="review-order-id">
-    <label style="font:11px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#796d67;">Product</label>
-    <select id="review-item" style="width:100%;padding:13px;border:1px solid var(--line);margin:8px 0 14px;font:14px Arial,sans-serif;background:#fff;"><option value="">Select product</option></select>
-    <label style="font:11px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#796d67;">Rating</label>
-    <div class="review-stars" id="review-stars">
-      <button class="review-star" type="button" data-rating="1" onclick="setReviewRating(1)">★</button>
-      <button class="review-star" type="button" data-rating="2" onclick="setReviewRating(2)">★</button>
-      <button class="review-star" type="button" data-rating="3" onclick="setReviewRating(3)">★</button>
-      <button class="review-star" type="button" data-rating="4" onclick="setReviewRating(4)">★</button>
-      <button class="review-star" type="button" data-rating="5" onclick="setReviewRating(5)">★</button>
-    </div>
-    <label style="font:11px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#796d67;">Your Review</label>
-    <textarea id="review-text" rows="5" placeholder="Tell us about the saree and your experience..." style="width:100%;padding:13px;border:1px solid var(--line);margin:8px 0 14px;font:14px Arial,sans-serif;resize:vertical;"></textarea>
-    <button id="review-submit" class="login-action" type="button" onclick="submitReview()">Submit Review</button>
-  </div>
-</div>
-
-<!-- ===== Three-dot side menu ===== -->
-<div id="side-menu-overlay" class="side-menu-overlay" onclick="closeSideMenu()"></div>
-<aside id="side-menu" class="side-menu" aria-label="Saanjh menu">
-  <div class="side-menu-head">
-    <h3>SAANJH</h3>
-    <button class="side-menu-close" type="button" onclick="closeSideMenu()" aria-label="Close menu">×</button>
-  </div>
-  <button class="side-menu-link" type="button" onclick="handleAccountMenu();">
-    <span id="menu-account-label">Login / Create ID</span><span>›</span>
-  </button>
-  <button class="side-menu-link" type="button" onclick="openOrders();">
-    <span>My Orders</span><span>›</span>
-  </button>
-  <button class="side-menu-link" type="button" onclick="goToSection('collections');">
-    <span>Collections</span><span>›</span>
-  </button>
-  <button class="side-menu-link" type="button" onclick="goToSection('about-us');">
-    <span>About Us</span><span>›</span>
-  </button>
-  <button class="side-menu-link" type="button" onclick="goToSection('shop');">
-    <span>Shop</span><span>›</span>
-  </button>
-  <button class="side-menu-link" type="button" onclick="openPolicy();">
-    <span>Replacement & Policy</span><span>›</span>
-  </button>
-  <button class="side-menu-link" type="button" onclick="openCustomerCare();">
-    <span>Customer Care</span><span>›</span>
-  </button>
-  <button class="side-menu-link" type="button" onclick="openLegal('privacy-modal');closeSideMenu();">
-    <span>Privacy Policy</span><span>›</span>
-  </button>
-  <button class="side-menu-link" type="button" onclick="openLegal('terms-modal');closeSideMenu();">
-    <span>Terms &amp; Conditions</span><span>›</span>
-  </button>
-  <button class="side-menu-link" type="button" onclick="openLegal('shipping-modal');closeSideMenu();">
-    <span>Shipping Policy</span><span>›</span>
-  </button>
-
-  <div style="height:1px;background:var(--line);margin:26px 0 10px;"></div>
-  <button id="menu-logout" class="side-menu-link" type="button"
-          onclick="handleLogout();" style="display:none;color:#9a3f3f !important;">
-    <span>Logout</span><span>↪</span>
-  </button>
-</aside>
-
-<!-- ===== Customer Login / Create ID ===== -->
-<div id="login-modal-overlay" class="login-modal-overlay">
-  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
-    <div class="login-modal-head">
-      <h2 id="login-title">Customer Login</h2>
-      <button class="login-close" type="button" onclick="closeLogin()" aria-label="Close login">×</button>
-    </div>
-    <p id="login-subtitle" style="color:#796d67;line-height:1.6;margin-top:0;">
-      Login to your Saanjh account.
-    </p>
-    <input id="login-email" type="email" placeholder="Email Address" autocomplete="email">
-    <input id="login-password" type="password" placeholder="Password" autocomplete="current-password">
-    <button id="login-submit" class="login-action" type="button" onclick="handleLogin()">Login</button>
-    <button id="login-switch" class="login-switch" type="button" onclick="toggleLoginMode()">Create a new account</button>
-    <p id="login-status" style="font:12px Arial,sans-serif;color:#8b536a;line-height:1.5;margin:12px 0 0;"></p>
-  </div>
-</div>
-
-
-<!-- ===== My Account ===== -->
-<div id="account-modal-overlay" class="login-modal-overlay">
-  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="account-title">
-    <div class="login-modal-head">
-      <h2 id="account-title">My Account</h2>
-      <button class="login-close" type="button" onclick="closeAccount()" aria-label="Close account">×</button>
-    </div>
-    <div style="padding:10px 0 4px;">
-      <p style="margin:0 0 6px;font-size:12px;color:#8a7b74;text-transform:uppercase;letter-spacing:.12em;">Signed in as</p>
-      <p id="account-email" style="margin:0;font-size:15px;color:#3f332f;word-break:break-word;"></p>
-    </div>
-    <button class="login-action" type="button" onclick="closeAccount();openOrders();">My Orders</button>
-    <button class="login-switch" type="button" onclick="closeAccount();handleLogout();">Logout</button>
-  </div>
-</div>
-
-
-<!-- ===== My Orders ===== -->
-<div id="orders-modal-overlay" class="login-modal-overlay">
-  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="orders-title">
-    <div class="login-modal-head">
-      <h2 id="orders-title">My Orders</h2>
-      <button class="login-close" type="button" onclick="closeOrders()" aria-label="Close orders">×</button>
-    </div>
-    <div id="customer-orders" style="font:13px Arial,sans-serif;color:#3f332f;line-height:1.55;">
-      Please login to view your orders.
-    </div>
-  </div>
-</div>
-
-<main>
-<section class="container hero">
-  <div class="hero-copy">
-    <div class="eyebrow">The Chiffon Edit · 2026</div>
-    <h1>Light as air.<br><em>Beautiful</em> as dusk.</h1>
-    <p>
-   
-Discover delicate chiffon sarees designed to move with you —
-      soft drapes, luminous colours and effortless Indian elegance.
-<p>The Art Of Indian Draping</p>
-    </p>
-    <a class="btn" href="#shop">Explore the collection</a>
-  </div>
-  <div class="hero-visual"></div>
-</section>
-
-<div class="marquee"><div class="marquee-inner">
-  ✦ Soft drapes &nbsp;&nbsp; ✦ Feminine silhouettes &nbsp;&nbsp; ✦ Modern Indian heirlooms &nbsp;&nbsp; ✦ Made for your saanjh &nbsp;&nbsp;
-  ✦ Soft drapes &nbsp;&nbsp; ✦ Feminine silhouettes &nbsp;&nbsp; ✦ Modern Indian heirlooms
-</div></div>
-
-<section class="container" style="padding-bottom:35px;">
-  <div class="trust-strip" aria-label="Saanjh customer promises">
-    <div class="trust-item"><strong>Secure Checkout</strong><span>COD &amp; secure online payment</span></div>
-    <div class="trust-item"><strong>Quality Checked</strong><span>Every saree is prepared with care</span></div>
-    <div class="trust-item"><strong>Replacement Support</strong><span>For eligible wrong, damaged or defective items</span></div>
-    <div class="trust-item"><strong>Customer Care</strong><span>WhatsApp &amp; email support</span></div>
-  </div>
-</section>
-
-<section class="container" id="featured-home" style="padding-top:55px;padding-bottom:45px;">
-  <div class="mini-sections">
-    <div class="mini-section"><div class="section-label">Curated favourites</div><h3>Best Sellers</h3><div id="best-sellers-grid" class="mini-grid"></div></div>
-    <div class="mini-section"><div class="section-label">Just arrived</div><h3>New Arrivals</h3><div id="new-arrivals-grid" class="mini-grid"></div></div>
-  </div>
-</section>
-
-<section id="shop" class="container">
-  <div class="section-head">
-    <div class="section-label">The signature edit</div>
-    <h2>Chiffon, softly spoken.</h2>
-    <p>Airy textures, graceful movement and colours inspired by Indian evenings.</p>
-  </div>
-  <div class="shop-toolbar" aria-label="Shop filters">
-  <input id="product-search" type="search" placeholder="Search sarees by name, colour or occasion…" autocomplete="off">
-  <select id="collection-filter"><option value="">All Collections</option></select>
-  <select id="sort-products"><option value="featured">Sort: Featured</option><option value="newest">Newest</option><option value="price-low">Price: Low to High</option><option value="price-high">Price: High to Low</option><option value="name">Name A–Z</option></select>
-</div>
-<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin:-8px 0 16px;font:12px Arial,sans-serif;color:var(--muted);"><span id="product-result-count"></span><button type="button" id="wishlist-view-btn" style="border:1px solid var(--line);background:#fffdf9;border-radius:999px;padding:8px 13px;color:var(--berry);cursor:pointer;">♡ Wishlist</button></div>
-<div class="products" id="products">
-    <p>Loading products...</p>
-</div>
-</section>
-
-<section id="about-us" class="story">
-  <div class="container story-grid">
-    <div class="story-card"><div class="seal">Saanjh<br>Chiffon<br>Est. 2026</div></div>
-    <div>
-      <div class="section-label">Our philosophy</div>
-      <h2>For the woman who loves a little softness.</h2>
-      <p>
-        Saanjh Chiffon celebrates the beauty of an unhurried evening —
-        the first glow of sunset, a familiar fragrance, a saree that falls
-        perfectly and feels like second skin.
-      </p>
-      <p>
-        Every piece is imagined to be graceful without feeling precious,
-        romantic without feeling excessive, and timeless enough to return to.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section id="collections" class="container">
-  <div class="section-head">
-    <div class="section-label">Curated for you</div>
-    <h2>Two moods, one signature.</h2>
-  </div>
-  <div class="collections">
-    <a class="collection" href="#shop">
-      <h3>The Celebration Edit</h3>
-      <p>Soft shimmer · graceful borders · evenings worth remembering</p>
-    </a>
-    <a class="collection" href="#shop">
-      <h3>The Everyday Edit</h3>
-      <p>Fresh pastels · effortless drapes · beautiful ordinary days</p>
-    </a>
-  </div>
-</section>
-
-<section class="container" style="padding-top:45px;padding-bottom:45px;"><div class="mini-section" style="text-align:center;background:linear-gradient(135deg,#f7eee8,#efe4e7);"><div class="section-label">Follow the Saanjh edit</div><h2 style="font-weight:400;color:var(--berry);margin:12px 0;font-size:42px;">See how Saanjh is styled.</h2><p style="color:var(--muted);line-height:1.7;max-width:560px;margin:auto;">New drapes, colour stories and festive inspiration on Instagram.</p><a class="btn" href="https://www.instagram.com/Saanjhbysanskriti/" target="_blank" rel="noopener">Follow @saanjhbysanskriti</a></div></section>
-
-<section class="newsletter">
-  <div class="container">
-    <div class="section-label">A little note from Saanjh</div>
-    <h2>Come, stay awhile.</h2>
-    <p>Be the first to know about new drops, private edits and festive collections.</p>
-   <form action="https://formsubmit.co/sanskritisinghthagele14@gmail.com" method="POST">
-  <input type="email" name="email" placeholder="Your Email Address" required>
-  <input type="hidden" name="_subject" value="New Saanjh Website Subscriber">
-  <button type="submit">Join us</button>
-</form>
-  </div>
-</section>
-</main>
-
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div><h3>SAANJH</h3><p>Chiffon sarees for soft evenings and unforgettable moments.</p></div>
-      <div><h3>Explore</h3><p><a href="#shop">Shop</a><br><a href="#collections">Collections</a><br><a href="#">Our Story</a><br><a href="#" onclick="event.preventDefault(); openPolicy();">Replacement &amp; Policy</a><br><a href="#" onclick="event.preventDefault(); openCustomerCare();">Customer Care</a><br><a href="#" onclick="event.preventDefault();openLegal('privacy-modal');">Privacy Policy</a><br><a href="#" onclick="event.preventDefault();openLegal('terms-modal');">Terms &amp; Conditions</a><br><a href="#" onclick="event.preventDefault();openLegal('shipping-modal');">Shipping Policy</a></p></div>
-    <div><h3>Connect</h3><p>
-<a href="https://www.instagram.com/Saanjhbysanskriti/" target="_blank">Instagram</a><br>
-<a href="https://wa.me/917771855001" target="_blank">WhatsApp</a><br>
-<a href="mailto:sanskritisinghthagele14@gmail.com">sanskritisinghthagele14@gmail.com</a>
-</p></div>
-    </div>
-    <div class="copyright">© 2026 Saanjh Chiffon · By Sanskriti · All rights reserved</div>
-  </div>
-</footer>
-<div id="privacy-modal" class="legal-modal" onclick="if(event.target===this)closeLegal('privacy-modal')"><div class="legal-card"><button class="legal-close" onclick="closeLegal('privacy-modal')">×</button><h2>Privacy Policy</h2><p>Saanjh Chiffon uses customer information only to process orders, provide support, improve the shopping experience and communicate about relevant orders or services.</p><h3>Information we may receive</h3><p>Name, phone number, email, delivery address, order details and account information supplied during checkout or account creation.</p><h3>Payments</h3><p>Online payments are handled through the payment provider used at checkout. Saanjh Chiffon does not ask customers to share card or banking passwords through chat.</p><h3>Contact</h3><p>For privacy questions, contact sanskritisinghthagele14@gmail.com.</p></div></div>
-<div id="shipping-modal" class="legal-modal" onclick="if(event.target===this)closeLegal('shipping-modal')"><div class="legal-card"><button class="legal-close" onclick="closeLegal('shipping-modal')">×</button><h2>Shipping Policy</h2><p>Orders are processed after successful confirmation. Delivery timelines can vary by destination, courier and operational conditions.</p><h3>Dispatch</h3><p>Customers will receive order-status updates as the order moves through confirmation, shipping and delivery.</p><h3>Delivery</h3><p>Customers should provide an accurate address and reachable phone number. If a courier cannot deliver because of an incorrect or incomplete address, additional handling may be required.</p><h3>Support</h3><p>For shipping help, contact Customer Care through WhatsApp or sanskritisinghthagele14@gmail.com.</p></div></div>
-<div id="terms-modal" class="legal-modal" onclick="if(event.target===this)closeLegal('terms-modal')"><div class="legal-card"><button class="legal-close" onclick="closeLegal('terms-modal')">×</button><h2>Terms &amp; Conditions</h2><p>By placing an order, customers confirm that the information supplied at checkout is accurate and that they are authorized to use the selected payment method.</p><h3>Products &amp; pricing</h3><p>Product images, colours and availability may vary slightly by screen and stock. Prices and availability may change without prior notice, subject to applicable law.</p><h3>Orders</h3><p>An order is subject to successful confirmation and payment where applicable. Cancellation, replacement and grievance handling are governed by the policies displayed on this website and applicable law.</p></div></div>
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-   import { getFirestore, collection, getDocs, query, where, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-  import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-    import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-functions.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyCUpRDeE2tKsBlpuK4sljUHjudwCjGwJsI",
-    authDomain: "saanjhbysanskriti.firebaseapp.com",
-    projectId: "saanjhbysanskriti",
-    storageBucket: "saanjhbysanskriti.firebasestorage.app",
-    messagingSenderId: "130853028955",
-    appId: "1:130853028955:web:f95a16d3356d9710896b7e",
-    measurementId: "G-EYJYW4QDBT"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  console.log("Saanjh: Firebase initialized");
-    const db = getFirestore(app);
-    const auth = getAuth(app);
-    setPersistence(auth, browserLocalPersistence).catch((error) => console.error("Auth persistence setup failed:", error));
-    let cart = [];
-try { cart = JSON.parse(localStorage.getItem("saanjh_cart") || "[]"); if (!Array.isArray(cart)) cart = []; } catch(e) { cart = []; }
-let isOrderSubmitting = false;
-let checkoutOrderKey = null;
-    let currentUser = null;
-let productsData = {};
-
-function resolveProductImage(imageValue) {
-  if (!imageValue) return "";
-  if (typeof imageValue === "object") {
-    const candidate = imageValue.url || imageValue.downloadURL || imageValue.downloadUrl || imageValue.src || imageValue.image || imageValue.path || imageValue.fullPath || "";
-    return candidate ? String(candidate).trim() : "";
-  }
-  return String(imageValue).trim();
-}
-
-
-let loginMode = "login";
-
-function openSideMenu(){
-  document.getElementById("side-menu")?.classList.add("open");
-  document.getElementById("side-menu-overlay")?.classList.add("open");
-}
-function closeSideMenu(){
-  document.getElementById("side-menu")?.classList.remove("open");
-  document.getElementById("side-menu-overlay")?.classList.remove("open");
-}
-function goToSection(id){
-  closeSideMenu();
-  setTimeout(() => document.getElementById(id)?.scrollIntoView({behavior:"smooth"}), 80);
-}
-function openLogin(){
-  document.getElementById("login-modal-overlay")?.classList.add("open");
-  document.getElementById("login-email")?.focus();
-}
-function closeLogin(){
-  document.getElementById("login-modal-overlay")?.classList.remove("open");
-}
-async function handleLogout(){
-  try{
-    await signOut(auth);
-    closeOrders();
-    closeSideMenu();
-    alert("Logout ho gaya.");
-  }catch(error){
-    console.error("Logout error:", error);
-    alert("Logout nahi ho paya. Please try again.");
-  }
-}
-
-function handleAccountMenu(){
-  closeSideMenu();
-  if (currentUser){
-    openAccount();
-  } else {
-    openLogin();
-  }
-}
-
-function openAccount(){
-  const overlay = document.getElementById("account-modal-overlay");
-  const emailBox = document.getElementById("account-email");
-  if (!overlay) return;
-  if (emailBox) emailBox.textContent = currentUser?.email || "Customer";
-  overlay.classList.add("open");
-}
-
-function closeAccount(){
-  document.getElementById("account-modal-overlay")?.classList.remove("open");
-}
-
-function openOrders(){
-  closeSideMenu();
-  const overlay = document.getElementById("orders-modal-overlay");
-  if (!overlay) return;
-  overlay.classList.add("open");
-  loadCustomerOrders();
-}
-
-function closeOrders(){
-  document.getElementById("orders-modal-overlay")?.classList.remove("open");
-}
-
-function orderProgress(status){
-  const normalized=String(status||"Order received").toLowerCase();
-  const steps=["Order received","Confirmed","Shipped","Delivered"];
-  let active=0; if(normalized.includes("confirm"))active=1; if(normalized.includes("ship"))active=2; if(normalized.includes("deliver"))active=3;
-  if(normalized.includes("cancel")) return '<div class="order-progress cancelled"><span>Cancelled</span></div>';
-  return '<div class="order-progress">'+steps.map((step,i)=>`<div class="order-step ${i<=active?'active':''}"><i></i><span>${step}</span></div>`).join('')+'</div>';
-}
-
-async function loadCustomerOrders(){
-  const box = document.getElementById("customer-orders");
-  if (!box) return;
-
-  const user = auth.currentUser;
-  if (!user){
-    box.innerHTML = `
-      <div class="orders-empty">
-        <b>Please login first.</b>
-        <div style="font-size:12px;color:#666;margin-top:6px;">
-          Login karke aap apne orders aur order status yahan dekh sakte hain.
-        </div>
-        <button class="login-action" type="button" onclick="closeOrders(); openLogin();">Login / Create ID</button>
-      </div>`;
-    return;
-  }
-
-  box.innerHTML = `<div style="padding:16px;text-align:center;color:#777;">Loading your orders...</div>`;
-
-  try{
-    const email = String(user.email || "").trim();
-
-    let snap = await getDocs(
-      query(collection(db, "ORDERS"), where("email", "==", email))
-    );
-
-    if (snap.empty){
-      snap = await getDocs(
-        query(collection(db, "orders"), where("email", "==", email))
-      );
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Saanjh Admin Panel</title>
+
+  <style>
+    body{
+      font-family:Arial,sans-serif;
+      background:#f7f1eb;
+      margin:0;
+      padding:20px;
+      color:#333;
     }
 
-    if (snap.empty){
-      box.innerHTML = `
-        <div class="orders-empty">
-          <b>No orders found.</b>
-          <div style="font-size:12px;color:#666;margin-top:6px;">
-            ${email}<br>
-            Aapka naya order isi account me automatically dikh jayega.
-          </div>
-        </div>`;
-      return;
-    }
-
-    const docs = [...snap.docs].sort((a,b) => {
-      const av = a.data().createdAt?.toMillis ? a.data().createdAt.toMillis() : 0;
-      const bv = b.data().createdAt?.toMillis ? b.data().createdAt.toMillis() : 0;
-      return bv - av;
-    });
-
-    box.innerHTML = docs.map(d => {
-      const o = d.data();
-      const date = o.createdAt?.toDate
-        ? o.createdAt.toDate().toLocaleString("en-IN")
-        : (o.createdAt || "");
-      const items = Array.isArray(o.items) ? o.items : [];
-      const status = o.orderStatus || o.status || "Order received";
-      const payment = o.paymentMethod || "—";
-
-      return `
-        <div class="order-card">
-          <div class="order-card-title">Order #${d.id}</div>
-          <div class="order-card-meta">${date}</div>
-          <div>
-            ${items.length
-              ? items.map(i => `${i.name || "Item"} × ${i.qty || 1}`).join("<br>")
-              : "Order items"}
-          </div>
-          <div class="order-card-total">Total: ₹${o.total || 0}</div>
-          <div class="order-status">Status: <b>${status}</b></div>${orderProgress(status)}
-          <div class="order-card-meta">Payment: ${payment}</div>
-          ${String(status).trim().toLowerCase() === "delivered" ? `
-          <button class="replacement-btn" type="button" onclick='openReplacement(${JSON.stringify(d.id)}, ${JSON.stringify(items)})'>Request Replacement</button>
-          <div class="replacement-note">Available after delivery for wrong, damaged or defective items only.</div>` : ""}
-        </div>`;
-    }).join("");
-
-  }catch(error){
-    console.error("Customer order history error:", error);
-    box.innerHTML = `
-      <div class="orders-empty" style="color:#9a3f3f;">
-        Order history load nahi ho paayi.<br>
-        <small>${error?.message || "Please try again."}</small>
-      </div>`;
-  }
-}
-
-function openPolicy(){
-  closeSideMenu();
-  document.getElementById("policy-modal-overlay")?.classList.add("open");
-}
-function closePolicy(){
-  document.getElementById("policy-modal-overlay")?.classList.remove("open");
-}
-function openCustomerCare(){
-  closeSideMenu();
-  document.getElementById("customer-care-modal-overlay")?.classList.add("open");
-}
-function closeCustomerCare(){
-  document.getElementById("customer-care-modal-overlay")?.classList.remove("open");
-}
-
-let selectedReviewRating = 0;
-function setReviewRating(rating){
-  selectedReviewRating = Number(rating)||0;
-  document.querySelectorAll("#review-stars .review-star").forEach(btn=>{
-    btn.classList.toggle("active", Number(btn.dataset.rating)<=selectedReviewRating);
-  });
-}
-function openReview(orderId, items){
-  const user=auth.currentUser;
-  if(!user){alert("Please login first.");return;}
-  const overlay=document.getElementById("review-modal-overlay");
-  const select=document.getElementById("review-item");
-  if(!overlay||!select)return;
-  document.getElementById("review-order-id").value=orderId;
-  document.getElementById("review-order-label").textContent=`Order #${orderId} — select the product you want to review.`;
-  select.innerHTML=`<option value="">Select product</option>`+(Array.isArray(items)?items:[]).map((item,i)=>{
-    const name=String(item?.name||item?.Name||"Product");
-    const qty=Number(item?.qty||1);
-    return `<option value="${i}">${name} × ${qty}</option>`;
-  }).join("");
-  document.getElementById("review-text").value="";
-  setReviewRating(0);
-  overlay.classList.add("open");
-}
-function closeReview(){
-  document.getElementById("review-modal-overlay")?.classList.remove("open");
-}
-async function submitReview(){
-  const user=auth.currentUser;
-  if(!user){alert("Please login first.");return;}
-  const orderId=document.getElementById("review-order-id")?.value;
-  const itemIndex=document.getElementById("review-item")?.value;
-  const review=document.getElementById("review-text")?.value.trim();
-  const button=document.getElementById("review-submit");
-  if(itemIndex===""){alert("Please select the product.");return;}
-  if(!selectedReviewRating){alert("Please select a rating.");return;}
-  if(!review){alert("Please write your review.");return;}
-  if(button){button.disabled=true;button.textContent="Submitting...";}
-  try{
-    let orderSnap=null;
-    for(const collectionName of ["ORDERS","orders"]){
-      const snap=await getDocs(query(collection(db,collectionName),where("email","==",String(user.email||"").trim())));
-      const match=snap.docs.find(d=>d.id===orderId);
-      if(match){orderSnap=match;break;}
-    }
-    if(!orderSnap) throw new Error("Order not found for this account.");
-    const order=orderSnap.data();
-    const items=Array.isArray(order.items)?order.items:[];
-    const item=items[Number(itemIndex)];
-    if(!item) throw new Error("Selected product was not found in this order.");
-    await addDoc(collection(db,"CUSTOMER_REVIEWS"),{
-      orderId,
-      customerUid:user.uid,
-      customerEmail:user.email||"",
-      customerName:order.name||order.customerName||"",
-      productId:item.id||item.productId||"",
-      productName:item.name||item.Name||"Product",
-      rating:selectedReviewRating,
-      review,
-      status:"Pending",
-      createdAt:serverTimestamp()
-    });
-    closeReview();
-    alert("Thank you! Aapka review submit ho gaya hai.");
-  }catch(error){
-    console.error("Review submit error:",error);
-    alert("Review submit nahi ho paya. Please try again.\n\n"+(error?.message||""));
-  }finally{
-    if(button){button.disabled=false;button.textContent="Submit Review";}
-  }
-}
-
-async function openReplacement(orderId, items){
-  const user = auth.currentUser;
-  if(!user){ alert("Please login first."); return; }
-  const overlay=document.getElementById("replacement-modal-overlay");
-  const orderLabel=document.getElementById("replacement-order-label");
-  const orderInput=document.getElementById("replacement-order-id");
-  const select=document.getElementById("replacement-item");
-  if(!overlay||!select) return;
-  orderInput.value=orderId;
-  orderLabel.textContent=`Order #${orderId} — select the product you want to replace.`;
-  select.innerHTML=`<option value="">Select product</option>` + (Array.isArray(items)?items:[]).map((item,i)=>{
-    const name=String(item?.name||item?.Name||"Product");
-    const qty=Number(item?.qty||1);
-    return `<option value="${i}">${name} × ${qty}</option>`;
-  }).join("");
-  document.getElementById("replacement-details").value="";
-  document.getElementById("replacement-reason").value="Wrong product received";
-  overlay.classList.add("open");
-}
-
-function closeReplacement(){
-  document.getElementById("replacement-modal-overlay")?.classList.remove("open");
-}
-
-async function submitReplacementRequest(){
-  const user=auth.currentUser;
-  if(!user){alert("Please login first.");return;}
-  const orderId=document.getElementById("replacement-order-id")?.value;
-  const itemIndex=document.getElementById("replacement-item")?.value;
-  const reason=document.getElementById("replacement-reason")?.value;
-  const details=document.getElementById("replacement-details")?.value.trim();
-  const button=document.getElementById("replacement-submit");
-  if(itemIndex===""){alert("Please select the product.");return;}
-  if(!details){alert("Please describe the issue.");return;}
-  if(button){button.disabled=true;button.textContent="Submitting...";}
-  try{
-    let orderSnap=null;
-    for(const collectionName of ["ORDERS","orders"]){
-      const snap=await getDocs(query(collection(db,collectionName),where("email","==",String(user.email||"").trim())));
-      const match=snap.docs.find(d=>d.id===orderId);
-      if(match){orderSnap=match;break;}
-    }
-    if(!orderSnap) throw new Error("Order not found for this account.");
-    const order=orderSnap.data();
-    const items=Array.isArray(order.items)?order.items:[];
-    const item=items[Number(itemIndex)];
-    if(!item) throw new Error("Selected product was not found in this order.");
-    await addDoc(collection(db,"REPLACEMENT_REQUESTS"),{
-      orderId,
-      customerUid:user.uid,
-      customerEmail:user.email||"",
-      customerName:order.name||order.customerName||"",
-      phone:order.phone||"",
-      item:{name:item.name||item.Name||"Product",qty:Number(item.qty||1),productId:item.id||item.productId||""},
-      reason,
-      details,
-      status:"Requested",
-      createdAt:serverTimestamp()
-    });
-    closeReplacement();
-    alert("Replacement request submit ho gayi hai. Saanjh team order verify karke aapko update karegi.");
-  }catch(error){
-    console.error("Replacement request error:",error);
-    alert("Replacement request submit nahi ho paayi. Please try again.\n\n"+(error?.message||""));
-  }finally{
-    if(button){button.disabled=false;button.textContent="Submit Replacement Request";}
-  }
-}
-
-function toggleLoginMode(){
-  loginMode = loginMode === "login" ? "signup" : "login";
-  const title = document.getElementById("login-title");
-  const subtitle = document.getElementById("login-subtitle");
-  const submit = document.getElementById("login-submit");
-  const sw = document.getElementById("login-switch");
-  const status = document.getElementById("login-status");
-  if (loginMode === "signup"){
-    title.textContent = "Create Account";
-    subtitle.textContent = "Create your Saanjh customer account.";
-    submit.textContent = "Create Account";
-    sw.textContent = "Already have an account? Login";
-  } else {
-    title.textContent = "Customer Login";
-    subtitle.textContent = "Login to your Saanjh account.";
-    submit.textContent = "Login";
-    sw.textContent = "Create a new account";
-  }
-  if (status) status.textContent = "";
-}
-async function handleLogin(){
-  const email = String(document.getElementById("login-email")?.value || "").trim();
-  const password = String(document.getElementById("login-password")?.value || "");
-  const status = document.getElementById("login-status");
-  if (!email || !password){
-    if (status) status.textContent = "Please email aur password fill karein.";
-    return;
-  }
-  if (password.length < 6){
-    if (status) status.textContent = "Password kam se kam 6 characters ka hona chahiye.";
-    return;
-  }
-  const submit = document.getElementById("login-submit");
-  submit.disabled = true;
-  submit.textContent = loginMode === "signup" ? "Creating..." : "Logging in...";
-  try{
-    if (loginMode === "signup"){
-      await createUserWithEmailAndPassword(auth, email, password);
-      if (status) status.textContent = "Account create ho gaya. 🎉";
-    } else {
-      await signInWithEmailAndPassword(auth, email, password);
-      if (status) status.textContent = "Login successful. 🎉";
-    }
-    setTimeout(closeLogin, 500);
-  }catch(error){
-    console.error("Login error:", error);
-    const code = error?.code || "";
-    if (status){
-      if (code.includes("invalid-credential") || code.includes("wrong-password") || code.includes("user-not-found")){
-        status.textContent = "Email ya password incorrect hai.";
-      } else if (code.includes("email-already-in-use")){
-        status.textContent = "Is email se account already bana hua hai.";
-      } else {
-        status.textContent = error?.message || "Login nahi ho paya. Please try again.";
-      }
-    }
-  }finally{
-    submit.disabled = false;
-    submit.textContent = loginMode === "signup" ? "Create Account" : "Login";
-  }
-}
-
-onAuthStateChanged(auth, (user) => {
-  currentUser = user;
-  const label = document.getElementById("menu-account-label");
-  const logout = document.getElementById("menu-logout");
-  if (label) label.textContent = user ? "My Account" : "Login / Create ID";
-  if (logout) logout.style.display = user ? "flex" : "none";
-});
-
-let selectedCollection = "";
-let wishlist = [];
-try { wishlist = JSON.parse(localStorage.getItem("saanjh_wishlist") || "[]"); if(!Array.isArray(wishlist)) wishlist=[]; } catch(e){ wishlist=[]; }
-
-function isWishlisted(id){ return wishlist.includes(String(id)); }
-function saveWishlist(){ try{ localStorage.setItem("saanjh_wishlist", JSON.stringify(wishlist)); }catch(e){} }
-function toggleWishlist(id){
-  id=String(id);
-  if(isWishlisted(id)) wishlist=wishlist.filter(x=>x!==id); else wishlist.push(id);
-  saveWishlist();
-  renderProducts();
-  renderHomeProductSections();
-  const p=productsData[id];
-  if(p) showSaanjhToast(isWishlisted(id) ? "Added to wishlist" : "Removed from wishlist");
-}
-window.toggleWishlist=toggleWishlist;
-function populateCollectionFilter(){
-  const select=document.getElementById("collection-filter"); if(!select) return;
-  const current=select.value;
-  const names=[...new Set(Object.values(productsData).map(p=>String(p.collection||"").trim()).filter(Boolean))];
-  select.innerHTML='<option value="">All Collections</option>'+names.map(n=>`<option value="${escapeHtml(n)}">${escapeHtml(n)}</option>`).join("");
-  if(names.includes(current)) select.value=current;
-}
-function productMatches(p){
-  const q=String(document.getElementById("product-search")?.value||"").trim().toLowerCase();
-  const collection=String(document.getElementById("collection-filter")?.value||"");
-  const hay=[p.Name,p.name,p.color,p.occasion,p.borderWork,p.fabric,p.collection].map(v=>String(v||"").toLowerCase()).join(" ");
-  return (!q || hay.includes(q)) && (!collection || String(p.collection||"")===collection);
-}
-function getFilteredProducts(){
-  let list=Object.values(productsData).filter(productMatches);
-  const sort=document.getElementById("sort-products")?.value||"featured";
-  if(sort==="price-low") list.sort((a,b)=>Number(a.price||0)-Number(b.price||0));
-  else if(sort==="price-high") list.sort((a,b)=>Number(b.price||0)-Number(a.price||0));
-  else if(sort==="name") list.sort((a,b)=>String(a.Name||a.name||"").localeCompare(String(b.Name||b.name||"")));
-  else if(sort==="newest") list.sort((a,b)=>String(b.createdAt||b.updatedAt||"").localeCompare(String(a.createdAt||a.updatedAt||"")));
-  else list.sort((a,b)=>Number(Boolean(b.featured))-Number(Boolean(a.featured)) || String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
-  return list;
-}
-function miniCard(p){
-  const id=p.id; const imgs=Array.isArray(p.images)&&p.images.length?p.images:(p.image?[p.image]:[]); const img=resolveProductImage(imgs[0]);
-  return `<article class="mini-card"><img src="${escapeHtml(img)}" alt="${escapeHtml(p.Name||"Saanjh saree")}" loading="lazy"><h4>${escapeHtml(p.Name||"Saanjh Saree")}</h4><p class="mini-price">₹${Number(p.price||0).toLocaleString("en-IN")}</p><button type="button" onclick="openProductDetails('${id}')">View Saree</button></article>`;
-}
-function renderHomeProductSections(){
-  const all=Object.values(productsData);
-  const featured=all.filter(p=>p.featured===true || String(p.featured).toLowerCase()==="true");
-  const best=(featured.length?featured:all).slice(0,4);
-  const newest=[...all].sort((a,b)=>String(b.createdAt||b.updatedAt||"").localeCompare(String(a.createdAt||a.updatedAt||""))).slice(0,4);
-  const b=document.getElementById("best-sellers-grid"), n=document.getElementById("new-arrivals-grid");
-  if(b) b.innerHTML=best.length?best.map(miniCard).join(""): '<div class="wishlist-empty">New favourites are coming soon.</div>';
-  if(n) n.innerHTML=newest.length?newest.map(miniCard).join(""): '<div class="wishlist-empty">New arrivals are coming soon.</div>';
-}
-function renderWishlistView(){
-  const list=wishlist.map(id=>productsData[id]).filter(Boolean);
-  const productsContainer=document.getElementById("products"); if(!productsContainer) return;
-  productsContainer.innerHTML=list.length?list.map(p=>productCardHtml(p)).join(""):'<div class="wishlist-empty" style="grid-column:1/-1;">Your wishlist is empty.</div>';
-  bindProductCards(productsContainer);
-  const count=document.getElementById("product-result-count"); if(count) count.textContent=`${list.length} wishlist item${list.length===1?"":"s"}`;
-}
-function productCardHtml(product){
-  const productId=product.id, stock=Number(product.stock||0), price=Number(product.price||0);
-  const raw=Array.isArray(product.images)&&product.images.length?product.images:(product.image?[product.image]:[]);
-  const imgs=[...new Set(raw.map(resolveProductImage).filter(Boolean))];
-  return `<article class="product" data-product-id="${escapeHtml(productId)}"><div class="product-image" data-gallery><button class="wishlist-btn ${isWishlisted(productId)?"active":""}" type="button" onclick="event.stopPropagation();toggleWishlist('${productId}')" aria-label="${isWishlisted(productId)?"Remove from":"Add to"} wishlist">${isWishlisted(productId)?"♥":"♡"}</button><div class="product-images" data-track>${imgs.map(img=>`<img src="${escapeHtml(img)}" alt="${escapeHtml(product.Name||"Saanjh Saree")}" loading="lazy" class="product-slide" draggable="false">`).join("")}</div>${imgs.length>1?`<button class="gallery-btn gallery-prev" type="button" aria-label="Previous photo">‹</button><button class="gallery-btn gallery-next" type="button" aria-label="Next photo">›</button><div class="gallery-dots">${imgs.map((_,i)=>`<button class="gallery-dot ${i===0?"active":""}" type="button" data-index="${i}" aria-label="Photo ${i+1}"></button>`).join("")}</div>`:""}<span>${stock>0?"In stock":"Sold out"}</span></div><div class="product-info"><h3>${escapeHtml(product.Name||"Saanjh Saree")}</h3><p>${escapeHtml(product.description||"Beautiful chiffon saree")}</p><p class="price">₹${price.toLocaleString("en-IN")}</p><p style="font-size:14px;">${stock>0?"":"Currently unavailable"}</p><button class="add-cart-btn" data-product-id="${escapeHtml(productId)}" ${stock<=0?"disabled":""}>${stock>0?"Add to Cart":"Sold Out"}</button></div></article>`;
-}
-function bindProductCards(container){
-  container.querySelectorAll(".product").forEach(article=>{
-    const id=article.dataset.productId; article.addEventListener("click",e=>{if(e.target.closest("button"))return;openProductDetails(id);});
-    article.querySelector(".add-cart-btn")?.addEventListener("click",e=>{e.stopPropagation();addToCart(id);});
-    const gallery=article.querySelector("[data-gallery]"),track=article.querySelector("[data-track]"),imgs=article.querySelectorAll(".product-slide"),prev=article.querySelector(".gallery-prev"),next=article.querySelector(".gallery-next"),dots=[...article.querySelectorAll(".gallery-dot")];
-    if(!gallery||!track||imgs.length<=1)return;
-    let current=0,startX=0,dragging=false; const goTo=i=>{current=(i+imgs.length)%imgs.length;track.style.transform=`translateX(-${current*100}%)`;dots.forEach((d,j)=>d.classList.toggle("active",j===current));};
-    prev?.addEventListener("click",e=>{e.stopPropagation();goTo(current-1)}); next?.addEventListener("click",e=>{e.stopPropagation();goTo(current+1)}); dots.forEach(d=>d.addEventListener("click",e=>{e.stopPropagation();goTo(Number(d.dataset.index))}));
-    gallery.addEventListener("touchstart",e=>{startX=e.touches[0].clientX;dragging=true},{passive:true}); gallery.addEventListener("touchend",e=>{if(!dragging)return;dragging=false;const dx=e.changedTouches[0].clientX-startX;if(Math.abs(dx)>45)goTo(current+(dx<0?1:-1))},{passive:true});
-  });
-}
-function renderProducts(){
-  const c=document.getElementById("products"); if(!c)return;
-  const list=getFilteredProducts(); c.innerHTML=list.length?list.map(productCardHtml).join(""):'<div class="wishlist-empty" style="grid-column:1/-1;">No sarees match your search.</div>';
-  bindProductCards(c); const count=document.getElementById("product-result-count"); if(count) count.textContent=`${list.length} saree${list.length===1?"":"s"}`;
-}
-function openWishlist(){ document.getElementById("product-search").value="";document.getElementById("collection-filter").value="";document.getElementById("sort-products").value="featured";renderWishlistView();document.getElementById("shop")?.scrollIntoView({behavior:"smooth"}); }
-window.openWishlist=openWishlist;
-
-async function loadProducts() {
-  const productsContainer=document.getElementById("products"); if(!productsContainer)return;
-  productsContainer.innerHTML='<p style="padding:28px 10px;text-align:center;color:#777;">Loading products...</p>';
-  try{
-    const snapshot=await Promise.race([getDocs(collection(db,"PRODUCTS")),new Promise((_,reject)=>setTimeout(()=>reject(new Error("Products are taking too long to load. Please try again.")),8000))]);
-    productsData={};
-    snapshot.docs.forEach(docSnap=>{const product=docSnap.data()||{};const productName=String(product.Name||product.name||"").trim();if(!productName)return;productsData[docSnap.id]={id:docSnap.id,...product};});
-    populateCollectionFilter();
-    renderProducts();
-    renderHomeProductSections();
-  }catch(error){console.error("Error loading products:",error);productsContainer.innerHTML=`<div style="padding:28px 10px;text-align:center;color:#6f5660;line-height:1.8;"><p style="margin:0 0 12px;font-size:18px;">Products load nahi ho paaye.</p><small style="display:block;color:#777;margin-bottom:16px;">${String(error?.message||"Firebase error").replace(/</g,"&lt;")}</small><button type="button" id="retry-products" style="padding:12px 22px;border:0;border-radius:8px;background:#111;color:#fff;cursor:pointer;">Try Again</button></div>`;document.getElementById("retry-products")?.addEventListener("click",loadProducts);}
-}
-
-function openLegal(id){document.getElementById(id)?.classList.add("open");document.body.style.overflow="hidden";}
-function closeLegal(id){document.getElementById(id)?.classList.remove("open");document.body.style.overflow="";}
-window.openLegal=openLegal;window.closeLegal=closeLegal;
-
-document.addEventListener("DOMContentLoaded",()=>{
-  document.getElementById("product-search")?.addEventListener("input",renderProducts);
-  document.getElementById("collection-filter")?.addEventListener("change",renderProducts);
-  document.getElementById("sort-products")?.addEventListener("change",renderProducts);
-  document.getElementById("wishlist-view-btn")?.addEventListener("click",openWishlist);
-});
-
-async function openProductDetails(productId){
-  const product = productsData[productId];
-  if(!product) return;
-  const overlay=document.getElementById("product-details-overlay");
-  const title=document.getElementById("product-details-title");
-  const price=document.getElementById("product-details-price");
-  const desc=document.getElementById("product-details-description");
-  const meta=document.getElementById("product-details-meta");
-  const main=document.getElementById("product-details-image");
-  const thumbs=document.getElementById("product-details-thumbs");
-  const add=document.getElementById("product-details-add");
-  const buy=document.getElementById("product-details-buy");
-  const reviewsBox=document.getElementById("product-reviews-list");
-  if(!overlay||!title||!price||!desc||!meta||!main||!thumbs||!add||!buy) return;
-
-  const rawImages=Array.isArray(product.images)&&product.images.length?product.images:(product.image?[product.image]:[]);
-  const images=[...new Set(rawImages.map(resolveProductImage).filter(Boolean))];
-  const stock=Number(product.stock||0);
-  const productName=product.Name||product.name||"Saanjh Saree";
-  const productDescription=product.description||product.Description||product.details||"Beautiful chiffon saree designed for a soft, graceful drape.";
-  const color=product.color||product.Color||"Elegant shade";
-  const border=product.borderWork||product.border||product.Border||"Delicate finish";
-  const occasion=product.occasion||product.Occasion||"Festive & special occasions";
-  const sareeLength=product.sareeLength||product.length||product.Length||"Approx. 5.5 m";
-  const blouseDetails=product.blouseDetails||product.blouse||product.Blouse||"Blouse piece included";
-  const fabric=product.fabric||product.Fabric||"Chiffon";
-
-  title.textContent=productName;
-  price.textContent="₹"+Number(product.price||0).toLocaleString("en-IN");
-  desc.textContent=productDescription;
-  meta.innerHTML=`
-    <div class="details-spec-grid">
-      <div><span>Fabric</span><strong>${fabric}</strong></div>
-      <div><span>Colour</span><strong>${color}</strong></div>
-      <div><span>Border / Work</span><strong>${border}</strong></div>
-      <div><span>Occasion</span><strong>${occasion}</strong></div>
-      <div><span>Saree Length</span><strong>${sareeLength}</strong></div>
-      <div><span>Blouse</span><strong>${blouseDetails}</strong></div>
-      ${stock>0 ? "" : '<div><span>Availability</span><strong>Currently unavailable</strong></div>'}
-    </div>`;
-  main.src=images[0]||"";
-  main.alt=productName;
-  main.onerror=()=>{ main.style.visibility="hidden"; };
-  main.onload=()=>{ main.style.visibility="visible"; };
-  thumbs.innerHTML="";
-  images.forEach((src,i)=>{
-    const b=document.createElement("button");
-    b.type="button";
-    b.setAttribute("aria-label","View photo "+(i+1));
-    b.innerHTML=`<img src="${src}" alt="Photo ${i+1}" loading="lazy">`;
-    b.addEventListener("click",()=>{
-      main.src=src;
-      main.style.visibility="visible";
-      thumbs.querySelectorAll("button").forEach((btn,idx)=>btn.classList.toggle("active",idx===i));
-    });
-    thumbs.appendChild(b);
-  });
-  if (thumbs.firstElementChild) thumbs.firstElementChild.classList.add("active");
-
-  add.disabled=stock<=0;
-  buy.disabled=stock<=0;
-  add.textContent=stock>0?"Add to Cart":"Sold Out";
-  buy.textContent=stock>0?"Buy Now":"Sold Out";
-  add.onclick=()=>{ if(stock>0){ addToCart(productId); } };
-  buy.onclick=()=>{ if(stock>0){ addToCart(productId); closeProductDetails(); setTimeout(()=>checkout(),80); } };
-  const wishBtn=document.getElementById("product-details-wishlist");
-  if(wishBtn){ wishBtn.classList.toggle("active",isWishlisted(productId)); wishBtn.textContent=isWishlisted(productId)?"♥ Remove from Wishlist":"♡ Add to Wishlist"; wishBtn.onclick=()=>{toggleWishlist(productId);wishBtn.classList.toggle("active",isWishlisted(productId));wishBtn.textContent=isWishlisted(productId)?"♥ Remove from Wishlist":"♡ Add to Wishlist";}; }
-
-  const note=document.getElementById("product-details-policy-note");
-  if(note) note.innerHTML = "<strong>Replacement:</strong> Available after delivery for wrong, damaged or defective items, subject to Saanjh Replacement & Return Policy. <a href=\"#\" onclick=\"event.preventDefault();closeProductDetails();openPolicy();\">View policy</a>";
-
-  overlay.classList.add("open");
-  document.body.style.overflow="hidden";
-  await loadProductReviews(productId, productName);
-}
-
-function closeProductDetails(event){
-  if(event && event.target!==event.currentTarget) return;
-  document.getElementById("product-details-overlay")?.classList.remove("open");
-  document.body.style.overflow="";
-}
-
-async function loadProductReviews(productId, productName){
-  const box=document.getElementById("product-reviews-list");
-  if(!box) return;
-  box.innerHTML='<div class="product-review-empty">Loading reviews...</div>';
-  try{
-    const snap=await getDocs(query(collection(db,"CUSTOMER_REVIEWS"),where("productId","==",String(productId))));
-    const reviews=snap.docs.map(d=>({id:d.id,...d.data()})).filter(r=>String(r.status||"Pending").toLowerCase()==="approved").sort((a,b)=>{
-      const av=a.createdAt?.toMillis?a.createdAt.toMillis():0;
-      const bv=b.createdAt?.toMillis?b.createdAt.toMillis():0;
-      return bv-av;
-    });
-    if(!reviews.length){
-      box.innerHTML='<button type="button" id="product-first-review-btn" class="product-review-empty product-review-first-btn">Be the first customer to share your experience</button>';
-      const firstReviewBtn=document.getElementById("product-first-review-btn");
-      if(firstReviewBtn) firstReviewBtn.onclick=()=>openProductReviewFromPage(productId, productName);
-      return;
-    }
-    box.innerHTML=reviews.map(r=>{
-      const rating=Math.max(1,Math.min(5,Number(r.rating||5)));
-      const stars="★".repeat(rating)+"☆".repeat(5-rating);
-      const name=String(r.customerName||"Verified Customer");
-      const text=String(r.review||"");
-      return `<article class="product-review-card"><div class="product-review-stars">${stars}</div><div class="product-review-name">${name}</div><div class="product-review-text">${text}</div></article>`;
-    }).join("");
-  }catch(error){
-    console.error("Product reviews load error:",error);
-    box.innerHTML='<div class="product-review-empty">Reviews abhi load nahi ho paaye. Please try again.</div>';
-  }
-}
-
-async function openProductReviewFromPage(productId, productName){
-  const user=auth.currentUser;
-  if(!user){ alert("Please login first to share your experience."); return; }
-
-  let deliveredOrder=null;
-  try{
-    for(const collectionName of ["ORDERS","orders"]){
-      const snap=await getDocs(query(collection(db,collectionName),where("email","==",String(user.email||"").trim())));
-      const match=snap.docs.find(d=>{
-        const o=d.data()||{};
-        const status=String(o.status||o.orderStatus||"").toLowerCase();
-        const items=Array.isArray(o.items)?o.items:[];
-        const hasProduct=items.some(item=>String(item?.id||item?.productId||"")===String(productId));
-        return status==="delivered" && hasProduct;
-      });
-      if(match){ deliveredOrder=match; break; }
-    }
-    if(!deliveredOrder){
-      alert("Review dene ke liye ye product delivered hona chahiye.");
-      return;
-    }
-    const order=deliveredOrder.data()||{};
-    const items=Array.isArray(order.items)?order.items:[];
-    openReview(deliveredOrder.id, items);
-    const select=document.getElementById("review-item");
-    if(select){
-      const index=items.findIndex(item=>String(item?.id||item?.productId||"")===String(productId));
-      if(index>=0) select.value=String(index);
-    }
-  }catch(error){
-    console.error("Product review open error:",error);
-    alert("Review form open nahi ho paaya. Please try again.");
-  }
-}
-
-function showSaanjhToast(message){
-  let toast=document.getElementById("saanjh-toast");
-  if(!toast){ toast=document.createElement("div"); toast.id="saanjh-toast"; toast.className="saanjh-toast"; document.body.appendChild(toast); }
-  toast.textContent=message; toast.classList.add("show");
-  clearTimeout(window.__saanjhToastTimer);
-  window.__saanjhToastTimer=setTimeout(()=>toast.classList.remove("show"),2200);
-}
-
-function addToCart(productId) {
-  const product = productsData[productId];
-
-  if (!product) return;
-
-  const stock = Number(product.stock || 0);
-
-  const existingItem = cart.find(item => item.id === productId);
-
-  if (existingItem) {
-
-    if (existingItem.qty >= stock) {
-      alert("Itni quantity stock me available nahi hai.");
-      return;
-    }
-
-    existingItem.qty += 1;
-
-  } else {
-
-    if (stock <= 0) {
-      alert("Ye product sold out hai.");
-      return;
-    }
-
-    cart.push({
-      id: productId,
-      name: product.Name || "Saanjh Saree",
-      price: Number(product.price || 0),
-      qty: 1,
-      stock: stock
-    });
-  }
-
-  renderCart();
-  showSaanjhToast("Added to cart");
-}
-
-
-function changeCartQty(productId, change) {
-
-  const item = cart.find(item => item.id === productId);
-
-  if (!item) return;
-
-  const newQty = item.qty + change;
-
-  if (newQty <= 0) {
-    cart = cart.filter(item => item.id !== productId);
-  } 
-  else if (newQty > item.stock) {
-    alert("Stock me sirf " + item.stock + " available hai.");
-    return;
-  } 
-  else {
-    item.qty = newQty;
-  }
-
-  renderCart();
-}
-
-
-function createCartButton() {
-
-  if (document.getElementById("cart-button")) return;
-
-  const button = document.createElement("button");
-
-  button.id = "cart-button";
-
-  button.innerHTML = "🛍️ Cart (<span id='cart-count'>0</span>)";
-
-  button.style.cssText = `
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index:9999;
-    padding:14px 20px;
-    border:none;
-    border-radius:30px;
-    background:#111;
-    color:white;
-    font-size:15px;
-    cursor:pointer;
-    box-shadow:0 4px 15px rgba(0,0,0,.25);
-  `;
-
-  button.onclick = () => {
-    const cartBox = document.getElementById("cart-box");
-
-    if (cartBox) {
-      cartBox.style.display =
-        cartBox.style.display === "none" ? "block" : "none";
-    }
-  };
-
-  document.body.appendChild(button);
-
-  const cartBox = document.createElement("div");
-
-  cartBox.id = "cart-box";
-
-  cartBox.style.cssText = `
-    display:none;
-    position:fixed;
-    right:20px;
-    bottom:80px;
-    width:320px;
-    max-width:calc(100% - 40px);
-    max-height:70vh;
-    overflow:auto;
-    z-index:9998;
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 5px 25px rgba(0,0,0,.25);
-  `;
-
-  document.body.appendChild(cartBox);
-
-  renderCart();
-}
-
-
-function renderCart() {
-
-  const cartBox = document.getElementById("cart-box");
-  const cartCount = document.getElementById("cart-count");
-
-  if (!cartBox) return;
-
-  const totalItems = cart.reduce(
-    (total, item) => total + item.qty,
-    0
-  );
-
-  const totalPrice = cart.reduce(
-    (total, item) => total + item.price * item.qty,
-    0
-  );
-
-  try { localStorage.setItem("saanjh_cart", JSON.stringify(cart)); } catch(e) {}
-
-  if (cartCount) {
-    cartCount.textContent = totalItems;
-  }
-
-  if (cart.length === 0) {
-
-    cartBox.innerHTML = `
-      <h3>Your Cart</h3>
-      <p>Cart abhi empty hai.</p>
-    `;
-
-    return;
-  }
-
-  cartBox.innerHTML = `
-    <h3>Your Cart</h3>
-
-    ${cart.map(item => `
-      <div style="
-        border-bottom:1px solid #ddd;
-        padding:12px 0;
-      ">
-
-        <strong>${item.name}</strong>
-
-        <div style="margin-top:8px;">
-          ₹${item.price} × ${item.qty}
-        </div>
-
-        <div style="
-          display:flex;
-          align-items:center;
-          gap:10px;
-          margin-top:8px;
-        ">
-
-          <button 
-            onclick="changeCartQty('${item.id}', -1)"
-            style="padding:5px 10px;"
-          >
-            −
-          </button>
-
-          <span>${item.qty}</span>
-
-          <button 
-            onclick="changeCartQty('${item.id}', 1)"
-            style="padding:5px 10px;"
-          >
-            +
-          </button>
-
-        </div>
-
-      </div>
-    `).join("")}
-
-    <h3 style="margin-top:15px;">
-      Total: ₹${totalPrice}
-    </h3>
-
-    <button
-      onclick="checkout()"
-      style="
-        width:100%;
-        padding:12px;
-        border:none;
-        border-radius:6px;
-        background:#111;
-        color:white;
-        cursor:pointer;
-        margin-top:10px;
-      "
-    >
-      Proceed to Checkout
-    </button>
-  `;
-}
-
-
-function checkout() {
-
-  if (cart.length === 0) {
-    alert("Cart empty hai.");
-    return;
-  }
-
-  let checkoutBox = document.getElementById("checkout-box");
-
-  if (!checkoutBox) {
-
-    checkoutBox = document.createElement("div");
-
-    checkoutBox.id = "checkout-box";
-    checkoutOrderKey = (crypto.randomUUID ? crypto.randomUUID() : (Date.now() + "-" + Math.random().toString(36).slice(2)));
-    isOrderSubmitting = false;
-
-    checkoutBox.style.cssText = `
-      position:fixed;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      width:420px;
-      max-width:90%;
-      max-height:90vh;
-      overflow:auto;
+    .box{
+      max-width:900px;
+      margin:auto;
       background:white;
       padding:25px;
       border-radius:15px;
-      box-shadow:0 5px 30px rgba(0,0,0,.3);
-      z-index:10000;
-    `;
+      box-shadow:0 5px 20px #0001;
+    }
 
-    document.body.appendChild(checkoutBox);
-  }
+    h1{
+      color:#8b5e3c;
+    }
 
-  checkoutBox.innerHTML = `
+    input,button{
+      width:100%;
+      padding:12px;
+      margin:7px 0;
+      box-sizing:border-box;
+      border-radius:8px;
+      border:1px solid #ccc;
+    }
 
-    <h2 style="margin-top:0;">Checkout</h2>
+    button{
+      background:#8b5e3c;
+      color:white;
+      border:none;
+      cursor:pointer;
+      font-weight:bold;
+    }
 
-    <p>Please enter your delivery details.</p>
+    button:hover{
+      opacity:.9;
+    }
+
+    .product{
+      border:1px solid #ddd;
+      padding:15px;
+      margin:12px 0;
+      border-radius:10px;
+    }
+
+    .stock{
+      font-weight:bold;
+      color:#8b5e3c;
+    }
+
+    #adminPanel{
+      display:none;
+    }
+
+    .logout{
+      background:#555;
+    }
+  
+    #editProductOverlay label{
+      display:block;
+      margin:12px 0 5px;
+      font-weight:700;
+      color:#5d4a43;
+    }
+    #editProductOverlay input,
+    #editProductOverlay textarea{
+      width:100%;
+      padding:12px;
+      box-sizing:border-box;
+      border:1px solid #ccc;
+      border-radius:8px;
+      font:inherit;
+      background:#fff;
+    }
+    #editProductOverlay button{
+      width:100%;
+    }
+    @media(max-width:600px){
+      #editProductOverlay{padding:10px!important}
+      #editProductOverlay > div{padding:18px!important}
+    }
+
+    .editable-photo-card[data-deleted="1"]{
+      border:2px solid #b42318!important;
+      background:#fff7f7!important;
+    }
+    .editable-photo-card input[type="file"]{
+      width:100%;box-sizing:border-box;
+    }
+
+/* ===== Admin dashboard upgrades ===== */
+.dashboard-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:15px 0 22px}.dash-card{background:#fff;border:1px solid #eadfd9;border-radius:14px;padding:18px}.dash-card span{display:block;font-size:11px;color:#8b756b;text-transform:uppercase;letter-spacing:.08em}.dash-card strong{display:block;font-size:28px;color:#6b4638;margin-top:6px}.admin-section{background:#fff;border:1px solid #eadfd9;border-radius:14px;padding:18px;margin:18px 0}.admin-table-wrap{overflow:auto}.admin-table{width:100%;border-collapse:collapse;font-size:13px}.admin-table th,.admin-table td{padding:11px;border-bottom:1px solid #eee4de;text-align:left;vertical-align:top}.admin-table th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#795f55}.status-pill{display:inline-block;border-radius:999px;padding:5px 9px;font-size:11px;background:#f4eee9;color:#6b4638}.admin-action-row{display:flex;gap:7px;flex-wrap:wrap}.admin-action-row button{width:auto;margin:0;padding:8px 11px}.danger-btn{background:#b42318!important}.muted-note{font-size:12px;color:#806f67;line-height:1.5}@media(max-width:800px){.dashboard-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.dashboard-grid{grid-template-columns:1fr}}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <h1>🌸 Saanjh Admin Panel</h1>
+
+  <!-- LOGIN -->
+  <div id="loginBox">
+
+    <h3>Admin Login</h3>
 
     <input
-      id="customer-name"
-      type="text"
-      placeholder="Full Name"
-      style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
-    >
-
-    <input
-      id="customer-phone"
-      type="tel"
-      placeholder="Mobile Number"
-      style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
-    >
-
-    <input
-      id="customer-email"
       type="email"
-      placeholder="Email Address"
-      value="${currentUser?.email || ""}"
-      style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
-    >
-
-    <textarea
-      id="customer-address"
-      placeholder="Full Delivery Address"
-      rows="3"
-      style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
-    ></textarea>
-
-    <input
-      id="customer-city"
-      type="text"
-      placeholder="City"
-      style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
+      id="email"
+      placeholder="Admin Email"
     >
 
     <input
-      id="customer-state"
-      type="text"
-      placeholder="State"
-      style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
+      type="password"
+      id="password"
+      placeholder="Password"
     >
 
-    <input
-      id="customer-pincode"
-      type="text"
-      placeholder="Pincode"
-      maxlength="6"
-      style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;"
-    >
-
-    <h3>Payment Method</h3>
-
-    <label style="display:block;margin:10px 0;">
-      <input
-        type="radio"
-        name="payment-method"
-        value="COD"
-        checked
-      >
-      Cash on Delivery
-    </label>
-
-    <label style="display:block;margin:10px 0;">
-      <input
-        type="radio"
-        name="payment-method"
-        value="ONLINE"
-      >
-      Online Payment
-    </label>
-
-    <h3>
-      Total: ₹${cart.reduce(
-        (total, item) => total + item.price * item.qty,
-        0
-      )}
-    </h3>
-
-    <button
-      onclick="window.placeOrder()"
-      style="
-        width:100%;
-        padding:14px;
-        border:none;
-        border-radius:7px;
-        background:#111;
-        color:white;
-        cursor:pointer;
-        margin-top:10px;
-      "
-    >
-      Place Order
+    <button onclick="login()">
+      Login
     </button>
 
-    <button
-      onclick="window.closeCheckout()"
-      style="
-        width:100%;
-        padding:12px;
-        border:1px solid #ccc;
-        border-radius:7px;
-        background:white;
-        cursor:pointer;
-        margin-top:8px;
-      "
+    <p id="loginMessage"></p>
+
+  </div>
+
+
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel">
+
+    <button class="logout" onclick="logout()">Logout</button>
+
+    <section class="admin-section">
+      <h2 style="margin-top:0;color:#6b4638;">Dashboard</h2>
+      <div class="dashboard-grid">
+        <div class="dash-card"><span>Total Products</span><strong id="dash-products">—</strong></div>
+        <div class="dash-card"><span>Low Stock</span><strong id="dash-low-stock">—</strong></div>
+        <div class="dash-card"><span>Orders</span><strong id="dash-orders">—</strong></div>
+        <div class="dash-card"><span>Revenue</span><strong id="dash-revenue">—</strong></div>
+      </div>
+      <div class="admin-action-row"><button type="button" onclick="loadAdminDashboard()">Refresh Dashboard</button></div>
+      <p id="dashboard-note" class="muted-note"></p>
+    </section>
+
+    <section class="admin-section">
+      <h2 style="margin-top:0;color:#6b4638;">Order Management</h2>
+      <p class="muted-note">Order status customer ke My Orders me dikhega: Placed → Confirmed → Shipped → Delivered.</p>
+      <div id="admin-orders">Loading orders...</div>
+    </section>
+
+    <section class="admin-section">
+      <h2 style="margin-top:0;color:#6b4638;">Replacement Requests</h2>
+      <div id="admin-replacements">Loading replacement requests...</div>
+    </section>
+
+    <section class="admin-section">
+      <h2 style="margin-top:0;color:#6b4638;">Customer Reviews</h2>
+      <p class="muted-note">Approve reviews to make them visible on the product page.</p>
+      <div id="admin-reviews">Loading reviews...</div>
+    </section>
+
+    <hr>
+
+    <h2>Add Product</h2>
+
+    <input
+      id="productName"
+      placeholder="Product Name"
     >
-      Close
+
+    <input
+      id="productPrice"
+      type="number"
+      placeholder="Price"
+    >
+
+    <input
+      id="productStock"
+      type="number"
+      placeholder="Stock Quantity"
+    >
+
+    <textarea id="productDescription" placeholder="Description" rows="3"></textarea>
+    <input id="productColor" placeholder="Color">
+    <input id="productWork" placeholder="Border / Work">
+    <input id="productOccasion" placeholder="Occasion">
+
+    <label style="display:block;margin:10px 0 5px;font-weight:700;color:#5d4a43;">Collection</label>
+    <select id="productCollection">
+      <option value="Celebration">The Celebration Edit</option>
+      <option value="Everyday">The Everyday Edit</option>
+    </select>
+    <input id="productSareeLength" placeholder="Saree Length (e.g. Approx. 5.5 m)">
+    <input id="productBlouseDetails" placeholder="Blouse Details">
+    <input id="productFabric" placeholder="Fabric" value="Chiffon">
+    <label style="display:flex;align-items:center;gap:8px;margin:10px 0;font-weight:700;color:#5d4a43;"><input id="productFeatured" type="checkbox" style="width:auto;margin:0;"> Featured / Best Seller</label>
+
+    <input
+  id="productImage"
+  type="file"
+  accept="image/*"
+  multiple
+>
+
+    <button onclick="addProduct()">
+      Add Product
     </button>
-  `;
-}
-function closeCheckout() {
-  const checkoutBox = document.getElementById("checkout-box");
 
-  if (checkoutBox) {
-    checkoutBox.remove();
+    <hr>
+
+    <h2>Collections / Edits</h2>
+    <p style="color:#6b5a55;line-height:1.6;">Yahan se Celebration, Everyday ya apna koi naya Edit/Section bana sakte ho. Naya section banne ke baad woh Add Product aur Edit Product me automatically aa jayega.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <input id="newCollectionName" placeholder="New Edit Name (e.g. Wedding Edit)">
+      <input id="newCollectionDescription" placeholder="Short description">
+    </div>
+    <button type="button" onclick="addCollection()">+ Create New Edit / Section</button>
+    <div style="margin:16px 0 6px;font-weight:700;color:#5d4a43;">Manage Existing Edits / Sections</div>
+    <div style="font-size:12px;color:#777;margin-bottom:10px;line-height:1.5;">Custom sections ko yahin se delete kar sakti ho. Delete karne se products delete nahi honge.</div>
+    <div id="collectionManager" style="margin:14px 0;"></div>
+
+    <hr>
+
+    <h2>Products</h2>
+
+    <div id="products">
+      Loading products...
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- FULL PRODUCT EDIT PANEL -->
+<div id="editProductOverlay" style="
+  display:none;position:fixed;inset:0;background:rgba(20,14,12,.58);
+  z-index:9999;align-items:center;justify-content:center;padding:18px;
+">
+  <div style="
+    width:min(900px,96vw);max-height:94vh;overflow:auto;background:#fff;
+    border-radius:18px;padding:24px;box-shadow:0 25px 80px rgba(0,0,0,.25);
+  ">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <h2 style="margin:0;color:#5d4a43;">Edit Product</h2>
+      <button type="button" onclick="closeEditPanel()" style="
+        width:44px;padding:10px;margin:0;background:#fff;color:#333;
+        border:1px solid #ddd;font-size:22px;
+      ">×</button>
+    </div>
+
+    <p id="editProductStatus" style="color:#8b5e3c;margin:10px 0 18px;"></p>
+
+    <input type="hidden" id="editProductId">
+
+    <label>Product Name</label>
+    <input id="editProductName" placeholder="Product Name">
+
+    <label>Price</label>
+    <input id="editProductPrice" type="number" min="0" placeholder="Price">
+
+    <label>Stock Quantity</label>
+    <input id="editProductStock" type="number" min="0" placeholder="Stock Quantity">
+
+    <label>Description</label>
+    <textarea id="editProductDescription" rows="4" placeholder="Description"></textarea>
+
+    <label>Color</label>
+    <input id="editProductColor" placeholder="Color">
+
+    <label>Border / Work</label>
+    <input id="editProductWork" placeholder="Border / Work">
+
+    <label>Occasion</label>
+    <input id="editProductOccasion" placeholder="Occasion">
+
+    <label>Collection</label>
+    <select id="editProductCollection">
+      <option value="Celebration">The Celebration Edit</option>
+      <option value="Everyday">The Everyday Edit</option>
+    </select>
+
+    <label>Saree Length</label>
+    <input id="editProductSareeLength" placeholder="Approx. 5.5 m">
+
+    <label>Blouse Details</label>
+    <input id="editProductBlouseDetails" placeholder="Blouse Details">
+
+    <label>Fabric</label>
+    <input id="editProductFabric" placeholder="Fabric">
+    <label style="display:flex;align-items:center;gap:8px;margin:12px 0;font-weight:700;color:#5d4a43;"><input id="editProductFeatured" type="checkbox" style="width:auto;margin:0;"> Featured / Best Seller</label>
+
+    <hr style="border:0;border-top:1px solid #eee;margin:22px 0;">
+
+    <h3 style="margin:0 0 8px;color:#5d4a43;">Product Photos</h3>
+    <p style="font-size:13px;color:#777;margin:5px 0 12px;">
+      Har photo ko alag se change/delete kar sakte ho. Nayi photos alag se add bhi kar sakte ho.
+    </p>
+    <div id="editCurrentPhotos" style="
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:14px;margin-bottom:20px;
+    "></div>
+    <div style="border:1px dashed #cdbeb5;border-radius:12px;padding:15px;background:#faf7f4;">
+      <label style="font-weight:700;color:#5d4a43;">Add New Photos</label>
+      <p style="font-size:13px;color:#777;margin:5px 0 8px;">
+        Existing photos delete/change nahi hongi. Selected photos existing gallery ke saath add hongi.
+      </p>
+      <input id="editNewProductImages" type="file" accept="image/*" multiple style="background:#fff;">
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;">
+      <button type="button" onclick="saveEditPanel()" id="saveEditPanelBtn">
+        Save All Changes
+      </button>
+      <button type="button" onclick="closeEditPanel()" style="
+        background:#fff;color:#333;border:1px solid #bbb;
+      ">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
   }
-}
+    from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+  import {
+  getFirestore,
+  collection,
+  getDocs,
+  getDoc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  setDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+  
+  import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
+
+  const firebaseConfig = {
+
+    apiKey: "AIzaSyCUpRDeE2tKsBlpuK4sljUHjudwCjGwJsI",
+    authDomain:
+      "saanjhbysanskriti.firebaseapp.com",
+
+    projectId:
+      "saanjhbysanskriti",
+
+    storageBucket:
+      "saanjhbysanskriti.firebasestorage.app",
+
+    messagingSenderId:
+      "130853028955",
+
+    appId:
+      "1:130853028955:web:f95a16d3356d9710896b7e"
+
+  };
 
 
-async function placeOrder() {
+  const app = initializeApp(firebaseConfig);
 
-  // Prevent accidental double-clicks / repeated order submissions.
-  if (isOrderSubmitting) {
-    return;
-  }
+  const auth = getAuth(app);
 
-  const name = document.getElementById("customer-name").value.trim();
-  const phone = document.getElementById("customer-phone").value.trim();
-  const email = document.getElementById("customer-email").value.trim();
-  const address = document.getElementById("customer-address").value.trim();
-  const city = document.getElementById("customer-city").value.trim();
-  const state = document.getElementById("customer-state").value.trim();
-  const pincode = document.getElementById("customer-pincode").value.trim();
-
-  const paymentMethod = document.querySelector(
-    'input[name="payment-method"]:checked'
-  ).value;
+  const db = getFirestore(app);
+  
+  const storage = getStorage(app);
 
 
-  if (
-    !name ||
-    !phone ||
-    !email ||
-    !address ||
-    !city ||
-    !state ||
-    !pincode
-  ) {
-    alert("Please saari details fill karein.");
-    return;
-  }
+  window.login = async function(){
 
+    const email =
+      document.getElementById("email").value;
 
-  if (!/^[0-9]{10}$/.test(phone)) {
-    alert("Please valid 10 digit mobile number enter karein.");
-    return;
-  }
+    const password =
+      document.getElementById("password").value;
 
+    const message =
+      document.getElementById("loginMessage");
 
-  if (!/^[0-9]{6}$/.test(pincode)) {
-    alert("Please valid 6 digit pincode enter karein.");
-    return;
-  }
+    try{
 
-
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.qty,
-    0
-  );
-
-  // Lock the checkout immediately so a second click cannot create another order.
-  isOrderSubmitting = true;
-  const placeButton = document.querySelector('#checkout-box button[onclick="window.placeOrder()"]');
-  const closeButton = document.querySelector('#checkout-box button[onclick="window.closeCheckout()"]');
-  if (placeButton) {
-    placeButton.disabled = true;
-    placeButton.style.pointerEvents = "none";
-    placeButton.style.opacity = "0.65";
-    placeButton.textContent = "Processing…";
-  }
-  if (closeButton) {
-    closeButton.disabled = true;
-    closeButton.style.pointerEvents = "none";
-    closeButton.style.opacity = "0.55";
-  }
-
-  const clientOrderId = checkoutOrderKey || (crypto.randomUUID ? crypto.randomUUID() : (Date.now() + "-" + Math.random().toString(36).slice(2)));
-
-if (paymentMethod === "COD") {
-    try {
-      const createCodOrder = httpsCallable(
-        getFunctions(app),
-        "createCodOrder"
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
       );
 
-      const result = await createCodOrder({
-        name: name,
-        phone: phone,
-        email: email,
-        address: address,
-        city: city,
-        state: state,
-        pincode: pincode,
-        items: cart.map((item) => ({
-          productId: item.id || item.productId,
-          name: item.name,
-          price: item.price,
-          qty: item.qty
-        })),
-        total: total,
-        paymentMethod: "COD",
-        clientOrderId: clientOrderId
+      message.innerText =
+        "Login successful ✅";
+
+    }catch(error){
+
+      console.error(error);
+
+      message.innerText =
+        "Login failed ❌ " + error.message;
+
+    }
+
+  };
+
+
+  window.logout = async function(){
+
+    await signOut(auth);
+
+  };
+
+
+  onAuthStateChanged(auth, user => {
+
+    if(user){
+
+      document.getElementById("loginBox")
+        .style.display = "none";
+
+      document.getElementById("adminPanel")
+        .style.display = "block";
+
+      refreshCollectionSelects();
+      loadProducts();
+      loadAdminDashboard();
+
+    }else{
+
+      document.getElementById("loginBox")
+        .style.display = "block";
+
+      document.getElementById("adminPanel")
+        .style.display = "none";
+
+    }
+
+  });
+
+
+  async function loadProducts(){
+
+    const container =
+      document.getElementById("products");
+
+    container.innerHTML =
+      "Loading products...";
+
+    try{
+
+      const snapshot =
+        await getDocs(
+          collection(db,"PRODUCTS")
+        );
+
+      container.innerHTML = "";
+
+      snapshot.forEach(productDoc => {
+
+        // Reserved metadata document used for custom collection definitions.
+        if(productDoc.id === "COLLECTIONS_META") return;
+
+        const product = productDoc.data() || {};
+        if(!String(product.Name || product.name || "").trim()) return;
+
+        const id =
+          productDoc.id;
+
+        const div =
+          document.createElement("div");
+
+        div.className = "product";
+
+        div.innerHTML = `
+
+          <h3>${product.Name || "Product"} ${product.featured ? '<span class="status-pill">Featured</span>' : ''}</h3>
+
+          <p>
+            Price: ₹${product.price || 0}
+          </p>
+
+          <p class="stock">
+            Stock: ${product.stock || 0}
+          </p>
+          <p style="line-height:1.7;color:#6b5a55;">
+            ${product.color ? "Color: " + product.color + "<br>" : ""}
+            ${product.borderWork ? "Border / Work: " + product.borderWork + "<br>" : ""}
+            ${product.occasion ? "Occasion: " + product.occasion + "<br>" : ""}
+            <strong>Collection: ${product.collection === "Celebration" ? "The Celebration Edit" : product.collection === "Everyday" ? "The Everyday Edit" : "Not set"}</strong><br>
+            ${product.sareeLength ? "Saree Length: " + product.sareeLength + "<br>" : ""}
+            ${product.blouseDetails ? "Blouse: " + product.blouseDetails + "<br>" : ""}
+            ${product.fabric ? "Fabric: " + product.fabric : ""}
+          </p>
+<div class="product-images">
+  ${
+    (product.images && product.images.length
+      ? product.images
+      : (product.image ? [product.image] : [])
+    ).map(img => `
+      <img
+        src="${img}"
+        style="width:120px;height:120px;object-fit:cover;margin:5px;border-radius:8px;"
+      >
+    `).join("")
+  }
+</div>
+          <input
+            type="number"
+            id="stock-${id}"
+            value="${product.stock || 0}"
+            min="0"
+          >
+
+          <button
+            onclick="updateStock('${id}')"
+          >
+            Update Stock
+          </button>
+          <br><br>
+
+<button type="button" onclick="openEditPanel('${id}')">
+    Edit Product — All Details & Photos
+</button>
+<button type="button" onclick="deleteProduct('${id}')" style="background:#b42318;margin-top:8px;">
+    Delete Product
+</button>
+
+        `;
+
+        container.appendChild(div);
+
       });
 
-      alert(
-        "Order successfully place ho gaya! 🎉\n\n" +
-        "Order ID: " + result.data.orderId
-      );
+    }catch(error){
 
-      cart = [];
-      localStorage.removeItem("cart");
-      closeCheckout();
-      renderCart();
-
-    } catch (error) {
       console.error(error);
-      isOrderSubmitting = false;
-      if (placeButton) {
-        placeButton.disabled = false;
-        placeButton.style.pointerEvents = "auto";
-        placeButton.style.opacity = "1";
-        placeButton.textContent = "Place Order";
-      }
-      if (closeButton) {
-        closeButton.disabled = false;
-        closeButton.style.pointerEvents = "auto";
-        closeButton.style.opacity = "1";
-      }
 
-      alert(
-        "Order place nahi ho paya.\n\n" +
-        (error.message || "Please try again.")
-      );
+      container.innerHTML =
+        "Products load nahi hue ❌";
+
     }
-  } else {
-  try {
-    const createRazorpayOrder = httpsCallable(
-      getFunctions(app),
-      "createRazorpayOrder"
-    );
 
-    const orderResult = await createRazorpayOrder({
-      total: total,
-      clientOrderId: clientOrderId
-    });
+  }
 
-    const razorpayOptions = {
-      key: orderResult.data.keyId,
-      amount: orderResult.data.amount,
-      currency: orderResult.data.currency,
-      name: "Saanjh Chiffon",
-      description: "Saree Purchase",
-      order_id: orderResult.data.orderId,
 
-      prefill: {
-        name: name,
-        email: email,
-        contact: phone
-      },
+async function getCollectionDefinitions(){
+  const metadataRef = doc(db, "PRODUCTS", "COLLECTIONS_META");
+  const metadataSnap = await getDoc(metadataRef);
+  const map = metadataSnap.exists() && metadataSnap.data().collections
+    ? metadataSnap.data().collections
+    : {};
+  return Object.entries(map).map(([id, value]) => ({
+    id,
+    name: String(value?.name || "").trim(),
+    description: String(value?.description || ""),
+    order: Number(value?.order || 0)
+  })).filter(c => c.name);
+}
 
-      notes: {
-        address: address,
-        city: city,
-        state: state,
-        pincode: pincode
-      },
-
-      handler: async function (response) {
-        try {
-          const verifyRazorpayPayment = httpsCallable(
-            getFunctions(app),
-            "verifyRazorpayPayment"
-          );
-
-          const verifyResult = await verifyRazorpayPayment({
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_signature: response.razorpay_signature,
-
-            name: name,
-            phone: phone,
-            email: email,
-            address: address,
-            city: city,
-            state: state,
-            pincode: pincode,
-
-            items: cart.map((item) => ({
-              productId: item.id || item.productId,
-              name: item.name,
-              price: item.price,
-              qty: item.qty
-            })),
-
-            total: total,
-            clientOrderId: clientOrderId
-          });
-
-          alert(
-            "Online payment successful! 🎉\n\n" +
-            "Order ID: " + verifyResult.data.orderId
-          );
-
-          cart = [];
-          localStorage.removeItem("cart");
-          closeCheckout();
-          renderCart();
-
-        } catch (error) {
-          console.error(error);
-          // Keep the submission locked after a successful payment attempt so
-          // the customer cannot accidentally create a second order.
-          alert(
-            "Payment verify nahi ho paya.\n\n" +
-            (error.message || "Please contact us.")
-          );
-        }
-      },
-
-      theme: {
-        color: "#8b5e3c"
-      }
+async function saveCollectionDefinitions(collections){
+  const map = {};
+  collections.forEach(c => {
+    map[c.id] = {
+      name: c.name,
+      description: c.description || "",
+      order: Number(c.order || 0),
+      createdAt: c.createdAt || new Date().toISOString()
     };
+  });
+  await setDoc(doc(db, "PRODUCTS", "COLLECTIONS_META"), {collections: map}, {merge: true});
+}
 
-    const razorpay = new Razorpay(razorpayOptions);
+async function refreshCollectionSelects(){
+  // Always render the two default edits first, so the manager never appears blank
+  // even if the optional custom-collection metadata read is temporarily unavailable.
+  const saved = await getCollectionDefinitions().catch(error => { console.warn("Collection metadata read failed", error); return []; });
+  const celebrationSaved = saved.find(c => c.id === "__celebration");
+  const everydaySaved = saved.find(c => c.id === "__everyday");
+  const collections = [
+    celebrationSaved || {id:"__celebration",name:"Celebration Edit",description:"Soft shimmer · graceful borders · evenings worth remembering",order:-2},
+    everydaySaved || {id:"__everyday",name:"Everyday Edit",description:"Fresh pastels · effortless drapes · beautiful ordinary days",order:-1}
+  ];
 
-    razorpay.on("payment.failed", function (response) {
-      console.error(response.error);
-      isOrderSubmitting = false;
-      if (placeButton) {
-        placeButton.disabled = false;
-        placeButton.style.pointerEvents = "auto";
-        placeButton.style.opacity = "1";
-        placeButton.textContent = "Place Order";
-      }
-      if (closeButton) {
-        closeButton.disabled = false;
-        closeButton.style.pointerEvents = "auto";
-        closeButton.style.opacity = "1";
-      }
+  saved.forEach(c => {
+    if(!collections.some(x => x.id === c.id)){
+      collections.push(c);
+    }
+  });
 
-      alert(
-        "Payment failed.\n\n" +
-        (response.error.description || "Please try again.")
-      );
+  collections.sort((a,b) =>
+    Number(a.order||0)-Number(b.order||0) ||
+    String(a.name||"").localeCompare(String(b.name||""))
+  );
+
+  const selects = [
+    document.getElementById("productCollection"),
+    document.getElementById("editProductCollection")
+  ].filter(Boolean);
+
+  selects.forEach(select => {
+    const current = select.value;
+    select.innerHTML = "";
+    collections.forEach(c => {
+      const opt = document.createElement("option");
+      opt.value = c.name;
+      opt.textContent = c.name;
+      select.appendChild(opt);
     });
-
-    razorpay.open();
-
-  } catch (error) {
-    console.error(error);
-    isOrderSubmitting = false;
-    if (placeButton) {
-      placeButton.disabled = false;
-      placeButton.style.pointerEvents = "auto";
-      placeButton.style.opacity = "1";
-      placeButton.textContent = "Place Order";
+    if(current && [...select.options].some(o => o.value === current)){
+      select.value = current;
     }
-    if (closeButton) {
-      closeButton.disabled = false;
-      closeButton.style.pointerEvents = "auto";
-      closeButton.style.opacity = "1";
-    }
+  });
 
-    alert(
-      "Payment start nahi ho paya.\n\n" +
-      (error.message || "Please try again.")
-    );
+  const manager = document.getElementById("collectionManager");
+  if(manager){
+    manager.innerHTML = collections.map(c => {
+      const isDefault =
+        c.id === "__celebration" || c.id === "__everyday";
+
+      return `
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;border:1px solid #eadfd9;border-radius:12px;padding:12px;margin:8px 0;background:#fff;">
+          <div style="min-width:0;flex:1;">
+            <strong>${escapeHtml(c.name)}</strong>
+            <div style="font-size:12px;color:#777;margin-top:3px;">
+              ${escapeHtml(c.description||"")}
+            </div>
+          </div>
+          <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:flex-end;">
+            <button type="button" onclick="editCollection('${c.id}')" style="background:#fff!important;color:#6b3f2b!important;border:1px solid #c9b1a5;border-radius:8px;padding:8px 12px;font-weight:700;cursor:pointer;white-space:nowrap;">Edit</button>
+            ${isDefault
+              ? '<span style="font-size:11px;color:#777;border:1px solid #ddd;border-radius:999px;padding:6px 9px;white-space:nowrap;">Default</span>'
+              : `<button type="button" onclick="deleteCollection('${c.id}')" style="background:#b42318!important;color:#fff!important;border:0;border-radius:8px;padding:9px 13px;font-weight:700;cursor:pointer;white-space:nowrap;">Delete Section</button>`}
+          </div>
+        </div>`;
+    }).join("");
   }
 }
+function escapeHtml(value){ return String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch])); }
+window.addCollection = async function(){
+  const name=document.getElementById("newCollectionName").value.trim();
+  const description=document.getElementById("newCollectionDescription").value.trim();
+  if(!name){ alert("Edit / Section ka naam likho."); return; }
+  try{
+    const existing = await getCollectionDefinitions();
+    if(existing.some(c => c.name.toLowerCase() === name.toLowerCase()) || ["Celebration Edit","Everyday Edit"].some(n => n.toLowerCase() === name.toLowerCase())){
+      alert("Ye Edit already bana hua hai."); return;
+    }
+    const id = "custom_" + Date.now();
+    existing.push({id,name,description,order:existing.length+1,createdAt:new Date().toISOString()});
+    await saveCollectionDefinitions(existing);
+    document.getElementById("newCollectionName").value="";
+    document.getElementById("newCollectionDescription").value="";
+    await refreshCollectionSelects();
+    alert("New Edit / Section create ho gaya ✅");
+  }catch(error){ console.error(error); alert("New Edit create nahi hua ❌\n\nFirebase permission issue aa raha tha, ab metadata PRODUCTS ke andar save hota hai. Agar phir bhi aaye to Firestore PRODUCTS write rule check karna hoga.\n\n"+error.message); }
+};
+window.editCollection = async function(id){
+  const defaults = {
+    "__celebration": {name:"Celebration Edit", description:"Soft shimmer · graceful borders · evenings worth remembering", order:-2},
+    "__everyday": {name:"Everyday Edit", description:"Fresh pastels · effortless drapes · beautiful ordinary days", order:-1}
+  };
+  try{
+    const existing = await getCollectionDefinitions();
+    const current = existing.find(c => c.id === id) || defaults[id];
+    if(!current){ alert("Edit nahi mila."); return; }
+    const name = prompt("Edit / Section ka naam:", current.name || "");
+    if(name === null) return;
+    const cleanName = name.trim();
+    if(!cleanName){ alert("Naam empty nahi ho sakta."); return; }
+    if(existing.some(c => c.id !== id && c.name.toLowerCase() === cleanName.toLowerCase())){ alert("Ye naam already use ho raha hai."); return; }
+    const description = prompt("Short description:", current.description || "");
+    if(description === null) return;
+    const updated = existing.filter(c => c.id !== id);
+    updated.push({id, name:cleanName, description:description.trim(), order:Number(current.order ?? (id === "__celebration" ? -2 : id === "__everyday" ? -1 : updated.length + 1)), createdAt:current.createdAt || new Date().toISOString()});
+    await saveCollectionDefinitions(updated);
+    await refreshCollectionSelects();
+    loadProducts();
+    alert("Edit update ho gaya ✅");
+  }catch(error){ console.error(error); alert("Edit update nahi hua ❌\n\n" + error.message); }
+};
+
+window.deleteCollection = async function(id){
+  if(id === "__celebration" || id === "__everyday"){ alert("Default Edit delete nahi kiya ja sakta."); return; }
+  if(!confirm("Ye section delete karna hai? Isse products delete nahi honge.")) return;
+  try{
+    const existing = await getCollectionDefinitions();
+    const updated = existing.filter(c => c.id !== id);
+    await saveCollectionDefinitions(updated);
+    await refreshCollectionSelects();
+    loadProducts();
+    alert("Section delete ho gaya ✅");
+  }catch(error){ alert("Section delete nahi hua ❌\n\n"+error.message); }
+};
+
+
+  window.updateStock = async function(id){
+
+    const input =
+      document.getElementById("stock-" + id);
+
+    const newStock =
+      Number(input.value);
+
+    try{
+
+      await updateDoc(
+        doc(db,"PRODUCTS",id),
+        {
+          stock:newStock
+        }
+      );
+
+      alert("Stock updated ✅");
+
+      loadProducts();
+
+    }catch(error){
+
+      console.error(error);
+
+      alert(
+        "Stock update nahi hua ❌\n\n" +
+        error.message
+      );
+
+    }
+
+  };
+window.openEditPanel = async function(id){
+  try{
+    const snap = await getDoc(doc(db, "PRODUCTS", id));
+
+    if(!snap.exists()){
+      alert("Product nahi mila ❌");
+      return;
+    }
+
+    const p = snap.data();
+
+    document.getElementById("editProductId").value = id;
+    document.getElementById("editProductName").value = p.Name || "";
+    document.getElementById("editProductPrice").value = p.price ?? "";
+    document.getElementById("editProductStock").value = p.stock ?? 0;
+    document.getElementById("editProductDescription").value =
+      p.description || p.Description || "";
+    document.getElementById("editProductColor").value =
+      p.color || p.Color || "";
+    document.getElementById("editProductWork").value =
+      p.borderWork || p.border || p.Border || "";
+    document.getElementById("editProductOccasion").value =
+      p.occasion || p.Occasion || "";
+    document.getElementById("editProductCollection").value =
+      p.collection === "Celebration" ? "Celebration" : "Everyday";
+    document.getElementById("editProductSareeLength").value =
+      p.sareeLength || p.length || p.Length || "";
+    document.getElementById("editProductBlouseDetails").value =
+      p.blouseDetails || p.blouse || p.Blouse || "";
+    document.getElementById("editProductFabric").value =
+      p.fabric || p.Fabric || "Chiffon";
+    document.getElementById("editProductFeatured").checked = p.featured === true || String(p.featured).toLowerCase() === "true";
+    document.getElementById("editNewProductImages").value = "";
+
+    const images = Array.isArray(p.images) && p.images.length
+      ? p.images
+      : (p.image ? [p.image] : []);
+
+    const current = document.getElementById("editCurrentPhotos");
+    current.innerHTML = images.length
+      ? images.map((url, i) => `
+          <div class="editable-photo-card" data-photo-index="${i}" style="
+            border:1px solid #ddd;border-radius:12px;padding:10px;background:#fff;
+          ">
+            <img src="${url}" alt="Photo ${i+1}" style="
+              width:100%;height:190px;object-fit:cover;border-radius:9px;
+              border:1px solid #eee;display:block;
+            ">
+            <div style="font-weight:700;color:#5d4a43;margin:8px 0 6px;">Photo ${i+1}</div>
+            <label style="font-size:12px;color:#777;margin:0 0 4px;">Change this photo</label>
+            <input type="file" class="edit-photo-file" data-photo-index="${i}"
+              accept="image/*" style="font-size:12px;padding:7px;margin:0 0 6px;">
+            <button type="button" class="delete-existing-photo" data-photo-index="${i}"
+              style="background:#b42318;margin:0;">Delete This Photo</button>
+          </div>
+        `).join("")
+      : '<p style="color:#777;">No photos found. Add new photos below.</p>';
+
+    current.querySelectorAll(".delete-existing-photo").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const card = btn.closest(".editable-photo-card");
+        card.dataset.deleted = card.dataset.deleted === "1" ? "0" : "1";
+        const deleted = card.dataset.deleted === "1";
+        card.style.opacity = deleted ? "0.45" : "1";
+        btn.textContent = deleted ? "Undo Delete" : "Delete This Photo";
+        btn.style.background = deleted ? "#6b7280" : "#b42318";
+      });
+    });
+
+    document.getElementById("editProductStatus").textContent =
+      "Sabhi product details ek hi panel me edit kar sakte ho.";
+
+    document.getElementById("editProductOverlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }catch(error){
+    console.error(error);
+    alert("Edit panel open nahi hua ❌\n\n" + error.message);
+  }
+};
+
+window.closeEditPanel = function(){
+  document.getElementById("editProductOverlay").style.display = "none";
+  document.body.style.overflow = "";
+};
+
+window.saveEditPanel = async function(){
+  const id = document.getElementById("editProductId").value;
+  const button = document.getElementById("saveEditPanelBtn");
+
+  if(!id) return;
+
+  const name = document.getElementById("editProductName").value.trim();
+  const price = Number(document.getElementById("editProductPrice").value);
+  const stock = Number(document.getElementById("editProductStock").value);
+  const description = document.getElementById("editProductDescription").value.trim();
+  const color = document.getElementById("editProductColor").value.trim();
+  const work = document.getElementById("editProductWork").value.trim();
+  const occasion = document.getElementById("editProductOccasion").value.trim();
+  const collectionName = document.getElementById("editProductCollection").value;
+  const sareeLength = document.getElementById("editProductSareeLength").value.trim();
+  const blouseDetails = document.getElementById("editProductBlouseDetails").value.trim();
+  const fabric = document.getElementById("editProductFabric").value.trim() || "Chiffon";
+  const fileInput = document.getElementById("editProductImages");
+
+  if(!name || !Number.isFinite(price) || price < 0 || !Number.isFinite(stock) || stock < 0){
+    alert("Product name, price aur stock sahi fill karo.");
+    return;
+  }
+
+  try{
+    button.disabled = true;
+    button.textContent = "Saving...";
+
+    const productRef = doc(db, "PRODUCTS", id);
+    const snap = await getDoc(productRef);
+
+    if(!snap.exists()){
+      throw new Error("Product nahi mila.");
+    }
+
+    const current = snap.data();
+    let images = Array.isArray(current.images)
+      ? [...current.images]
+      : (current.image ? [current.image] : []);
+
+    const currentPhotoCards = Array.from(
+      document.querySelectorAll("#editCurrentPhotos .editable-photo-card")
+    );
+
+    const updatedImages = [];
+
+    // Change/delete each existing photo independently.
+    for(let i = 0; i < currentPhotoCards.length; i++){
+      const card = currentPhotoCards[i];
+      if(card.dataset.deleted === "1") continue;
+
+      const oldUrl = images[i] || "";
+      const photoInput = card.querySelector(".edit-photo-file");
+
+      if(photoInput && photoInput.files && photoInput.files.length > 0){
+        const file = photoInput.files[0];
+        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+        const storageRef = ref(
+          storage,
+          "products/" + id + "/" + Date.now() + "_replace_" + i + "_" + safeName
+        );
+        await uploadBytes(storageRef, file);
+        updatedImages.push(await getDownloadURL(storageRef));
+      }else{
+        updatedImages.push(oldUrl);
+      }
+    }
+
+    // Add new photos without replacing existing ones.
+    const newFilesInput = document.getElementById("editNewProductImages");
+    if(newFilesInput && newFilesInput.files.length > 0){
+      const newFiles = Array.from(newFilesInput.files);
+      for(let i = 0; i < newFiles.length; i++){
+        const file = newFiles[i];
+        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+        const storageRef = ref(
+          storage,
+          "products/" + id + "/" + Date.now() + "_new_" + i + "_" + safeName
+        );
+        await uploadBytes(storageRef, file);
+        updatedImages.push(await getDownloadURL(storageRef));
+      }
+    }
+
+    images = updatedImages;
+    const image = images[0] || "";
+
+    await updateDoc(productRef, {
+      Name: name,
+      price: price,
+      stock: stock,
+      description: description,
+      color: color,
+      borderWork: work,
+      occasion: occasion,
+      collection: collectionName,
+      sareeLength: sareeLength,
+      blouseDetails: blouseDetails,
+      fabric: fabric,
+      featured: document.getElementById("editProductFeatured").checked,
+      updatedAt: new Date().toISOString(),
+      image: image,
+      images: images
+    });
+
+    alert("Product ki saari details successfully update ho gayi ✅");
+    closeEditPanel();
+    loadProducts();
+
+  }catch(error){
+    console.error(error);
+    alert("Product update nahi hua ❌\n\n" + error.message);
+  }finally{
+    button.disabled = false;
+    button.textContent = "Save All Changes";
+  }
+};
+
+// Keep old function name compatible with any existing calls.
+window.editProduct = window.openEditPanel;
+
+  window.addProduct = async function(){
+
+    const name = document.getElementById("productName").value.trim();
+    const price = Number(document.getElementById("productPrice").value);
+    const stock = Number(document.getElementById("productStock").value);
+
+    const description = document.getElementById("productDescription").value.trim();
+    const color = document.getElementById("productColor").value.trim();
+    const work = document.getElementById("productWork").value.trim();
+    const occasion = document.getElementById("productOccasion").value.trim();
+    const collectionName = document.getElementById("productCollection").value;
+    const sareeLength = document.getElementById("productSareeLength").value.trim();
+    const blouseDetails = document.getElementById("productBlouseDetails").value.trim();
+    const fabric = document.getElementById("productFabric").value.trim() || "Chiffon";
+    const featured = document.getElementById("productFeatured").checked;
+
+    const imageFiles = document.getElementById("productImage").files;
+
+    if(!name || !price || stock < 0){
+      alert("Product details complete karo.");
+      return;
+    }
+
+    try{
+
+      let images = [];
+
+      for (const file of imageFiles) {
+
+        const imageRef = ref(
+          storage,
+          "products/" + Date.now() + "_" + file.name
+        );
+
+        await uploadBytes(imageRef, file);
+        const imageUrl = await getDownloadURL(imageRef);
+        images.push(imageUrl);
+      }
+
+      await addDoc(
+        collection(db,"PRODUCTS"),
+        {
+          Name:name,
+          price:price,
+          stock:stock,
+          description:description,
+          color:color,
+          borderWork:work,
+          occasion:occasion,
+          collection:collectionName,
+          sareeLength:sareeLength,
+          blouseDetails:blouseDetails,
+          fabric:fabric,
+          featured:featured,
+          createdAt:new Date().toISOString(),
+          updatedAt:new Date().toISOString(),
+          images:images,
+          image:images[0] || ""
+        }
+      );
+
+      alert("Product added successfully ✅");
+
+      document.getElementById("productName").value = "";
+      document.getElementById("productPrice").value = "";
+      document.getElementById("productStock").value = "";
+      document.getElementById("productDescription").value = "";
+      document.getElementById("productColor").value = "";
+      document.getElementById("productWork").value = "";
+      document.getElementById("productOccasion").value = "";
+      document.getElementById("productCollection").value = "Celebration";
+      document.getElementById("productSareeLength").value = "";
+      document.getElementById("productBlouseDetails").value = "";
+      document.getElementById("productFabric").value = "Chiffon";
+      document.getElementById("productFeatured").checked = false;
+      document.getElementById("productImage").value = "";
+
+      loadProducts();
+
+    }catch(error){
+
+      console.error(error);
+
+      alert(
+        "Product add nahi hua ❌\n\n" +
+        error.message
+      );
+
+    }
+
+  };
+
+window.deleteProduct = async function(id){
+
+  const confirmDelete = confirm(
+    "Kya aap ye product delete karna chahte ho?"
+  );
+
+  if(!confirmDelete){
+    return;
+  }
+
+  try{
+
+    await deleteDoc(
+      doc(db, "PRODUCTS", id)
+    );
+
+    alert("Product deleted successfully ✅");
+
+    loadProducts();
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Product delete nahi hua ❌\n\n" +
+      error.message
+    );
+
+  }
+
+};
+
+
+function adminEsc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));}
+function adminDate(v){try{return v?.toDate?v.toDate().toLocaleString("en-IN"):new Date(v).toLocaleString("en-IN")}catch(e){return "—"}}
+
+async function fetchAdminCollection(name){
+  try{return await getDocs(collection(db,name));}catch(e){console.warn(name,"read failed",e);return null;}
 }
-window.openProductDetails = openProductDetails;
-window.closeProductDetails = closeProductDetails;
-window.openOrders = openOrders;
-window.closeOrders = closeOrders;
-window.loadCustomerOrders = loadCustomerOrders;
-window.openReplacement = openReplacement;
-window.closeReplacement = closeReplacement;
-window.submitReplacementRequest = submitReplacementRequest;
-window.openPolicy = openPolicy;
-window.closePolicy = closePolicy;
-window.openCustomerCare = openCustomerCare;
-window.closeCustomerCare = closeCustomerCare;
-window.setReviewRating = setReviewRating;
-window.openReview = openReview;
-window.closeReview = closeReview;
-window.submitReview = submitReview;
-window.openProductReviewFromPage = openProductReviewFromPage;
-window.showSaanjhToast = showSaanjhToast;
-window.handleAccountMenu = handleAccountMenu;
-window.openAccount = openAccount;
-window.closeAccount = closeAccount;
-window.openSideMenu = openSideMenu;
-window.closeSideMenu = closeSideMenu;
-window.goToSection = goToSection;
-window.openLogin = openLogin;
-window.closeLogin = closeLogin;
-
-// Robust three-dot menu click/touch handler (module-safe)
-const __saanjhMenuTrigger = document.querySelector('.menu-trigger');
-if (__saanjhMenuTrigger) {
-  __saanjhMenuTrigger.addEventListener('click', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    openSideMenu();
-  });
+async function loadAdminDashboard(){
+  const note=document.getElementById("dashboard-note");
+  try{
+    const productsSnap=await getDocs(collection(db,"PRODUCTS"));
+    const products=productsSnap.docs.map(d=>({id:d.id,...d.data()})).filter(p=>String(p.Name||p.name||"").trim());
+    const ordersSnap=await fetchAdminCollection("ORDERS");
+    const orders=ordersSnap?ordersSnap.docs.map(d=>({id:d.id,...d.data()})):[];
+    const revenue=orders.reduce((sum,o)=>sum+Number(o.total||o.amount||0),0);
+    const low=products.filter(p=>Number(p.stock||0)>0&&Number(p.stock||0)<=3).length;
+    document.getElementById("dash-products").textContent=products.length;
+    document.getElementById("dash-low-stock").textContent=low;
+    document.getElementById("dash-orders").textContent=orders.length;
+    document.getElementById("dash-revenue").textContent=orders.length?"₹"+revenue.toLocaleString("en-IN"):"₹0";
+    if(note) note.textContent=ordersSnap?"Dashboard refreshed successfully.":"Products loaded. Order metrics are unavailable because Firestore currently restricts admin order reads.";
+    loadAdminOrders(orders);
+    await loadAdminReviews();
+    await loadAdminReplacements();
+  }catch(e){console.error(e);if(note)note.textContent="Dashboard refresh failed: "+e.message;}
 }
 
-window.toggleLoginMode = toggleLoginMode;
-window.handleLogin = handleLogin;
-window.handleLogout = handleLogout;
-window.changeCartQty = changeCartQty;
-window.checkout = checkout;
-window.placeOrder = placeOrder;
-window.closeCheckout = closeCheckout;
-
-
-// ===== Global interaction polish =====
-function closeAnyOpenLayer(){
-  const ids=["login-modal-overlay","account-modal-overlay","orders-modal-overlay","policy-modal-overlay","customer-care-modal-overlay","review-modal-overlay","replacement-modal-overlay"];
-  ids.forEach(id=>document.getElementById(id)?.classList.remove("open"));
-  document.getElementById("side-menu")?.classList.remove("open");
-  document.getElementById("side-menu-overlay")?.classList.remove("open");
-  document.body.style.overflow="";
+async function loadAdminOrders(prefetched){
+  const box=document.getElementById("admin-orders"); if(!box)return;
+  let orders=prefetched;
+  if(!orders){const snap=await fetchAdminCollection("ORDERS");orders=snap?snap.docs.map(d=>({id:d.id,...d.data()})):[];}
+  if(!orders.length){box.innerHTML='<p class="muted-note">No orders found, or admin order-read permission is not enabled.</p>';return;}
+  orders.sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
+  box.innerHTML='<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th><th>Payment</th><th>Action</th></tr></thead><tbody>'+orders.slice(0,50).map(o=>{
+    const status=String(o.orderStatus||o.status||"Order received");
+    return `<tr><td><strong>${adminEsc(o.id)}</strong><br><small>${adminEsc(adminDate(o.createdAt))}</small></td><td>${adminEsc(o.name||o.customerName||"Customer")}<br><small>${adminEsc(o.email||"")}</small></td><td>₹${Number(o.total||0).toLocaleString("en-IN")}</td><td><span class="status-pill">${adminEsc(status)}</span></td><td>${adminEsc(o.paymentMethod||o.payment||"—")}</td><td><select onchange="updateAdminOrderStatus('${adminEsc(o.id)}',this.value)"><option>Order received</option><option>Confirmed</option><option>Shipped</option><option>Delivered</option><option>Cancelled</option></select></td></tr>`;
+  }).join('')+'</tbody></table></div>';
 }
-document.addEventListener("keydown",e=>{
-  if(e.key!=="Escape") return;
-  if(document.getElementById("product-details-overlay")?.classList.contains("open")){ closeProductDetails(); return; }
-  closeAnyOpenLayer();
-});
-["login-modal-overlay","account-modal-overlay","orders-modal-overlay","policy-modal-overlay","replacement-modal-overlay","review-modal-overlay"].forEach(id=>{
-  const el=document.getElementById(id);
-  if(el) el.addEventListener("click",e=>{ if(e.target===el) el.classList.remove("open"); });
-});
-const careOverlay=document.getElementById("customer-care-modal-overlay");
-if(careOverlay) careOverlay.addEventListener("click",e=>{if(e.target===careOverlay) closeCustomerCare();});
+window.updateAdminOrderStatus=async function(id,status){
+  try{await updateDoc(doc(db,"ORDERS",id),{orderStatus:status,status:status,updatedAt:new Date().toISOString()});alert("Order status updated ✅");loadAdminDashboard();}catch(e){alert("Order status update nahi hua ❌\n\n"+e.message);}
+};
 
-window.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => loadProducts(), 0);
-});
+async function loadAdminReviews(){
+  const box=document.getElementById("admin-reviews"); if(!box)return;
+  const snap=await fetchAdminCollection("CUSTOMER_REVIEWS");
+  if(!snap){box.innerHTML='<p class="muted-note">Reviews read permission is not enabled for this admin yet.</p>';return;}
+  const reviews=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
+  if(!reviews.length){box.innerHTML='<p class="muted-note">No customer reviews yet.</p>';return;}
+  box.innerHTML=reviews.map(r=>`<div style="border:1px solid #eadfd9;border-radius:12px;padding:13px;margin:9px 0;"><strong>${adminEsc(r.productName||"Product")}</strong> · ${"★".repeat(Number(r.rating||0))}${"☆".repeat(Math.max(0,5-Number(r.rating||0)))}<p style="margin:7px 0;line-height:1.5;">${adminEsc(r.text||r.review||"")}</p><small>${adminEsc(r.customerName||r.customerEmail||"Customer")} · ${adminEsc(adminDate(r.createdAt))}</small><div class="admin-action-row" style="margin-top:9px;"><button type="button" onclick="moderateReview('${adminEsc(r.id)}','Approved')">Approve</button><button type="button" class="danger-btn" onclick="moderateReview('${adminEsc(r.id)}','Rejected')">Reject</button></div></div>`).join('');
+}
+window.moderateReview=async function(id,status){try{await updateDoc(doc(db,"CUSTOMER_REVIEWS",id),{status,moderatedAt:new Date().toISOString()});loadAdminReviews();}catch(e){alert("Review update nahi hua ❌\n\n"+e.message);}};
+
+async function loadAdminReplacements(){
+  const box=document.getElementById("admin-replacements"); if(!box)return;
+  const snap=await fetchAdminCollection("REPLACEMENT_REQUESTS");
+  if(!snap){box.innerHTML='<p class="muted-note">Replacement request read permission is not enabled for this admin yet.</p>';return;}
+  const rows=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
+  if(!rows.length){box.innerHTML='<p class="muted-note">No replacement requests yet.</p>';return;}
+  box.innerHTML='<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Order</th><th>Customer</th><th>Item</th><th>Reason</th><th>Status</th><th>Action</th></tr></thead><tbody>'+rows.map(r=>`<tr><td>${adminEsc(r.orderId||r.id)}</td><td>${adminEsc(r.customerName||r.customerEmail||"Customer")}<br><small>${adminEsc(r.phone||"")}</small></td><td>${adminEsc(r.item?.name||"Product")}</td><td>${adminEsc(r.reason||"")}<br><small>${adminEsc(r.details||"")}</small></td><td><span class="status-pill">${adminEsc(r.status||"Requested")}</span></td><td><select onchange="updateReplacementStatus('${adminEsc(r.id)}',this.value)"><option>Requested</option><option>Approved</option><option>Rejected</option><option>Replacement shipped</option><option>Completed</option></select></td></tr>`).join('')+'</tbody></table></div>';
+}
+window.updateReplacementStatus=async function(id,status){try{await updateDoc(doc(db,"REPLACEMENT_REQUESTS",id),{status,updatedAt:new Date().toISOString()});loadAdminReplacements();}catch(e){alert("Replacement status update nahi hua ❌\n\n"+e.message);}};
+window.loadAdminDashboard=loadAdminDashboard;
 
 </script>
+
 </body>
 </html>
