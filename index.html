@@ -1442,16 +1442,56 @@ function renderWishlistView(){
   const count=document.getElementById("product-result-count"); if(count) count.textContent=`${list.length} wishlist item${list.length===1?"":"s"}`;
 }
 function productCardHtml(product){
-  const productId=product.id, stock=Number(product.stock||0), price=Number(product.price||0);
-  const raw=Array.isArray(product.images)&&product.images.length?product.images:(product.image?[product.image]:[]);
-  const imgs=[...new Set(raw.map(resolveProductImage).filter(Boolean))];
-  const media=imgs.length
-    ? `<div class="product-images" data-track>${imgs.map(img=>`<img src="${escapeHtml(img)}" alt="${escapeHtml(product.Name||"Chiffon saree")}" loading="lazy" class="product-slide" draggable="false">`).join("")}</div>`
+  const productId = product.id;
+  const stock = Number(product.stock || 0);
+  const price = Number(product.price || 0);
+  const productName = product.Name || "Chiffon saree";
+  const description = product.description || "Beautiful chiffon saree";
+  const wishActive = isWishlisted(productId);
+  const wishClass = wishActive ? "active" : "";
+  const wishLabel = wishActive ? "Remove from" : "Add to";
+  const wishIcon = wishActive ? "♥" : "♡";
+  const stockLabel = stock > 0 ? "In stock" : "Sold out";
+  const unavailableHtml = stock > 0 ? "" : '<p style="font-size:14px;">Currently unavailable</p>';
+  const cartDisabled = stock <= 0 ? "disabled" : "";
+  const cartLabel = stock > 0 ? "Add to Cart" : "Sold Out";
+
+  const raw = Array.isArray(product.images) && product.images.length
+    ? product.images
+    : (product.image ? [product.image] : []);
+  const imgs = [...new Set(raw.map(resolveProductImage).filter(Boolean))];
+
+  const media = imgs.length
+    ? `<div class="product-images" data-track>${imgs.map(img =>
+        `<img src="${escapeHtml(img)}" alt="${escapeHtml(productName)}" loading="lazy" class="product-slide" draggable="false">`
+      ).join("")}</div>`
     : `<div class="product-images product-image-placeholder" data-track><span>Saanjh Chiffon</span></div>`;
-  const galleryControls=imgs.length>1
-    ? `<button class="gallery-btn gallery-prev" type="button" aria-label="Previous photo">‹</button><button class="gallery-btn gallery-next" type="button" aria-label="Next photo">›</button><div class="gallery-dots">${imgs.map((_,i)=>`<button class="gallery-dot ${i===0?"active":""}" type="button" data-index="${i}" aria-label="Photo ${i+1}"></button>`).join("")}</div>`
+
+  const galleryControls = imgs.length > 1
+    ? `<button class="gallery-btn gallery-prev" type="button" aria-label="Previous photo">‹</button>
+       <button class="gallery-btn gallery-next" type="button" aria-label="Next photo">›</button>
+       <div class="gallery-dots">${imgs.map((_, i) =>
+         `<button class="gallery-dot ${i === 0 ? "active" : ""}" type="button" data-index="${i}" aria-label="Photo ${i + 1}"></button>`
+       ).join("")}</div>`
     : "";
-  return `<article class="product" data-product-id="${escapeHtml(productId)}"><div class="product-image" data-gallery><button class="wishlist-btn ${isWishlisted(productId)?"active":""}" type="button" onclick="event.stopPropagation();toggleWishlist('${productId}')" aria-label="${isWishlisted(productId)?"Remove from":"Add to"} wishlist">${isWishlisted(productId)?"♥":"♡"}</button>${media}${galleryControls}<span>${stock>0?"In stock":"Sold out"}</span></div><div class="product-info"><h3>${escapeHtml(product.Name||"Chiffon saree")}</h3><p>${escapeHtml(product.description||"Beautiful chiffon saree")}</p><p class="price">₹${price.toLocaleString("en-IN")}</p>${stock>0?"":"<p style="font-size:14px;">Currently unavailable</p>"}<button class="add-cart-btn" data-product-id="${escapeHtml(productId)}" ${stock<=0?"disabled":""}>${stock>0?"Add to Cart":"Sold Out"}</button></div></article>`;
+
+  return `<article class="product" data-product-id="${escapeHtml(productId)}">
+    <div class="product-image" data-gallery>
+      <button class="wishlist-btn ${wishClass}" type="button"
+        onclick="event.stopPropagation();toggleWishlist('${escapeHtml(productId)}')"
+        aria-label="${wishLabel} wishlist">${wishIcon}</button>
+      ${media}
+      ${galleryControls}
+      <span>${stockLabel}</span>
+    </div>
+    <div class="product-info">
+      <h3>${escapeHtml(productName)}</h3>
+      <p>${escapeHtml(description)}</p>
+      <p class="price">₹${price.toLocaleString("en-IN")}</p>
+      ${unavailableHtml}
+      <button class="add-cart-btn" data-product-id="${escapeHtml(productId)}" ${cartDisabled}>${cartLabel}</button>
+    </div>
+  </article>`;
 }
 function bindProductCards(container){
   container.querySelectorAll(".product").forEach(article=>{
