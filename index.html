@@ -195,7 +195,7 @@ footer p,footer a{font:11px Arial,sans-serif;line-height:2;color:#ead8dc}
   display: flex;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
   touch-action: pan-y;
   user-select: none;
   cursor: grab;
@@ -495,8 +495,8 @@ button,a{ -webkit-tap-highlight-color:transparent }
 .product-info h3{letter-spacing:-.01em}
 .add-cart-btn{min-height:46px!important;width:100%;font-weight:700!important;letter-spacing:.08em!important;transition:.2s!important}
 .add-cart-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 18px rgba(30,20,20,.12)}
-#cart-button{backdrop-filter:blur(10px);background:rgba(35,27,29,.96)!important;min-height:48px;display:flex;align-items:center;justify-content:center;gap:6px}
-#cart-box{border:1px solid rgba(120,80,90,.14);box-shadow:var(--shadow-deep)!important}
+#cart-button{backdrop-filter:blur(10px);background:rgba(35,27,29,.96)!important;min-height:48px;display:flex!important;align-items:center;justify-content:center;gap:6px;z-index:10030!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
+#cart-box{border:1px solid rgba(120,80,90,.14);box-shadow:var(--shadow-deep)!important;z-index:10029!important}
 #cart-box h3{font-family:Georgia,serif;font-weight:400;color:var(--berry)}
 #cart-box button{border-radius:7px!important}
 .product-details-overlay{backdrop-filter:blur(4px)}
@@ -1828,6 +1828,8 @@ function createCartButton() {
   renderCart();
 }
 
+// Ensure the floating cart exists on desktop and mobile before any product is added.
+createCartButton();
 
 function renderCart() {
 
